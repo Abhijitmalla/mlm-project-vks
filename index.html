@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLM Growth Partners · Proof before promise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #030a07;
+      color: #e5ede9;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    :root {
+      --bg-deep: #030a07;
+      --bg-panel: rgba(13, 27, 21, 0.65);
+      --bg-card: rgba(18, 38, 29, 0.5);
+      --bg-card-hover: rgba(25, 51, 39, 0.7);
+      --line: rgba(62, 207, 142, 0.12);
+      --line-bright: rgba(62, 207, 142, 0.25);
+      --accent-gold: #EAB308;
+      --accent-emerald: #10B981;
+      --text-cream: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --radius: 18px;
+      --shadow: 0 20px 40px -12px rgba(0,0,0,0.7);
+    }
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    h1,h2,h3,h4 { font-family: 'Outfit', sans-serif; font-weight: 600; letter-spacing: -0.02em; }
+    ::selection { background: rgba(16, 185, 129, 0.3); color: #fff; }
+
+    .bg-texture {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(circle at 20% 30%, rgba(16,185,129,0.07) 0%, transparent 45%),
+                  radial-gradient(circle at 80% 70%, rgba(234,179,8,0.05) 0%, transparent 45%);
+      animation: bg-drift 18s ease-in-out infinite alternate;
+    }
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
+    }
+    @keyframes bg-drift { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
+
+    .page {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      gap: 0;
+    }
+
+    /* animations */
+    @keyframes fade-in { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slide-in-left { from { opacity:0; transform:translateX(-24px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes slide-in-right { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes scale-in { from { opacity:0; transform:scale(0.94); } to { opacity:1; transform:scale(1); } }
+
+    .brand { opacity:0; animation: slide-in-left 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards; }
+    .about-block { opacity:0; animation: fade-in 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s forwards; }
+    .video-shell { opacity:0; animation: scale-in 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s forwards; }
+    .headline { opacity:0; animation: fade-in 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s forwards; }
+    .left-footnote { opacity:0; animation: fade-in 0.6s cubic-bezier(0.16,1,0.3,1) 0.6s forwards; }
+    .lead-card-inline { opacity:0; animation: slide-in-right 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s forwards; }
+    .right-header { opacity:0; animation: fade-in 0.6s cubic-bezier(0.16,1,0.3,1) 0.45s forwards; }
+
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* LEFT PANEL */
+    .left-panel {
+      position: sticky; top:0; height:100vh; overflow-y:auto;
+      padding: 36px 40px 20px 40px;
+      display: flex; flex-direction: column; gap: 18px;
+      background: var(--bg-panel);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid var(--line);
+    }
+    .network-motif {
+      position: absolute; top:0; right:0; width:240px; height:100%;
+      opacity:0.3; pointer-events:none; z-index:-1;
+    }
+    .brand { display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+    .brand-mark {
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, var(--accent-emerald), var(--accent-gold));
+      display:flex; align-items:center; justify-content:center;
+      font-family: 'Space Grotesk', sans-serif; font-weight:700;
+      color:#030a07; font-size:18px;
+      box-shadow: 0 4px 14px rgba(16,185,129,0.25);
+    }
+    .brand-name { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; color:var(--text-cream); letter-spacing:-0.3px; }
+    .brand-name span { color:var(--accent-gold); }
+
+    .about-block { display:flex; flex-direction:column; gap:8px; }
+    .eyebrow {
+      font-size:11px; color:var(--accent-emerald); font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
+      display:flex; align-items:center; gap:10px;
+    }
+    .eyebrow::before { content:""; width:22px; height:2px; background:var(--accent-emerald); border-radius:2px; }
+    .about-title { font-size:clamp(18px,1.6vw,22px); font-weight:600; line-height:1.3; color:var(--text-cream); }
+    .subtext { color:var(--text-muted); font-size:13.5px; max-width:50ch; line-height:1.6; }
+
+    .video-shell {
+      position:relative; border-radius:22px; overflow:hidden; isolation:isolate;
+      background:
+        radial-gradient(circle at 22% 18%, rgba(16,185,129,0.18), transparent 34%),
+        linear-gradient(145deg, rgba(234,179,8,0.13), rgba(16,185,129,0.06) 42%, #020403 100%);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 28px 58px -16px rgba(0,0,0,0.82), 0 0 38px rgba(16,185,129,0.12);
+      height: 460px;
+      width:100%; margin:10px 0 8px;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .video-shell::before {
+      content:''; position:absolute; inset:0; border-radius:22px;
+      padding:1.5px;
+      background: linear-gradient(var(--glow-angle,135deg), rgba(16,185,129,0.6), rgba(234,179,8,0.4), rgba(16,185,129,0.2), rgba(16,185,129,0.6));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: border-rotate 5s linear infinite;
+      z-index:2; pointer-events:none;
+    }
+    .video-shell::after {
+      content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(3,10,7,0.24) 0%, transparent 28%, transparent 58%, rgba(3,10,7,0.72) 100%),
+        radial-gradient(circle at 80% 12%, rgba(234,179,8,0.18), transparent 26%);
+      mix-blend-mode:normal;
+    }
+    @property --glow-angle { syntax:'<angle>'; initial-value:135deg; inherits:false; }
+    @keyframes border-rotate { to { --glow-angle:495deg; } }
+    .video-shell:hover {
+      transform:translateY(-4px) scale(1.01);
+      border-color:rgba(62,207,142,0.24);
+      box-shadow:0 36px 72px -16px rgba(0,0,0,0.86), 0 0 48px rgba(16,185,129,0.22);
+    }
+    .video-shell video { width:100%; height:100%; object-fit:cover; display:block; background:#000; position:relative; z-index:0; }
+
+    .live-badge {
+      position:absolute; top:14px; left:14px;
+      display:flex; align-items:center; gap:8px;
+      background:rgba(3,10,7,0.76); backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.12);
+      padding:7px 14px 7px 12px; border-radius:999px;
+      font-size:10px; font-weight:700; letter-spacing:0.3px; z-index:3; color:#fff;
+      box-shadow:0 12px 28px rgba(0,0,0,0.28);
+    }
+    .live-dot { width:7px; height:7px; border-radius:50%; background:var(--accent-emerald); box-shadow:0 0 0 0 rgba(16,185,129,0.6); animation:pulse-dot 1.8s infinite; }
+    @keyframes pulse-dot { 0% { box-shadow:0 0 0 0 rgba(16,185,129,0.5); } 70% { box-shadow:0 0 0 10px rgba(16,185,129,0); } 100% { box-shadow:0 0 0 0 rgba(16,185,129,0); } }
+    .video-caption {
+      position:absolute; left:18px; right:18px; bottom:58px; z-index:3;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      pointer-events:none;
+    }
+    .video-caption strong {
+      display:block; color:var(--text-cream); font-family:'Outfit',sans-serif;
+      font-size:16px; line-height:1.2; margin-bottom:3px;
+      text-shadow:0 2px 14px rgba(0,0,0,0.65);
+    }
+    .video-caption span {
+      display:block; color:rgba(226,232,240,0.82); font-size:12px; line-height:1.4;
+      text-shadow:0 2px 12px rgba(0,0,0,0.7);
+    }
+    .video-pill {
+      flex:0 0 auto; color:#04110c; background:linear-gradient(135deg, var(--accent-gold), #FDE047);
+      border-radius:999px; padding:7px 11px; font-size:10px; font-weight:800; letter-spacing:0.7px;
+      box-shadow:0 10px 24px rgba(234,179,8,0.18);
+    }
+
+    .headline {     font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.4;
+
+ font-weight:700; color:var(--text-cream); letter-spacing:-0.6px; margin:4px 0 2px; }
+    .headline em { font-style:normal; background:linear-gradient(to right, var(--accent-gold), #FDE047); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .left-footnote { display:flex; align-items:center; gap:8px; color:var(--text-dim); font-size:12px; font-weight:500; margin-top:2px; }
+
+    /* RIGHT PANEL */
+    .right-panel {
+      padding: 40px 48px 40px 40px;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .lead-card-inline {
+      background:var(--bg-panel); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow);
+      padding:28px 32px;
+      width:100%;
+      position:relative;
+      overflow:hidden;
+    }
+    .lead-card-inline::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--line-bright), transparent); }
+    .lead-card-inline h3 { margin:0 0 4px; font-size:24px; color:var(--text-cream); letter-spacing:-0.3px; }
+    .lead-card-inline > p { margin:0 0 20px; color:var(--text-muted); font-size:14px; line-height:1.5; }
+
+    .right-header { margin-bottom: 4px; }
+    .right-header h2 { font-size:clamp(28px,3.2vw,36px); margin:4px 0 10px; color:var(--text-cream); letter-spacing:-0.8px; line-height:1.2; }
+    .right-header p { color:var(--text-muted); font-size:15px; line-height:1.5; max-width: 60ch; }
+
+    /* ---------- SERVICES GRID ---------- */
+    .services-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; width:100%; margin-top:4px; }
+    .service-card {
+      display:flex; flex-direction:column; gap:14px; padding:20px 22px 22px;
+      background:var(--bg-card); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+      border:1px solid var(--line); border-radius:20px;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.35s, background 0.3s;
+      position:relative; overflow:hidden; cursor:default;
+    }
+    /* Top accent bar */
+    .service-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--card-accent, var(--accent-emerald)), transparent 80%);
+      opacity:0.6;
+      transition: opacity 0.3s;
+    }
+    /* Shimmer overlay on hover */
+    .service-card::after {
+      content:'';
+      position:absolute; inset:0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,20%), rgba(255,255,255,0.04) 0%, transparent 60%);
+      opacity:0; transition:opacity 0.4s;
+      pointer-events:none;
+    }
+    .service-card:hover { transform:translateY(-4px); background:var(--bg-card-hover); border-color:var(--line-bright); box-shadow:0 14px 32px -8px rgba(0,0,0,0.5), 0 0 0 1px var(--line-bright); }
+    .service-card:hover::before { opacity:1; }
+    .service-card:hover::after { opacity:1; }
+
+    .sc-top { display:flex; align-items:center; justify-content:space-between; }
+    .sc-node {
+      width:46px; height:46px; border-radius:15px;
+      background: radial-gradient(circle at 30% 30%, var(--card-accent-bg, rgba(16,185,129,0.18)), rgba(3,10,7,0.6) 80%);
+      border:1px solid var(--card-accent-border, rgba(16,185,129,0.25));
+      display:flex; align-items:center; justify-content:center;
+      color:var(--card-accent, var(--accent-emerald));
+      transition:all 0.3s; flex-shrink:0;
+    }
+    .service-card:hover .sc-node {
+      transform:scale(1.08);
+      box-shadow:0 0 16px var(--card-accent-glow, rgba(16,185,129,0.35));
+    }
+    .sc-num {
+      font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;
+      letter-spacing:0.5px; color:var(--text-dim);
+      background:rgba(255,255,255,0.03); border:1px solid var(--line);
+      padding:3px 8px; border-radius:20px;
+      transition:color 0.3s, border-color 0.3s;
+    }
+    .service-card:hover .sc-num { color:var(--card-accent, var(--accent-emerald)); border-color:var(--card-accent-border, rgba(16,185,129,0.3)); }
+    .sc-body h3 { font-size:15.5px; font-weight:600; color:var(--text-cream); margin:0 0 5px; line-height:1.3; }
+    .sc-body p  { font-size:12.5px; color:var(--text-muted); margin:0; line-height:1.5; }
+
+    /* Per-card accent colours */
+    .sc--emerald { --card-accent:#10B981; --card-accent-bg:rgba(16,185,129,0.15); --card-accent-border:rgba(16,185,129,0.22); --card-accent-glow:rgba(16,185,129,0.3); }
+    .sc--gold    { --card-accent:#EAB308; --card-accent-bg:rgba(234,179,8,0.15);  --card-accent-border:rgba(234,179,8,0.22);  --card-accent-glow:rgba(234,179,8,0.3); }
+    .sc--blue    { --card-accent:#60A5FA; --card-accent-bg:rgba(96,165,250,0.14); --card-accent-border:rgba(96,165,250,0.2);  --card-accent-glow:rgba(96,165,250,0.3); }
+    .sc--purple  { --card-accent:#A78BFA; --card-accent-bg:rgba(167,139,250,0.14);--card-accent-border:rgba(167,139,250,0.2); --card-accent-glow:rgba(167,139,250,0.3); }
+    .sc--orange  { --card-accent:#FB923C; --card-accent-bg:rgba(251,146,60,0.14); --card-accent-border:rgba(251,146,60,0.2);  --card-accent-glow:rgba(251,146,60,0.3); }
+    .sc--green2  { --card-accent:#34D399; --card-accent-bg:rgba(52,211,153,0.15); --card-accent-border:rgba(52,211,153,0.22); --card-accent-glow:rgba(52,211,153,0.3); }
+    .sc--rose    { --card-accent:#FB7185; --card-accent-bg:rgba(251,113,133,0.14);--card-accent-border:rgba(251,113,133,0.2); --card-accent-glow:rgba(251,113,133,0.3); }
+    .sc--sky     { --card-accent:#38BDF8; --card-accent-bg:rgba(56,189,248,0.14); --card-accent-border:rgba(56,189,248,0.2);  --card-accent-glow:rgba(56,189,248,0.3); }
+
+    /* TESTIMONIALS + CLIENT LIST */
+    .testimonials-section {
+      padding: 48px 48px 56px 40px;
+      background: transparent;
+    }
+    .testimonials-section .section-divider {
+      max-width: 1200px;
+      height: 1px;
+      margin: 0 auto 40px;
+      background: linear-gradient(90deg, transparent, var(--line-bright), transparent);
+    }
+    .testimonials-header {
+      max-width: 62ch;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .testimonials-header .eyebrow { justify-content: center; }
+    .testimonials-header h2 { font-size: clamp(28px, 3.2vw, 36px); margin: 12px 0 8px; color: var(--text-cream); letter-spacing: -0.6px; line-height: 1.2; }
+    .testimonials-header p { color: var(--text-muted); font-size: 15px; line-height: 1.5; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      max-width: 1200px;
+      margin: 0 auto 48px auto;
+    }
+    .testimonial-card {
+      display:flex; flex-direction:column; gap:14px; padding:24px;
+      background:var(--bg-card); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      border:1px solid var(--line); border-radius:18px;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.4s;
+    }
+    .testimonial-card:hover { transform:translateY(-4px) scale(1.008); background:var(--bg-card-hover); border-color:var(--line-bright); box-shadow:0 16px 32px -8px rgba(0,0,0,0.5), 0 0 20px rgba(16,185,129,0.08); }
+    .testimonial-stars { display:flex; gap:2px; color:var(--accent-gold); }
+    .testimonial-quote { color:var(--text-muted); font-size:14px; line-height:1.6; flex:1; }
+    .testimonial-person { display:flex; align-items:center; gap:12px; padding-top:6px; border-top:1px solid var(--line); }
+    .testimonial-avatar {
+      flex-shrink:0; width:40px; height:40px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px;
+      color:#030a07; background:linear-gradient(135deg, var(--accent-emerald), var(--accent-gold));
+    }
+    .testimonial-person .name { font-size:14px; font-weight:600; color:var(--text-cream); }
+    .testimonial-person .role { font-size:12px; color:var(--text-dim); }
+
+    /* CLIENT LIST (logos / names) */
+    .client-list-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    .client-list-section .eyebrow {
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .client-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px 40px;
+      padding: 8px 0 12px;
+    }
+    .client-item {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+      padding: 6px 12px;
+      border-radius: 40px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      transition: all 0.2s;
+    }
+    .client-item:hover {
+      color: var(--text-cream);
+      border-color: var(--line-bright);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-2px);
+    }
+
+    /* CHAT FAB */
+    .chat-fab {
+      position:fixed; right:28px; bottom:28px; z-index:50;
+      width:60px; height:60px; border-radius:18px;
+      background:linear-gradient(135deg, var(--accent-emerald), #059669);
+      border:1px solid rgba(255,255,255,0.15);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; box-shadow:0 12px 30px -6px rgba(16,185,129,0.5);
+      transition: all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+    }
+    .chat-fab:hover { transform:translateY(-3px) scale(1.04); box-shadow:0 18px 36px -8px rgba(16,185,129,0.6); }
+    .chat-fab:active { transform:scale(0.94); }
+    .chat-fab-icon { width:46px; height:46px; position:relative; z-index:1; color:#fff; transition:transform 0.3s; }
+    .chat-fab:hover .chat-fab-icon { transform:scale(1.06) rotate(-3deg); }
+    .chat-fab-ring { position:absolute; inset:-5px; border-radius:22px; border:2px solid rgba(16,185,129,0.3); animation:ring-pulse 2.2s cubic-bezier(0.16,1,0.3,1) infinite; }
+    @keyframes ring-pulse { 0% { transform:scale(0.8); opacity:1; } 100% { transform:scale(1.5); opacity:0; } }
+
+    .chat-panel {
+      position:fixed; right:28px; bottom:100px; z-index:50;
+      width:330px; max-width:calc(100vw - 40px);
+      background:var(--bg-panel); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+      border:1px solid var(--line-bright); border-radius:22px;
+      box-shadow:0 30px 60px -12px rgba(0,0,0,0.8);
+      display:flex; flex-direction:column; overflow:hidden;
+      opacity:0; transform:translateY(16px) scale(0.94); pointer-events:none;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1); transform-origin:bottom right;
+    }
+    .chat-panel.open { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+    .chat-panel-header { padding:14px 18px; background:rgba(3,10,7,0.5); border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
+    .chat-panel-header .title { display:flex; align-items:center; gap:10px; font-weight:600; font-size:14px; font-family:'Outfit',sans-serif; }
+    .chat-panel-header .status-dot { width:7px; height:7px; border-radius:50%; background:var(--accent-emerald); box-shadow:0 0 8px var(--accent-emerald); }
+    .chat-close { background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:17px; padding:2px 6px; transition:color 0.2s; }
+    .chat-close:hover { color:var(--text-cream); }
+    .chat-body { padding:16px 18px; display:flex; flex-direction:column; gap:10px; max-height:260px; overflow-y:auto; font-size:13.5px; }
+    .chat-body::-webkit-scrollbar { width:3px; }
+    .chat-body::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.08); border-radius:10px; }
+    .msg { padding:10px 14px; border-radius:14px; max-width:86%; line-height:1.4; }
+    .msg.bot { background:rgba(255,255,255,0.04); color:var(--text-cream); align-self:flex-start; border:1px solid var(--line); border-bottom-left-radius:4px; }
+    .msg.user { background:var(--accent-emerald); color:#030a07; align-self:flex-end; border-bottom-right-radius:4px; font-weight:500; }
+    .chat-input-row { display:flex; border-top:1px solid var(--line); padding:6px; background:rgba(3,10,7,0.3); gap:4px; }
+    .chat-input-row input { flex:1; background:rgba(255,255,255,0.03); border:1px solid transparent; border-radius:12px; padding:10px 14px; color:var(--text-cream); font-family:'Inter',sans-serif; font-size:13px; transition:border-color 0.2s; }
+    .chat-input-row input:focus { outline:none; border-color:var(--accent-emerald); background:rgba(255,255,255,0.05); }
+    .chat-input-row input::placeholder { color:var(--text-dim); }
+    .chat-input-row button { background:none; border:none; color:var(--accent-emerald); padding:0 10px; cursor:pointer; display:flex; align-items:center; border-radius:12px; transition:background 0.2s; }
+    .chat-input-row button:hover { background:rgba(16,185,129,0.08); }
+
+    @media (max-width: 1100px) {
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .client-grid { gap: 16px 24px; }
+    }
+    @media (max-width: 900px) {
+      .page { grid-template-columns: 1fr; }
+      .left-panel {
+        position: relative; height: auto;
+        padding: 32px 28px;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+      .right-panel { padding: 32px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-section { padding: 32px 20px 48px; }
+      .video-shell { height: 340px; }
+      .chat-fab { right:20px; bottom:20px; width:54px; height:54px; border-radius:16px; }
+      .chat-panel { right:20px; bottom:84px; max-width:calc(100vw - 40px); }
+    }
+    @media (max-width: 600px) {
+      .lead-card-inline { padding: 24px 20px; }
+      .right-panel { padding: 24px 16px; }
+      .testimonials-section { padding: 24px 16px 40px; }
+      .left-panel { padding: 24px 18px; }
+      .video-shell { height: 300px; border-radius:18px; }
+      .video-caption { left:14px; right:14px; bottom:54px; }
+      .video-caption strong { font-size:14px; }
+      .video-caption span { font-size:11px; }
+      .video-pill { display:none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .client-grid { gap: 12px 16px; }
+    }
+
+    /* form fields */
+    .field { margin-bottom:16px; display:flex; flex-direction:column; gap:5px; }
+    .field label { font-size:12px; color:var(--text-muted); font-weight:500; }
+    .field input {
+      background:rgba(3,10,7,0.4); border:1px solid var(--line); border-radius:12px;
+      padding:12px 14px; color:var(--text-cream); font-family:'Inter',sans-serif; font-size:14px;
+      transition:all 0.2s; box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .field input:focus { outline:none; border-color:var(--accent-emerald); background:rgba(255,255,255,0.02); box-shadow:0 0 0 3px rgba(16,185,129,0.1), inset 0 2px 4px rgba(0,0,0,0.08); }
+    .field input::placeholder { color:var(--text-dim); }
+    .field-error { font-size:11px; color:#ef4444; min-height:14px; font-weight:500; }
+    .btn-submit {
+      width:100%; padding:14px; border:none; border-radius:12px;
+      background:linear-gradient(135deg, var(--accent-emerald), #059669);
+      color:#fff; font-family:'Outfit',sans-serif; font-weight:600; font-size:15px;
+      cursor:pointer; margin-top:4px; transition:all 0.2s;
+      box-shadow:0 4px 14px rgba(16,185,129,0.25);
+    }
+    .btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(16,185,129,0.35); }
+    .btn-submit:active { transform:translateY(0); }
+
+    /* MODAL */
+    .modal-overlay {
+      position:fixed; inset:0; z-index:200;
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(3,10,7,0.8); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      padding:20px; opacity:0; pointer-events:none; transition:opacity 0.25s;
+    }
+    .modal-overlay.open { opacity:1; pointer-events:auto; }
+    .modal-card {
+      width:100%; max-width:420px; background:var(--bg-panel); border:1px solid var(--line-bright);
+      border-radius:24px; box-shadow:0 40px 80px -20px rgba(0,0,0,0.9);
+      padding:32px 32px 28px; position:relative;
+      transform:translateY(16px) scale(0.94); transition:all 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    .modal-overlay.open .modal-card { transform:translateY(0) scale(1); }
+    .modal-close {
+      position:absolute; top:16px; right:16px;
+      background:rgba(255,255,255,0.04); border:1px solid var(--line);
+      border-radius:50%; width:30px; height:30px;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--text-muted); cursor:pointer; transition:all 0.2s;
+    }
+    .modal-close:hover { background:rgba(255,255,255,0.08); color:var(--text-cream); transform:scale(1.08); }
+    .success-icon {
+      width:56px; height:56px; border-radius:50%;
+      background:linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.05));
+      border:1px solid var(--accent-emerald);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--accent-emerald); margin-bottom:18px;
+    }
+    .modal-card h3 { margin:0 0 6px; font-size:22px; color:var(--text-cream); }
+    .modal-card > p { margin:0 0 20px; color:var(--text-muted); font-size:14px; }
+    .contact-options { display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+    .contact-option { display:flex; align-items:center; gap:14px; padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.02); transition:all 0.2s; }
+    .contact-option:hover { border-color:var(--line-bright); background:rgba(255,255,255,0.04); transform:translateY(-2px); }
+    .contact-icon { width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .contact-icon.call { background:rgba(234,179,8,0.12); color:var(--accent-gold); }
+    .contact-icon.whatsapp { background:rgba(16,185,129,0.12); color:var(--accent-emerald); }
+    .contact-text .label { font-size:11px; color:var(--text-dim); font-weight:500; display:block; }
+    .contact-text .value { font-size:14px; font-weight:600; color:var(--text-cream); font-family:'JetBrains Mono',monospace; }
+    .btn-close-success {
+      width:100%; padding:14px; border:1px solid var(--line); border-radius:14px;
+      background:rgba(255,255,255,0.02); color:var(--text-cream);
+      font-family:'Outfit',sans-serif; font-weight:600; font-size:14px;
+      cursor:pointer; margin-top:18px; transition:all 0.2s;
+    }
+    .btn-close-success:hover { background:rgba(255,255,255,0.04); border-color:var(--text-muted); }
+
+    @media (prefers-reduced-motion:reduce) {
+      * { animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+      .reveal { opacity:1 !important; transform:none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successOverlay">
+  <div class="modal-card">
+    <button class="modal-close" id="successClose" aria-label="Close">✕</button>
+    <div class="success-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <h3>Submitted successfully!</h3>
+    <p>We'll call you back shortly. You can also reach us directly:</p>
+    <div class="contact-options">
+      <a href="tel:892765638" class="contact-option"><span class="contact-icon call"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg></span><span class="contact-text"><span class="label">Call us</span><span class="value">89276 5638</span></span></a>
+      <a href="https://wa.me/919237377196" target="_blank" rel="noopener" class="contact-option"><span class="contact-icon whatsapp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.9 11.9 0 0012.02 0C5.4 0 .05 5.35.05 11.97c0 2.11.55 4.16 1.6 5.97L0 24l6.22-1.63a11.9 11.9 0 005.8 1.48h.01c6.62 0 11.97-5.35 11.97-11.97 0-3.2-1.25-6.2-3.48-8.4zM12.03 21.5a9.4 9.4 0 01-4.8-1.31l-.34-.2-3.69.97.99-3.6-.22-.37a9.42 9.42 0 01-1.45-5.02c0-5.2 4.23-9.43 9.44-9.43a9.37 9.37 0 016.67 2.77 9.36 9.36 0 012.76 6.67c0 5.2-4.23 9.43-9.36 9.52zm5.16-7.06c-.28-.14-1.67-.82-1.93-.92-.26-.1-.45-.14-.64.14-.19.28-.74.92-.9 1.1-.17.19-.33.21-.61.07-.28-.14-1.18-.44-2.25-1.4a8.4 8.4 0 01-1.56-1.94c-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.56-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.35-.26.28-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.07 4.87 4.31.68.29 1.21.47 1.63.6.68.22 1.3.19 1.79.11.55-.08 1.67-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33z"/></svg></span><span class="contact-text"><span class="label">WhatsApp</span><span class="value">92373 77196</span></span></a>
+    </div>
+    <button class="btn-close-success" id="successDone">Continue</button>
+  </div>
+</div>
+
+<div class="bg-texture"></div>
+<div class="bg-grid"></div>
+
+<div class="page">
+
+  <!-- LEFT PANEL: video, about, headline -->
+  <aside class="left-panel">
+    <svg class="network-motif" viewBox="0 0 240 900" preserveAspectRatio="xMidYMid slice">
+      <g stroke="rgba(16,185,129,0.25)" stroke-width="1" fill="none">
+        <path d="M40 90 L110 170 L200 130" />
+        <path d="M110 170 L80 290 L170 350" />
+        <path d="M170 350 L220 460 L130 530" />
+        <path d="M130 530 L50 600 L140 690" />
+        <path d="M140 690 L210 770 L120 830" />
+      </g>
+      <g fill="#10B981"><circle cx="40" cy="90" r="3"/><circle cx="200" cy="130" r="2.8"/><circle cx="80" cy="290" r="2.8"/><circle cx="220" cy="460" r="3"/><circle cx="50" cy="600" r="2.8"/><circle cx="210" cy="770" r="2.8"/></g>
+      <g fill="#EAB308"><circle cx="110" cy="170" r="4"/><circle cx="170" cy="350" r="3.5"/><circle cx="130" cy="530" r="4"/><circle cx="140" cy="690" r="3.5"/><circle cx="120" cy="830" r="4"/></g>
+    </svg>
+
+    <div class="brand"><div class="brand-mark">M</div><div class="brand-name">MLM Growth <span>Partners</span></div></div>
+
+    <div class="about-block">
+      <div class="eyebrow">ABOUT US</div>
+      <h2 class="about-title">Built by people who've run MLM networks, not just coded for them</h2>
+      <p class="subtext">Full‑service MLM technology & growth partner — software, plans, promotion and leads, all under one roof. Tested on our own live network before we offer it to you.</p>
+    </div>
+
+    <!-- VIDEO (left) -->
+    <div class="video-shell">
+      <div class="live-badge"><span class="live-dot"></span> LIVE PROOF</div>
+      <video controls poster="" preload="metadata">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-caption">
+        <div>
+          <strong>Watch the working demo</strong>
+          <span>See how the plan, software and growth support come together.</span>
+        </div>
+        <div class="video-pill">PROOF FIRST</div>
+      </div>
+    </div>
+
+    <h1 class="headline">Don't just buy. <em>Test it yourself</em> before spending a single rupee.</h1>
+    <p class="subtext">Watch the presentation above to see our live proof, then explore our full suite of premium MLM services.</p>
+    <div class="left-footnote"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg> No commitment needed to watch the demo</div>
+  </aside>
+
+  <!-- RIGHT PANEL: form, services -->
+  <main class="right-panel">
+
+    <!-- LEAD FORM -->
+    <div class="lead-card-inline">
+      <div class="eyebrow" style="margin-bottom:4px;">GET A CALLBACK</div>
+      <h3>Tell us where to reach you</h3>
+      <p>Share a few details and our team will call you back with everything you need.</p>
+      <form id="leadForm" novalidate>
+        <div class="field"><label for="leadName">Full name</label><input type="text" id="leadName" name="name" placeholder="Your name" autocomplete="name" required><div class="field-error" id="errName"></div></div>
+        <div class="field"><label for="leadMobile">Mobile number</label><input type="tel" id="leadMobile" name="mobile" placeholder="10-digit mobile" autocomplete="tel" required><div class="field-error" id="errMobile"></div></div>
+        <div class="field"><label for="leadEmail">Email ID</label><input type="email" id="leadEmail" name="email" placeholder="you@example.com" autocomplete="email" required><div class="field-error" id="errEmail"></div></div>
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+    </div>
+
+    <div class="right-header">
+      <div class="eyebrow">OUR FULL SUITE</div>
+      <h2>Everything your MLM network needs, under one roof</h2>
+      <p>Eight services built to launch, run and grow your MLM business — from software to promotion.</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- 01 -->
+      <div class="service-card sc--emerald reveal">
+        <div class="sc-top">
+          <div class="sc-node">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+          </div>
+          <span class="sc-num">01</span>
+        </div>
+        <div class="sc-body">
+          <h3>Customised MLM Software</h3>
+          <p>Tailored platform built around your compensation plan and business flow.</p>
+        </div>
+      </div>
+      <!-- 02 -->
+      <div class="service-card sc--gold reveal">
+        <div class="sc-top">
+          <div class="sc-node">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5M9 13h6M9 17h6M9 9h2"/></svg>
+          </div>
+          <span class="sc-num">02</span>
+        </div>
+        <div class="sc-body">
+          <h3>MLM Plan PDF Making</h3>
+          <p>Clear, professional documents that explain your compensation structure.</p>
+        </div>
+      </div>
+      <!-- 03 -->
+      <div class="service-card sc--blue reveal">
+        <div class="sc-top">
+          <div class="sc-node">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M21 8l-4 3 4 3z"/></svg>
+          </div>
+          <span class="sc-num">03</span>
+        </div>
+        <div class="sc-body">
+          <h3>MLM Plan Video Making</h3>
+          <p>Engaging explainer videos that make your plan easy to pitch and trust.</p>
+        </div>
+      </div>
+      <!-- 04 -->
+      <div class="service-card sc--purple reveal">
+        <div class="sc-top">
+          <div class="sc-node">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h6v6"/></svg>
+          </div>
+          <span class="sc-num">04</span>
+        </div>
+        <div class="sc-body">
+          <h3>Result‑Based Plan Promotion</h3>
+          <p>Promotion tied to real, trackable outcomes — not empty impressions.</p>
+        </div>
+      </div>
+      <!-- 05 -->
+      <div class="service-card sc--orange reveal">
+        <div class="sc-top">
+          <div class="sc-node">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+          </div>
+          <span class="sc-num">05</span>
+        </div>
+        <div class="sc-body">
+          <h3>Latest MLM Database</h3>
+          <p>Fresh, verified prospect lists to keep your recruitment pipeline full.</p>
+        </div>
+      </div>
+      <!-- 06 -->
+      <div class="service-card sc--green2 reveal">
+        <div class="sc-top">
+          <div class="sc-node">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 01-9 8.4A8.5 8.5 0 013 12a8.4 8.4 0 018.4-8.5 8.4 8.4 0 019.6 8z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
+          </div>
+          <span class="sc-num">06</span>
+        </div>
+        <div class="sc-body">
+          <h3>WhatsApp Business Services</h3>
+          <p>Broadcast, automation and support tools set up on WhatsApp Business.</p>
+        </div>
+      </div>
+      <!-- 07 -->
+      <div class="service-card sc--rose reveal">
+        <div class="sc-top">
+          <div class="sc-node">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <span class="sc-num">07</span>
+        </div>
+        <div class="sc-body">
+          <h3>MLM Leader Services</h3>
+          <p>Coaching and support for team leaders to keep networks active.</p>
+        </div>
+      </div>
+      <!-- 08 -->
+      <div class="service-card sc--sky reveal">
+        <div class="sc-top">
+          <div class="sc-node">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18 15 15 0 010-18z"/></svg>
+          </div>
+          <span class="sc-num">08</span>
+        </div>
+        <div class="sc-body">
+          <h3>Meta &amp; Google Ad Services</h3>
+          <p>Targeted campaigns across Meta and Google to bring qualified leads in.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- TESTIMONIALS + CLIENT LIST -->
+<section class="testimonials-section">
+  <div class="section-divider"></div>
+  <div class="testimonials-header">
+    <div class="eyebrow">WHAT OUR CLIENTS SAY</div>
+    <h2>Trusted by MLM leaders who tested us first</h2>
+    <p>Real feedback from network owners who watched the proof, ran the numbers, and stayed for the results.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">We watched the live demo before committing. Two weeks after launch our plan payouts were running exactly as promised, no surprises.</p><div class="testimonial-person"><div class="testimonial-avatar">R</div><div><div class="name">Rakesh Sharma</div><div class="role">Founder, Vantara Network</div></div></div></div>
+    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">The plan PDF and explainer video made pitching so much easier. Our downline actually understands the compensation structure now.</p><div class="testimonial-person"><div class="testimonial-avatar">P</div><div><div class="name">Priya Nair</div><div class="role">Director, Zenith Lifecare</div></div></div></div>
+    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">Lead quality from their database and ad campaigns is far better than what we got running ads ourselves. Our sign-up rate roughly doubled.</p><div class="testimonial-person"><div class="testimonial-avatar">A</div><div><div class="name">Arjun Mehta</div><div class="role">Co-founder, Bright Horizon MLM</div></div></div></div>
+    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">Support from the leader coaching team kept our team active during a slow quarter. Practical advice, not generic motivation.</p><div class="testimonial-person"><div class="testimonial-avatar">S</div><div><div class="name">Sneha Kulkarni</div><div class="role">Team Leader, Orbit Wellness</div></div></div></div>
+    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">Custom software matched our compensation plan exactly, down to the edge cases our old vendor kept getting wrong.</p><div class="testimonial-person"><div class="testimonial-avatar">V</div><div><div class="name">Vikram Desai</div><div class="role">CEO, Elevate Direct</div></div></div></div>
+    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">WhatsApp automation alone saved us hours every day. Broadcast, follow-ups, everything runs without us babysitting it.</p><div class="testimonial-person"><div class="testimonial-avatar">N</div><div><div class="name">Neha Kapoor</div><div class="role">Ops Head, Pinnacle Network</div></div></div></div>
+  </div>
+
+  <!-- CLIENT LIST (brand names) -->
+  <div class="client-list-section">
+    <div class="eyebrow">TRUSTED BY LEADING NETWORKS</div>
+    <div class="client-grid">
+      <span class="client-item">Vantara Network</span>
+      <span class="client-item">Zenith Lifecare</span>
+      <span class="client-item">Bright Horizon MLM</span>
+      <span class="client-item">Orbit Wellness</span>
+      <span class="client-item">Elevate Direct</span>
+      <span class="client-item">Pinnacle Network</span>
+      <span class="client-item">Apex Growth</span>
+      <span class="client-item">Nexus Direct</span>
+      <span class="client-item">Prime Connect</span>
+      <span class="client-item">Stellar MLM</span>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT WITH AI -->
+<button class="chat-fab" id="chatFab" aria-label="Chat with AI" aria-expanded="false">
+  <span class="chat-fab-ring"></span>
+ 
+  <img class="chat-fab-icon" src="./assets/image/ai-assistant.png" alt="" srcset="">
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-panel-header"><div class="title"><span class="status-dot"></span> Chat with AI</div><button class="chat-close" id="chatClose" aria-label="Close chat">✕</button></div>
+  <div class="chat-body" id="chatBody"><div class="msg bot">Hi! I can answer questions about our MLM software, plans, promotion and database services. What would you like to know?</div></div>
+  <div class="chat-input-row"><input type="text" id="chatInput" placeholder="Ask about a service..."><button id="chatSend" aria-label="Send message"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></button></div>
+</div>
+
+<script>
+  // SCROLL-REVEAL
+  (function() {
+    const cards = document.querySelectorAll('.service-card, .testimonial-card');
+    cards.forEach((el, i) => { el.classList.add('reveal'); el.style.transitionDelay = (i % 4) * 60 + 'ms'; });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } });
+    }, { threshold: 0.1 });
+    cards.forEach(el => io.observe(el));
+  })();
+
+  // Lead form + success modal
+  const leadForm = document.getElementById('leadForm');
+  const nameInput = document.getElementById('leadName');
+  const mobileInput = document.getElementById('leadMobile');
+  const emailInput = document.getElementById('leadEmail');
+  const errName = document.getElementById('errName');
+  const errMobile = document.getElementById('errMobile');
+  const errEmail = document.getElementById('errEmail');
+  const successOverlay = document.getElementById('successOverlay');
+  const successClose = document.getElementById('successClose');
+  const successDone = document.getElementById('successDone');
+
+  function closeOverlay() { successOverlay.classList.remove('open'); }
+  function openOverlay() { successOverlay.classList.add('open'); }
+
+  leadForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+    errName.textContent = ''; errMobile.textContent = ''; errEmail.textContent = '';
+    if (!nameInput.value.trim()) { errName.textContent = 'Please enter your name.'; valid = false; }
+    const mobileVal = mobileInput.value.trim();
+    if (!/^\d{10}$/.test(mobileVal)) { errMobile.textContent = 'Enter a valid 10-digit mobile number.'; valid = false; }
+    const emailVal = emailInput.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) { errEmail.textContent = 'Enter a valid email address.'; valid = false; }
+    if (!valid) return;
+    openOverlay();
+    leadForm.reset();
+  });
+
+  successClose.addEventListener('click', closeOverlay);
+  successDone.addEventListener('click', closeOverlay);
+
+  // CHAT
+  const panel = document.getElementById('chatPanel');
+  const fab = document.getElementById('chatFab');
+  const closeBtn = document.getElementById('chatClose');
+  const body = document.getElementById('chatBody');
+  const input = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('chatSend');
+
+  function toggleChat(open) {
+    const willOpen = open !== undefined ? open : !panel.classList.contains('open');
+    panel.classList.toggle('open', willOpen);
+    fab.setAttribute('aria-expanded', String(willOpen));
+    if (willOpen) input.focus();
+  }
+  fab.addEventListener('click', () => toggleChat());
+  closeBtn.addEventListener('click', () => toggleChat(false));
+
+  function addMessage(text, from) {
+    const div = document.createElement('div');
+    div.className = 'msg ' + from;
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  function botReply() { addMessage("Thanks for your message! Our team will get back to you shortly with details on that service.", 'bot'); }
+  function handleSend() {
+    const val = input.value.trim();
+    if (!val) return;
+    addMessage(val, 'user');
+    input.value = '';
+    setTimeout(botReply, 500);
+  }
+  sendBtn.addEventListener('click', handleSend);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
+</script>
+</body>
+</html>
