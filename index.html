@@ -1,837 +1,3319 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MLM Growth Partners · Proof before promise</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #030a07;
-      color: #e5ede9;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    :root {
-      --bg-deep: #030a07;
-      --bg-panel: rgba(13, 27, 21, 0.65);
-      --bg-card: rgba(18, 38, 29, 0.5);
-      --bg-card-hover: rgba(25, 51, 39, 0.7);
-      --line: rgba(62, 207, 142, 0.12);
-      --line-bright: rgba(62, 207, 142, 0.25);
-      --accent-gold: #EAB308;
-      --accent-emerald: #10B981;
-      --text-cream: #F8FAFC;
-      --text-muted: #94A3B8;
-      --text-dim: #64748B;
-      --radius: 18px;
-      --shadow: 0 20px 40px -12px rgba(0,0,0,0.7);
-    }
-    a { color: inherit; text-decoration: none; }
-    .mono { font-family: 'JetBrains Mono', monospace; }
-    h1,h2,h3,h4 { font-family: 'Outfit', sans-serif; font-weight: 600; letter-spacing: -0.02em; }
-    ::selection { background: rgba(16, 185, 129, 0.3); color: #fff; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> MLM Software & Network Growth Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #060B16;
+            --bg-elev: #0B1526;
+            --surface: #101C33;
+            --surface-2: #172542;
+            --teal: #3B82F6;
+            --teal-dim: #2563EB;
+            --gradient: linear-gradient(135deg, #60A5FA 0%, #3B82F6 45%, #1E3A8A 100%);
+            --coral: #FF6B4A;
+            --text: #F4F6F9;
+            --muted: #8B93A6;
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
 
-    .bg-texture {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background: radial-gradient(circle at 20% 30%, rgba(16,185,129,0.07) 0%, transparent 45%),
-                  radial-gradient(circle at 80% 70%, rgba(234,179,8,0.05) 0%, transparent 45%);
-      animation: bg-drift 18s ease-in-out infinite alternate;
-    }
-    .bg-grid {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image: linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
-      -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
-    }
-    @keyframes bg-drift { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .page {
-      position: relative; z-index: 1;
-      display: grid; grid-template-columns: 1fr 1fr;
-      min-height: 100vh;
-      gap: 0;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* animations */
-    @keyframes fade-in { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes slide-in-left { from { opacity:0; transform:translateX(-24px); } to { opacity:1; transform:translateX(0); } }
-    @keyframes slide-in-right { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
-    @keyframes scale-in { from { opacity:0; transform:scale(0.94); } to { opacity:1; transform:scale(1); } }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    .brand { opacity:0; animation: slide-in-left 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards; }
-    .about-block { opacity:0; animation: fade-in 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s forwards; }
-    .video-shell { opacity:0; animation: scale-in 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s forwards; }
-    .headline { opacity:0; animation: fade-in 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s forwards; }
-    .left-footnote { opacity:0; animation: fade-in 0.6s cubic-bezier(0.16,1,0.3,1) 0.6s forwards; }
-    .lead-card-inline { opacity:0; animation: slide-in-right 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s forwards; }
-    .right-header { opacity:0; animation: fade-in 0.6s cubic-bezier(0.16,1,0.3,1) 0.45s forwards; }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    .reveal { opacity:0; transform:translateY(28px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.visible { opacity:1; transform:translateY(0); }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+        }
 
-    /* LEFT PANEL */
-    .left-panel {
-      position: sticky; top:0; height:100vh; overflow-y:auto;
-      padding: 36px 40px 20px 40px;
-      display: flex; flex-direction: column; gap: 18px;
-      background: var(--bg-panel);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-right: 1px solid var(--line);
-    }
-    .network-motif {
-      position: absolute; top:0; right:0; width:240px; height:100%;
-      opacity:0.3; pointer-events:none; z-index:-1;
-    }
-    .brand { display:flex; align-items:center; gap:12px; margin-bottom:4px; }
-    .brand-mark {
-      width:42px; height:42px; border-radius:14px;
-      background: linear-gradient(135deg, var(--accent-emerald), var(--accent-gold));
-      display:flex; align-items:center; justify-content:center;
-      font-family: 'Space Grotesk', sans-serif; font-weight:700;
-      color:#030a07; font-size:18px;
-      box-shadow: 0 4px 14px rgba(16,185,129,0.25);
-    }
-    .brand-name { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; color:var(--text-cream); letter-spacing:-0.3px; }
-    .brand-name span { color:var(--accent-gold); }
+        /* ---------- NAV ---------- */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 6%;
+            background: linear-gradient(to bottom, rgba(6, 11, 22, 0.9), transparent);
+            backdrop-filter: blur(2px);
+        }
 
-    .about-block { display:flex; flex-direction:column; gap:8px; }
-    .eyebrow {
-      font-size:11px; color:var(--accent-emerald); font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
-      display:flex; align-items:center; gap:10px;
-    }
-    .eyebrow::before { content:""; width:22px; height:2px; background:var(--accent-emerald); border-radius:2px; }
-    .about-title { font-size:clamp(18px,1.6vw,22px); font-weight:600; line-height:1.3; color:var(--text-cream); }
-    .subtext { color:var(--text-muted); font-size:13.5px; max-width:50ch; line-height:1.6; }
+        .brand {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .video-shell {
-      position:relative; border-radius:22px; overflow:hidden; isolation:isolate;
-      background:
-        radial-gradient(circle at 22% 18%, rgba(16,185,129,0.18), transparent 34%),
-        linear-gradient(145deg, rgba(234,179,8,0.13), rgba(16,185,129,0.06) 42%, #020403 100%);
-      border:1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 28px 58px -16px rgba(0,0,0,0.82), 0 0 38px rgba(16,185,129,0.12);
-      height: 460px;
-      width:100%; margin:10px 0 8px;
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease, border-color 0.4s ease;
-    }
-    .video-shell::before {
-      content:''; position:absolute; inset:0; border-radius:22px;
-      padding:1.5px;
-      background: linear-gradient(var(--glow-angle,135deg), rgba(16,185,129,0.6), rgba(234,179,8,0.4), rgba(16,185,129,0.2), rgba(16,185,129,0.6));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      animation: border-rotate 5s linear infinite;
-      z-index:2; pointer-events:none;
-    }
-    .video-shell::after {
-      content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
-      background:
-        linear-gradient(180deg, rgba(3,10,7,0.24) 0%, transparent 28%, transparent 58%, rgba(3,10,7,0.72) 100%),
-        radial-gradient(circle at 80% 12%, rgba(234,179,8,0.18), transparent 26%);
-      mix-blend-mode:normal;
-    }
-    @property --glow-angle { syntax:'<angle>'; initial-value:135deg; inherits:false; }
-    @keyframes border-rotate { to { --glow-angle:495deg; } }
-    .video-shell:hover {
-      transform:translateY(-4px) scale(1.01);
-      border-color:rgba(62,207,142,0.24);
-      box-shadow:0 36px 72px -16px rgba(0,0,0,0.86), 0 0 48px rgba(16,185,129,0.22);
-    }
-    .video-shell video { width:100%; height:100%; object-fit:cover; display:block; background:#000; position:relative; z-index:0; }
+        .brand .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 12px var(--teal);
+        }
 
-    .live-badge {
-      position:absolute; top:14px; left:14px;
-      display:flex; align-items:center; gap:8px;
-      background:rgba(3,10,7,0.76); backdrop-filter:blur(10px);
-      border:1px solid rgba(255,255,255,0.12);
-      padding:7px 14px 7px 12px; border-radius:999px;
-      font-size:10px; font-weight:700; letter-spacing:0.3px; z-index:3; color:#fff;
-      box-shadow:0 12px 28px rgba(0,0,0,0.28);
-    }
-    .live-dot { width:7px; height:7px; border-radius:50%; background:var(--accent-emerald); box-shadow:0 0 0 0 rgba(16,185,129,0.6); animation:pulse-dot 1.8s infinite; }
-    @keyframes pulse-dot { 0% { box-shadow:0 0 0 0 rgba(16,185,129,0.5); } 70% { box-shadow:0 0 0 10px rgba(16,185,129,0); } 100% { box-shadow:0 0 0 0 rgba(16,185,129,0); } }
-    .video-caption {
-      position:absolute; left:18px; right:18px; bottom:58px; z-index:3;
-      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
-      pointer-events:none;
-    }
-    .video-caption strong {
-      display:block; color:var(--text-cream); font-family:'Outfit',sans-serif;
-      font-size:16px; line-height:1.2; margin-bottom:3px;
-      text-shadow:0 2px 14px rgba(0,0,0,0.65);
-    }
-    .video-caption span {
-      display:block; color:rgba(226,232,240,0.82); font-size:12px; line-height:1.4;
-      text-shadow:0 2px 12px rgba(0,0,0,0.7);
-    }
-    .video-pill {
-      flex:0 0 auto; color:#04110c; background:linear-gradient(135deg, var(--accent-gold), #FDE047);
-      border-radius:999px; padding:7px 11px; font-size:10px; font-weight:800; letter-spacing:0.7px;
-      box-shadow:0 10px 24px rgba(234,179,8,0.18);
-    }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
 
-    .headline {     font-size: clamp(14px, 1.2vw, 17px);
-    line-height: 1.4;
+        .nav-links a {
+            transition: color .25s ease;
+        }
 
- font-weight:700; color:var(--text-cream); letter-spacing:-0.6px; margin:4px 0 2px; }
-    .headline em { font-style:normal; background:linear-gradient(to right, var(--accent-gold), #FDE047); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .left-footnote { display:flex; align-items:center; gap:8px; color:var(--text-dim); font-size:12px; font-weight:500; margin-top:2px; }
+        .nav-links a:hover {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-    /* RIGHT PANEL */
-    .right-panel {
-      padding: 40px 48px 40px 40px;
-      background: transparent;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
+        @media (max-width:760px) {
+            .nav-links {
+                display: none;
+            }
+        }
 
-    .lead-card-inline {
-      background:var(--bg-panel); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-      border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow);
-      padding:28px 32px;
-      width:100%;
-      position:relative;
-      overflow:hidden;
-    }
-    .lead-card-inline::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--line-bright), transparent); }
-    .lead-card-inline h3 { margin:0 0 4px; font-size:24px; color:var(--text-cream); letter-spacing:-0.3px; }
-    .lead-card-inline > p { margin:0 0 20px; color:var(--text-muted); font-size:14px; line-height:1.5; }
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 75% 30%, #16294d 0%, #060B16 60%);
+        }
 
-    .right-header { margin-bottom: 4px; }
-    .right-header h2 { font-size:clamp(28px,3.2vw,36px); margin:4px 0 10px; color:var(--text-cream); letter-spacing:-0.8px; line-height:1.2; }
-    .right-header p { color:var(--text-muted); font-size:15px; line-height:1.5; max-width: 60ch; }
+        .hero canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.28;
+        }
 
-    /* ---------- SERVICES GRID ---------- */
-    .services-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; width:100%; margin-top:4px; }
-    .service-card {
-      display:flex; flex-direction:column; gap:14px; padding:20px 22px 22px;
-      background:var(--bg-card); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-      border:1px solid var(--line); border-radius:20px;
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.35s, background 0.3s;
-      position:relative; overflow:hidden; cursor:default;
-    }
-    /* Top accent bar */
-    .service-card::before {
-      content:'';
-      position:absolute; top:0; left:0; right:0; height:2px;
-      background: linear-gradient(90deg, var(--card-accent, var(--accent-emerald)), transparent 80%);
-      opacity:0.6;
-      transition: opacity 0.3s;
-    }
-    /* Shimmer overlay on hover */
-    .service-card::after {
-      content:'';
-      position:absolute; inset:0;
-      background: radial-gradient(circle at var(--mx,50%) var(--my,20%), rgba(255,255,255,0.04) 0%, transparent 60%);
-      opacity:0; transition:opacity 0.4s;
-      pointer-events:none;
-    }
-    .service-card:hover { transform:translateY(-4px); background:var(--bg-card-hover); border-color:var(--line-bright); box-shadow:0 14px 32px -8px rgba(0,0,0,0.5), 0 0 0 1px var(--line-bright); }
-    .service-card:hover::before { opacity:1; }
-    .service-card:hover::after { opacity:1; }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(100deg, rgba(6, 11, 22, 0.9) 0%, rgba(6, 11, 22, 0.55) 42%, rgba(6, 11, 22, 0.15) 75%);
+            z-index: 1;
+        }
 
-    .sc-top { display:flex; align-items:center; justify-content:space-between; }
-    .sc-node {
-      width:46px; height:46px; border-radius:15px;
-      background: radial-gradient(circle at 30% 30%, var(--card-accent-bg, rgba(16,185,129,0.18)), rgba(3,10,7,0.6) 80%);
-      border:1px solid var(--card-accent-border, rgba(16,185,129,0.25));
-      display:flex; align-items:center; justify-content:center;
-      color:var(--card-accent, var(--accent-emerald));
-      transition:all 0.3s; flex-shrink:0;
-    }
-    .service-card:hover .sc-node {
-      transform:scale(1.08);
-      box-shadow:0 0 16px var(--card-accent-glow, rgba(16,185,129,0.35));
-    }
-    .sc-num {
-      font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;
-      letter-spacing:0.5px; color:var(--text-dim);
-      background:rgba(255,255,255,0.03); border:1px solid var(--line);
-      padding:3px 8px; border-radius:20px;
-      transition:color 0.3s, border-color 0.3s;
-    }
-    .service-card:hover .sc-num { color:var(--card-accent, var(--accent-emerald)); border-color:var(--card-accent-border, rgba(16,185,129,0.3)); }
-    .sc-body h3 { font-size:15.5px; font-weight:600; color:var(--text-cream); margin:0 0 5px; line-height:1.3; }
-    .sc-body p  { font-size:12.5px; color:var(--text-muted); margin:0; line-height:1.5; }
+        .hero-grid {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 0 6%;
+            max-width: 1240px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 44px;
+            align-items: center;
+        }
 
-    /* Per-card accent colours */
-    .sc--emerald { --card-accent:#10B981; --card-accent-bg:rgba(16,185,129,0.15); --card-accent-border:rgba(16,185,129,0.22); --card-accent-glow:rgba(16,185,129,0.3); }
-    .sc--gold    { --card-accent:#EAB308; --card-accent-bg:rgba(234,179,8,0.15);  --card-accent-border:rgba(234,179,8,0.22);  --card-accent-glow:rgba(234,179,8,0.3); }
-    .sc--blue    { --card-accent:#60A5FA; --card-accent-bg:rgba(96,165,250,0.14); --card-accent-border:rgba(96,165,250,0.2);  --card-accent-glow:rgba(96,165,250,0.3); }
-    .sc--purple  { --card-accent:#A78BFA; --card-accent-bg:rgba(167,139,250,0.14);--card-accent-border:rgba(167,139,250,0.2); --card-accent-glow:rgba(167,139,250,0.3); }
-    .sc--orange  { --card-accent:#FB923C; --card-accent-bg:rgba(251,146,60,0.14); --card-accent-border:rgba(251,146,60,0.2);  --card-accent-glow:rgba(251,146,60,0.3); }
-    .sc--green2  { --card-accent:#34D399; --card-accent-bg:rgba(52,211,153,0.15); --card-accent-border:rgba(52,211,153,0.22); --card-accent-glow:rgba(52,211,153,0.3); }
-    .sc--rose    { --card-accent:#FB7185; --card-accent-bg:rgba(251,113,133,0.14);--card-accent-border:rgba(251,113,133,0.2); --card-accent-glow:rgba(251,113,133,0.3); }
-    .sc--sky     { --card-accent:#38BDF8; --card-accent-bg:rgba(56,189,248,0.14); --card-accent-border:rgba(56,189,248,0.2);  --card-accent-glow:rgba(56,189,248,0.3); }
+        @media (max-width:900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding-top: 110px;
+            }
+        }
 
-    /* TESTIMONIALS + CLIENT LIST */
-    .testimonials-section {
-      padding: 48px 48px 56px 40px;
-      background: transparent;
-    }
-    .testimonials-section .section-divider {
-      max-width: 1200px;
-      height: 1px;
-      margin: 0 auto 40px;
-      background: linear-gradient(90deg, transparent, var(--line-bright), transparent);
-    }
-    .testimonials-header {
-      max-width: 62ch;
-      margin: 0 auto 40px;
-      text-align: center;
-    }
-    .testimonials-header .eyebrow { justify-content: center; }
-    .testimonials-header h2 { font-size: clamp(28px, 3.2vw, 36px); margin: 12px 0 8px; color: var(--text-cream); letter-spacing: -0.6px; line-height: 1.2; }
-    .testimonials-header p { color: var(--text-muted); font-size: 15px; line-height: 1.5; }
+        .hero-text {
+            max-width: 560px;
+            margin-left: -46px;
+            text-align: left;
+        }
 
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      max-width: 1200px;
-      margin: 0 auto 48px auto;
-    }
-    .testimonial-card {
-      display:flex; flex-direction:column; gap:14px; padding:24px;
-      background:var(--bg-card); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-      border:1px solid var(--line); border-radius:18px;
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.4s;
-    }
-    .testimonial-card:hover { transform:translateY(-4px) scale(1.008); background:var(--bg-card-hover); border-color:var(--line-bright); box-shadow:0 16px 32px -8px rgba(0,0,0,0.5), 0 0 20px rgba(16,185,129,0.08); }
-    .testimonial-stars { display:flex; gap:2px; color:var(--accent-gold); }
-    .testimonial-quote { color:var(--text-muted); font-size:14px; line-height:1.6; flex:1; }
-    .testimonial-person { display:flex; align-items:center; gap:12px; padding-top:6px; border-top:1px solid var(--line); }
-    .testimonial-avatar {
-      flex-shrink:0; width:40px; height:40px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px;
-      color:#030a07; background:linear-gradient(135deg, var(--accent-emerald), var(--accent-gold));
-    }
-    .testimonial-person .name { font-size:14px; font-weight:600; color:var(--text-cream); }
-    .testimonial-person .role { font-size:12px; color:var(--text-dim); }
+        .hero-video-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+            aspect-ratio: 4/2.6;
+            align-self: center;
+            opacity: 0;
+            transform: translateX(60px);
+        }
 
-    /* CLIENT LIST (logos / names) */
-    .client-list-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 8px;
-      border-top: 1px solid var(--line);
-    }
-    .client-list-section .eyebrow {
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .client-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px 40px;
-      padding: 8px 0 12px;
-    }
-    .client-item {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 500;
-      font-size: 15px;
-      color: var(--text-muted);
-      letter-spacing: 0.2px;
-      padding: 6px 12px;
-      border-radius: 40px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--line);
-      transition: all 0.2s;
-    }
-    .client-item:hover {
-      color: var(--text-cream);
-      border-color: var(--line-bright);
-      background: rgba(255,255,255,0.04);
-      transform: translateY(-2px);
-    }
+        .hero-video-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-    /* CHAT FAB */
-    .chat-fab {
-      position:fixed; right:28px; bottom:28px; z-index:50;
-      width:60px; height:60px; border-radius:18px;
-      background:linear-gradient(135deg, var(--accent-emerald), #059669);
-      border:1px solid rgba(255,255,255,0.15);
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer; box-shadow:0 12px 30px -6px rgba(16,185,129,0.5);
-      transition: all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
-    }
-    .chat-fab:hover { transform:translateY(-3px) scale(1.04); box-shadow:0 18px 36px -8px rgba(16,185,129,0.6); }
-    .chat-fab:active { transform:scale(0.94); }
-    .chat-fab-icon { width:46px; height:46px; position:relative; z-index:1; color:#fff; transition:transform 0.3s; }
-    .chat-fab:hover .chat-fab-icon { transform:scale(1.06) rotate(-3deg); }
-    .chat-fab-ring { position:absolute; inset:-5px; border-radius:22px; border:2px solid rgba(16,185,129,0.3); animation:ring-pulse 2.2s cubic-bezier(0.16,1,0.3,1) infinite; }
-    @keyframes ring-pulse { 0% { transform:scale(0.8); opacity:1; } 100% { transform:scale(1.5); opacity:0; } }
+        .hero-video-frame::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(200deg, transparent 55%, rgba(6, 11, 22, 0.65) 100%);
+        }
 
-    .chat-panel {
-      position:fixed; right:28px; bottom:100px; z-index:50;
-      width:330px; max-width:calc(100vw - 40px);
-      background:var(--bg-panel); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
-      border:1px solid var(--line-bright); border-radius:22px;
-      box-shadow:0 30px 60px -12px rgba(0,0,0,0.8);
-      display:flex; flex-direction:column; overflow:hidden;
-      opacity:0; transform:translateY(16px) scale(0.94); pointer-events:none;
-      transition: all 0.25s cubic-bezier(0.16,1,0.3,1); transform-origin:bottom right;
-    }
-    .chat-panel.open { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
-    .chat-panel-header { padding:14px 18px; background:rgba(3,10,7,0.5); border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
-    .chat-panel-header .title { display:flex; align-items:center; gap:10px; font-weight:600; font-size:14px; font-family:'Outfit',sans-serif; }
-    .chat-panel-header .status-dot { width:7px; height:7px; border-radius:50%; background:var(--accent-emerald); box-shadow:0 0 8px var(--accent-emerald); }
-    .chat-close { background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:17px; padding:2px 6px; transition:color 0.2s; }
-    .chat-close:hover { color:var(--text-cream); }
-    .chat-body { padding:16px 18px; display:flex; flex-direction:column; gap:10px; max-height:260px; overflow-y:auto; font-size:13.5px; }
-    .chat-body::-webkit-scrollbar { width:3px; }
-    .chat-body::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.08); border-radius:10px; }
-    .msg { padding:10px 14px; border-radius:14px; max-width:86%; line-height:1.4; }
-    .msg.bot { background:rgba(255,255,255,0.04); color:var(--text-cream); align-self:flex-start; border:1px solid var(--line); border-bottom-left-radius:4px; }
-    .msg.user { background:var(--accent-emerald); color:#030a07; align-self:flex-end; border-bottom-right-radius:4px; font-weight:500; }
-    .chat-input-row { display:flex; border-top:1px solid var(--line); padding:6px; background:rgba(3,10,7,0.3); gap:4px; }
-    .chat-input-row input { flex:1; background:rgba(255,255,255,0.03); border:1px solid transparent; border-radius:12px; padding:10px 14px; color:var(--text-cream); font-family:'Inter',sans-serif; font-size:13px; transition:border-color 0.2s; }
-    .chat-input-row input:focus { outline:none; border-color:var(--accent-emerald); background:rgba(255,255,255,0.05); }
-    .chat-input-row input::placeholder { color:var(--text-dim); }
-    .chat-input-row button { background:none; border:none; color:var(--accent-emerald); padding:0 10px; cursor:pointer; display:flex; align-items:center; border-radius:12px; transition:background 0.2s; }
-    .chat-input-row button:hover { background:rgba(16,185,129,0.08); }
+        .hero-video-frame::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            height: 3px;
+            background: var(--gradient);
+            z-index: 2;
+        }
 
-    @media (max-width: 1100px) {
-      .testimonials-grid { grid-template-columns: 1fr 1fr; }
-      .client-grid { gap: 16px 24px; }
-    }
-    @media (max-width: 900px) {
-      .page { grid-template-columns: 1fr; }
-      .left-panel {
-        position: relative; height: auto;
-        padding: 32px 28px;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-      }
-      .right-panel { padding: 32px 24px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .testimonials-section { padding: 32px 20px 48px; }
-      .video-shell { height: 340px; }
-      .chat-fab { right:20px; bottom:20px; width:54px; height:54px; border-radius:16px; }
-      .chat-panel { right:20px; bottom:84px; max-width:calc(100vw - 40px); }
-    }
-    @media (max-width: 600px) {
-      .lead-card-inline { padding: 24px 20px; }
-      .right-panel { padding: 24px 16px; }
-      .testimonials-section { padding: 24px 16px 40px; }
-      .left-panel { padding: 24px 18px; }
-      .video-shell { height: 300px; border-radius:18px; }
-      .video-caption { left:14px; right:14px; bottom:54px; }
-      .video-caption strong { font-size:14px; }
-      .video-caption span { font-size:11px; }
-      .video-pill { display:none; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .client-grid { gap: 12px 16px; }
-    }
+        @media (max-width:900px) {
+            .hero-video-frame {
+                aspect-ratio: 16/9;
+            }
+        }
 
-    /* form fields */
-    .field { margin-bottom:16px; display:flex; flex-direction:column; gap:5px; }
-    .field label { font-size:12px; color:var(--text-muted); font-weight:500; }
-    .field input {
-      background:rgba(3,10,7,0.4); border:1px solid var(--line); border-radius:12px;
-      padding:12px 14px; color:var(--text-cream); font-family:'Inter',sans-serif; font-size:14px;
-      transition:all 0.2s; box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);
-    }
-    .field input:focus { outline:none; border-color:var(--accent-emerald); background:rgba(255,255,255,0.02); box-shadow:0 0 0 3px rgba(16,185,129,0.1), inset 0 2px 4px rgba(0,0,0,0.08); }
-    .field input::placeholder { color:var(--text-dim); }
-    .field-error { font-size:11px; color:#ef4444; min-height:14px; font-weight:500; }
-    .btn-submit {
-      width:100%; padding:14px; border:none; border-radius:12px;
-      background:linear-gradient(135deg, var(--accent-emerald), #059669);
-      color:#fff; font-family:'Outfit',sans-serif; font-weight:600; font-size:15px;
-      cursor:pointer; margin-top:4px; transition:all 0.2s;
-      box-shadow:0 4px 14px rgba(16,185,129,0.25);
-    }
-    .btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(16,185,129,0.35); }
-    .btn-submit:active { transform:translateY(0); }
+        .hero-media {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-    /* MODAL */
-    .modal-overlay {
-      position:fixed; inset:0; z-index:200;
-      display:flex; align-items:center; justify-content:center;
-      background:rgba(3,10,7,0.8); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-      padding:20px; opacity:0; pointer-events:none; transition:opacity 0.25s;
-    }
-    .modal-overlay.open { opacity:1; pointer-events:auto; }
-    .modal-card {
-      width:100%; max-width:420px; background:var(--bg-panel); border:1px solid var(--line-bright);
-      border-radius:24px; box-shadow:0 40px 80px -20px rgba(0,0,0,0.9);
-      padding:32px 32px 28px; position:relative;
-      transform:translateY(16px) scale(0.94); transition:all 0.25s cubic-bezier(0.16,1,0.3,1);
-    }
-    .modal-overlay.open .modal-card { transform:translateY(0) scale(1); }
-    .modal-close {
-      position:absolute; top:16px; right:16px;
-      background:rgba(255,255,255,0.04); border:1px solid var(--line);
-      border-radius:50%; width:30px; height:30px;
-      display:flex; align-items:center; justify-content:center;
-      color:var(--text-muted); cursor:pointer; transition:all 0.2s;
-    }
-    .modal-close:hover { background:rgba(255,255,255,0.08); color:var(--text-cream); transform:scale(1.08); }
-    .success-icon {
-      width:56px; height:56px; border-radius:50%;
-      background:linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.05));
-      border:1px solid var(--accent-emerald);
-      display:flex; align-items:center; justify-content:center;
-      color:var(--accent-emerald); margin-bottom:18px;
-    }
-    .modal-card h3 { margin:0 0 6px; font-size:22px; color:var(--text-cream); }
-    .modal-card > p { margin:0 0 20px; color:var(--text-muted); font-size:14px; }
-    .contact-options { display:flex; flex-direction:column; gap:10px; margin-top:16px; }
-    .contact-option { display:flex; align-items:center; gap:14px; padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.02); transition:all 0.2s; }
-    .contact-option:hover { border-color:var(--line-bright); background:rgba(255,255,255,0.04); transform:translateY(-2px); }
-    .contact-icon { width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .contact-icon.call { background:rgba(234,179,8,0.12); color:var(--accent-gold); }
-    .contact-icon.whatsapp { background:rgba(16,185,129,0.12); color:var(--accent-emerald); }
-    .contact-text .label { font-size:11px; color:var(--text-dim); font-weight:500; display:block; }
-    .contact-text .value { font-size:14px; font-weight:600; color:var(--text-cream); font-family:'JetBrains Mono',monospace; }
-    .btn-close-success {
-      width:100%; padding:14px; border:1px solid var(--line); border-radius:14px;
-      background:rgba(255,255,255,0.02); color:var(--text-cream);
-      font-family:'Outfit',sans-serif; font-weight:600; font-size:14px;
-      cursor:pointer; margin-top:18px; transition:all 0.2s;
-    }
-    .btn-close-success:hover { background:rgba(255,255,255,0.04); border-color:var(--text-muted); }
+        .hero-form-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 34px 28px;
+            box-shadow: var(--shadow);
+            position: relative;
+            opacity: 0;
+            transform: translateX(60px);
+        }
 
-    @media (prefers-reduced-motion:reduce) {
-      * { animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
-      .reveal { opacity:1 !important; transform:none !important; }
-    }
-  </style>
+        .hero-form-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .hero-form-card h2 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero-form-card > p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .video-caption {
+            font-size: 0.86rem;
+            line-height: 1.5;
+            color: var(--muted);
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .services-layout {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 960px) {
+            .services-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: normal;
+            background: none;
+            color: #ffffff;
+            text-transform: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            opacity: 0;
+            transform: translateX(90px);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 26px;
+            height: 1px;
+            background: #ffffff;
+        }
+
+        .hero h1 {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+            line-height: 1.18;
+            letter-spacing: -0.02em;
+            margin-bottom: 22px;
+            color: #ffffff;
+            opacity: 0;
+            transform: translateX(120px);
+        }
+
+        .hero h1 span {
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: #ffffff;
+            font-weight: 600;
+            max-width: 520px;
+            margin-bottom: 38px;
+            opacity: 0;
+            transform: translateX(110px);
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+        .rotate-text {
+            display: inline-block;
+            transition: transform .45s cubic-bezier(.22, .9, .3, 1), opacity .35s ease;
+        }
+
+        .rotate-text.swap-out {
+            transform: translateX(-60px);
+            opacity: 0;
+        }
+
+        .rotate-text.swap-in {
+            transform: translateX(60px);
+            opacity: 0;
+        }
+
+        .rotate-text.no-transition {
+            transition: none !important;
+        }
+
+        .slide-in {
+            animation: slideIn 0.85s cubic-bezier(.22, .9, .3, 1) forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 15px 30px;
+            border-radius: 999px;
+            transition: all .3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: #f5f9ff;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-ghost {
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: var(--text);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--teal);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* vertical get in touch tab */
+        .side-tab {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) rotate(180deg);
+            writing-mode: vertical-rl;
+            background: var(--coral);
+            color: #1a0700;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            padding: 18px 10px;
+            z-index: 45;
+            border-radius: 8px 0 0 8px;
+            transition: padding .25s ease, background .25s ease;
+        }
+
+        .side-tab:hover {
+            padding-right: 16px;
+            background: #ff7f5e;
+        }
+
+        /* scroll cue */
+        .scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 6%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            z-index: 2;
+        }
+
+        .scroll-cue .line {
+            width: 1px;
+            height: 28px;
+            background: linear-gradient(var(--teal), transparent);
+            animation: pulseLine 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulseLine {
+
+            0%,
+            100% {
+                opacity: .3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ---------- MODAL ---------- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(4, 8, 16, 0.82);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .35s ease, visibility .35s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 34px 34px;
+            box-shadow: var(--shadow);
+            transform: scale(0.85) translateY(20px);
+            opacity: 0;
+            transition: transform .45s cubic-bezier(.2, 1.4, .4, 1), opacity .35s ease;
+        }
+
+        .modal-overlay.open .modal-card {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .modal-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface-2);
+            color: var(--muted);
+            transition: all .25s ease;
+            font-size: 1.1rem;
+        }
+
+        .modal-close:hover {
+            background: var(--coral);
+            color: #1a0700;
+            transform: rotate(90deg);
+        }
+
+        .modal-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .modal-card h2 {
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal-card>p {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 26px;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .field input {
+            width: 100%;
+            background: var(--bg-elev);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 13px 14px;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: var(--font-body);
+            transition: border-color .25s ease, box-shadow .25s ease;
+        }
+
+        .field input::placeholder {
+            color: #4C566D;
+        }
+
+        .field input:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .field .err {
+            display: none;
+            color: var(--coral);
+            font-size: 0.76rem;
+            margin-top: 6px;
+        }
+
+        .field.invalid input {
+            border-color: var(--coral);
+        }
+
+        .field.invalid .err {
+            display: block;
+        }
+
+        .modal-submit {
+            width: 100%;
+            background: var(--gradient);
+            color: #f5f9ff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px;
+            border-radius: 10px;
+            margin-top: 8px;
+            transition: all .25s ease;
+        }
+
+        .modal-submit:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+
+        /* success view */
+        .success-view {
+            display: none;
+            text-align: center;
+        }
+
+        .success-view.show {
+            display: block;
+        }
+
+        .form-view.hide {
+            display: none;
+        }
+
+        .check-wrap {
+            width: 74px;
+            height: 74px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .check-wrap svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .check-wrap circle {
+            stroke: var(--teal);
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 76;
+            stroke-dashoffset: 76;
+            animation: drawCircle .6s ease forwards .1s;
+        }
+
+        .check-wrap path {
+            stroke: var(--teal);
+            stroke-width: 2.4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 24;
+            stroke-dashoffset: 24;
+            animation: drawCheck .4s ease forwards .55s;
+        }
+
+        @keyframes drawCircle {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .success-view h2 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .success-view p {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 22px;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .contact-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            transition: border-color .25s ease;
+        }
+
+        .contact-chip:hover {
+            border-color: var(--teal);
+        }
+
+        .contact-chip svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .modal-done-btn {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all .25s ease;
+        }
+
+        .modal-done-btn:hover {
+            border-color: var(--teal);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ---------- SERVICES ---------- */
+        .services {
+            position: relative;
+            padding: 110px 6% 130px;
+            background: var(--bg-elev);
+        }
+
+        .services-head {
+            max-width: 640px;
+            margin: 0 auto 64px;
+            text-align: center;
+        }
+
+        .services .eyebrow-static {
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            font-weight: 500;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: none;
+            margin-bottom: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .services .eyebrow-static::before,
+        .services .eyebrow-static::after {
+            content: "";
+            width: 20px;
+            height: 1px;
+            background: var(--coral);
+        }
+
+        .services h2 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+            margin-bottom: 14px;
+        }
+
+        .services-head p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .services-grid {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width:920px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width:600px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .video-info-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .video-info-card h4 {
+            color: #FFB020;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            font-family: var(--font-body);
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .video-info-card p {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .service-card {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease, border-color .3s ease, background .3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            border-color: var(--teal);
+            background: var(--surface-2);
+        }
+
+        .service-node {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: #4C566D;
+            position: absolute;
+            top: 22px;
+            right: 24px;
+            letter-spacing: 0.05em;
+        }
+
+        .service-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.1);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .service-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--teal);
+        }
+
+        .service-card:nth-child(3n-1) .service-icon {
+            background: rgba(255, 107, 74, 0.1);
+        }
+
+        .service-card:nth-child(3n-1) .service-icon svg {
+            stroke: var(--coral);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 0.97rem;
+            font-weight: 600;
+            margin: 0 0 4px 0;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 0.82rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .service-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-link {
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap .25s ease;
+        }
+
+        .service-link:hover {
+            gap: 10px;
+        }
+
+        /* connecting lines behind grid (decorative, subtle) */
+        .services::before {
+            content: "";
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 60px;
+            background-image: radial-gradient(circle, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* ---------- SCROLL ANIMATIONS (HEADINGS) ---------- */
+        .services-head, .testimonials-head {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .services-head.visible, .testimonials-head.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------- TESTIMONIALS (Video) ---------- */
+        .testimonials {
+            position: relative;
+            padding: 110px 6% 130px;
+            background: var(--bg);
+        }
+
+        .testimonials-head {
+            max-width: 640px;
+            margin: 0 auto 64px;
+            text-align: center;
+        }
+
+        .testimonials .eyebrow-static {
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            font-weight: 500;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: none;
+            margin-bottom: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .testimonials .eyebrow-static::before,
+        .testimonials .eyebrow-static::after {
+            content: "";
+            width: 20px;
+            height: 1px;
+            background: var(--teal);
+        }
+
+        .testimonials h2 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+            margin-bottom: 14px;
+        }
+
+        .testimonials-head p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        /* Video testimonials grid */
+        .video-testimonials-grid {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 920px) {
+            .video-testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 540px) {
+            .video-testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
+
+        .video-tcard {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            cursor: pointer;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            background: var(--surface);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: transform .5s cubic-bezier(.22,.9,.3,1), opacity .5s ease, box-shadow .3s ease;
+        }
+
+        .video-tcard::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            padding: 2px;
+            background: linear-gradient(135deg, #60A5FA, #3B82F6 50%, #1E3A8A);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .video-tcard.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .video-tcard:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(59,130,246,0.35);
+        }
+
+        .video-tcard video,
+        .video-tcard .vtcard-placeholder {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* placeholder when no real video */
+        .vtcard-placeholder {
+            background: linear-gradient(160deg, #0d1f40 0%, #0a1628 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vtcard-placeholder-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: rgba(59,130,246,0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(59,130,246,0.3);
+        }
+
+        .vtcard-placeholder-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #60A5FA;
+            margin-left: 3px;
+        }
+
+        /* dark gradient overlay at bottom */
+        .video-tcard-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(4,8,18,0.92) 0%, rgba(4,8,18,0.5) 40%, transparent 70%);
+            z-index: 2;
+        }
+
+        .video-tcard-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 4;
+            padding: 20px 16px 16px;
+        }
+
+        .vtcard-name {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .vtcard-role {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .vtcard-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: #25D366;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background .25s ease, transform .25s ease;
+        }
+
+        .vtcard-wa:hover {
+            background: #1ebc5a;
+            transform: scale(1.04);
+        }
+
+        .vtcard-wa svg {
+            width: 14px;
+            height: 14px;
+            fill: #fff;
+            flex-shrink: 0;
+        }
+
+        /* play button on hover */
+        .vtcard-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            z-index: 4;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(6px);
+            border: 1.5px solid rgba(255,255,255,0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity .3s ease, transform .3s ease;
+            pointer-events: none;
+        }
+
+        .vtcard-play svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+            margin-left: 3px;
+        }
+
+        .video-tcard:hover .vtcard-play {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+
+        /* ---------- CLIENT NAME STYLES ---------- */
+        .client-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .client-role {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* ---------- OUR CLIENTS GRID ---------- */
+        .our-clients {
+            padding: 80px 6% 100px;
+            background: var(--bg-elev);
+            position: relative;
+        }
+
+        .our-clients-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .our-clients-head {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .clients-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+        }
+
+        @media (max-width: 960px) {
+            .clients-logo-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .clients-logo-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+        .client-logo-card {
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 10px;
+            padding: 18px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 72px;
+            text-align: center;
+            transition: border-color .25s ease, background .25s ease, transform .25s ease;
+            cursor: default;
+        }
+
+        .client-logo-card:hover {
+            border-color: rgba(59, 130, 246, 0.45);
+            background: var(--surface-2);
+            transform: translateY(-3px);
+        }
+
+        .clc-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .clc-name {
+            font-family: var(--font-display);
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.03em;
+            line-height: 1.3;
+            white-space: nowrap;
+        }
+
+        /* ---------- STATS + CTA BAND ---------- */
+        .stats-cta {
+            position: relative;
+            background: var(--bg);
+            padding: 90px 6% 110px;
+            overflow: hidden;
+        }
+
+        .stats-cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .stats-cta-inner {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .stats-cta-head {
+            text-align: center;
+            margin-bottom: 44px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .stats-cta-head.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stats-cta-head h2 {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            line-height: 1.25;
+            margin-bottom: 14px;
+        }
+
+        .stats-cta-head h2 .accent {
+            color: var(--coral);
+        }
+
+        .stats-cta-head p {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .stats-band {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: var(--gradient);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.25);
+            overflow: hidden;
+            margin-bottom: 46px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .stats-band.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 20%;
+            bottom: 20%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+        }
+
+        .stat-num {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.55rem;
+            color: #fff;
+            line-height: 1.15;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        @media (max-width: 760px) {
+            .stats-band {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .stat-item:not(:last-child) {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            }
+        }
+
+        .cta-box {
+            border: 1.5px dashed rgba(59, 130, 246, 0.5);
+            border-radius: 18px;
+            padding: 36px 6% 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .cta-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta-banner {
+            background: var(--gradient);
+            border-radius: 12px;
+            padding: 18px 24px;
+            max-width: 720px;
+            margin: 0 auto 30px;
+            box-shadow: 0 14px 34px rgba(59, 130, 246, 0.3);
+        }
+
+        .cta-banner .line1 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #fff;
+            letter-spacing: 0.01em;
+        }
+
+        .cta-banner .line2 {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .cta-contact {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+            letter-spacing: 0.01em;
+            margin-bottom: 10px;
+        }
+
+        .cta-contact a {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cta-subtext {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        /* ---------- SERVICES SHOWCASE (carousel) ---------- */
+        .services-showcase {
+            position: relative;
+            background: var(--bg);
+            padding: 90px 6% 120px;
+        }
+
+        .ssc-banner {
+            max-width: 1180px;
+            margin: 0 auto 56px;
+            background: var(--gradient);
+            border-radius: 16px;
+            padding: 26px 20px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.28);
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .ssc-banner.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ssc-banner h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+            letter-spacing: 0.03em;
+            color: #fff;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .ssc-banner h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 64px;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--coral);
+        }
+
+        .ssc-carousel {
+            position: relative;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .ssc-track {
+            display: flex;
+            gap: 22px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 6px 4px 20px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .ssc-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .ssc-card {
+            scroll-snap-align: start;
+            flex: 0 0 calc(25% - 17px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease, border-color .3s ease, box-shadow .3s ease;
+        }
+
+        .ssc-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ssc-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 18px 42px rgba(59, 130, 246, 0.28);
+        }
+
+        @media (max-width: 1000px) {
+            .ssc-card {
+                flex: 0 0 calc(50% - 11px);
+            }
+        }
+
+        @media (max-width: 620px) {
+            .ssc-card {
+                flex: 0 0 82%;
+            }
+        }
+
+        .ssc-visual {
+            position: relative;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, #16294d 0%, #0a1628 100%);
+            overflow: hidden;
+        }
+
+        .ssc-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(59, 130, 246, 0.16) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .ssc-visual svg.ssc-illustration {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ssc-label {
+            padding: 20px 18px 24px;
+            text-align: center;
+        }
+
+        .ssc-label h3 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.02rem;
+            line-height: 1.35;
+        }
+
+        .ssc-arrow {
+            position: absolute;
+            top: 40%;
+            transform: translateY(-50%);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            transition: background .25s ease, border-color .25s ease, transform .25s ease;
+        }
+
+        .ssc-arrow:hover {
+            background: var(--gradient);
+            border-color: transparent;
+            transform: translateY(-50%) scale(1.06);
+        }
+
+        .ssc-arrow svg {
+            width: 18px;
+            height: 18px;
+            stroke: #fff;
+        }
+
+        .ssc-arrow.prev {
+            left: -23px;
+        }
+
+        .ssc-arrow.next {
+            right: -23px;
+        }
+
+        @media (max-width: 700px) {
+            .ssc-arrow {
+                display: none;
+            }
+        }
+
+        .ssc-dots {
+            display: flex;
+            justify-content: center;
+            gap: 9px;
+            margin-top: 6px;
+        }
+
+        .ssc-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.18);
+            transition: background .25s ease, transform .25s ease;
+        }
+
+        .ssc-dot.active {
+            background: var(--teal);
+            transform: scale(1.25);
+        }
+
+        /* ---------- TRUST / GUARANTEE BLOCK ---------- */
+        .trust-block {
+            max-width: 1180px;
+            margin: 0 auto 70px;
+            display: grid;
+            grid-template-columns: 1.55fr 1fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 860px) {
+            .trust-block {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .trust-note {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--teal);
+            border-radius: 14px;
+            padding: 30px 32px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .trust-note.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .trust-note h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .trust-note h3 span {
+            color: var(--coral);
+        }
+
+        .trust-note p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .trust-note p + p {
+            margin-top: 14px;
+        }
+
+        .trust-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .trust-feature-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--coral);
+            border-radius: 14px;
+            padding: 20px 22px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease, border-color .3s ease;
+        }
+
+        .trust-feature-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .trust-feature-item:hover {
+            border-left-color: var(--teal);
+        }
+
+        .trust-feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .trust-feature-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: #fff;
+        }
+
+        .trust-feature-text h4 {
+            font-family: var(--font-display);
+            font-size: 1.02rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .trust-feature-text p {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* ---------- BADGE ROW ---------- */
+        .badge-row {
+            max-width: 1100px;
+            margin: 46px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        @media (max-width: 760px) {
+            .badge-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .badge-card {
+            background: var(--gradient);
+            border-radius: 14px;
+            padding: 26px 16px;
+            text-align: center;
+            box-shadow: 0 14px 32px rgba(59, 130, 246, 0.28);
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease, box-shadow .3s ease;
+        }
+
+        .badge-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .badge-card:hover {
+            box-shadow: 0 18px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .badge-card:nth-child(even) {
+            background: linear-gradient(135deg, #FF9A6B 0%, #FF6B4A 55%, #C43F27 100%);
+            box-shadow: 0 14px 32px rgba(255, 107, 74, 0.28);
+        }
+
+        .badge-card:nth-child(even):hover {
+            box-shadow: 0 18px 40px rgba(255, 107, 74, 0.4);
+        }
+
+        .badge-icon {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: #fff;
+        }
+
+        .badge-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .badge-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.92);
+            letter-spacing: 0.02em;
+        }
+
+        /* ---------- FAQ ---------- */
+        .faq {
+            position: relative;
+            background: var(--bg-elev);
+            padding: 90px 6% 110px;
+        }
+
+        .faq-head {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 46px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .faq-head.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-head h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+        }
+
+        .faq-list {
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            border-radius: 12px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease;
+        }
+
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            text-align: left;
+            background: var(--gradient);
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.98rem;
+            padding: 18px 22px;
+            transition: filter .25s ease;
+        }
+
+        .faq-question:hover {
+            filter: brightness(1.08);
+        }
+
+        .faq-item:nth-child(even) .faq-question {
+            background: linear-gradient(135deg, #FF9A6B 0%, #FF6B4A 55%, #C43F27 100%);
+        }
+
+        .faq-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.22);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: none;
+            transition: max-height .4s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 400px;
+        }
+
+        .faq-answer-inner {
+            padding: 20px 24px;
+            color: var(--text);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            padding: 40px 6%;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        footer .brand {
+            font-size: 1.05rem;
+        }
+
+        footer .foot-meta {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ---------- AI ASSISTANT ---------- */
+        .ai-fab {
+            position: fixed;
+            right: 26px;
+            bottom: 26px;
+            z-index: 90;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: #f5f9ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.35);
+            transition: transform .3s ease, box-shadow .3s ease;
+            animation: aiFloat 3s ease-in-out infinite;
+        }
+
+        .ai-fab svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .ai-fab:hover {
+            transform: scale(1.08);
+            box-shadow: 0 14px 36px rgba(59, 130, 246, 0.5);
+        }
+
+        .ai-fab::after {
+            content: "";
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(59, 130, 246, 0.4);
+            animation: aiPulse 2.4s ease-out infinite;
+        }
+
+        @keyframes aiFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes aiPulse {
+            0% {
+                transform: scale(1);
+                opacity: .7;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .ai-panel {
+            position: fixed;
+            right: 26px;
+            bottom: 98px;
+            z-index: 91;
+            width: 340px;
+            max-width: calc(100vw - 40px);
+            height: 440px;
+            max-height: calc(100vh - 150px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.9) translateY(16px);
+            transform-origin: bottom right;
+            transition: opacity .3s ease, transform .35s cubic-bezier(.2, 1.3, .4, 1), visibility .3s ease;
+        }
+
+        .ai-panel.open {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+        }
+
+        .ai-panel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-elev);
+        }
+
+        .ai-panel-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 8px var(--teal);
+            flex-shrink: 0;
+        }
+
+        .ai-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .ai-status {
+            font-size: 0.74rem;
+            color: var(--muted);
+        }
+
+        .ai-close {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            background: var(--surface-2);
+            font-size: 0.9rem;
+            transition: all .25s ease;
+        }
+
+        .ai-close:hover {
+            background: var(--coral);
+            color: #1a0700;
+        }
+
+        .ai-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ai-msg {
+            max-width: 82%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 0.86rem;
+            line-height: 1.5;
+        }
+
+        .ai-msg.bot {
+            background: var(--surface-2);
+            color: var(--text);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .ai-msg.user {
+            background: var(--teal);
+            color: #081226;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .ai-input-row {
+            display: flex;
+            gap: 10px;
+            padding: 14px;
+            border-top: 1px solid var(--border);
+            background: var(--bg-elev);
+        }
+
+        .ai-input-row input {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 11px 14px;
+            color: var(--text);
+            font-size: 0.86rem;
+            font-family: var(--font-body);
+        }
+
+        .ai-input-row input:focus {
+            outline: none;
+            border-color: var(--teal);
+        }
+
+        .ai-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            background: var(--gradient);
+            color: #f5f9ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: filter .25s ease;
+        }
+
+        .ai-send svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .ai-send:hover {
+            filter: brightness(1.15);
+        }
+
+        @media (max-width:480px) {
+            .ai-panel {
+                right: 16px;
+                bottom: 88px;
+            }
+
+            .ai-fab {
+                right: 16px;
+                bottom: 16px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- SUCCESS MODAL -->
-<div class="modal-overlay" id="successOverlay">
-  <div class="modal-card">
-    <button class="modal-close" id="successClose" aria-label="Close">✕</button>
-    <div class="success-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></div>
-    <h3>Submitted successfully!</h3>
-    <p>We'll call you back shortly. You can also reach us directly:</p>
-    <div class="contact-options">
-      <a href="tel:892765638" class="contact-option"><span class="contact-icon call"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg></span><span class="contact-text"><span class="label">Call us</span><span class="value">89276 5638</span></span></a>
-      <a href="https://wa.me/919237377196" target="_blank" rel="noopener" class="contact-option"><span class="contact-icon whatsapp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.9 11.9 0 0012.02 0C5.4 0 .05 5.35.05 11.97c0 2.11.55 4.16 1.6 5.97L0 24l6.22-1.63a11.9 11.9 0 005.8 1.48h.01c6.62 0 11.97-5.35 11.97-11.97 0-3.2-1.25-6.2-3.48-8.4zM12.03 21.5a9.4 9.4 0 01-4.8-1.31l-.34-.2-3.69.97.99-3.6-.22-.37a9.42 9.42 0 01-1.45-5.02c0-5.2 4.23-9.43 9.44-9.43a9.37 9.37 0 016.67 2.77 9.36 9.36 0 012.76 6.67c0 5.2-4.23 9.43-9.36 9.52zm5.16-7.06c-.28-.14-1.67-.82-1.93-.92-.26-.1-.45-.14-.64.14-.19.28-.74.92-.9 1.1-.17.19-.33.21-.61.07-.28-.14-1.18-.44-2.25-1.4a8.4 8.4 0 01-1.56-1.94c-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.56-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.35-.26.28-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.07 4.87 4.31.68.29 1.21.47 1.63.6.68.22 1.3.19 1.79.11.55-.08 1.67-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33z"/></svg></span><span class="contact-text"><span class="label">WhatsApp</span><span class="value">92373 77196</span></span></a>
+    <!-- HERO -->
+    <section class="hero">
+        <canvas id="netCanvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-grid">
+            <div class="hero-text">
+                <div class="eyebrow slide-in" style="animation-delay:.1s">MLM Software Company</div>
+                <h1 class="slide-in" style="animation-delay:.25s"><span class="rotate-text" id="rotateText">Simple
+                        software your whole team can use</span></h1>
+                <p class="slide-in" style="animation-delay:.42s"><span class="rotate-text" id="rotateSubText">From
+                        compensation plans to leader websites, everything is made simple for your team.</span></p>
+                <div class="hero-ctas slide-in" style="animation-delay:.58s">
+                    <a href="#services" class="btn btn-primary">View Services</a>
+                    <button class="btn btn-ghost" id="heroContactBtn">Contact Us</button>
+                </div>
+            </div>
+            <div class="hero-media">
+                <div class="hero-form-card slide-in" style="animation-delay:.3s">
+                    <div class="modal-eyebrow">Get in touch</div>
+                    <h2>Talk to our team</h2>
+                    <p>Fill in your details and we'll call you back soon.</p>
+
+                    <form id="heroPageForm" novalidate>
+                        <div class="field" id="heroNameField">
+                            <label for="heroName">Full Name</label>
+                            <input type="text" id="heroName" placeholder="Your name">
+                            <div class="err">Please enter your name.</div>
+                        </div>
+                        <div class="field" id="heroMobileField">
+                            <label for="heroMobile">Mobile Number</label>
+                            <input type="tel" id="heroMobile" placeholder="10-digit mobile number">
+                            <div class="err">Please enter a valid mobile number.</div>
+                        </div>
+                        <div class="field" id="heroEmailField">
+                            <label for="heroEmail">Email Address</label>
+                            <input type="email" id="heroEmail" placeholder="you@example.com">
+                            <div class="err">Please enter a valid email address.</div>
+                        </div>
+                        <button type="submit" class="modal-submit">Submit</button>
+                    </form>
+                    <div class="success-view" id="heroSuccessView" style="display: none; text-align: center; margin-top: 20px;">
+                        <div class="check-wrap" style="width: 50px; height: 50px; margin: 0 auto 10px;">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10.5"></circle>
+                                <path d="M7 12.5l3.2 3.2L17 9"></path>
+                            </svg>
+                        </div>
+                        <h2 style="font-size: 1.1rem; margin-bottom: 5px;">Submitted successfully</h2>
+                        <p style="margin-bottom: 0;">We will get back to you soon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <button class="side-tab" id="sideTab">Get In Touch</button>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <button class="modal-close" id="modalClose">&#10005;</button>
+
+            <div class="form-view" id="formView">
+                <div class="modal-eyebrow">Get in touch</div>
+                <h2>Talk to our team</h2>
+                <p>Fill in your details and we'll call you back soon.</p>
+
+                <form id="enquiryForm" novalidate>
+                    <div class="field" id="nameField">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Your name">
+                        <div class="err">Please enter your name.</div>
+                    </div>
+                    <div class="field" id="mobileField">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" placeholder="10-digit mobile number">
+                        <div class="err">Please enter a valid mobile number.</div>
+                    </div>
+                    <div class="field" id="emailField">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="you@example.com">
+                        <div class="err">Please enter a valid email address.</div>
+                    </div>
+                    <button type="submit" class="modal-submit">Submit</button>
+                </form>
+            </div>
+
+            <div class="success-view" id="successView">
+                <div class="check-wrap">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10.5"></circle>
+                        <path d="M7 12.5l3.2 3.2L17 9"></path>
+                    </svg>
+                </div>
+                <h2>Your details are submitted successfully</h2>
+                <p>We will get back to you soon. You can also reach us directly:</p>
+                <div class="contact-row">
+                    <a class="contact-chip" href="tel:832765638">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                        832765638
+                    </a>
+                    <a class="contact-chip" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                        </svg>
+                        WhatsApp: 9237377196
+                    </a>
+                </div>
+                <button class="modal-done-btn" id="modalDone">Close</button>
+            </div>
+        </div>
     </div>
-    <button class="btn-close-success" id="successDone">Continue</button>
-  </div>
-</div>
 
-<div class="bg-texture"></div>
-<div class="bg-grid"></div>
+    <!-- SERVICES -->
+    <section class="services" id="services">
+        <div class="services-layout">
+            <div class="services-left">
+                <div class="sticky-video-wrapper" style="position: sticky; top: 120px;">
+                    <div class="hero-video-frame" style="opacity: 1; transform: none;">
+                        <video autoplay muted loop playsinline
+                            poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg">
+                            <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-info-card">
+                        <h4>Don't just buy. Test it yourself before spending a single rupee!</h4>
+                        <p>Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="services-right">
+                <div class="services-head" style="text-align: left; margin: 0 0 24px 0;">
+                    <div class="eyebrow-static">Our Services</div>
+                    <h2>Everything your MLM business needs</h2>
+                </div>
 
-<div class="page">
+                <div class="services-grid" id="servicesGrid">
 
-  <!-- LEFT PANEL: video, about, headline -->
-  <aside class="left-panel">
-    <svg class="network-motif" viewBox="0 0 240 900" preserveAspectRatio="xMidYMid slice">
-      <g stroke="rgba(16,185,129,0.25)" stroke-width="1" fill="none">
-        <path d="M40 90 L110 170 L200 130" />
-        <path d="M110 170 L80 290 L170 350" />
-        <path d="M170 350 L220 460 L130 530" />
-        <path d="M130 530 L50 600 L140 690" />
-        <path d="M140 690 L210 770 L120 830" />
-      </g>
-      <g fill="#10B981"><circle cx="40" cy="90" r="3"/><circle cx="200" cy="130" r="2.8"/><circle cx="80" cy="290" r="2.8"/><circle cx="220" cy="460" r="3"/><circle cx="50" cy="600" r="2.8"/><circle cx="210" cy="770" r="2.8"/></g>
-      <g fill="#EAB308"><circle cx="110" cy="170" r="4"/><circle cx="170" cy="350" r="3.5"/><circle cx="130" cy="530" r="4"/><circle cx="140" cy="690" r="3.5"/><circle cx="120" cy="830" r="4"/></g>
-    </svg>
+                    <a href="#" class="service-card" data-open-modal>
+                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="14" rx="2" />
+                                <path d="M8 22h8M12 18v4" />
+                            </svg></div>
+                        <div class="service-content">
+                            <h3>01. Customized MLM Software</h3>
+                            <p>Powerful backend dashboards tailored to your business with smart automation.</p>
+                            <span class="service-link">Explore Service &rarr;</span>
+                        </div>
+                    </a>
 
-    <div class="brand"><div class="brand-mark">M</div><div class="brand-name">MLM Growth <span>Partners</span></div></div>
+                    <a href="#" class="service-card" data-open-modal>
+                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <path d="M14 2v6h6M9 15h6M9 11h2" />
+                            </svg></div>
+                        <div class="service-content">
+                            <h3>02. MLM Plan PDF Making</h3>
+                            <p>Professional compensation plan PDF design with premium presentation.</p>
+                            <span class="service-link">View PDF &rarr;</span>
+                        </div>
+                    </a>
 
-    <div class="about-block">
-      <div class="eyebrow">ABOUT US</div>
-      <h2 class="about-title">Built by people who've run MLM networks, not just coded for them</h2>
-      <p class="subtext">Full‑service MLM technology & growth partner — software, plans, promotion and leads, all under one roof. Tested on our own live network before we offer it to you.</p>
+                    <a href="#" class="service-card" data-open-modal>
+                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="5" width="20" height="14" rx="2" />
+                                <path d="M10 9.5v5l4-2.5z" />
+                            </svg></div>
+                        <div class="service-content">
+                            <h3>03. MLM Plan Video Making</h3>
+                            <p>HD animated presentation videos with voice-over and effects.</p>
+                            <span class="service-link">Watch Video &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="service-card" data-open-modal>
+                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18" />
+                                <path d="M7 15l4-5 3 3 5-7" />
+                            </svg></div>
+                        <div class="service-content">
+                            <h3>04. Result Based Promotion</h3>
+                            <p>Reach targeted audiences using automated marketing campaigns.</p>
+                            <span class="service-link">Promotion &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="service-card" data-open-modal>
+                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <ellipse cx="12" cy="5" rx="8" ry="3" />
+                                <path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" />
+                            </svg></div>
+                        <div class="service-content">
+                            <h3>05. Latest MLM Database</h3>
+                            <p>Fresh verified databases with high quality genuine contacts.</p>
+                            <span class="service-link">Access Database &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="service-card" data-open-modal>
+                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="4" />
+                                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+                            </svg></div>
+                        <div class="service-content">
+                            <h3>06. MLM Leader Website</h3>
+                            <p>Modern responsive website for personal branding and business.</p>
+                            <span class="service-link">Visit Website &rarr;</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS (Video) -->
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-head">
+            <div class="eyebrow-static">Testimonials</div>
+            <h2>What our happy clients say</h2>
+            <p>Real video reviews from MLM leaders and business owners across India.</p>
+        </div>
+
+        <div class="video-testimonials-grid">
+
+            <!-- Card 1 -->
+            <div class="video-tcard">
+                <div class="vtcard-placeholder">
+                    <div class="vtcard-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="video-tcard-overlay"></div>
+                <div class="vtcard-play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="video-tcard-info">
+                    <div class="vtcard-name">Mr. Srinivas</div>
+                    <div class="vtcard-role">Founder &amp; CEO &ndash; Parivrat in-corporation<br>(Andrapradesh)</div>
+                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="video-tcard">
+                <div class="vtcard-placeholder">
+                    <div class="vtcard-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="video-tcard-overlay"></div>
+                <div class="vtcard-play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="video-tcard-info">
+                    <div class="vtcard-name">Mr. Bhagbat Chohan</div>
+                    <div class="vtcard-role">Founder &amp; CEO &ndash; Ai Abacus<br>(Maharashtra)</div>
+                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="video-tcard">
+                <div class="vtcard-placeholder">
+                    <div class="vtcard-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="video-tcard-overlay"></div>
+                <div class="vtcard-play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="video-tcard-info">
+                    <div class="vtcard-name">Mr. Ammba Das</div>
+                    <div class="vtcard-role">Founder &amp; CEO &ndash; Direct Sellar<br>(Telangana)</div>
+                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="video-tcard">
+                <div class="vtcard-placeholder">
+                    <div class="vtcard-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="video-tcard-overlay"></div>
+                <div class="vtcard-play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="video-tcard-info">
+                    <div class="vtcard-name">Mr. Srinivas</div>
+                    <div class="vtcard-role">Founder &amp; CEO &ndash; Parivrat in-corporation<br>(Andrapradesh)</div>
+                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- OUR CLIENTS -->
+    <section class="our-clients" id="clients">
+        <div class="our-clients-inner">
+            <div class="our-clients-head">
+                <div class="eyebrow-static" style="font-family:var(--font-body);font-size:.92rem;font-weight:500;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;">Our Clients</div>
+                <h2 style="font-family:var(--font-body);font-weight:600;font-size:clamp(1.4rem,2.2vw,1.8rem);margin-bottom:10px;">Trusted by Growing MLM Businesses</h2>
+                <p style="color:var(--muted);font-size:1rem;">Hundreds of MLM leaders and companies across India trust our solutions.</p>
+            </div>
+            <div class="clients-logo-grid">
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9670;</span><span class="clc-name">MYGOLDENWAY</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#d81b60;">&#9752;</span><span class="clc-name">My Shops<span style="color:#e53935;">247</span></span></div>
+                <div class="client-logo-card"><span class="clc-name" style="letter-spacing:.05em;">TRENDSWAVE<br><span style="font-size:.65rem;font-weight:400;letter-spacing:.15em;color:var(--muted);">FASHION</span></span></div>
+                <div class="client-logo-card"><span class="clc-name" style="color:#FFB020;">1X<span style="color:#fff;">KING</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;font-size:1.4rem;">&#9650;</span><span class="clc-name" style="color:#43a047;">AGN</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#8987;</span><span class="clc-name">TimeHelp</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#8962;</span><span class="clc-name">Vaishnocity</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#FF6B4A;">&#9670;</span><span class="clc-name">Lifetym<span style="color:#3B82F6;">Profit</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#3B82F6;">&#9739;</span><span class="clc-name">GLOBALHELP<span style="color:#FFB020;">24</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;">&#10022;</span><span class="clc-name">SUCCESSYOURLIFE</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#FFB020;">&#9788;</span><span class="clc-name" style="color:#FFB020;">RISEMON</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9775;</span><span class="clc-name">MONEY LINK<br><span style="font-size:.65rem;color:var(--muted);letter-spacing:.1em;">PRO</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9883;</span><span class="clc-name">XTREME FX TRADES<br><span style="font-size:.65rem;color:#FFB020;letter-spacing:.05em;">GO RICH LIFE</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;">&#8962;</span><span class="clc-name">Ecartal<span style="color:#3B82F6;"> India</span></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST / GUARANTEE -->
+    <!-- STATS + CTA BAND -->
+    <section class="stats-cta" id="statsCta">
+        <div class="stats-cta-inner">
+
+            <div class="stats-cta-head">
+                <h2>India's <span class="accent">#1 All-in-One</span> MLM Hub</h2>
+                <p>From software to scale, we handle everything &mdash; 9+ years of industry excellence.</p>
+            </div>
+
+            <div class="stats-band">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-num">9+</div>
+                        <div class="stat-label">Years of Excellence</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-num">2800+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <path d="M10 9.5v5l4-2.5z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-num">1.7 Lakh+</div>
+                        <div class="stat-label">MLMSUCCESSTIPS</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <div class="cta-banner">
+                    <div class="line1">READY TO START YOUR MLM BUSINESS TODAY?</div>
+                    <div class="line2">Get 100% expert assistance &amp; 24/7 dedicated support from India's best development team.</div>
+                </div>
+                <div class="cta-contact">CALL / WHATSAPP: <a href="tel:+918927656368">+91 8927656368</a></div>
+                <div class="cta-subtext">(Available anytime for free consultation after you check our live demos)</div>
+            </div>
+
+            
+
+        </div>
+    </section>
+
+    <!-- SERVICES SHOWCASE -->
+    <section class="services-showcase" id="servicesShowcase">
+        <div class="ssc-banner">
+            <h2>Our Services</h2>
+        </div>
+
+        <div class="ssc-carousel">
+            <button class="ssc-arrow prev" id="sscPrev" aria-label="Previous">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+
+            <div class="ssc-track" id="sscTrack">
+
+                <div class="ssc-card">
+                    <div class="ssc-visual">
+                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="g1lap" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0" stop-color="#60A5FA" />
+                                    <stop offset="1" stop-color="#1E3A8A" />
+                                </linearGradient>
+                            </defs>
+                            <ellipse cx="200" cy="240" rx="150" ry="14" fill="#000" opacity="0.25" />
+                            <rect x="110" y="150" width="180" height="12" rx="4" fill="#22314f" />
+                            <path d="M95 150 L145 90 L255 90 L305 150 Z" fill="url(#g1lap)" opacity="0.9" />
+                            <rect x="150" y="60" width="100" height="70" rx="4" fill="#0b1526" stroke="#3B82F6" stroke-width="2" />
+                            <circle cx="176" cy="80" r="8" fill="none" stroke="#60A5FA" stroke-width="2" />
+                            <circle cx="200" cy="102" r="8" fill="none" stroke="#FF6B4A" stroke-width="2" />
+                            <circle cx="224" cy="80" r="8" fill="none" stroke="#60A5FA" stroke-width="2" />
+                            <path d="M182 84 L196 98 M208 98 L220 84" stroke="#8B93A6" stroke-width="1.5" />
+                            <circle cx="90" cy="70" r="14" fill="#101C33" stroke="#3B82F6" stroke-width="2" />
+                            <path d="M84 70h12M90 64v12" stroke="#60A5FA" stroke-width="2" />
+                            <circle cx="310" cy="100" r="16" fill="#101C33" stroke="#FF6B4A" stroke-width="2" />
+                            <path d="M303 100h14M310 93v14" stroke="#FF6B4A" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="ssc-label">
+                        <h3>Latest MLM Database</h3>
+                    </div>
+                </div>
+
+                <div class="ssc-card">
+                    <div class="ssc-visual">
+                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="g2brow" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0" stop-color="#60A5FA" />
+                                    <stop offset="1" stop-color="#3B82F6" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="70" y="60" width="260" height="180" rx="10" fill="#0b1526" stroke="#22314f" stroke-width="2" />
+                            <rect x="70" y="60" width="260" height="28" rx="10" fill="url(#g2brow)" />
+                            <circle cx="86" cy="74" r="4" fill="#fff" opacity="0.8" />
+                            <circle cx="100" cy="74" r="4" fill="#fff" opacity="0.6" />
+                            <circle cx="114" cy="74" r="4" fill="#fff" opacity="0.4" />
+                            <rect x="150" y="66" width="120" height="16" rx="8" fill="rgba(255,255,255,0.25)" />
+                            <rect x="90" y="104" width="220" height="34" rx="6" fill="#172542" />
+                            <rect x="102" y="114" width="70" height="14" rx="3" fill="#60A5FA" />
+                            <rect x="90" y="150" width="100" height="60" rx="6" fill="#172542" />
+                            <rect x="200" y="150" width="110" height="60" rx="6" fill="#172542" />
+                            <rect x="102" y="162" width="76" height="8" rx="3" fill="#3B82F6" opacity="0.7" />
+                            <rect x="102" y="176" width="50" height="8" rx="3" fill="#8B93A6" opacity="0.5" />
+                            <rect x="212" y="162" width="86" height="8" rx="3" fill="#FF6B4A" opacity="0.7" />
+                            <rect x="212" y="176" width="60" height="8" rx="3" fill="#8B93A6" opacity="0.5" />
+                        </svg>
+                    </div>
+                    <div class="ssc-label">
+                        <h3>MLM Leader Website</h3>
+                    </div>
+                </div>
+
+                <div class="ssc-card">
+                    <div class="ssc-visual">
+                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="g3code" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0" stop-color="#FF9A6B" />
+                                    <stop offset="1" stop-color="#C43F27" />
+                                </linearGradient>
+                            </defs>
+                            <ellipse cx="200" cy="240" rx="150" ry="14" fill="#000" opacity="0.25" />
+                            <path d="M95 150 L145 90 L255 90 L305 150 Z" fill="#1E3A8A" opacity="0.8" />
+                            <rect x="110" y="150" width="180" height="12" rx="4" fill="#22314f" />
+                            <rect x="150" y="58" width="100" height="72" rx="4" fill="#081226" stroke="#3B82F6" stroke-width="2" />
+                            <rect x="160" y="68" width="26" height="6" rx="3" fill="#60A5FA" />
+                            <rect x="160" y="80" width="46" height="6" rx="3" fill="#FF6B4A" />
+                            <rect x="160" y="92" width="34" height="6" rx="3" fill="#8B93A6" />
+                            <rect x="160" y="104" width="54" height="6" rx="3" fill="#60A5FA" />
+                            <rect x="160" y="116" width="20" height="6" rx="3" fill="#FF6B4A" />
+                            <circle cx="308" cy="76" r="20" fill="url(#g3code)" />
+                            <path d="M300 76l5 5 10-10" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="ssc-label">
+                        <h3>Customized MLM Software Development</h3>
+                    </div>
+                </div>
+
+                <div class="ssc-card">
+                    <div class="ssc-visual">
+                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="g4pdf" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0" stop-color="#FF6B4A" />
+                                    <stop offset="1" stop-color="#C43F27" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="130" cy="120" r="42" fill="#172542" stroke="#3B82F6" stroke-width="2" />
+                            <circle cx="130" cy="104" r="14" fill="#22314f" />
+                            <path d="M104 148c0-16 12-26 26-26s26 10 26 26" fill="#22314f" />
+                            <rect x="200" y="60" width="120" height="160" rx="8" fill="#f4f6f9" />
+                            <path d="M296 60v28h24z" fill="#d8dee8" />
+                            <rect x="216" y="98" width="88" height="8" rx="3" fill="#c3cad6" />
+                            <rect x="216" y="114" width="70" height="8" rx="3" fill="#c3cad6" />
+                            <rect x="216" y="130" width="80" height="8" rx="3" fill="#c3cad6" />
+                            <rect x="204" y="150" width="72" height="34" rx="6" fill="url(#g4pdf)" />
+                            <text x="240" y="173" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">PDF</text>
+                            <rect x="216" y="196" width="88" height="8" rx="3" fill="#c3cad6" />
+                        </svg>
+                    </div>
+                    <div class="ssc-label">
+                        <h3>MLM Plan PDF Making</h3>
+                    </div>
+                </div>
+
+                <div class="ssc-card">
+                    <div class="ssc-visual">
+                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="g5vid" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0" stop-color="#60A5FA" />
+                                    <stop offset="1" stop-color="#1E3A8A" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="80" y="60" width="240" height="150" rx="10" fill="#0b1526" stroke="#22314f" stroke-width="2" />
+                            <rect x="150" y="216" width="100" height="10" rx="4" fill="#22314f" />
+                            <rect x="130" y="226" width="140" height="8" rx="4" fill="#172542" />
+                            <circle cx="200" cy="135" r="34" fill="url(#g5vid)" opacity="0.95" />
+                            <path d="M192 120l24 15-24 15z" fill="#fff" />
+                            <rect x="96" y="176" width="208" height="8" rx="4" fill="#172542" />
+                            <rect x="96" y="176" width="120" height="8" rx="4" fill="#FF6B4A" />
+                            <circle cx="216" cy="180" r="6" fill="#fff" />
+                        </svg>
+                    </div>
+                    <div class="ssc-label">
+                        <h3>MLM Plan Video Making</h3>
+                    </div>
+                </div>
+
+                <div class="ssc-card">
+                    <div class="ssc-visual">
+                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="g6promo" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0" stop-color="#FF9A6B" />
+                                    <stop offset="1" stop-color="#C43F27" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M110 130l50-24v88l-50-24z" fill="url(#g6promo)" />
+                            <path d="M160 106l60-26v112l-60-26z" fill="#172542" stroke="#3B82F6" stroke-width="2" />
+                            <rect x="100" y="130" width="14" height="40" rx="4" fill="#22314f" />
+                            <path d="M175 92c14 8 14 46 0 54" stroke="#60A5FA" stroke-width="3" fill="none" stroke-linecap="round" />
+                            <path d="M185 82c22 12 22 66 0 78" stroke="#60A5FA" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6" />
+                            <polyline points="230,190 260,150 285,168 315,120" fill="none" stroke="#FF6B4A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="315" cy="120" r="7" fill="#FF6B4A" />
+                            <circle cx="285" cy="168" r="5" fill="#fff" />
+                            <circle cx="260" cy="150" r="5" fill="#fff" />
+                        </svg>
+                    </div>
+                    <div class="ssc-label">
+                        <h3>Result Based Promotion</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="ssc-arrow next" id="sscNext" aria-label="Next">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="ssc-dots" id="sscDots"></div>
+    </section>
+
+    <!-- TRUST / GUARANTEE -->
+    <section class="stats-cta" style="padding-top: 60px; padding-bottom: 60px;">
+        <div class="trust-block">
+            <div class="trust-note">
+                <h3><span>Note :-</span> Our 100% Verified Tech Guarantee</h3>
+                <p>You are not risking your money or dealing with unverified technology here. We are the only agency in India that gives you direct access to test live admin panels and user dashboards before you make a decision.</p>
+                <p>Simply click on any of our services above, check the live working CRM software, view our real design catalogs, and call us only when you are 100% satisfied.</p>
+            </div>
+            <div class="trust-features">
+                <div class="trust-feature-item">
+                    <div class="trust-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" />
+                        </svg>
+                    </div>
+                    <div class="trust-feature-text">
+                        <h4>Live Testing</h4>
+                        <p>Experience real software flow instantly.</p>
+                    </div>
+                </div>
+                <div class="trust-feature-item">
+                    <div class="trust-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="8" r="4" />
+                            <path d="M2 21c0-4 3.1-7 7-7s7 3 7 7" />
+                            <path d="M17 12a4 4 0 0 0 0-8" />
+                            <path d="M22 21c0-3.3-2-6-5-7" />
+                        </svg>
+                    </div>
+                    <div class="trust-feature-text">
+                        <h4>Secure Payments</h4>
+                        <p>PCI-DSS compliant transaction engines.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ <div class="cta-box">
+                <div class="cta-banner">
+                    <div class="line1">READY TO START YOUR MLM BUSINESS TODAY?</div>
+                    <div class="line2">Get 100% expert assistance &amp; 24/7 dedicated support from India's best development team.</div>
+                </div>
+                <div class="cta-contact">CALL / WHATSAPP: <a href="tel:+918927656368">+91 8927656368</a></div>
+                <div class="cta-subtext">(Available anytime for free consultation after you check our live demos)</div>
+            </div>
+
+            <div class="badge-row">
+                <div class="badge-card">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="badge-value">4.9 / 5</div>
+                    <div class="badge-label">Client Rating</div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zM22 10.5c0-1.1-.9-2-2-2h-5.6l.8-4.1V4a1.5 1.5 0 0 0-1.5-1.5c-.4 0-.7.16-1 .44L8 8v13h11c.83 0 1.54-.5 1.84-1.22l2-4.71c.1-.25.16-.51.16-.79v-2z"/></svg>
+                    </div>
+                    <div class="badge-value">100%</div>
+                    <div class="badge-label">Assistance</div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm1-16h-2v6l5.25 3.15L17 13.65 13 11.3z"/></svg>
+                    </div>
+                    <div class="badge-value">24/7</div>
+                    <div class="badge-label">Support</div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <div class="badge-value">Start Now</div>
+                    <div class="badge-label">Your Company</div>
+                </div>
+            </div>
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="faq-head">
+            <h2>Frequently Asked Questions (FAQs)</h2>
+        </div>
+
+        <div class="faq-list" id="faqList">
+
+            <div class="faq-item open">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&minus;</span>
+                    <span>Q1. Customized MLM Software की Delivery में कितना समय (Time) लगता है?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Customized MLM Software की Delivery पूरी तरह से आपके Plan की Complexity और Requirements पर Depend करती है। नॉर्मली एक बेसिक Plan का Software 5 से 7 Working Days में रेडी हो जाता है। अगर आपका Plan बहुत ज्यादा एडवांस या यूनिक है, तो उसमें 10 से 15 Days का समय लग सकता है। हमारी टीम हमेशा टाइमली और एरर-फ्री Delivery सुनिश्चित करती है।
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&plus;</span>
+                    <span>क्या ₹99/- वाले MLM Plan PDF Making पैकेज में डिज़ाइन (Design) कस्टमाइज़्ड होता है?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        जी हाँ, ₹99/- वाले पैकेज में भी आपके Plan के हिसाब से बेसिक कस्टमाइज़ेशन किया जाता है, जैसे कलर थीम, लोगो और आपका कंटेंट। पूरी तरह प्रीमियम और एडवांस डिज़ाइन के लिए हमारे हायर पैकेज उपलब्ध हैं, जहाँ अनलिमिटेड रिवीज़न भी मिलते हैं।
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&plus;</span>
+                    <span>Result-Based Promotion में Lead की क्या गारंटी होती है और Data कैसे मिलता है?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        हमारे Result-Based Promotion में आपको वेरिफाइड और जेन्युइन लीड्स दी जाती हैं, जो रियल-टाइम में आपके CRM Dashboard पर अपडेट होती रहती हैं। लीड की क्वालिटी और क्वांटिटी आपके चुने गए पैकेज पर डिपेंड करती है, और पूरी रिपोर्टिंग ट्रांसपेरेंट होती है।
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&plus;</span>
+                    <span>आपके Latest MLM Database की Accuracy कितनी है और क्या यह Fresh डेटा है?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        हमारा Database रेगुलरली अपडेट किया जाता है और इसकी एक्यूरेसी 90% से ज्यादा रहती है। हर एंट्री को वेरिफाई करने के बाद ही डेटाबेस में शामिल किया जाता है, ताकि आपको सिर्फ जेन्युइन और फ्रेश कॉन्टैक्ट्स ही मिलें।
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&plus;</span>
+                    <span>MLM Leader Website का 1 साल के बाद Renewal Charge क्या होगा?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        MLM Leader Website का पहला साल पैकेज में शामिल होता है। उसके बाद Hosting, Domain और Support के लिए एक मिनिमल एनुअल रिन्यूअल चार्ज लगता है, जो आपके प्लान के हिसाब से पहले ही बता दिया जाता है — कोई हिडन चार्ज नहीं होता।
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="brand"><span class="dot"></span>MLM</div>
+        <div class="foot-meta">832765638 &nbsp;·&nbsp; WhatsApp 9237377196 &nbsp;·&nbsp; © 2026 MLM Technologies
+        </div>
+    </footer>
+
+    <!-- AI ASSISTANT -->
+    <button class="ai-fab" id="aiFab" aria-label="Open AI assistant">
+        <img src="./assets/image/ai-assistant.png" alt="AI assistant" width="40" height="40">
+    </button>
+
+    <div class="ai-panel" id="aiPanel">
+        <div class="ai-panel-head">
+            <div class="ai-panel-title">
+                <span class="ai-dot"></span>
+                <div>
+                    <div class="ai-name">MLM Assistant</div>
+                    <div class="ai-status">Online now</div>
+                </div>
+            </div>
+            <button class="ai-close" id="aiClose">&#10005;</button>
+        </div>
+        <div class="ai-body" id="aiBody">
+            <div class="ai-msg bot">Hi! I'm here to help. Ask me anything about our MLM software or services.</div>
+        </div>
+        <form class="ai-input-row" id="aiForm">
+            <input type="text" id="aiInput" placeholder="Type your message..." autocomplete="off">
+            <button type="submit" class="ai-send" aria-label="Send">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2 11 13" />
+                    <path d="M22 2 15 22l-4-9-9-4z" />
+                </svg>
+            </button>
+        </form>
     </div>
 
-    <!-- VIDEO (left) -->
-    <div class="video-shell">
-      <div class="live-badge"><span class="live-dot"></span> LIVE PROOF</div>
-      <video controls poster="" preload="metadata">
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="video-caption">
-        <div>
-          <strong>Watch the working demo</strong>
-          <span>See how the plan, software and growth support come together.</span>
-        </div>
-        <div class="video-pill">PROOF FIRST</div>
-      </div>
-    </div>
+    <script>
+        /* ---------- Network particle background ---------- */
+        const canvas = document.getElementById('netCanvas');
+        const ctx = canvas.getContext('2d');
+        let w, h, particles;
 
-    <h1 class="headline">Don't just buy. <em>Test it yourself</em> before spending a single rupee.</h1>
-    <p class="subtext">Watch the presentation above to see our live proof, then explore our full suite of premium MLM services.</p>
-    <div class="left-footnote"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg> No commitment needed to watch the demo</div>
-  </aside>
+        function resize() {
+            w = canvas.width = canvas.offsetWidth;
+            h = canvas.height = canvas.offsetHeight;
+        }
+        function initParticles() {
+            const count = Math.min(60, Math.floor((w * h) / 22000));
+            particles = Array.from({ length: count }, () => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: (Math.random() - 0.5) * 0.35,
+                r: Math.random() * 1.6 + 1
+            }));
+        }
+        function tick() {
+            ctx.clearRect(0, 0, w, h);
+            for (const p of particles) {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > w) p.vx *= -1;
+                if (p.y < 0 || p.y > h) p.vy *= -1;
+            }
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const a = particles[i], b = particles[j];
+                    const d = Math.hypot(a.x - b.x, a.y - b.y);
+                    if (d < 140) {
+                        ctx.strokeStyle = `rgba(59,130,246,${(1 - d / 140) * 0.22})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+                    }
+                }
+            }
+            for (const p of particles) {
+                ctx.fillStyle = 'rgba(59,130,246,0.75)';
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+            }
+            requestAnimationFrame(tick);
+        }
+        window.addEventListener('resize', () => { resize(); initParticles(); });
+        resize(); initParticles(); tick();
 
-  <!-- RIGHT PANEL: form, services -->
-  <main class="right-panel">
+        /* ---------- Rotating headline + sub-text (synced together) ---------- */
+        const rotateText = document.getElementById('rotateText');
+        const rotateSubText = document.getElementById('rotateSubText');
+        const phrases = [
+            "Simple software your whole team can use",
+            "Grow your MLM business with the right software",
+            "Test it live before you spend a single rupee",
+            "Trusted by growing MLM networks",
+            "From plan to promotion — all in one place"
+        ];
+        const subPhrases = [
+            "From compensation plans to leader websites, everything is made simple for your team.",
+            "We build simple MLM software and create plans, videos, and websites that are easy for your whole team to use.",
+            "Custom software, ready-made content, and support that keeps your network moving.",
+            "One team for software, plans, videos, and promotion — start to finish.",
+            "Simple tools built for MLM teams, from setup to scale."
+        ];
+        let rotateIndex = 0;
 
-    <!-- LEAD FORM -->
-    <div class="lead-card-inline">
-      <div class="eyebrow" style="margin-bottom:4px;">GET A CALLBACK</div>
-      <h3>Tell us where to reach you</h3>
-      <p>Share a few details and our team will call you back with everything you need.</p>
-      <form id="leadForm" novalidate>
-        <div class="field"><label for="leadName">Full name</label><input type="text" id="leadName" name="name" placeholder="Your name" autocomplete="name" required><div class="field-error" id="errName"></div></div>
-        <div class="field"><label for="leadMobile">Mobile number</label><input type="tel" id="leadMobile" name="mobile" placeholder="10-digit mobile" autocomplete="tel" required><div class="field-error" id="errMobile"></div></div>
-        <div class="field"><label for="leadEmail">Email ID</label><input type="email" id="leadEmail" name="email" placeholder="you@example.com" autocomplete="email" required><div class="field-error" id="errEmail"></div></div>
-        <button type="submit" class="btn-submit">Submit</button>
-      </form>
-    </div>
+        if (rotateText && rotateSubText) {
+            setInterval(() => {
+                rotateText.classList.add('swap-out');
+                rotateSubText.classList.add('swap-out');
+                setTimeout(() => {
+                    rotateIndex = (rotateIndex + 1) % phrases.length;
+                    rotateText.textContent = phrases[rotateIndex];
+                    rotateSubText.textContent = subPhrases[rotateIndex];
 
-    <div class="right-header">
-      <div class="eyebrow">OUR FULL SUITE</div>
-      <h2>Everything your MLM network needs, under one roof</h2>
-      <p>Eight services built to launch, run and grow your MLM business — from software to promotion.</p>
-    </div>
+                    rotateText.classList.add('no-transition');
+                    rotateSubText.classList.add('no-transition');
 
-    <div class="services-grid">
-      <!-- 01 -->
-      <div class="service-card sc--emerald reveal">
-        <div class="sc-top">
-          <div class="sc-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
-          </div>
-          <span class="sc-num">01</span>
-        </div>
-        <div class="sc-body">
-          <h3>Customised MLM Software</h3>
-          <p>Tailored platform built around your compensation plan and business flow.</p>
-        </div>
-      </div>
-      <!-- 02 -->
-      <div class="service-card sc--gold reveal">
-        <div class="sc-top">
-          <div class="sc-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5M9 13h6M9 17h6M9 9h2"/></svg>
-          </div>
-          <span class="sc-num">02</span>
-        </div>
-        <div class="sc-body">
-          <h3>MLM Plan PDF Making</h3>
-          <p>Clear, professional documents that explain your compensation structure.</p>
-        </div>
-      </div>
-      <!-- 03 -->
-      <div class="service-card sc--blue reveal">
-        <div class="sc-top">
-          <div class="sc-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M21 8l-4 3 4 3z"/></svg>
-          </div>
-          <span class="sc-num">03</span>
-        </div>
-        <div class="sc-body">
-          <h3>MLM Plan Video Making</h3>
-          <p>Engaging explainer videos that make your plan easy to pitch and trust.</p>
-        </div>
-      </div>
-      <!-- 04 -->
-      <div class="service-card sc--purple reveal">
-        <div class="sc-top">
-          <div class="sc-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h6v6"/></svg>
-          </div>
-          <span class="sc-num">04</span>
-        </div>
-        <div class="sc-body">
-          <h3>Result‑Based Plan Promotion</h3>
-          <p>Promotion tied to real, trackable outcomes — not empty impressions.</p>
-        </div>
-      </div>
-      <!-- 05 -->
-      <div class="service-card sc--orange reveal">
-        <div class="sc-top">
-          <div class="sc-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
-          </div>
-          <span class="sc-num">05</span>
-        </div>
-        <div class="sc-body">
-          <h3>Latest MLM Database</h3>
-          <p>Fresh, verified prospect lists to keep your recruitment pipeline full.</p>
-        </div>
-      </div>
-      <!-- 06 -->
-      <div class="service-card sc--green2 reveal">
-        <div class="sc-top">
-          <div class="sc-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 01-9 8.4A8.5 8.5 0 013 12a8.4 8.4 0 018.4-8.5 8.4 8.4 0 019.6 8z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
-          </div>
-          <span class="sc-num">06</span>
-        </div>
-        <div class="sc-body">
-          <h3>WhatsApp Business Services</h3>
-          <p>Broadcast, automation and support tools set up on WhatsApp Business.</p>
-        </div>
-      </div>
-      <!-- 07 -->
-      <div class="service-card sc--rose reveal">
-        <div class="sc-top">
-          <div class="sc-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <span class="sc-num">07</span>
-        </div>
-        <div class="sc-body">
-          <h3>MLM Leader Services</h3>
-          <p>Coaching and support for team leaders to keep networks active.</p>
-        </div>
-      </div>
-      <!-- 08 -->
-      <div class="service-card sc--sky reveal">
-        <div class="sc-top">
-          <div class="sc-node">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18 15 15 0 010-18z"/></svg>
-          </div>
-          <span class="sc-num">08</span>
-        </div>
-        <div class="sc-body">
-          <h3>Meta &amp; Google Ad Services</h3>
-          <p>Targeted campaigns across Meta and Google to bring qualified leads in.</p>
-        </div>
-      </div>
-    </div>
-  </main>
-</div>
+                    rotateText.classList.remove('swap-out');
+                    rotateSubText.classList.remove('swap-out');
+                    rotateText.classList.add('swap-in');
+                    rotateSubText.classList.add('swap-in');
 
-<!-- TESTIMONIALS + CLIENT LIST -->
-<section class="testimonials-section">
-  <div class="section-divider"></div>
-  <div class="testimonials-header">
-    <div class="eyebrow">WHAT OUR CLIENTS SAY</div>
-    <h2>Trusted by MLM leaders who tested us first</h2>
-    <p>Real feedback from network owners who watched the proof, ran the numbers, and stayed for the results.</p>
-  </div>
-  <div class="testimonials-grid">
-    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">We watched the live demo before committing. Two weeks after launch our plan payouts were running exactly as promised, no surprises.</p><div class="testimonial-person"><div class="testimonial-avatar">R</div><div><div class="name">Rakesh Sharma</div><div class="role">Founder, Vantara Network</div></div></div></div>
-    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">The plan PDF and explainer video made pitching so much easier. Our downline actually understands the compensation structure now.</p><div class="testimonial-person"><div class="testimonial-avatar">P</div><div><div class="name">Priya Nair</div><div class="role">Director, Zenith Lifecare</div></div></div></div>
-    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">Lead quality from their database and ad campaigns is far better than what we got running ads ourselves. Our sign-up rate roughly doubled.</p><div class="testimonial-person"><div class="testimonial-avatar">A</div><div><div class="name">Arjun Mehta</div><div class="role">Co-founder, Bright Horizon MLM</div></div></div></div>
-    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">Support from the leader coaching team kept our team active during a slow quarter. Practical advice, not generic motivation.</p><div class="testimonial-person"><div class="testimonial-avatar">S</div><div><div class="name">Sneha Kulkarni</div><div class="role">Team Leader, Orbit Wellness</div></div></div></div>
-    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">Custom software matched our compensation plan exactly, down to the edge cases our old vendor kept getting wrong.</p><div class="testimonial-person"><div class="testimonial-avatar">V</div><div><div class="name">Vikram Desai</div><div class="role">CEO, Elevate Direct</div></div></div></div>
-    <div class="testimonial-card"><div class="testimonial-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><p class="testimonial-quote">WhatsApp automation alone saved us hours every day. Broadcast, follow-ups, everything runs without us babysitting it.</p><div class="testimonial-person"><div class="testimonial-avatar">N</div><div><div class="name">Neha Kapoor</div><div class="role">Ops Head, Pinnacle Network</div></div></div></div>
-  </div>
+                    void rotateText.offsetWidth;
 
-  <!-- CLIENT LIST (brand names) -->
-  <div class="client-list-section">
-    <div class="eyebrow">TRUSTED BY LEADING NETWORKS</div>
-    <div class="client-grid">
-      <span class="client-item">Vantara Network</span>
-      <span class="client-item">Zenith Lifecare</span>
-      <span class="client-item">Bright Horizon MLM</span>
-      <span class="client-item">Orbit Wellness</span>
-      <span class="client-item">Elevate Direct</span>
-      <span class="client-item">Pinnacle Network</span>
-      <span class="client-item">Apex Growth</span>
-      <span class="client-item">Nexus Direct</span>
-      <span class="client-item">Prime Connect</span>
-      <span class="client-item">Stellar MLM</span>
-    </div>
-  </div>
-</section>
+                    rotateText.classList.remove('no-transition');
+                    rotateSubText.classList.remove('no-transition');
 
-<!-- CHAT WITH AI -->
-<button class="chat-fab" id="chatFab" aria-label="Chat with AI" aria-expanded="false">
-  <span class="chat-fab-ring"></span>
- 
-  <img class="chat-fab-icon" src="./assets/image/ai-assistant.png" alt="" srcset="">
-</button>
-<div class="chat-panel" id="chatPanel">
-  <div class="chat-panel-header"><div class="title"><span class="status-dot"></span> Chat with AI</div><button class="chat-close" id="chatClose" aria-label="Close chat">✕</button></div>
-  <div class="chat-body" id="chatBody"><div class="msg bot">Hi! I can answer questions about our MLM software, plans, promotion and database services. What would you like to know?</div></div>
-  <div class="chat-input-row"><input type="text" id="chatInput" placeholder="Ask about a service..."><button id="chatSend" aria-label="Send message"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></button></div>
-</div>
+                    rotateText.classList.remove('swap-in');
+                    rotateSubText.classList.remove('swap-in');
+                }, 450);
+            }, 4000);
+        }
 
-<script>
-  // SCROLL-REVEAL
-  (function() {
-    const cards = document.querySelectorAll('.service-card, .testimonial-card');
-    cards.forEach((el, i) => { el.classList.add('reveal'); el.style.transitionDelay = (i % 4) * 60 + 'ms'; });
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } });
-    }, { threshold: 0.1 });
-    cards.forEach(el => io.observe(el));
-  })();
+        /* ---------- Modal logic ---------- */
+        const overlay = document.getElementById('modalOverlay');
+        const formView = document.getElementById('formView');
+        const successView = document.getElementById('successView');
+        const form = document.getElementById('enquiryForm');
 
-  // Lead form + success modal
-  const leadForm = document.getElementById('leadForm');
-  const nameInput = document.getElementById('leadName');
-  const mobileInput = document.getElementById('leadMobile');
-  const emailInput = document.getElementById('leadEmail');
-  const errName = document.getElementById('errName');
-  const errMobile = document.getElementById('errMobile');
-  const errEmail = document.getElementById('errEmail');
-  const successOverlay = document.getElementById('successOverlay');
-  const successClose = document.getElementById('successClose');
-  const successDone = document.getElementById('successDone');
+        function openModal() {
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function resetModalToForm() {
+            successView.classList.remove('show');
+            formView.classList.remove('hide');
+        }
 
-  function closeOverlay() { successOverlay.classList.remove('open'); }
-  function openOverlay() { successOverlay.classList.add('open'); }
+        // auto-open on page load removed
 
-  leadForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    let valid = true;
-    errName.textContent = ''; errMobile.textContent = ''; errEmail.textContent = '';
-    if (!nameInput.value.trim()) { errName.textContent = 'Please enter your name.'; valid = false; }
-    const mobileVal = mobileInput.value.trim();
-    if (!/^\d{10}$/.test(mobileVal)) { errMobile.textContent = 'Enter a valid 10-digit mobile number.'; valid = false; }
-    const emailVal = emailInput.value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) { errEmail.textContent = 'Enter a valid email address.'; valid = false; }
-    if (!valid) return;
-    openOverlay();
-    leadForm.reset();
-  });
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modalDone').addEventListener('click', () => { closeModal(); setTimeout(resetModalToForm, 400); });
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
 
-  successClose.addEventListener('click', closeOverlay);
-  successDone.addEventListener('click', closeOverlay);
+        document.getElementById('heroContactBtn').addEventListener('click', openModal);
+        document.getElementById('sideTab').addEventListener('click', openModal);
+        document.querySelectorAll('[data-open-modal]').forEach(el => {
+            el.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+        });
 
-  // CHAT
-  const panel = document.getElementById('chatPanel');
-  const fab = document.getElementById('chatFab');
-  const closeBtn = document.getElementById('chatClose');
-  const body = document.getElementById('chatBody');
-  const input = document.getElementById('chatInput');
-  const sendBtn = document.getElementById('chatSend');
+        /* ---------- Form validation & submit ---------- */
+        function validateField(id, testFn) {
+            const field = document.getElementById(id + 'Field');
+            const input = document.getElementById(id);
+            const ok = testFn(input.value.trim());
+            field.classList.toggle('invalid', !ok);
+            return ok;
+        }
 
-  function toggleChat(open) {
-    const willOpen = open !== undefined ? open : !panel.classList.contains('open');
-    panel.classList.toggle('open', willOpen);
-    fab.setAttribute('aria-expanded', String(willOpen));
-    if (willOpen) input.focus();
-  }
-  fab.addEventListener('click', () => toggleChat());
-  closeBtn.addEventListener('click', () => toggleChat(false));
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const okName = validateField('name', v => v.length > 1);
+            const okMobile = validateField('mobile', v => /^[0-9+\-\s]{10,15}$/.test(v));
+            const okEmail = validateField('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
 
-  function addMessage(text, from) {
-    const div = document.createElement('div');
-    div.className = 'msg ' + from;
-    div.textContent = text;
-    body.appendChild(div);
-    body.scrollTop = body.scrollHeight;
-  }
-  function botReply() { addMessage("Thanks for your message! Our team will get back to you shortly with details on that service.", 'bot'); }
-  function handleSend() {
-    const val = input.value.trim();
-    if (!val) return;
-    addMessage(val, 'user');
-    input.value = '';
-    setTimeout(botReply, 500);
-  }
-  sendBtn.addEventListener('click', handleSend);
-  input.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
-</script>
+            if (okName && okMobile && okEmail) {
+                formView.classList.add('hide');
+                successView.classList.add('show');
+            }
+        });
+
+        ['name', 'mobile', 'email'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                document.getElementById(id + 'Field').classList.remove('invalid');
+            });
+        });
+
+        const heroForm = document.getElementById('heroPageForm');
+        if (heroForm) {
+            heroForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const okName = validateField('heroName', v => v.length > 1);
+                const okMobile = validateField('heroMobile', v => /^[0-9+\-\s]{10,15}$/.test(v));
+                const okEmail = validateField('heroEmail', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+
+                if (okName && okMobile && okEmail) {
+                    heroForm.style.display = 'none';
+                    document.getElementById('heroSuccessView').style.display = 'block';
+                }
+            });
+
+            ['heroName', 'heroMobile', 'heroEmail'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    document.getElementById(id + 'Field').classList.remove('invalid');
+                });
+            });
+        }
+
+        /* ---------- AI Assistant ---------- */
+        const aiFab = document.getElementById('aiFab');
+        const aiPanel = document.getElementById('aiPanel');
+        const aiClose = document.getElementById('aiClose');
+        const aiForm = document.getElementById('aiForm');
+        const aiInput = document.getElementById('aiInput');
+        const aiBody = document.getElementById('aiBody');
+
+        function toggleAiPanel() { aiPanel.classList.toggle('open'); }
+        aiFab.addEventListener('click', toggleAiPanel);
+        aiClose.addEventListener('click', () => aiPanel.classList.remove('open'));
+
+        const canned = [
+            "Thanks for reaching out! Our team will get back to you shortly.",
+            "You can also tap the Get In Touch tab to share your details directly.",
+            "We offer custom software, plan PDFs, videos, promotion, database, and leader websites.",
+            "Feel free to call us at 832765638 or WhatsApp 9237377196."
+        ];
+        let replyIndex = 0;
+
+        aiForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const text = aiInput.value.trim();
+            if (!text) return;
+            const userMsg = document.createElement('div');
+            userMsg.className = 'ai-msg user';
+            userMsg.textContent = text;
+            aiBody.appendChild(userMsg);
+            aiInput.value = '';
+            aiBody.scrollTop = aiBody.scrollHeight;
+
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'ai-msg bot';
+                botMsg.textContent = canned[replyIndex % canned.length];
+                replyIndex++;
+                aiBody.appendChild(botMsg);
+                aiBody.scrollTop = aiBody.scrollHeight;
+            }, 500);
+        });
+
+        /* ---------- Services showcase carousel ---------- */
+        const sscTrack = document.getElementById('sscTrack');
+        const sscPrev = document.getElementById('sscPrev');
+        const sscNext = document.getElementById('sscNext');
+        const sscDotsWrap = document.getElementById('sscDots');
+
+        if (sscTrack) {
+            const sscCards = Array.from(sscTrack.children);
+
+            sscCards.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'ssc-dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => {
+                    sscCards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+                });
+                sscDotsWrap.appendChild(dot);
+            });
+            const sscDots = Array.from(sscDotsWrap.children);
+
+            function sscStep() {
+                const card = sscTrack.querySelector('.ssc-card');
+                if (!card) return 300;
+                const style = getComputedStyle(sscTrack);
+                const gap = parseFloat(style.columnGap || style.gap || 22);
+                return card.getBoundingClientRect().width + gap;
+            }
+
+            sscPrev.addEventListener('click', () => sscTrack.scrollBy({ left: -sscStep(), behavior: 'smooth' }));
+            sscNext.addEventListener('click', () => sscTrack.scrollBy({ left: sscStep(), behavior: 'smooth' }));
+
+            let sscTicking = false;
+            sscTrack.addEventListener('scroll', () => {
+                if (sscTicking) return;
+                sscTicking = true;
+                requestAnimationFrame(() => {
+                    const trackRect = sscTrack.getBoundingClientRect();
+                    let closestIdx = 0;
+                    let closestDist = Infinity;
+                    sscCards.forEach((c, i) => {
+                        const dist = Math.abs(c.getBoundingClientRect().left - trackRect.left);
+                        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+                    });
+                    sscDots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+                    sscTicking = false;
+                });
+            });
+        }
+
+        /* ---------- FAQ accordion ---------- */
+        const faqList = document.getElementById('faqList');
+        if (faqList) {
+            faqList.querySelectorAll('[data-faq-toggle]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.closest('.faq-item');
+                    const icon = btn.querySelector('.faq-icon');
+                    const isOpen = item.classList.contains('open');
+                    item.classList.toggle('open', !isOpen);
+                    icon.innerHTML = !isOpen ? '&minus;' : '&plus;';
+                });
+            });
+        }
+
+        const animElements = document.querySelectorAll('.service-card, .video-tcard, .services-head, .testimonials-head, .stats-cta-head, .stats-band, .cta-box, .ssc-banner, .ssc-card, .trust-note, .trust-feature-item, .badge-card, .faq-head, .faq-item');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 70);
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        animElements.forEach(el => io.observe(el));
+    </script>
 </body>
+
 </html>
