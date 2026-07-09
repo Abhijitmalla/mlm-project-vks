@@ -1,11 +1,2355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instant Live Demos — MLM Software Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#080b14;
+    --bg-1:#0b1020;
+    --bg-2:#0e1426;
+    --card:#0f1526;
+    --card-border:rgba(96,165,250,0.14);
+    --bg-elev:#0e1528;
+    --surface:#101c33;
+    --surface-2:#172542;
+    --border:rgba(255,255,255,0.08);
+    --text:#f4f6f9;
+    --muted:#8b93a6;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --card-border-hover:rgba(96,165,250,0.35);
+    --blue-100:#dbeafe;
+    --blue-300:#93c5fd;
+    --blue-400:#60a5fa;
+    --blue-500:#3b82f6;
+    --blue-600:#2563eb;
+    --blue-700:#1d4ed8;
+    --text-hi:#f1f5f9;
+    --text-mid:#aab4c8;
+    --text-low:#6b7690;
+    --green:#34d399;
+    --whatsapp:#25d366;
+    --gradient:linear-gradient(135deg, var(--blue-500), var(--blue-700));
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:9px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    background:
+      radial-gradient(circle at 12% 8%, rgba(59,130,246,0.10), transparent 40%),
+      radial-gradient(circle at 88% 78%, rgba(37,99,235,0.10), transparent 45%),
+      var(--bg-0);
+    color:var(--text-hi);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  /* faint dotted grid, echoes the constellation dots on the second reference */
+  .grid-dots{
+    position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:radial-gradient(rgba(148,163,184,0.10) 1px, transparent 1px);
+    background-size:34px 34px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 20%, black, transparent 75%);
+  }
+
+  .wrap{
+    position:relative;z-index:1;
+    max-width:1300px;
+    margin:0 auto;
+    padding:72px 32px 96px;
+  }
+
+  /* ---------- HERO / HEADER ---------- */
+  .eyebrow{
+    display:flex;align-items:center;gap:10px;
+    justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:0.18em;
+    color:var(--blue-400);
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 0 0 rgba(52,211,153,0.6);
+    animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(52,211,153,0.55);}
+    70%{box-shadow:0 0 0 8px rgba(52,211,153,0);}
+    100%{box-shadow:0 0 0 0 rgba(52,211,153,0);}
+  }
+
+  h1.headline{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    text-align:center;
+    font-size:clamp(28px,4vw,46px);
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    background:linear-gradient(180deg,#ffffff 20%,#c8d5ee 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    max-width:920px;
+    margin:0 auto 18px;
+  }
+  h1.headline span{
+    background:linear-gradient(120deg,var(--blue-300),var(--blue-500));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  p.subhead{
+    text-align:center;
+    color:var(--text-mid);
+    font-size:16px;
+    line-height:1.6;
+    max-width:680px;
+    margin:0 auto 56px;
+  }
+
+  /* ---------- MAIN GRID ---------- */
+  .main-grid{
+    display:grid;
+    grid-template-columns:1.35fr 1fr;
+    gap:36px;
+    align-items:start;
+  }
+  @media (max-width:960px){
+    .main-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- LEFT: DEMO SHOWCASE ---------- */
+  .cta-banner{
+    background:var(--gradient);
+    color:#f5f9ff;
+    box-shadow:0 8px 24px rgba(59,130,246,0.35);
+    border-radius:var(--radius-md);
+    padding:20px 26px;
+    margin-bottom:22px;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .cta-banner:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(59,130,246,0.45);
+  }
+  .cta-banner::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg,rgba(255,255,255,0.16),transparent 60%);
+  }
+  .cta-banner h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:18px;font-weight:700;
+    color:#f5f9ff;
+    position:relative;
+  }
+  .cta-banner .underline{
+    width:46px;height:3px;border-radius:3px;
+    background:#f5f9ff;margin-top:8px;opacity:.9;
+  }
+
+  .showcase-lead{
+    color:var(--text-mid);
+    font-size:14.5px;
+    line-height:1.6;
+    margin-bottom:20px;
+  }
+
+  .demo-panel{
+    border-radius:var(--radius-lg);
+    border:1px solid var(--card-border);
+    background:linear-gradient(180deg,var(--card),#0a0f1e);
+    overflow:hidden;
+    position:relative;
+  }
+  .demo-panel .top-glow{
+    height:3px;width:100%;
+    background:linear-gradient(90deg,var(--blue-500),#a855f7,var(--blue-500));
+    background-size:200% 100%;
+    animation:shimmer 3.5s linear infinite;
+  }
+  @keyframes shimmer{
+    0%{background-position:0% 0;}
+    100%{background-position:200% 0;}
+  }
+
+  .demo-panel-head{
+    display:flex;align-items:center;gap:12px;
+    padding:16px 20px;
+    border-bottom:1px solid var(--card-border);
+  }
+  .avatar-badge{
+    width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue-400),var(--blue-700));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;
+    flex-shrink:0;
+  }
+  .demo-panel-head .title{font-size:14.5px;font-weight:600;color:var(--text-hi);}
+  .demo-panel-head .sub{font-size:12px;color:var(--text-low);}
+
+  /* single video player, pink glow frame */
+  .video-frame{
+    margin:18px;
+    border-radius:var(--radius-md);
+    border:2.5px solid #ec4899;
+    box-shadow:0 0 0 1px rgba(236,72,153,0.15), 0 10px 30px rgba(236,72,153,0.20);
+    overflow:hidden;
+    position:relative;
+    background:#0a0f1e;
+  }
+  .video-media{
+    position:relative;
+    aspect-ratio:16/8.2;
+    background:
+      linear-gradient(180deg, rgba(8,11,20,0.15), rgba(8,11,20,0.75)),
+      linear-gradient(150deg, rgba(59,130,246,0.30), rgba(15,23,42,0.9));
+    display:flex;align-items:center;justify-content:center;
+  }
+  .video-media .brand-mark{
+    position:absolute;left:14px;bottom:44px;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;font-size:13px;
+    color:rgba(255,255,255,0.55);
+    letter-spacing:.05em;
+  }
+  .video-media .play-btn{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--gradient);
+    color:#f5f9ff;
+    box-shadow:0 8px 24px rgba(59,130,246,0.35);
+    display:flex;align-items:center;justify-content:center;
+    border:2px solid rgba(255,255,255,0.5);
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .video-media .play-btn:hover{
+    box-shadow:0 12px 30px rgba(59,130,246,0.45);
+    transform:scale(1.08);
+  }
+  .video-media .play-btn::after{
+    content:"";
+    border-left:18px solid #fff;
+    border-top:11px solid transparent;
+    border-bottom:11px solid transparent;
+    margin-left:5px;
+  }
+
+  .video-controls{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:10px;
+    padding:12px 18px;
+    background:rgba(4,6,12,0.82);
+    backdrop-filter:blur(6px);
+  }
+  .video-controls .ctrl-left{display:flex;align-items:center;gap:14px;}
+  .video-controls .icon-btn{
+    width:30px;height:30px;border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.14);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--text-hi);font-size:13px;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .video-controls .icon-btn:hover{background:rgba(255,255,255,0.16);}
+  .video-controls .more-videos{
+    display:flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;color:var(--text-hi);
+    cursor:pointer;
+  }
+  .video-controls .more-videos .stack{
+    width:26px;height:20px;border-radius:4px;
+    background:linear-gradient(135deg,var(--blue-500),#7c3aed);
+    display:flex;align-items:center;justify-content:center;
+    font-size:10px;
+  }
+  .video-controls .yt{
+    display:flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:700;color:#fff;
+  }
+  .video-controls .yt .yt-icon{
+    width:22px;height:16px;border-radius:4px;
+    background:#ff0000;
+    display:flex;align-items:center;justify-content:center;
+    font-size:8px;color:#fff;
+  }
+
+  .guide-note{
+    padding:0 20px 18px;
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--text-mid);
+  }
+  .guide-note .label{
+    color:#f87171;
+    font-weight:700;
+    font-style:italic;
+  }
+
+  .demo-panel-foot{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;flex-wrap:wrap;
+    padding:14px 20px;
+    background:var(--gradient);
+    color:#f5f9ff;
+    box-shadow:0 8px 24px rgba(59,130,246,0.35);
+  }
+  .demo-panel-foot .more{
+    font-size:12.5px;font-weight:600;color:#f5f9ff;
+    display:flex;align-items:center;gap:6px;
+  }
+  .demo-panel-foot .call{
+    display:flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;color:#f5f9ff;
+    text-decoration:none;
+  }
+  .demo-panel-foot .call .wa{
+    width:22px;height:22px;border-radius:50%;
+    background:var(--whatsapp);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;
+  }
+
+  .notice{
+    margin-top:16px;
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--text-mid);
+  }
+  .notice .label{
+    color:#f87171;
+    font-weight:700;
+    font-style:italic;
+  }
+
+  /* ---------- RIGHT: TRUST / FEATURE CARDS ---------- */
+  .right-col h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:22px;font-weight:700;
+    line-height:1.35;
+    margin-bottom:22px;
+    color:var(--text-hi);
+  }
+  .right-col h2 em{
+    font-style:normal;
+    background:linear-gradient(120deg,var(--blue-300),var(--blue-500));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  .feature-list{display:flex;flex-direction:column;gap:14px;}
+
+  .feature-card{
+    position:relative;
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius-md);
+    padding:20px;
+    overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .feature-card::before{
+    content:"";
+    position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--blue-500),transparent);
+    opacity:0;transition:opacity .25s ease;
+  }
+  .feature-card:hover{border-color:var(--card-border-hover);transform:translateY(-2px);}
+  .feature-card:hover::before{opacity:1;}
+
+  .feature-icon{
+    width:46px;height:46px;flex-shrink:0;
+    border-radius:12px;
+    background:linear-gradient(145deg, rgba(59,130,246,0.18), rgba(59,130,246,0.05));
+    border:1px solid rgba(96,165,250,0.25);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .feature-icon svg{width:22px;height:22px;stroke:var(--blue-400);}
+
+  .feature-text .num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;color:var(--blue-400);
+    letter-spacing:.08em;
+    margin-bottom:4px;
+    display:block;
+  }
+  .feature-text h3{
+    font-size:15.5px;font-weight:600;
+    color:var(--text-hi);margin-bottom:6px;
+  }
+  .feature-text p{
+    font-size:13px;line-height:1.55;
+    color:var(--text-mid);
+  }
+
+  .disclaimer{
+    margin-top:18px;
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--text-mid);
+  }
+  .disclaimer .label{
+    color:#f87171;
+    font-weight:700;
+    font-style:italic;
+  }
+
+  /* ---------- SERVICES SECTION ---------- */
+  .services-section{
+    margin: 84px 0 0;
+    padding: 0 0 24px;
+  }
+
+  .services-layout{
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 36px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 960px){
+    .services-layout{grid-template-columns: 1fr;}
+  }
+
+  .sticky-video-wrapper{
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .hero-video-frame{
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+    aspect-ratio: 4/2.6;
+    flex: 1;
+    min-height: 320px;
+  }
+
+  .hero-video-frame video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-video-frame::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(200deg, transparent 55%, rgba(6,11,22,0.65) 100%);
+  }
+
+  .hero-video-frame::before{
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    height: 3px;
+    background: var(--gradient);
+    z-index: 2;
+  }
+
+  .video-info-card{
+    margin-top: 16px;
+    padding: 18px 20px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    background: rgba(15,21,38,0.9);
+    flex-shrink: 0;
+  }
+
+  .video-info-card h4{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-hi);
+    margin-bottom: 8px;
+  }
+
+  .video-info-card p{
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-mid);
+  }
+
+  .services-head{
+    margin-bottom: 22px;
+    opacity: 1;
+    transform: none;
+  }
+
+  .services-head .eyebrow-static{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--blue-400);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .services-head .eyebrow-static::before,
+  .services-head .eyebrow-static::after{
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: var(--blue-400);
+  }
+
+  .services-head h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(22px, 2.8vw, 30px);
+    margin-bottom: 8px;
+    color: var(--text-hi);
+  }
+
+  .services-grid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 700px){
+    .services-grid{grid-template-columns: 1fr;}
+  }
+
+  .service-card{
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 18px 18px;
+    height: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--card-border);
+    background: linear-gradient(180deg, rgba(15,21,38,0.95), rgba(10,15,30,0.98));
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    text-decoration: none;
+  }
+
+  .service-card:hover{
+    transform: translateY(-2px);
+    border-color: var(--card-border-hover);
+    box-shadow: 0 10px 24px rgba(59,130,246,0.18);
+  }
+
+  .service-icon{
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(59,130,246,0.18), rgba(59,130,246,0.05));
+    border: 1px solid rgba(96,165,250,0.25);
+  }
+
+  .service-icon svg{
+    width: 20px;
+    height: 20px;
+    stroke: var(--blue-400);
+  }
+
+  .service-content h3{
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-hi);
+    margin-bottom: 6px;
+  }
+
+  .service-content p{
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text-mid);
+    margin-bottom: 8px;
+  }
+
+  .service-link{
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue-400);
+  }
+
+  /* ---------- LET'S START / PLAN SHOWCASE ---------- */
+  .lets-start{margin-top:88px;}
+
+  .ls-title{
+    text-align:center;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(22px,3vw,32px);
+    letter-spacing:.04em;
+    color:#facc15;
+    text-shadow:0 0 24px rgba(250,204,21,0.35);
+    margin-bottom:22px;
+  }
+
+  .ls-banner{
+    background:var(--gradient);
+    color:#f5f9ff;
+    box-shadow:0 8px 24px rgba(59,130,246,0.35);
+    border-radius:var(--radius-md);
+    padding:20px 26px;
+    text-align:center;
+    margin-bottom:36px;
+  }
+  .ls-banner h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(17px,2.2vw,24px);
+    font-weight:700;
+    color:#fff;
+    letter-spacing:.02em;
+  }
+  .ls-banner .underline{
+    width:52px;height:3px;border-radius:3px;
+    background:#fff;opacity:.9;
+    margin:10px auto 0;
+  }
+
+  .note-banner{
+    margin-top:36px;
+    background:var(--gradient);
+    color:#f5f9ff;
+    box-shadow:0 8px 24px rgba(59,130,246,0.35);
+    border-radius:var(--radius-lg);
+    padding:18px 32px;
+    text-align:center;
+  }
+  .note-banner p{
+    font-size:13.5px;font-weight:700;
+    color:#f5f9ff;
+    line-height:1.7;
+    letter-spacing:.01em;
+  }
+  .note-banner .phone{
+    text-decoration:none;color:#f5f9ff;
+  }
+
+  .dashed-divider{
+    border:none;
+    border-top:2px dashed rgba(148,163,184,0.35);
+    margin:36px 0 0;
+  }
+
+  .plan-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  @media (max-width:960px){
+    .plan-grid{grid-template-columns:1fr;}
+  }
+
+  .plan-card{
+    background:linear-gradient(180deg,#f4f7fd,#e9eef8);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 14px 34px rgba(4,8,20,0.35);
+    display:flex;flex-direction:column;
+  }
+
+  .plan-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:16.5px;font-weight:700;
+    line-height:1.4;
+    color:var(--blue-700);
+    margin-bottom:14px;
+    min-height:70px;
+  }
+
+  .plan-video{
+    border-radius:12px;
+    overflow:hidden;
+    background:#0b0f1a;
+    margin-bottom:18px;
+  }
+  .pv-top{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 12px;
+    background:#000;
+  }
+  .pv-avatar{
+    width:28px;height:28px;border-radius:50%;
+    background:#fff;color:#0b0f1a;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;
+    flex-shrink:0;
+  }
+  .pv-top .pv-title{font-size:12.5px;font-weight:600;color:#fff;line-height:1.3;}
+  .pv-top .pv-sub{font-size:10.5px;color:#9aa3b5;margin-top:1px;}
+
+  .pv-thumb{
+    position:relative;
+    aspect-ratio:16/9;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(59,130,246,0.25), transparent 60%),
+      linear-gradient(150deg,#1a1f33,#05070d);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pv-thumb .play-btn{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--gradient);
+    color:#f5f9ff;
+    box-shadow:0 8px 24px rgba(59,130,246,0.4);
+    display:flex;align-items:center;justify-content:center;
+    border:2px solid rgba(255,255,255,0.5);
+    cursor:pointer;
+    transition:transform .2s ease;
+  }
+  .pv-thumb .play-btn:hover{transform:scale(1.08);}
+  .pv-thumb .play-btn::after{
+    content:"";
+    border-left:13px solid #fff;
+    border-top:8px solid transparent;
+    border-bottom:8px solid transparent;
+    margin-left:3px;
+  }
+
+  .pv-foot{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:8px;
+    padding:9px 12px;
+    background:#000;
+  }
+  .pv-foot .icon-set{display:flex;align-items:center;gap:10px;}
+  .pv-foot .icon-btn{
+    width:24px;height:24px;border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.16);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:11px;
+  }
+  .pv-foot .watch-yt{
+    display:flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:700;color:#fff;
+  }
+  .pv-foot .watch-yt .yt-icon{
+    width:20px;height:14px;border-radius:4px;
+    background:#ff0000;
+    display:flex;align-items:center;justify-content:center;
+    font-size:7px;color:#fff;
+  }
+
+  .admin-details h5{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:14.5px;font-weight:700;
+    color:#0f3a5f;
+    margin-bottom:10px;
+  }
+  .detail-group{margin-bottom:16px;}
+  .detail-group:last-child{margin-bottom:0;}
+  .detail-row{
+    font-size:12.5px;
+    color:#1f2937;
+    display:flex;align-items:center;flex-wrap:wrap;
+    gap:8px;
+    padding:6px 0;
+    border-top:1px solid rgba(15,23,42,0.06);
+  }
+  .detail-row:first-of-type{border-top:none;}
+  .detail-row b{color:#111827;font-weight:600;flex-shrink:0;}
+  .detail-row a{
+    color:var(--blue-600);
+    text-decoration:none;
+    word-break:break-all;
+    font-size:12px;
+  }
+  .detail-row a:hover{text-decoration:underline;}
+  .detail-row .val{color:#374151;}
+
+  .copy-btn{
+    display:inline-flex;align-items:center;gap:5px;
+    background:linear-gradient(135deg,#7c3aed,#4f46e5);
+    color:#fff;
+    border:none;
+    font-size:11px;font-weight:600;
+    padding:5px 11px;
+    border-radius:7px;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(79,70,229,0.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .copy-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(79,70,229,0.45);}
+  .copy-btn:active{transform:translateY(0);}
+  .copy-btn.copied{background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 4px 12px rgba(22,163,74,0.35);}
+
+  /* footer strip */
+  .bottom-note{
+    margin-top:44px;
+    text-align:center;
+    color:var(--text-low);
+    font-size:12.5px;
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:.03em;
+  }
+
+  /* ---------- SCROLL ANIMATIONS (HEADINGS) ---------- */
+        .services-head, .testimonials-head {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .services-head.visible, .testimonials-head.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------- TESTIMONIALS (Video) ---------- */
+        .testimonials {
+            position: relative;
+            padding: 80px 0 100px;
+        }
+
+        .testimonials-head {
+            max-width: 640px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        .testimonials .eyebrow-static {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--blue-400);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .testimonials .eyebrow-static::before,
+        .testimonials .eyebrow-static::after {
+            content: "";
+            width: 20px;
+            height: 1px;
+            background: var(--blue-400);
+        }
+
+        .testimonials h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(24px, 3vw, 36px);
+            margin-bottom: 14px;
+            color: var(--text-hi);
+        }
+
+        .testimonials-head p {
+            color: var(--text-mid);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Video testimonials grid */
+        .video-testimonials-grid {
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 960px) {
+            .video-testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 540px) {
+            .video-testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        /* Video Testimonial Cards */
+        .video-tcard {
+            position: relative;
+            border-radius: var(--radius-lg);
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .video-tcard:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(59,130,246,0.25);
+            border-color: var(--card-border-hover);
+        }
+
+        .vtcard-placeholder {
+            position: relative;
+            aspect-ratio: 9/16;
+            background: linear-gradient(150deg, #1a1f33, #05070d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .vtcard-placeholder::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(59,130,246,0.15) 0%, transparent 60%);
+        }
+
+        .vtcard-placeholder-icon svg {
+            width: 48px;
+            height: 48px;
+            fill: rgba(255,255,255,0.05);
+        }
+
+        .video-tcard-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(8,11,20,0.95) 0%, rgba(8,11,20,0.3) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .vtcard-play {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(59,130,246,0.4);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 2;
+        }
+
+        .vtcard-play:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 12px 30px rgba(59,130,246,0.5);
+        }
+
+        .vtcard-play svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+            margin-left: 3px;
+        }
+
+        .video-tcard-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px 20px;
+            z-index: 2;
+        }
+
+        .vtcard-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-hi);
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .vtcard-role {
+            font-size: 13px;
+            color: var(--text-mid);
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .vtcard-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            color: var(--whatsapp);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .vtcard-wa:hover {
+            background: rgba(37, 211, 102, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .vtcard-wa svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* ---------- OUR CLIENTS GRID ---------- */
+        .our-clients {
+            padding: 80px 6% 100px;
+            background: var(--bg-0);
+            position: relative;
+        }
+
+        .our-clients-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .our-clients-head {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .clients-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+        }
+
+        @media (max-width: 960px) {
+            .clients-logo-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .clients-logo-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+        .client-logo-card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 10px;
+            padding: 18px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 72px;
+            text-align: center;
+            transition: border-color .25s ease, background .25s ease, transform .25s ease;
+            cursor: default;
+        }
+
+        .client-logo-card:hover {
+            border-color: rgba(59, 130, 246, 0.45);
+            background: #0a0f1e;
+            transform: translateY(-3px);
+        }
+
+        .clc-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .clc-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.03em;
+            line-height: 1.3;
+            white-space: nowrap;
+        }
+
+          .stats-cta {
+            position: relative;
+            background: var(--bg);
+            padding: 90px 6% 110px;
+            overflow: hidden;
+        }
+
+        .stats-cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .stats-cta-inner {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .stats-cta-head {
+            text-align: center;
+            margin-bottom: 44px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .stats-cta-head.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stats-cta-head h2 {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            line-height: 1.25;
+            margin-bottom: 14px;
+        }
+
+        .stats-cta-head h2 .accent {
+            color: var(--coral);
+        }
+
+        .stats-cta-head p {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .stats-band {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: var(--gradient);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.25);
+            overflow: hidden;
+            margin-bottom: 46px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .stats-band.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 20%;
+            bottom: 20%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+        }
+
+        .stat-num {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.55rem;
+            color: #fff;
+            line-height: 1.15;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        @media (max-width: 760px) {
+            .stats-band {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .stat-item:not(:last-child) {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            }
+        }
+
+        .cta-box {
+            border: 1.5px dashed rgba(59, 130, 246, 0.5);
+            border-radius: 18px;
+            padding: 36px 6% 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .cta-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta-banner {
+            background: var(--gradient);
+            border-radius: 12px;
+            padding: 18px 24px;
+            max-width: 720px;
+            margin: 0 auto 30px;
+            box-shadow: 0 14px 34px rgba(59, 130, 246, 0.3);
+        }
+
+        .cta-banner .line1 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #fff;
+            letter-spacing: 0.01em;
+        }
+
+        .cta-banner .line2 {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .cta-contact {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+            letter-spacing: 0.01em;
+            margin-bottom: 10px;
+        }
+
+        .cta-contact a {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cta-subtext {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+  /* ---------- MLM TYPES SECTION ---------- */
+  .mlm-types-section{
+    margin: 80px auto;
+    padding: 0 6%;
+    max-width: 1300px;
+  }
+
+  .mlm-types-head{
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .mlm-types-head h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  .mlm-types-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  @media (max-width: 960px){
+    .mlm-types-grid{
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px){
+    .mlm-types-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .mlm-type-card{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mt-img-container{
+    position: relative;
+    background: var(--card); 
+    border-radius: 12px;
+    padding: 8px;
+    aspect-ratio: 16/10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .mt-img-container::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.3);
+  }
+
+  .mt-img-container:hover{
+    transform: translateY(-5px);
+  }
+
+  .mt-img-container:hover::before{
+    background: linear-gradient(135deg, var(--blue-300), var(--blue-500));
+    box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .mt-placeholder{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(to bottom right, var(--bg-1), var(--bg-2));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-hi);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(96,165,250,0.1);
+  }
+  
+  .mt-placeholder svg{
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+    stroke: var(--blue-400);
+  }
+
+  .mt-title{
+    background: var(--gradient);
+    border-radius: 30px;
+    padding: 14px 20px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .mt-title:hover{
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
+  }
+
+   /* ---------- BADGE ROW ---------- */
+        .badge-row {
+            max-width: 1100px;
+            margin: 46px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        @media (max-width: 760px) {
+            .badge-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .badge-card {
+            background: var(--gradient);
+            border-radius: 14px;
+            padding: 26px 16px;
+            text-align: center;
+            box-shadow: 0 14px 32px rgba(59, 130, 246, 0.28);
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease, box-shadow .3s ease;
+        }
+
+        .badge-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .badge-card:hover {
+            box-shadow: 0 18px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .badge-card:nth-child(even) {
+            background: linear-gradient(135deg, #FF9A6B 0%, #FF6B4A 55%, #C43F27 100%);
+            box-shadow: 0 14px 32px rgba(255, 107, 74, 0.28);
+        }
+
+        .badge-card:nth-child(even):hover {
+            box-shadow: 0 18px 40px rgba(255, 107, 74, 0.4);
+        }
+
+        .badge-icon {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: #fff;
+        }
+
+        .badge-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .badge-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.92);
+            letter-spacing: 0.02em;
+        }
+          /* ---------- FAQ ---------- */
+        .faq {
+            position: relative;
+            background: var(--bg-elev);
+            padding: 90px 6% 110px;
+        }
+
+        .faq-head {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 46px;
+            opacity: 0;
+            transform: translateY(28px);
+            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
+        }
+
+        .faq-head.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-head h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+        }
+
+        .faq-list {
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            border-radius: 12px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            text-align: left;
+            background: var(--gradient);
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.98rem;
+            padding: 18px 22px;
+            transition: filter .25s ease;
+        }
+
+        .faq-question:hover {
+            filter: brightness(1.08);
+        }
+
+        .faq-item:nth-child(even) .faq-question {
+            background: linear-gradient(135deg, #FF9A6B 0%, #FF6B4A 55%, #C43F27 100%);
+        }
+
+        .faq-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.22);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: none;
+            transition: max-height .4s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 400px;
+        }
+
+        .faq-answer-inner {
+            padding: 20px 24px;
+            color: var(--text);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+</style>
 </head>
 <body>
-    
+
+<div class="grid-dots"></div>
+
+<div class="wrap">
+
+  <div class="eyebrow"><span class="dot"></span> LIVE PRODUCTION DEMOS</div>
+  <h1 class="headline">Instant live demos: experience <span>15+ powerful MLM systems</span> now</h1>
+  <p class="subhead">Explore our live production dashboards below. Test the complete flow of admin controls and user experiences instantly, before you share your customized requirement.</p>
+
+  <div class="main-grid">
+
+    <!-- LEFT: showcase -->
+    <div class="left-col">
+      <div class="cta-banner" id="watchBanner">
+        <h3>Watch this live video before testing the demos below</h3>
+        <div class="underline"></div>
+      </div>
+
+      <p class="showcase-lead">See the complete walkthrough of our admin control panels and user wallets, with real-time commission calculations.</p>
+
+      <div class="demo-panel">
+        <div class="top-glow"></div>
+        <div class="demo-panel-head">
+          <div class="avatar-badge">VK</div>
+          <div>
+            <div class="title">Looking for a customized MLM software service?</div>
+            <div class="sub">Live dashboard walkthrough — updated weekly</div>
+          </div>
+        </div>
+
+        <div class="video-frame" id="videoFrame">
+          <div class="video-media">
+            <span class="brand-mark">VK SERVICES ENTERPRISE</span>
+            <div class="play-btn" id="playBtn" title="Play walkthrough"></div>
+          </div>
+          <div class="video-controls">
+            <div class="ctrl-left">
+              <span class="icon-btn" title="Share">↗</span>
+              <span class="icon-btn" title="Watch later">🕐</span>
+            </div>
+            <div class="more-videos">
+              <span class="stack">▤</span> More videos
+            </div>
+            <div class="yt">
+              <span class="yt-icon">▶</span> YouTube
+            </div>
+          </div>
+        </div>
+
+        <p class="guide-note"><span class="label">Quick Testing Guide:</span> This video explains how to navigate through the admin panels and user dashboards shown below. If you have a specific custom plan like Binary, ROI, Autopool, or Generation, you can directly scroll down to that specific number block after watching this presentation.</p>
+
+        <div class="demo-panel-foot">
+          <div class="more">▶ More demo videos</div>
+          <a class="call" href="#" onclick="return false;">
+            <span class="wa">✆</span> Call / WhatsApp for details
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: trust cards -->
+    <div class="right-col">
+      <h2>Why leading MLM brands<br>trust <em>our services</em></h2>
+
+      <div class="feature-list" id="featureList"></div>
+
+      <p class="disclaimer"><span class="label">Technical Disclaimer:</span> All usernames, passwords, and wallet balances shown in this video and the links below are strictly for testing and training purposes on our public servers. Your original customized software and backend coding engine will be securely deployed on your own clean domain name for complete privacy.</p>
+    </div>
+
+  </div>
+
+ 
+
+  <div class="lets-start">
+    <h2 class="ls-title">Let's Start</h2>
+    <div class="ls-banner">
+      <h3>Customized MLM Software Demo</h3>
+      <div class="underline"></div>
+    </div>
+    <div class="plan-grid" id="planGrid"></div>
+
+    <div class="note-banner">
+      <p>Note: if username or password is changed, contact us to get correct details.<br>
+      It's just a demo, so any client can change it for testing purposes. Our contact number: <a class="phone" href="tel:+918927656368">+91 8927656368</a></p>
+    </div>
+
+    <hr class="dashed-divider">
+  </div>
+
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-head">
+            <div class="eyebrow-static">Testimonials</div>
+            <h2>What our happy clients say</h2>
+            <p>Real video reviews from MLM leaders and business owners across India.</p>
+        </div>
+
+        <div class="video-testimonials-grid">
+
+            <!-- Card 1 -->
+            <div class="video-tcard">
+                <div class="vtcard-placeholder">
+                    <div class="vtcard-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="video-tcard-overlay"></div>
+                <div class="vtcard-play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="video-tcard-info">
+                    <div class="vtcard-name">Mr. Srinivas</div>
+                    <div class="vtcard-role">Founder &amp; CEO &ndash; Parivrat in-corporation<br>(Andrapradesh)</div>
+                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="video-tcard">
+                <div class="vtcard-placeholder">
+                    <div class="vtcard-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="video-tcard-overlay"></div>
+                <div class="vtcard-play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="video-tcard-info">
+                    <div class="vtcard-name">Mr. Bhagbat Chohan</div>
+                    <div class="vtcard-role">Founder &amp; CEO &ndash; Ai Abacus<br>(Maharashtra)</div>
+                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="video-tcard">
+                <div class="vtcard-placeholder">
+                    <div class="vtcard-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="video-tcard-overlay"></div>
+                <div class="vtcard-play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="video-tcard-info">
+                    <div class="vtcard-name">Mr. Ammba Das</div>
+                    <div class="vtcard-role">Founder &amp; CEO &ndash; Direct Sellar<br>(Telangana)</div>
+                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="video-tcard">
+                <div class="vtcard-placeholder">
+                    <div class="vtcard-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="video-tcard-overlay"></div>
+                <div class="vtcard-play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="video-tcard-info">
+                    <div class="vtcard-name">Mr. Srinivas</div>
+                    <div class="vtcard-role">Founder &amp; CEO &ndash; Parivrat in-corporation<br>(Andrapradesh)</div>
+                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- OUR CLIENTS -->
+    <section class="our-clients" id="clients">
+        <div class="our-clients-inner">
+            <div class="our-clients-head">
+                <div class="eyebrow-static" style="font-family:'Space Grotesk', sans-serif;font-size:.92rem;font-weight:500;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;">Our Clients</div>
+                <h2 style="font-family:'Space Grotesk', sans-serif;font-weight:700;font-size:clamp(1.4rem,2.2vw,1.8rem);margin-bottom:10px;color:var(--text-hi);">Trusted by Growing MLM Businesses</h2>
+                <p style="color:var(--text-mid);font-size:1rem;">Hundreds of MLM leaders and companies across India trust our solutions.</p>
+            </div>
+            <div class="clients-logo-grid">
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9670;</span><span class="clc-name">MYGOLDENWAY</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#d81b60;">&#9752;</span><span class="clc-name">My Shops<span style="color:#e53935;">247</span></span></div>
+                <div class="client-logo-card"><span class="clc-name" style="letter-spacing:.05em;">TRENDSWAVE<br><span style="font-size:.65rem;font-weight:400;letter-spacing:.15em;color:var(--text-mid);">FASHION</span></span></div>
+                <div class="client-logo-card"><span class="clc-name" style="color:#FFB020;">1X<span style="color:#fff;">KING</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;font-size:1.4rem;">&#9650;</span><span class="clc-name" style="color:#43a047;">AGN</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#8987;</span><span class="clc-name">TimeHelp</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#8962;</span><span class="clc-name">Vaishnocity</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#FF6B4A;">&#9670;</span><span class="clc-name">Lifetym<span style="color:#3B82F6;">Profit</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#3B82F6;">&#9739;</span><span class="clc-name">GLOBALHELP<span style="color:#FFB020;">24</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;">&#10022;</span><span class="clc-name">SUCCESSYOURLIFE</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#FFB020;">&#9788;</span><span class="clc-name" style="color:#FFB020;">RISEMON</span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9775;</span><span class="clc-name">MONEY LINK<br><span style="font-size:.65rem;color:var(--text-mid);letter-spacing:.1em;">PRO</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9883;</span><span class="clc-name">XTREME FX TRADES<br><span style="font-size:.65rem;color:#FFB020;letter-spacing:.05em;">GO RICH LIFE</span></span></div>
+                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;">&#8962;</span><span class="clc-name">Ecartal<span style="color:#3B82F6;"> India</span></span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-cta" id="statsCta">
+        <div class="stats-cta-inner">
+
+            <div class="stats-cta-head visible">
+                <h2>India's <span class="accent">#1 All-in-One</span> MLM Hub</h2>
+                <p>From software to scale, we handle everything &mdash; 9+ years of industry excellence.</p>
+            </div>
+
+            <div class="stats-band visible">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-num">9+</div>
+                        <div class="stat-label">Years of Excellence</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-num">2800+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <path d="M10 9.5v5l4-2.5z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-num">1.7 Lakh+</div>
+                        <div class="stat-label">MLMSUCCESSTIPS</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-box visible">
+                <div class="cta-banner">
+                    <div class="line1">READY TO START YOUR MLM BUSINESS TODAY?</div>
+                    <div class="line2">Get 100% expert assistance &amp; 24/7 dedicated support from India's best development team.</div>
+                </div>
+                <div class="cta-contact">CALL / WHATSAPP: <a href="tel:+918927656368">+91 8927656368</a></div>
+                <div class="cta-subtext">(Available anytime for free consultation after you check our live demos)</div>
+            </div>
+
+            
+
+        </div>
+    </section>
+
+     <section class="services-section" id="services">
+    <div class="services-layout">
+      <div class="services-left">
+        <div class="sticky-video-wrapper">
+          <div class="hero-video-frame">
+            <video autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg">
+              <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-info-card">
+            <h4>Don't just buy. Test it yourself before spending a single rupee!</h4>
+            <p>Watch the complete presentation video above to see our live proof and explore our full suite of premium MLM services below.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="services-right">
+        <div class="services-head visible">
+          <div class="eyebrow-static">Our Services</div>
+          <h2>Everything your MLM business needs</h2>
+        </div>
+
+        <div class="services-grid">
+          <a href="custom-mlm.html" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" /></svg></div>
+            <div class="service-content">
+              <h3>01. Customized MLM Software</h3>
+              <p>Powerful backend dashboards tailored to your business with smart automation.</p>
+              <span class="service-link">Explore Service →</span>
+            </div>
+          </a>
+
+          <a href="#" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 11h2" /></svg></div>
+            <div class="service-content">
+              <h3>02. MLM Plan PDF Making</h3>
+              <p>Professional compensation plan PDF design with premium presentation.</p>
+              <span class="service-link">View PDF →</span>
+            </div>
+          </a>
+
+          <a href="#" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" /></svg></div>
+            <div class="service-content">
+              <h3>03. MLM Plan Video Making</h3>
+              <p>HD animated presentation videos with voice-over and effects.</p>
+              <span class="service-link">Watch Video →</span>
+            </div>
+          </a>
+
+          <a href="#" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 5-7" /></svg></div>
+            <div class="service-content">
+              <h3>04. Result Based Promotion</h3>
+              <p>Reach targeted audiences using automated marketing campaigns.</p>
+              <span class="service-link">Promotion →</span>
+            </div>
+          </a>
+
+          <a href="#" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" /></svg></div>
+            <div class="service-content">
+              <h3>05. Latest MLM Database</h3>
+              <p>Fresh verified databases with high quality genuine contacts.</p>
+              <span class="service-link">Access Database →</span>
+            </div>
+          </a>
+
+          <a href="#" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l9 5v8l-9 5-9-5V8z" /><path d="M12 7v10" /></svg></div>
+            <div class="service-content">
+              <h3>06. MLM Leader Website</h3>
+              <p>High-converting leader pages with smart automation and branding.</p>
+              <span class="service-link">View Website →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MLM TYPES SECTION -->
+  <section class="mlm-types-section" id="mlmTypes">
+    <div class="mlm-types-head">
+      <h2>Software MLM Types</h2>
+    </div>
+    <div class="mlm-types-grid">
+      <!-- Card 1 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="19" r="3"/><path d="M10.5 7.5L7.5 16.5"/><path d="M13.5 7.5L16.5 16.5"/></svg>
+             BINARY PLAN
+           </div>
+        </div>
+        <div class="mt-title">BINARY MLM PLAN</div>
+      </div>
+      <!-- Card 2 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8h16v-8"/><path d="M12 2v10"/><path d="M7 7l5-5 5 5"/></svg>
+             GENERATION PLAN
+           </div>
+        </div>
+        <div class="mt-title">GENERATION MLM PLAN</div>
+      </div>
+      <!-- Card 3 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+             ROI PLAN
+           </div>
+        </div>
+        <div class="mt-title">ROI MLM PLAN</div>
+      </div>
+      <!-- Card 4 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+             UNILEVEL PLAN
+           </div>
+        </div>
+        <div class="mt-title">UNILEVEL MLM PLAN</div>
+      </div>
+      <!-- Card 5 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+             AUTOPOOL PLAN
+           </div>
+        </div>
+        <div class="mt-title">AUTOPOOL MLM PLAN</div>
+      </div>
+      <!-- Card 6 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M19 12h-2M7 12H5"/></svg>
+             CRYPTO PLAN
+           </div>
+        </div>
+        <div class="mt-title">CRYPTO MLM PLAN</div>
+      </div>
+      <!-- Card 7 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 17h4v4M7 13h4v8M11 9h4v12M15 5h4v16"/></svg>
+             STAIR PLAN
+           </div>
+        </div>
+        <div class="mt-title">STAIR MLM PLAN</div>
+      </div>
+      <!-- Card 8 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+             PARTY PLAN
+           </div>
+        </div>
+        <div class="mt-title">PARTY MLM PLAN</div>
+      </div>
+      <!-- Card 9 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+             BOARD PLAN
+           </div>
+        </div>
+        <div class="mt-title">BOARD MLM PLAN</div>
+      </div>
+      <!-- Card 10 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+             AUSTRALIAN BINARY
+           </div>
+        </div>
+        <div class="mt-title">AUSTRALIAN BINARY PLAN</div>
+      </div>
+      <!-- Card 11 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+             E COMMERCE PLAN
+           </div>
+        </div>
+        <div class="mt-title">E COMMERCE MLM PLAN</div>
+      </div>
+      <!-- Card 12 -->
+      <div class="mlm-type-card">
+        <div class="mt-img-container">
+           <div class="mt-placeholder">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+             CUSTOMIZED PLAN
+           </div>
+        </div>
+        <div class="mt-title">CUSTOMIZED MLM PLAN</div>
+      </div>
+    </div>
+  </section>
+
+   <div class="badge-row">
+                <div class="badge-card visible">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="badge-value">4.9 / 5</div>
+                    <div class="badge-label">Client Rating</div>
+                </div>
+                <div class="badge-card visible">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zM22 10.5c0-1.1-.9-2-2-2h-5.6l.8-4.1V4a1.5 1.5 0 0 0-1.5-1.5c-.4 0-.7.16-1 .44L8 8v13h11c.83 0 1.54-.5 1.84-1.22l2-4.71c.1-.25.16-.51.16-.79v-2z"/></svg>
+                    </div>
+                    <div class="badge-value">100%</div>
+                    <div class="badge-label">Assistance</div>
+                </div>
+                <div class="badge-card visible">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm1-16h-2v6l5.25 3.15L17 13.65 13 11.3z"/></svg>
+                    </div>
+                    <div class="badge-value">24/7</div>
+                    <div class="badge-label">Support</div>
+                </div>
+                <div class="badge-card visible">
+                    <div class="badge-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <div class="badge-value">Start Now</div>
+                    <div class="badge-label">Your Company</div>
+                </div>
+            </div>
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="faq-head visible">
+            <h2>Frequently Asked Questions (FAQs)</h2>
+        </div>
+
+        <div class="faq-list" id="faqList">
+
+            <div class="faq-item visible">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&minus;</span>
+                    <span>Q1. Customized MLM Software की Delivery में कितना समय (Time) लगता है?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Customized MLM Software की Delivery पूरी तरह से आपके Plan की Complexity और Requirements पर Depend करती है। नॉर्मली एक बेसिक Plan का Software 5 से 7 Working Days में रेडी हो जाता है। अगर आपका Plan बहुत ज्यादा एडवांस या यूनिक है, तो उसमें 10 से 15 Days का समय लग सकता है। हमारी टीम हमेशा टाइमली और एरर-फ्री Delivery सुनिश्चित करती है।
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item visible">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&plus;</span>
+                    <span>क्या ₹99/- वाले MLM Plan PDF Making पैकेज में डिज़ाइन (Design) कस्टमाइज़्ड होता है?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        जी हाँ, ₹99/- वाले पैकेज में भी आपके Plan के हिसाब से बेसिक कस्टमाइज़ेशन किया जाता है, जैसे कलर थीम, लोगो और आपका कंटेंट। पूरी तरह प्रीमियम और एडवांस डिज़ाइन के लिए हमारे हायर पैकेज उपलब्ध हैं, जहाँ अनलिमिटेड रिवीज़न भी मिलते हैं।
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item visible">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&plus;</span>
+                    <span>Result-Based Promotion में Lead की क्या गारंटी होती है और Data कैसे मिलता है?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        हमारे Result-Based Promotion में आपको वेरिफाइड और जेन्युइन लीड्स दी जाती हैं, जो रियल-टाइम में आपके CRM Dashboard पर अपडेट होती रहती हैं। लीड की क्वालिटी और क्वांटिटी आपके चुने गए पैकेज पर डिपेंड करती है, और पूरी रिपोर्टिंग ट्रांसपेरेंट होती है।
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item visible">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&plus;</span>
+                    <span>आपके Latest MLM Database की Accuracy कितनी है और क्या यह Fresh डेटा है?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        हमारा Database रेगुलरली अपडेट किया जाता है और इसकी एक्यूरेसी 90% से ज्यादा रहती है। हर एंट्री को वेरिफाई करने के बाद ही डेटाबेस में शामिल किया जाता है, ताकि आपको सिर्फ जेन्युइन और फ्रेश कॉन्टैक्ट्स ही मिलें।
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item visible">
+                <button class="faq-question" data-faq-toggle>
+                    <span class="faq-icon">&plus;</span>
+                    <span>MLM Leader Website का 1 साल के बाद Renewal Charge क्या होगा?</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        MLM Leader Website का पहला साल पैकेज में शामिल होता है। उसके बाद Hosting, Domain और Support के लिए एक मिनिमल एनुअल रिन्यूअल चार्ज लगता है, जो आपके प्लान के हिसाब से पहले ही बता दिया जाता है — कोई हिडन चार्ज नहीं होता।
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+  <div class="bottom-note">© MLM SOFTWARE COMPANY — DASHBOARDS RENDERED IN REAL TIME</div>
+</div>
+
+<script>
+  document.getElementById('playBtn').addEventListener('click', () => {
+    alert('This would play the walkthrough video.');
+  });
+
+  const planTitles = [
+    "Ecommerce Product Base, Sub-Admin Panel, Auto Rebirth, Autopool & Repurchase (Admin Manageable CRM)",
+    "Ecommerce + Ad + ROI + Salary + Social Media Status MLM Plan",
+    "Ecommerce Product Base, Repurchase, Admin Direct Billing Inventory (Admin Manageable CRM)",
+    "One-Time Unilevel + Binary + Matching + Daily ROI MLM Plan",
+    "Custom Daily ROI Management + Pay Bonus MLM Plan",
+    "MLM Ads ROI Plan with Auto Payout Wallet",
+    "Binary + Matching Bonus with Auto Pool Rebirth System",
+    "Generation Level Income + Repurchase MLM Plan",
+    "Board / Matrix Plan with Auto Upgrade & Rebirth",
+    "Investment + Daily ROI + Direct Referral Bonus Plan",
+    "Ecommerce Product Base + Wallet-to-Wallet Fund Transfer",
+    "Franchise / Master Distributor Multi-Level Plan",
+    "Crypto Wallet Integrated MLM Plan with Staking Bonus",
+    "Hybrid Binary + Level + ROI All-in-One MLM Plan"
+  ];
+
+  const plans = planTitles.map((title, i) => {
+    const slug = `plan${String(i + 1).padStart(2, '0')}`;
+    return {
+      title,
+      sections: [
+        {
+          label: "Admin Details",
+          link: `https://example.com/${slug}/admin/index`,
+          username: "admin",
+          password: "password"
+        },
+        {
+          label: "User Details",
+          link: `https://example.com/${slug}/login`,
+          username: `KGF${5001 + i}`,
+          password: "12345"
+        },
+        {
+          label: "Ecommerce Admin Details",
+          link: `https://example.com/${slug}/controller/admin`,
+          username: "admin",
+          password: "password"
+        }
+      ]
+    };
+  });
+
+  document.getElementById('planGrid').innerHTML = plans.map((p) => `
+    <div class="plan-card">
+      <div class="plan-title">${p.title}</div>
+      <div class="plan-video">
+        <div class="pv-top">
+          <div class="pv-avatar">VK</div>
+          <div>
+            <div class="pv-title">Software demo walkthrough</div>
+            <div class="pv-sub">VK Services Enterprise</div>
+          </div>
+        </div>
+        <div class="pv-thumb">
+          <div class="play-btn" title="Play walkthrough"></div>
+        </div>
+        <div class="pv-foot">
+          <div class="icon-set">
+            <span class="icon-btn" title="Share">↗</span>
+            <span class="icon-btn" title="Watch later">🕐</span>
+          </div>
+          <div class="watch-yt"><span class="yt-icon">▶</span> Watch on YouTube</div>
+        </div>
+      </div>
+      <div class="admin-details">
+        ${p.sections.map(s => `
+          <div class="detail-group">
+            <h5>${s.label}</h5>
+            <div class="detail-row"><b>Link:</b> <a href="${s.link}" target="_blank" rel="noopener">${s.link}</a></div>
+            <div class="detail-row"><b>Admin Username:</b> <span class="val">${s.username}</span>
+              <button class="copy-btn" data-copy="${s.username}">Copy</button>
+            </div>
+            <div class="detail-row"><b>Admin Password:</b> <span class="val">${s.password}</span>
+              <button class="copy-btn" data-copy="${s.password}">Copy</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-copy');
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(e){/* clipboard unavailable, fail silently */}
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1400);
+    });
+  });
+
+  const features = [
+    {
+      num: "SPEED",
+      title: "0.40s dynamic query speed",
+      desc: "Instant rendering for huge downlines, tree structures, and commission wallets — without any lag.",
+      icon: `<path d="M12 3v3M21 12h-3M12 21v-3M3 12h3M6.3 6.3l2 2M17.7 6.3l-2 2M17.7 17.7l-2-2M6.3 17.7l2-2" stroke-width="1.6" stroke-linecap="round"/>`
+    },
+    {
+      num: "BUILD",
+      title: "Fresh coded architecture",
+      desc: "100% customized programming tailored to your logic — no pre-made templates or copy-paste code.",
+      icon: `<path d="M4 6h16M4 12h10M4 18h16" stroke-width="1.6" stroke-linecap="round"/>`
+    },
+    {
+      num: "SECURITY",
+      title: "256-bit financial encryption",
+      desc: "Server-layer protection protocols keep every user wallet, transaction, and password safe, 24/7.",
+      icon: `<path d="M12 2l7 3v6c0 5-3.5 8.5-7 11-3.5-2.5-7-6-7-11V5l7-3z" stroke-width="1.6" stroke-linejoin="round"/>`
+    },
+    {
+      num: "SCALE",
+      title: "2,800+ live deployments",
+      desc: "A proven platform already running production MLM networks across India, at scale.",
+      icon: `<circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M8 12l3 3 5-6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`
+    }
+  ];
+
+  document.getElementById('featureList').innerHTML = features.map(f => `
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none">${f.icon}</svg></div>
+      <div class="feature-text">
+        <span class="num">${f.num}</span>
+        <h3>${f.title}</h3>
+        <p>${f.desc}</p>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('watchBanner').addEventListener('click', () => {
+    alert('This would open the walkthrough video.');
+  });
+
+  document.querySelectorAll('[data-faq-toggle]').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.faq-item').forEach(faqItem => {
+        faqItem.classList.remove('open');
+        const icon = faqItem.querySelector('.faq-icon');
+        if (icon) icon.textContent = '+';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        const icon = item.querySelector('.faq-icon');
+        if (icon) icon.textContent = '−';
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
