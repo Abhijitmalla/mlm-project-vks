@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MLM Plan PDF Making — Premium Design Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { primary: '#111827', accent: '#F59E0B', dark: '#111827' },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+        boxShadow: {
+          card: '0 10px 30px -8px rgba(17,24,39,0.12)',
+          'accent-glow': '0 10px 28px -6px rgba(245,158,11,0.45)',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  @keyframes pulseRing { 0%{box-shadow:0 0 0 0 rgba(245,158,11,.55);} 70%{box-shadow:0 0 0 8px rgba(245,158,11,0);} 100%{box-shadow:0 0 0 0 rgba(245,158,11,0);} }
+  .live-dot{ animation: pulseRing 1.8s infinite; }
+
+  @keyframes shimmer { 0%{background-position:0% 0;} 100%{background-position:200% 0;} }
+  .shimmer-bar{ background-image:linear-gradient(90deg,#F59E0B,#111827,#F59E0B); background-size:200% 100%; animation:shimmer 3.5s linear infinite; }
+
+  body{ background:#FFFFFF; color:#111827; font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; }
+
+  .grid-dots{
+    background-image:radial-gradient(rgba(17,24,39,0.06) 1px, transparent 1px);
+    background-size:34px 34px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 55% at 50% 10%, black, transparent 75%);
+            mask-image:radial-gradient(ellipse 80% 55% at 50% 10%, black, transparent 75%);
+  }
+
+  /* Sample gallery hover */
+  .sample-card{ position:relative; }
+  .sample-overlay{
+    position:absolute; inset:0; background:linear-gradient(to top, rgba(17,24,39,.94), rgba(17,24,39,.15) 60%, transparent);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .sample-card:hover .sample-overlay{ opacity:1; }
+  .sample-card:hover .sample-cta{ transform:translateY(0); opacity:1; }
+  .sample-cta{ transform:translateY(8px); opacity:0; transition:all .25s ease; }
+
+  /* modal */
+  #sampleModal.open{ display:flex; }
+</style>
+</head>
+<body class="bg-white text-primary">
+
+<div class="fixed inset-0 grid-dots pointer-events-none z-0"></div>
+
+<div class="relative z-10  mx-auto px-6 sm:px-8 pt-14 sm:pt-16 pb-24">
+
+  <!-- ================= HERO ================= -->
+  <div class="flex items-center justify-center gap-2.5 font-mono text-xs tracking-[0.18em] uppercase text-accent mb-4">
+    <span class="w-1.5 h-1.5 rounded-full bg-accent live-dot"></span> MLM Plan PDF Making
+  </div>
+
+  <h1 class="font-display font-bold text-center text-[28px] sm:text-4xl md:text-[48px] leading-[1.15] tracking-tight max-w-4xl mx-auto mb-5 text-primary">
+    Give your MLM plan a <span class="text-accent">multimillion-dollar look</span> with premium PDF designing
+  </h1>
+
+  <p class="text-center text-gray-500 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-4">
+    Professional photoshop layout &middot; crisp, error-free calculation rendering &middot; HD deliverables — ready within <span class="text-primary font-semibold">48–72 hours</span>.
+  </p>
+
+  <div class="flex items-center justify-center gap-3 flex-wrap mb-16">
+    <a href="#samples" class="inline-flex items-center gap-2 bg-accent text-white font-semibold text-sm px-6 py-3 rounded-xl shadow-accent-glow hover:-translate-y-0.5 hover:brightness-105 transition">
+      View 12+ Live Samples
+    </a>
+    <a href="tel:+918927656368" class="inline-flex items-center gap-2 bg-white border border-gray-200 text-primary font-semibold text-sm px-6 py-3 rounded-xl hover:border-accent hover:-translate-y-0.5 transition">
+      <span class="w-5 h-5 rounded-full bg-primary text-white flex items-center justify-center text-[11px]">✆</span>
+      Call / WhatsApp Us
+    </a>
+  </div>
+
+  <!-- ================= VIDEO + FEATURES ================= -->
+  <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-9 items-stretch mb-24">
+
+  <!-- LEFT: video -->
+<div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-card flex flex-col">
+  <div class="h-[3px] w-full shimmer-bar"></div>
+  <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200">
+    <div class="w-9 h-9 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold text-[13px]">VK</div>
+    <div>
+      <div class="text-[14.5px] font-semibold text-primary">Watch how we design your MLM Plan PDF</div>
+      <div class="text-xs text-gray-400">Real project walkthrough — start to HD delivery</div>
+    </div>
+  </div>
+
+  <div class="m-4 rounded-xl border-2 border-accent overflow-hidden shadow-accent-glow bg-primary flex-1">
+<div class="relative aspect-video bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center h-full">
+          <span class="absolute left-3.5 bottom-4 font-display font-bold text-[13px] tracking-wide text-white/55">VK SERVICES ENTERPRISE</span>
+      <div id="playBtn" title="Play walkthrough" class="w-16 h-16 rounded-full bg-accent text-white border-2 border-white/50 shadow-accent-glow flex items-center justify-center cursor-pointer transition-transform hover:scale-105">
+        <span class="border-l-[18px] border-l-white border-y-[11px] border-y-transparent ml-1.5"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between gap-3 flex-wrap px-5 py-4 bg-primary text-white">
+    <div class="text-xs font-semibold flex items-center gap-1.5">▶ More walkthroughs</div>
+    <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
+      <span class="w-[22px] h-[22px] rounded-full bg-accent flex items-center justify-center text-xs">✆</span> Call / WhatsApp for details
+    </a>
+  </div>
+</div>
+
+    <!-- RIGHT: premium graphic ad presentation -->
+    <div class="flex flex-col">
+      <h2 class="font-display font-bold text-2xl leading-snug mb-2 text-primary">Premium graphic ad presentation <span class="text-accent">&amp; corporate designing</span></h2>
+      <p class="text-gray-500 text-[14.5px] leading-relaxed mb-6">
+        Every plan PDF is built like a corporate investor deck — clean grids, verified numbers, and a layout your leaders will be proud to share.
+      </p>
+
+      <div class="flex flex-col gap-3.5" id="featureList"></div>
+    </div>
+  </div>
+
+  <!-- ================= ORDERING TERMS & TRANSPARENT PRICING ================= -->
+  <section class="mb-24 -mx-6 sm:-mx-8 bg-primary text-white px-6 sm:px-8 py-16 sm:py-20 rounded-3xl">
+    <div class="max-w-xl mx-auto text-center mb-12">
+      <div class="inline-flex items-center gap-2.5 font-mono text-xs font-semibold tracking-[0.1em] uppercase text-accent mb-3.5">
+        <span class="w-5 h-px bg-accent"></span> Ordering Terms <span class="w-5 h-px bg-accent"></span>
+      </div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl mb-3.5 text-white">Transparent pricing, no surprises</h2>
+      <p class="text-gray-300 text-base leading-relaxed">Everything you need to know before you order — laid out clearly, upfront.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-7 flex flex-col transition hover:-translate-y-0.5 hover:border-accent/60">
+        <div class="w-12 h-12 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg text-white mb-2">Fixed Price</h3>
+        <p class="text-[13.5px] leading-relaxed text-gray-300">One quote, agreed before we start — no hidden charges, no surprise add-ons once the project is confirmed.</p>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-7 flex flex-col transition hover:-translate-y-0.5 hover:border-accent/60">
+        <div class="w-12 h-12 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg text-white mb-2">Delivery Timeline</h3>
+        <p class="text-[13.5px] leading-relaxed text-gray-300">Your HD PDF is delivered within a guaranteed 48–72 hours from the time your plan details are confirmed.</p>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-7 flex flex-col transition hover:-translate-y-0.5 hover:border-accent/60">
+        <div class="w-12 h-12 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg text-white mb-2">Payment Structure</h3>
+        <p class="text-[13.5px] leading-relaxed text-gray-300">A small advance to begin work, with the balance due only after you've reviewed and approved the final design.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SAMPLE GALLERY ================= -->
+
+  <section id="samples" class="mb-24">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2.5 font-mono text-xs font-semibold tracking-[0.1em] uppercase text-accent mb-3.5">
+        <span class="w-5 h-px bg-accent"></span> Ready-Made Samples <span class="w-5 h-px bg-accent"></span>
+      </div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl mb-3.5 text-primary">12+ ready design samples available</h2>
+      <p class="text-gray-500 text-base leading-relaxed max-w-xl mx-auto">Pick a style close to your plan — we'll rebuild it with your exact numbers and branding.</p>
+    </div>
+
+    <div id="sampleGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5"></div>
+  </section>
+
+  <!-- what our happy client say -->
+ <section class="py-24 px-6 bg-white" id="testimonials">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
+                <span class="w-6 h-[1px] bg-accent"></span> Testimonials <span class="w-6 h-[1px] bg-accent"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-4">What our happy clients say</h2>
+            <p class="text-gray-500">Real video reviews from MLM leaders and business owners across India.</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <h4 class="text-white font-bold font-display mb-1">Mr. Srinivas</h4>
+                    <p class="text-gray-300 text-xs mb-3">Founder & CEO - Parivrat<br>(Andhra Pradesh)</p>
+                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <h4 class="text-white font-bold font-display mb-1">Mr. Bhagbat Chohan</h4>
+                    <p class="text-gray-300 text-xs mb-3">Founder & CEO - Ai Abacus<br>(Maharashtra)</p>
+                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <h4 class="text-white font-bold font-display mb-1">Mr. Ammba Das</h4>
+                    <p class="text-gray-300 text-xs mb-3">Founder & CEO - Direct Sellar<br>(Telangana)</p>
+                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <h4 class="text-white font-bold font-display mb-1">Mr. Srinivas</h4>
+                    <p class="text-gray-300 text-xs mb-3">Founder & CEO - Parivrat<br>(Andhra Pradesh)</p>
+                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+      <!-- ================= OUR CLIENTS ================= -->
+  <section id="clients" class="mt-24">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2.5 font-display text-sm font-medium text-accent mb-3.5">Our Clients</div>
+      <h2 class="font-display font-bold text-2xl sm:text-3xl mb-2.5 text-primary">Trusted by Growing MLM Businesses</h2>
+      <p class="text-gray-500 text-base">Hundreds of MLM leaders and companies across India trust our solutions.</p>
+    </div>
+    <div id="clientsGrid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3.5"></div>
+  </section>
+
+
+ <!-- ================= STATS + CTA ================= -->
+<section id="statsCta" class="mt-24 -mx-6 sm:-mx-8 bg-primary text-white px-6 sm:px-8 py-24 rounded-3xl relative overflow-hidden">
+    <div class="relative max-w-[1100px] mx-auto">
+
+        <!-- HEADING -->
+        <div class="text-center mb-11">
+            <h2 class="font-body font-bold text-[1.7rem] sm:text-[2.3rem] leading-tight mb-3.5 text-white">
+                India's <span class="text-accent">#1 All-in-One</span> MLM Hub
+            </h2>
+            <p class="text-gray-300 text-base max-w-xl mx-auto">
+                From software to scale, we handle everything — 9+ years of industry excellence.
+            </p>
+        </div>
+
+        <!-- STATS BAND (softer amber background, better contrast) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 bg-amber-600 rounded-2xl shadow-accent-glow overflow-hidden mb-11 divide-y sm:divide-y-0 sm:divide-x divide-white/25">
+            <div class="flex items-center justify-center gap-4 px-5 py-8">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/></svg>
+                </div>
+                <div>
+                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">9+</div>
+                    <div class="text-[0.85rem] text-white/85">Years of Excellence</div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center gap-4 px-5 py-8">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">2800+</div>
+                    <div class="text-[0.85rem] text-white/85">Happy Clients</div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center gap-4 px-5 py-8">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg>
+                </div>
+                <div>
+                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">1.7 Lakh+</div>
+                    <div class="text-[0.85rem] text-white/85">MLMSUCCESSTIPS</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA BOX (softer amber, much better readability) -->
+        <div class="border-[1.5px] border-dashed border-accent/50 rounded-2xl px-6 sm:px-10 pt-9 pb-10 text-center">
+            <div class="bg-amber-600 rounded-xl px-6 py-4 max-w-xl mx-auto mb-7 shadow-accent-glow">
+                <div class="font-display font-bold text-[1.05rem] text-white tracking-wide">READY TO START YOUR MLM BUSINESS TODAY?</div>
+                <div class="text-[0.85rem] text-white/90 font-medium mt-1">Get 100% expert assistance &amp; 24/7 dedicated support from India's best development team.</div>
+            </div>
+            <div class="font-display font-bold text-[1.3rem] sm:text-[1.9rem] tracking-wide mb-2.5">
+                CALL / WHATSAPP: <a href="tel:+918927656368" class="text-accent hover:text-yellow-300 transition">+91 8927656368</a>
+            </div>
+            <div class="text-gray-300 text-[0.88rem]">(Available anytime for free consultation after you check our live demos)</div>
+        </div>
+
+    </div>
+</section>
+
+ <!-- ================= SERVICES ================= -->
+  <section id="services" class="mt-24">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-9 items-stretch">
+      <div>
+        <div class="sticky top-6 flex flex-col h-full">
+          <div class="relative rounded-[20px] overflow-hidden border border-gray-200 shadow-card aspect-[4/2.6] flex-1 min-h-[320px] before:content-[''] before:absolute before:-top-px before:-left-px before:-right-px before:h-[3px] before:bg-accent before:z-10">
+            <video autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg" class="w-full h-full object-cover block">
+              <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="mt-4 px-5 py-4.5 py-4 rounded-2xl bg-primary text-white flex-shrink-0">
+            <h4 class="font-display font-bold text-lg mb-2 text-white">Don't just buy. Test it yourself before spending a single rupee!</h4>
+            <p class="text-sm leading-relaxed text-gray-300">Watch the complete presentation video above to see our live proof and explore our full suite of premium MLM services below.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="mb-6">
+          <div class="inline-flex items-center gap-2.5 font-mono text-xs font-semibold tracking-[0.1em] uppercase text-accent mb-3">Our Services</div>
+          <h2 class="font-display font-bold text-2xl sm:text-[30px] text-primary">Everything your MLM business needs</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="servicesGrid"></div>
+      </div>
+    </div>
+  </section>
+
+ 
+ <!-- ================= BADGE ROW ================= -->
+  <div class="max-w-[1100px] mx-auto mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4.5 gap-4" id="badgeRow"></div>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="mt-24 -mx-6 sm:-mx-8 bg-primary text-white px-6 sm:px-8 py-24 rounded-3xl">
+  <div class="text-center max-w-2xl mx-auto mb-11">
+    <h2 class="font-body font-bold text-2xl sm:text-[2.1rem] text-white">Frequently Asked Questions (FAQs)</h2>
+  </div>
+
+  <div class="max-w-[980px] mx-auto flex flex-col gap-3" id="faqList">
+
+    <div class="faq-item rounded-xl overflow-hidden">
+      <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-accent text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-105">
+        <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">−</span>
+        <span>Q1. Customized MLM Software की Delivery में कितना समय (Time) लगता है?</span>
+      </button>
+      <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0 overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0;">
+        <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+          Customized MLM Software की Delivery पूरी तरह से आपके Plan की Complexity और Requirements पर Depend करती है। नॉर्मली एक बेसिक Plan का Software 5 से 7 Working Days में रेडी हो जाता है। अगर आपका Plan बहुत ज्यादा एडवांस या यूनिक है, तो उसमें 10 से 15 Days का समय लग सकता है। हमारी टीम हमेशा टाइमली और एरर-फ्री Delivery सुनिश्चित करती है।
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item rounded-xl overflow-hidden">
+      <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-gray-800 text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-110">
+        <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">+</span>
+        <span>क्या ₹99/- वाले MLM Plan PDF Making पैकेज में डिज़ाइन (Design) कस्टमाइज़्ड होता है?</span>
+      </button>
+      <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0 overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0;">
+        <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+          जी हाँ, ₹99/- वाले पैकेज में भी आपके Plan के हिसाब से बेसिक कस्टमाइज़ेशन किया जाता है, जैसे कलर थीम, लोगो और आपका कंटेंट। पूरी तरह प्रीमियम और एडवांस डिज़ाइन के लिए हमारे हायर पैकेज उपलब्ध हैं, जहाँ अनलिमिटेड रिवीज़न भी मिलते हैं।
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item rounded-xl overflow-hidden">
+      <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-accent text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-105">
+        <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">+</span>
+        <span>Result-Based Promotion में Lead की क्या गारंटी होती है और Data कैसे मिलता है?</span>
+      </button>
+      <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0 overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0;">
+        <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+          हमारे Result-Based Promotion में आपको वेरिफाइड और जेन्युइन लीड्स दी जाती हैं, जो रियल-टाइम में आपके CRM Dashboard पर अपडेट होती रहती हैं। लीड की क्वालिटी और क्वांटिटी आपके चुने गए पैकेज पर डिपेंड करती है, और पूरी रिपोर्टिंग ट्रांसपेरेंट होती है।
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item rounded-xl overflow-hidden">
+      <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-gray-800 text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-110">
+        <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">+</span>
+        <span>आपके Latest MLM Database की Accuracy कितनी है और क्या यह Fresh डेटा है?</span>
+      </button>
+      <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0 overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0;">
+        <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+          हमारा Database रेगुलरली अपडेट किया जाता है और इसकी एक्यूरेसी 90% से ज्यादा रहती है। हर एंट्री को वेरिफाई करने के बाद ही डेटाबेस में शामिल किया जाता है, ताकि आपको सिर्फ जेन्युइन और फ्रेश कॉन्टैक्ट्स ही मिलें।
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item rounded-xl overflow-hidden">
+      <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-accent text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-105">
+        <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">+</span>
+        <span>MLM Leader Website का 1 साल के बाद Renewal Charge क्या होगा?</span>
+      </button>
+      <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0 overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0;">
+        <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+          MLM Leader Website का पहला साल पैकेज में शामिल होता है। उसके बाद Hosting, Domain और Support के लिए एक मिनिमल एनुअल रिन्यूअल चार्ज लगता है, जो आपके प्लान के हिसाब से पहले ही बता दिया जाता है — कोई हिडन चार्ज नहीं होता।
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <div class="mt-14 text-center text-gray-400 text-xs font-mono tracking-wide">© MLM SOFTWARE COMPANY — PDF DESIGN STUDIO</div>
+</div>
+
+<!-- ================= SAMPLE MODAL ================= -->
+<div id="sampleModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-primary/80 backdrop-blur-sm p-6">
+  <div class="relative bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl">
+    <button id="modalClose" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm z-10 hover:bg-gray-800">✕</button>
+    <div id="modalThumb" class="aspect-[4/3]"></div>
+    <div class="p-6">
+      <div id="modalTitle" class="font-display font-bold text-lg text-primary mb-1"></div>
+      <p class="text-gray-500 text-sm leading-relaxed mb-5">We'll rebuild this exact style with your own plan numbers, logo, and colors.</p>
+      <a href="tel:+918927656368" class="inline-flex items-center gap-2 bg-accent text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-accent-glow hover:brightness-105 transition">
+        Request This Design
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('playBtn').addEventListener('click', () => {
+    alert('This would play the walkthrough video.');
+  });
+
+  /* ---------------- FEATURES ---------------- */
+  const features = [
+    { title: "International HD quality look", desc: "Every page is laid out to a global investor-deck standard — the kind of finish leaders trust on sight.", icon: `<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>` },
+    { title: "Error-free crisp calculation layout", desc: "Every percentage, level, and cap is cross-checked against your plan before it's placed on the page.", icon: `<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>` },
+    { title: "Guaranteed fast 48–72 hours delivery", desc: "A fixed turnaround, tracked from the moment we confirm your plan details.", icon: `<circle cx="12" cy="12" r="9" /><path d="M12 8v4l3 3"/>` },
+    { title: "12+ ready design samples available", desc: "Start from a proven layout instead of a blank page — pick a style and we adapt it to you.", icon: `<rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" />` }
+  ];
+
+  document.getElementById('featureList').innerHTML = features.map(f => `
+    <div class="flex gap-4 items-start bg-white border border-gray-200 rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-accent hover:shadow-card">
+      <div class="w-[46px] h-[46px] flex-shrink-0 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-[22px] h-[22px]">${f.icon}</svg>
+      </div>
+      <div>
+        <h3 class="text-[15.5px] font-semibold text-primary mb-1.5">${f.title}</h3>
+        <p class="text-[13px] leading-relaxed text-gray-500">${f.desc}</p>
+      </div>
+    </div>
+  `).join('');
+
+  /* ---------------- SAMPLE GALLERY ---------------- */
+  const samples = [
+    { n: "01", title: "Binary Plan PDF", color: "from-amber-500 to-orange-600" },
+    { n: "02", title: "ROI Plan PDF", color: "from-primary to-gray-700" },
+    { n: "03", title: "Generation Plan PDF", color: "from-amber-400 to-amber-600" },
+    { n: "04", title: "Unilevel Plan PDF", color: "from-gray-800 to-primary" },
+    { n: "05", title: "Autopool Plan PDF", color: "from-amber-500 to-yellow-600" },
+    { n: "06", title: "Crypto MLM PDF", color: "from-primary to-gray-800" },
+    { n: "07", title: "Board / Matrix PDF", color: "from-amber-600 to-orange-500" },
+    { n: "08", title: "Stair-Step PDF", color: "from-gray-700 to-primary" },
+    { n: "09", title: "Party Plan PDF", color: "from-amber-400 to-orange-500" },
+    { n: "10", title: "E-Commerce MLM PDF", color: "from-primary to-gray-700" },
+    { n: "11", title: "Australian Binary PDF", color: "from-amber-500 to-amber-700" },
+    { n: "12", title: "Custom Hybrid Plan PDF", color: "from-gray-800 to-black" }
+  ];
+
+  document.getElementById('sampleGrid').innerHTML = samples.map(s => `
+    <div class="sample-card rounded-2xl overflow-hidden border border-gray-200 shadow-sm cursor-pointer" data-title="${s.title}" data-color="${s.color}">
+      <div class="relative aspect-[4/5] bg-gradient-to-br ${s.color} flex items-center justify-center">
+        <span class="font-mono text-white/70 text-xs absolute top-3 left-3 tracking-wide">SAMPLE ${s.n}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="1.5" class="w-14 h-14"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h2"/></svg>
+        <div class="sample-overlay absolute inset-0 flex items-end p-4">
+          <span class="sample-cta text-white text-xs font-bold inline-flex items-center gap-1.5">View sample →</span>
+        </div>
+      </div>
+      <div class="px-3.5 py-3 bg-white">
+        <div class="text-sm font-semibold text-primary">${s.title}</div>
+      </div>
+    </div>
+  `).join('');
+
+
+
+  const modal = document.getElementById('sampleModal');
+  const modalThumb = document.getElementById('modalThumb');
+  const modalTitle = document.getElementById('modalTitle');
+
+  document.getElementById('sampleGrid').addEventListener('click', (e) => {
+    const card = e.target.closest('.sample-card');
+    if (!card) return;
+    modalTitle.textContent = card.dataset.title;
+    modalThumb.className = `aspect-[4/3] bg-gradient-to-br ${card.dataset.color} flex items-center justify-center`;
+    modalThumb.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5" class="w-20 h-20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h2"/></svg>`;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  });
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  /* ---------------- CLIENTS ---------------- */
+  const clients = [
+    { icon: "&#9670;", color: "text-red-500", name: "MYGOLDENWAY" },
+    { icon: "&#9752;", color: "text-pink-600", name: 'My Shops<span class="text-red-500">247</span>' },
+    { name: 'TRENDSWAVE<br><span class="text-[0.65rem] font-normal tracking-[0.15em] text-gray-400">FASHION</span>' },
+    { name: '<span class="text-amber-500">1X</span><span class="text-primary">KING</span>' },
+    { icon: "&#9650;", color: "text-green-600", name: "AGN", nameColor: "text-green-600" },
+    { icon: "&#8987;", color: "text-red-500", name: "TimeHelp" },
+    { icon: "&#8962;", color: "text-red-500", name: "Vaishnocity" },
+    { icon: "&#9670;", color: "text-accent", name: 'Lifetym<span class="text-primary">Profit</span>' },
+    { icon: "&#9739;", color: "text-primary", name: 'GLOBALHELP<span class="text-amber-500">24</span>' },
+    { icon: "&#10022;", color: "text-green-600", name: "SUCCESSYOURLIFE" },
+    { icon: "&#9788;", color: "text-amber-500", name: "RISEMON", nameColor: "text-amber-500" },
+    { icon: "&#9775;", color: "text-red-500", name: 'MONEY LINK<br><span class="text-[0.65rem] text-gray-400 tracking-[0.1em]">PRO</span>' },
+    { icon: "&#9883;", color: "text-red-500", name: 'XTREME FX TRADES<br><span class="text-[0.65rem] text-amber-500">GO RICH LIFE</span>' },
+    { icon: "&#8962;", color: "text-green-600", name: 'Ecartal<span class="text-primary"> India</span>' }
+  ];
+
+  document.getElementById('clientsGrid').innerHTML = clients.map(c => `
+    <div class="bg-white border border-gray-200 rounded-lg px-3.5 py-4.5 py-4 flex items-center justify-center gap-2 min-h-[72px] text-center transition hover:-translate-y-0.5 hover:border-accent shadow-sm">
+      ${c.icon ? `<span class="text-lg leading-none ${c.color}">${c.icon}</span>` : ''}
+      <span class="font-display text-[0.82rem] font-bold tracking-wide leading-snug whitespace-nowrap ${c.nameColor || 'text-primary'}">${c.name}</span>
+    </div>
+  `).join('');
+
+
+
+
+  
+  /* ---------------- SERVICES ---------------- */
+  const services = [
+    { n: "01", title: "Customized MLM Software", desc: "Powerful backend dashboards tailored to your business with smart automation.", link: "Explore Service →", href: "custom-mlm.html", icon: `<rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" />` },
+    { n: "02", title: "MLM Plan PDF Making", desc: "Professional compensation plan PDF design with premium presentation.", link: "View PDF →", href: "#", icon: `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 11h2" />` },
+    { n: "03", title: "MLM Plan Video Making", desc: "HD animated presentation videos with voice-over and effects.", link: "Watch Video →", href: "#", icon: `<rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" />` },
+    { n: "04", title: "Result Based Promotion", desc: "Reach targeted audiences using automated marketing campaigns.", link: "Promotion →", href: "#", icon: `<path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 5-7" />` },
+    { n: "05", title: "Latest MLM Database", desc: "Fresh verified databases with high quality genuine contacts.", link: "Access Database →", href: "#", icon: `<ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" />` },
+    { n: "06", title: "MLM Leader Website", desc: "High-converting leader pages with smart automation and branding.", link: "View Website →", href: "#", icon: `<path d="M12 3l9 5v8l-9 5-9-5V8z" /><path d="M12 7v10" />` }
+  ];
+
+  document.getElementById('servicesGrid').innerHTML = services.map(s => `
+    <a href="${s.href}" class="flex gap-3.5 items-start bg-white border border-gray-200 rounded-2xl p-4.5 p-4 transition hover:-translate-y-0.5 hover:border-accent hover:shadow-card no-underline">
+      <div class="w-11 h-11 flex-shrink-0 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5">${s.icon}</svg>
+      </div>
+      <div>
+        <h3 class="text-[15px] font-semibold text-primary mb-1.5">${s.n}. ${s.title}</h3>
+        <p class="text-[13px] leading-relaxed text-gray-500 mb-2">${s.desc}</p>
+        <span class="text-xs font-bold text-accent">${s.link}</span>
+      </div>
+    </a>
+  `).join('');
+
+
+
+  /* ---------------- BADGES ---------------- */
+  const badges = [
+    { value: "4.9 / 5", label: "Client Rating", icon: `<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>` },
+    { value: "100%", label: "Assistance", icon: `<path d="M2 21h4V9H2v12zM22 10.5c0-1.1-.9-2-2-2h-5.6l.8-4.1V4a1.5 1.5 0 0 0-1.5-1.5c-.4 0-.7.16-1 .44L8 8v13h11c.83 0 1.54-.5 1.84-1.22l2-4.71c.1-.25.16-.51.16-.79v-2z"/>` },
+    { value: "24/7", label: "Support", icon: `<path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm1-16h-2v6l5.25 3.15L17 13.65 13 11.3z"/>` },
+    { value: "Start Now", label: "Your Company", icon: `<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>` }
+  ];
+
+  document.getElementById('badgeRow').innerHTML = badges.map((b, i) => `
+    <div class="${i % 2 === 0 ? 'bg-primary' : 'bg-accent'} text-white rounded-2xl px-4 py-6.5 py-6 text-center shadow-card">
+      <div class="w-[54px] h-[54px] mx-auto mb-3.5 rounded-full bg-white/20 flex items-center justify-center">
+        <svg viewBox="0 0 24 24" class="w-6.5 h-6.5 w-[26px] h-[26px] fill-white">${b.icon}</svg>
+      </div>
+      <div class="font-display font-bold text-[1.35rem] text-white mb-1">${b.value}</div>
+      <div class="text-[0.82rem] font-semibold text-white/90 tracking-wide">${b.label}</div>
+    </div>
+  `).join('');
+
+ /* ---------------- FAQ ACCORDION ---------------- */
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach((item, index) => {
+    const button = item.querySelector("[data-faq-toggle]");
+    const answer = item.querySelector(".faq-answer");
+    const icon = item.querySelector(".faq-icon");
+
+    // First FAQ open by default
+    if (index === 0) {
+        item.classList.add("open");
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        icon.innerHTML = "&minus;";
+    } else {
+        answer.style.maxHeight = "0";
+        icon.innerHTML = "&plus;";
+    }
+
+    button.addEventListener("click", () => {
+        const isOpen = item.classList.contains("open");
+
+        // Close all
+        faqItems.forEach(faq => {
+            faq.classList.remove("open");
+            faq.querySelector(".faq-answer").style.maxHeight = "0";
+            faq.querySelector(".faq-icon").innerHTML = "&plus;";
+        });
+
+        // Open clicked
+        if (!isOpen) {
+            item.classList.add("open");
+            answer.style.maxHeight = answer.scrollHeight + "px";
+            icon.innerHTML = "&minus;";
+        }
+    });
+});
+  
+</script>
+
+</body>
+</html>

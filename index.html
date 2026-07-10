@@ -7,3073 +7,671 @@
     <title> MLM Software & Network Growth Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --bg: #060B16;
-            --bg-elev: #0B1526;
-            --surface: #101C33;
-            --surface-2: #172542;
-            --teal: #3B82F6;
-            --teal-dim: #2563EB;
-            --gradient: linear-gradient(135deg, #60A5FA 0%, #3B82F6 45%, #1E3A8A 100%);
-            --coral: #FF6B4A;
-            --text: #F4F6F9;
-            --muted: #8B93A6;
-            --border: rgba(255, 255, 255, 0.08);
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#111827",
+                        accent: "#F59E0B",
+                        dark: "#111827",
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button {
-            font-family: inherit;
-            cursor: pointer;
-            border: none;
-            background: none;
-            color: inherit;
-        }
-
-        /* ---------- NAV ---------- */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 40;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 22px 6%;
-            background: linear-gradient(to bottom, rgba(6, 11, 22, 0.9), transparent);
-            backdrop-filter: blur(2px);
-        }
-
-        .brand {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.25rem;
-            letter-spacing: 0.02em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand .dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--teal);
-            box-shadow: 0 0 12px var(--teal);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            font-size: 0.92rem;
-            color: var(--muted);
-        }
-
-        .nav-links a {
-            transition: color .25s ease;
-        }
-
-        .nav-links a:hover {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        @media (max-width:760px) {
-            .nav-links {
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .hero-bg {
+                background-image: url('./assets/image/banner2.jpg');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
                 display: none;
             }
-        }
-
-        /* ---------- HERO ---------- */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            background: radial-gradient(ellipse at 75% 30%, #16294d 0%, #060B16 60%);
-        }
-
-        .hero canvas {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.28;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(100deg, rgba(6, 11, 22, 0.9) 0%, rgba(6, 11, 22, 0.55) 42%, rgba(6, 11, 22, 0.15) 75%);
-            z-index: 1;
-        }
-
-        .hero-grid {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            padding: 0 6%;
-            max-width: 1240px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 0.9fr;
-            gap: 44px;
-            align-items: center;
-        }
-
-        @media (max-width:900px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 36px;
-                padding-top: 110px;
-            }
-        }
-
-        .hero-text {
-            max-width: 560px;
-            margin-left: -46px;
-            text-align: left;
-        }
-
-        .hero-video-frame {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
-            aspect-ratio: 4/2.6;
-            align-self: center;
-            opacity: 0;
-            transform: translateX(60px);
-        }
-
-        .hero-video-frame video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .hero-video-frame::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(200deg, transparent 55%, rgba(6, 11, 22, 0.65) 100%);
-        }
-
-        .hero-video-frame::before {
-            content: "";
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            height: 3px;
-            background: var(--gradient);
-            z-index: 2;
-        }
-
-        @media (max-width:900px) {
-            .hero-video-frame {
-                aspect-ratio: 16/9;
-            }
-        }
-
-        .hero-media {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .hero-form-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 34px 28px;
-            box-shadow: var(--shadow);
-            position: relative;
-            opacity: 0;
-            transform: translateX(60px);
-        }
-
-        .hero-form-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 20px;
-            right: 20px;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 0 0 4px 4px;
-        }
-
-        .hero-form-card h2 {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .hero-form-card > p {
-            color: var(--muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        .video-caption {
-            font-size: 0.86rem;
-            line-height: 1.5;
-            color: var(--muted);
-            text-align: center;
-            padding: 0 10px;
-        }
-
-        .services-layout {
-            max-width: 1240px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        @media (max-width: 960px) {
-            .services-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .eyebrow {
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: normal;
-            background: none;
-            color: #ffffff;
-            text-transform: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 18px;
-            opacity: 0;
-            transform: translateX(90px);
-        }
-
-        .eyebrow::before {
-            content: "";
-            width: 26px;
-            height: 1px;
-            background: #ffffff;
-        }
-
-        .hero h1 {
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: clamp(1.9rem, 3.4vw, 2.7rem);
-            line-height: 1.18;
-            letter-spacing: -0.02em;
-            margin-bottom: 22px;
-            color: #ffffff;
-            opacity: 0;
-            transform: translateX(120px);
-        }
-
-        .hero h1 span {
-            background: none;
-            -webkit-background-clip: initial;
-            background-clip: initial;
-            color: #ffffff;
-        }
-
-        .hero p {
-            font-size: 1.05rem;
-            color: #ffffff;
-            font-weight: 600;
-            max-width: 520px;
-            margin-bottom: 38px;
-            opacity: 0;
-            transform: translateX(110px);
-        }
-
-        .hero-ctas {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            opacity: 0;
-            transform: translateX(100px);
-        }
-
-        .rotate-text {
-            display: inline-block;
-            transition: transform .45s cubic-bezier(.22, .9, .3, 1), opacity .35s ease;
-        }
-
-        .rotate-text.swap-out {
-            transform: translateX(-60px);
-            opacity: 0;
-        }
-
-        .rotate-text.swap-in {
-            transform: translateX(60px);
-            opacity: 0;
-        }
-
-        .rotate-text.no-transition {
-            transition: none !important;
-        }
-
-        .slide-in {
-            animation: slideIn 0.85s cubic-bezier(.22, .9, .3, 1) forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .btn {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 0.92rem;
-            padding: 15px 30px;
-            border-radius: 999px;
-            transition: all .3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--gradient);
-            color: #f5f9ff;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-ghost {
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            color: var(--text);
-        }
-
-        .btn-ghost:hover {
-            border-color: var(--teal);
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* vertical get in touch tab */
-        .side-tab {
-            position: fixed;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%) rotate(180deg);
-            writing-mode: vertical-rl;
-            background: var(--coral);
-            color: #1a0700;
-            font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            padding: 18px 10px;
-            z-index: 45;
-            border-radius: 8px 0 0 8px;
-            transition: padding .25s ease, background .25s ease;
-        }
-
-        .side-tab:hover {
-            padding-right: 16px;
-            background: #ff7f5e;
-        }
-
-        /* scroll cue */
-        .scroll-cue {
-            position: absolute;
-            bottom: 36px;
-            left: 6%;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--muted);
-            letter-spacing: 0.1em;
-            z-index: 2;
-        }
-
-        .scroll-cue .line {
-            width: 1px;
-            height: 28px;
-            background: linear-gradient(var(--teal), transparent);
-            animation: pulseLine 1.8s ease-in-out infinite;
-        }
-
-        @keyframes pulseLine {
-
-            0%,
-            100% {
-                opacity: .3;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        /* ---------- MODAL ---------- */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: rgba(4, 8, 16, 0.82);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity .35s ease, visibility .35s ease;
-            padding: 20px;
-        }
-
-        .modal-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-card {
-            position: relative;
-            width: 100%;
-            max-width: 440px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px 34px 34px;
-            box-shadow: var(--shadow);
-            transform: scale(0.85) translateY(20px);
-            opacity: 0;
-            transition: transform .45s cubic-bezier(.2, 1.4, .4, 1), opacity .35s ease;
-        }
-
-        .modal-overlay.open .modal-card {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-
-        .modal-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 20px;
-            right: 20px;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 0 0 4px 4px;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--surface-2);
-            color: var(--muted);
-            transition: all .25s ease;
-            font-size: 1.1rem;
-        }
-
-        .modal-close:hover {
-            background: var(--coral);
-            color: #1a0700;
-            transform: rotate(90deg);
-        }
-
-        .modal-eyebrow {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .modal-card h2 {
-            font-family: var(--font-display);
-            font-size: 1.55rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .modal-card>p {
-            color: var(--muted);
-            font-size: 0.92rem;
-            margin-bottom: 26px;
-        }
-
-        .field {
-            margin-bottom: 16px;
-        }
-
-        .field label {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-
-        .field input {
-            width: 100%;
-            background: var(--bg-elev);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 13px 14px;
-            color: var(--text);
-            font-size: 0.95rem;
-            font-family: var(--font-body);
-            transition: border-color .25s ease, box-shadow .25s ease;
-        }
-
-        .field input::placeholder {
-            color: #4C566D;
-        }
-
-        .field input:focus {
-            outline: none;
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-        }
-
-        .field .err {
-            display: none;
-            color: var(--coral);
-            font-size: 0.76rem;
-            margin-top: 6px;
-        }
-
-        .field.invalid input {
-            border-color: var(--coral);
-        }
-
-        .field.invalid .err {
-            display: block;
-        }
-
-        .modal-submit {
-            width: 100%;
-            background: var(--gradient);
-            color: #f5f9ff;
-            font-weight: 600;
-            font-size: 0.95rem;
-            padding: 14px;
-            border-radius: 10px;
-            margin-top: 8px;
-            transition: all .25s ease;
-        }
-
-        .modal-submit:hover {
-            filter: brightness(1.15);
-            transform: translateY(-1px);
-        }
-
-        /* success view */
-        .success-view {
-            display: none;
-            text-align: center;
-        }
-
-        .success-view.show {
-            display: block;
-        }
-
-        .form-view.hide {
-            display: none;
-        }
-
-        .check-wrap {
-            width: 74px;
-            height: 74px;
-            margin: 0 auto 22px;
-            border-radius: 50%;
-            background: rgba(59, 130, 246, 0.12);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .check-wrap svg {
-            width: 36px;
-            height: 36px;
-        }
-
-        .check-wrap circle {
-            stroke: var(--teal);
-            stroke-width: 2;
-            fill: none;
-            stroke-dasharray: 76;
-            stroke-dashoffset: 76;
-            animation: drawCircle .6s ease forwards .1s;
-        }
-
-        .check-wrap path {
-            stroke: var(--teal);
-            stroke-width: 2.4;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-dasharray: 24;
-            stroke-dashoffset: 24;
-            animation: drawCheck .4s ease forwards .55s;
-        }
-
-        @keyframes drawCircle {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        @keyframes drawCheck {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        .success-view h2 {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-
-        .success-view p {
-            color: var(--muted);
-            font-size: 0.92rem;
-            margin-bottom: 22px;
-        }
-
-        .contact-row {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
-
-        .contact-chip {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            padding: 10px 16px;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            transition: border-color .25s ease;
-        }
-
-        .contact-chip:hover {
-            border-color: var(--teal);
-        }
-
-        .contact-chip svg {
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
-        }
-
-        .modal-done-btn {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px 30px;
-            border-radius: 10px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            transition: all .25s ease;
-        }
-
-        .modal-done-btn:hover {
-            border-color: var(--teal);
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* ---------- SERVICES ---------- */
-        .services {
-            position: relative;
-            padding: 110px 6% 130px;
-            background: var(--bg-elev);
-        }
-
-        .services-head {
-            max-width: 640px;
-            margin: 0 auto 64px;
-            text-align: center;
-        }
-
-        .services .eyebrow-static {
-            font-family: var(--font-body);
-            font-size: 0.92rem;
-            font-weight: 500;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-transform: none;
-            margin-bottom: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .services .eyebrow-static::before,
-        .services .eyebrow-static::after {
-            content: "";
-            width: 20px;
-            height: 1px;
-            background: var(--coral);
-        }
-
-        .services h2 {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: clamp(1.4rem, 2.2vw, 1.8rem);
-            margin-bottom: 14px;
-        }
-
-        .services-head p {
-            color: var(--muted);
-            font-size: 1rem;
-        }
-
-        .services-grid {
-            max-width: 1180px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        @media (max-width:920px) {
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width:600px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .video-info-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            margin-top: 24px;
-            box-shadow: var(--shadow);
-        }
-
-        .video-info-card h4 {
-            color: #FFB020;
-            font-size: 1.15rem;
-            margin-bottom: 12px;
-            font-family: var(--font-body);
-            line-height: 1.4;
-            font-weight: 600;
-        }
-
-        .video-info-card p {
-            color: var(--text);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .service-card {
-            position: relative;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 14px 18px;
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease, border-color .3s ease, background .3s ease;
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .service-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .service-card:hover {
-            border-color: var(--teal);
-            background: var(--surface-2);
-        }
-
-        .service-node {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: #4C566D;
-            position: absolute;
-            top: 22px;
-            right: 24px;
-            letter-spacing: 0.05em;
-        }
-
-        .service-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(59, 130, 246, 0.1);
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .service-icon svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--teal);
-        }
-
-        .service-card:nth-child(3n-1) .service-icon {
-            background: rgba(255, 107, 74, 0.1);
-        }
-
-        .service-card:nth-child(3n-1) .service-icon svg {
-            stroke: var(--coral);
-        }
-
-        .service-card h3 {
-            font-family: var(--font-display);
-            font-size: 0.97rem;
-            font-weight: 600;
-            margin: 0 0 4px 0;
-        }
-
-        .service-card p {
-            color: var(--muted);
-            font-size: 0.82rem;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .service-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .service-link {
-            font-size: 0.78rem;
-            font-weight: 600;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: gap .25s ease;
-        }
-
-        .service-link:hover {
-            gap: 10px;
-        }
-
-        /* connecting lines behind grid (decorative, subtle) */
-        .services::before {
-            content: "";
-            position: absolute;
-            top: 60px;
-            left: 0;
-            right: 0;
-            bottom: 60px;
-            background-image: radial-gradient(circle, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
-            background-size: 34px 34px;
-            pointer-events: none;
-            opacity: 0.5;
-        }
-
-        /* ---------- SCROLL ANIMATIONS (HEADINGS) ---------- */
-        .services-head, .testimonials-head {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
-        }
-
-        .services-head.visible, .testimonials-head.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ---------- TESTIMONIALS (Video) ---------- */
-        .testimonials {
-            position: relative;
-            padding: 110px 6% 130px;
-            background: var(--bg);
-        }
-
-        .testimonials-head {
-            max-width: 640px;
-            margin: 0 auto 64px;
-            text-align: center;
-        }
-
-        .testimonials .eyebrow-static {
-            font-family: var(--font-body);
-            font-size: 0.92rem;
-            font-weight: 500;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-transform: none;
-            margin-bottom: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .testimonials .eyebrow-static::before,
-        .testimonials .eyebrow-static::after {
-            content: "";
-            width: 20px;
-            height: 1px;
-            background: var(--teal);
-        }
-
-        .testimonials h2 {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: clamp(1.4rem, 2.2vw, 1.8rem);
-            margin-bottom: 14px;
-        }
-
-        .testimonials-head p {
-            color: var(--muted);
-            font-size: 1rem;
-        }
-
-        /* Video testimonials grid */
-        .video-testimonials-grid {
-            max-width: 1180px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        @media (max-width: 920px) {
-            .video-testimonials-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 540px) {
-            .video-testimonials-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-        }
-
-        .video-tcard {
-            position: relative;
-            border-radius: 18px;
-            overflow: hidden;
-            aspect-ratio: 9/16;
-            cursor: pointer;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            background: var(--surface);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.45);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: transform .5s cubic-bezier(.22,.9,.3,1), opacity .5s ease, box-shadow .3s ease;
-        }
-
-        .video-tcard::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 18px;
-            padding: 2px;
-            background: linear-gradient(135deg, #60A5FA, #3B82F6 50%, #1E3A8A);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .video-tcard.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .video-tcard:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(59,130,246,0.35);
-        }
-
-        .video-tcard video,
-        .video-tcard .vtcard-placeholder {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* placeholder when no real video */
-        .vtcard-placeholder {
-            background: linear-gradient(160deg, #0d1f40 0%, #0a1628 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .vtcard-placeholder-icon {
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            background: rgba(59,130,246,0.18);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(59,130,246,0.3);
-        }
-
-        .vtcard-placeholder-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: #60A5FA;
-            margin-left: 3px;
-        }
-
-        /* dark gradient overlay at bottom */
-        .video-tcard-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(4,8,18,0.92) 0%, rgba(4,8,18,0.5) 40%, transparent 70%);
-            z-index: 2;
-        }
-
-        .video-tcard-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 4;
-            padding: 20px 16px 16px;
-        }
-
-        .vtcard-name {
-            font-family: var(--font-display);
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-            line-height: 1.2;
-        }
-
-        .vtcard-role {
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.4;
-            margin-bottom: 12px;
-        }
-
-        .vtcard-wa {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            background: #25D366;
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 6px 12px;
-            border-radius: 999px;
-            text-decoration: none;
-            transition: background .25s ease, transform .25s ease;
-        }
-
-        .vtcard-wa:hover {
-            background: #1ebc5a;
-            transform: scale(1.04);
-        }
-
-        .vtcard-wa svg {
-            width: 14px;
-            height: 14px;
-            fill: #fff;
-            flex-shrink: 0;
-        }
-
-        /* play button on hover */
-        .vtcard-play {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -60%);
-            z-index: 4;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.18);
-            backdrop-filter: blur(6px);
-            border: 1.5px solid rgba(255,255,255,0.35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity .3s ease, transform .3s ease;
-            pointer-events: none;
-        }
-
-        .vtcard-play svg {
-            width: 22px;
-            height: 22px;
-            fill: #fff;
-            margin-left: 3px;
-        }
-
-        .video-tcard:hover .vtcard-play {
-            opacity: 1;
-            transform: translate(-50%, -50%);
-        }
-
-        /* ---------- CLIENT NAME STYLES ---------- */
-        .client-name {
-            font-family: var(--font-display);
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text);
-        }
-
-        .client-role {
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        /* ---------- OUR CLIENTS GRID ---------- */
-        .our-clients {
-            padding: 80px 6% 100px;
-            background: var(--bg-elev);
-            position: relative;
-        }
-
-        .our-clients-inner {
-            max-width: 1180px;
-            margin: 0 auto;
-        }
-
-        .our-clients-head {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .clients-logo-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 14px;
-        }
-
-        @media (max-width: 960px) {
-            .clients-logo-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .clients-logo-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-        }
-
-        .client-logo-card {
-            background: var(--surface);
-            border: 1px solid rgba(255, 255, 255, 0.10);
-            border-radius: 10px;
-            padding: 18px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            min-height: 72px;
-            text-align: center;
-            transition: border-color .25s ease, background .25s ease, transform .25s ease;
-            cursor: default;
-        }
-
-        .client-logo-card:hover {
-            border-color: rgba(59, 130, 246, 0.45);
-            background: var(--surface-2);
-            transform: translateY(-3px);
-        }
-
-        .clc-icon {
-            font-size: 1.2rem;
-            line-height: 1;
-            flex-shrink: 0;
-        }
-
-        .clc-name {
-            font-family: var(--font-display);
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 0.03em;
-            line-height: 1.3;
-            white-space: nowrap;
-        }
-
-        /* ---------- STATS + CTA BAND ---------- */
-        .stats-cta {
-            position: relative;
-            background: var(--bg);
-            padding: 90px 6% 110px;
-            overflow: hidden;
-        }
-
-        .stats-cta::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: radial-gradient(circle, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
-            background-size: 34px 34px;
-            pointer-events: none;
-            opacity: 0.4;
-        }
-
-        .stats-cta-inner {
-            position: relative;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .stats-cta-head {
-            text-align: center;
-            margin-bottom: 44px;
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
-        }
-
-        .stats-cta-head.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stats-cta-head h2 {
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: clamp(1.7rem, 3vw, 2.3rem);
-            line-height: 1.25;
-            margin-bottom: 14px;
-        }
-
-        .stats-cta-head h2 .accent {
-            color: var(--coral);
-        }
-
-        .stats-cta-head p {
-            color: var(--muted);
-            font-size: 1rem;
-            max-width: 560px;
-            margin: 0 auto;
-        }
-
-        .stats-band {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            background: var(--gradient);
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.25);
-            overflow: hidden;
-            margin-bottom: 46px;
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
-        }
-
-        .stats-band.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            padding: 30px 20px;
-            position: relative;
-        }
-
-        .stat-item:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 20%;
-            bottom: 20%;
-            width: 1px;
-            background: rgba(255, 255, 255, 0.28);
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.16);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .stat-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: #fff;
-        }
-
-        .stat-num {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.55rem;
-            color: #fff;
-            line-height: 1.15;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        @media (max-width: 760px) {
-            .stats-band {
-                grid-template-columns: 1fr;
-            }
-
-            .stat-item:not(:last-child)::after {
-                display: none;
-            }
-
-            .stat-item:not(:last-child) {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-            }
-        }
-
-        .cta-box {
-            border: 1.5px dashed rgba(59, 130, 246, 0.5);
-            border-radius: 18px;
-            padding: 36px 6% 40px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
-        }
-
-        .cta-box.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .cta-banner {
-            background: var(--gradient);
-            border-radius: 12px;
-            padding: 18px 24px;
-            max-width: 720px;
-            margin: 0 auto 30px;
-            box-shadow: 0 14px 34px rgba(59, 130, 246, 0.3);
-        }
-
-        .cta-banner .line1 {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: #fff;
-            letter-spacing: 0.01em;
-        }
-
-        .cta-banner .line2 {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            margin-top: 4px;
-        }
-
-        .cta-contact {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: clamp(1.3rem, 2.6vw, 1.9rem);
-            letter-spacing: 0.01em;
-            margin-bottom: 10px;
-        }
-
-        .cta-contact a {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .cta-subtext {
-            color: var(--muted);
-            font-size: 0.88rem;
-        }
-
-        /* ---------- SERVICES SHOWCASE (carousel) ---------- */
-        .services-showcase {
-            position: relative;
-            background: var(--bg);
-            padding: 90px 6% 120px;
-        }
-
-        .ssc-banner {
-            max-width: 1180px;
-            margin: 0 auto 56px;
-            background: var(--gradient);
-            border-radius: 16px;
-            padding: 26px 20px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.28);
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
-        }
-
-        .ssc-banner.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .ssc-banner h2 {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: clamp(1.5rem, 3vw, 2.1rem);
-            letter-spacing: 0.03em;
-            color: #fff;
-            display: inline-block;
-            position: relative;
-            padding-bottom: 12px;
-        }
-
-        .ssc-banner h2::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 64px;
-            height: 3px;
-            border-radius: 2px;
-            background: var(--coral);
-        }
-
-        .ssc-carousel {
-            position: relative;
-            max-width: 1180px;
-            margin: 0 auto;
-        }
-
-        .ssc-track {
-            display: flex;
-            gap: 22px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding: 6px 4px 20px;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .ssc-track::-webkit-scrollbar {
-            display: none;
-        }
-
-        .ssc-card {
-            scroll-snap-align: start;
-            flex: 0 0 calc(25% - 17px);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease, border-color .3s ease, box-shadow .3s ease;
-        }
-
-        .ssc-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .ssc-card:hover {
-            border-color: var(--teal);
-            box-shadow: 0 18px 42px rgba(59, 130, 246, 0.28);
-        }
-
-        @media (max-width: 1000px) {
-            .ssc-card {
-                flex: 0 0 calc(50% - 11px);
-            }
-        }
-
-        @media (max-width: 620px) {
-            .ssc-card {
-                flex: 0 0 82%;
-            }
-        }
-
-        .ssc-visual {
-            position: relative;
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(160deg, #16294d 0%, #0a1628 100%);
-            overflow: hidden;
-        }
-
-        .ssc-visual::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(circle, rgba(59, 130, 246, 0.16) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-
-        .ssc-visual svg.ssc-illustration {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .ssc-label {
-            padding: 20px 18px 24px;
-            text-align: center;
-        }
-
-        .ssc-label h3 {
-            font-family: var(--font-display);
-            font-weight: 600;
-            font-size: 1.02rem;
-            line-height: 1.35;
-        }
-
-        .ssc-arrow {
-            position: absolute;
-            top: 40%;
-            transform: translateY(-50%);
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5;
-            transition: background .25s ease, border-color .25s ease, transform .25s ease;
-        }
-
-        .ssc-arrow:hover {
-            background: var(--gradient);
-            border-color: transparent;
-            transform: translateY(-50%) scale(1.06);
-        }
-
-        .ssc-arrow svg {
-            width: 18px;
-            height: 18px;
-            stroke: #fff;
-        }
-
-        .ssc-arrow.prev {
-            left: -23px;
-        }
-
-        .ssc-arrow.next {
-            right: -23px;
-        }
-
-        @media (max-width: 700px) {
-            .ssc-arrow {
-                display: none;
-            }
-        }
-
-        .ssc-dots {
-            display: flex;
-            justify-content: center;
-            gap: 9px;
-            margin-top: 6px;
-        }
-
-        .ssc-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.18);
-            transition: background .25s ease, transform .25s ease;
-        }
-
-        .ssc-dot.active {
-            background: var(--teal);
-            transform: scale(1.25);
-        }
-
-        /* ---------- TRUST / GUARANTEE BLOCK ---------- */
-        .trust-block {
-            max-width: 1180px;
-            margin: 0 auto 70px;
-            display: grid;
-            grid-template-columns: 1.55fr 1fr;
-            gap: 24px;
-            align-items: stretch;
-        }
-
-        @media (max-width: 860px) {
-            .trust-block {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .trust-note {
-            position: relative;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--teal);
-            border-radius: 14px;
-            padding: 30px 32px;
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
-        }
-
-        .trust-note.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .trust-note h3 {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 16px;
-            color: #fff;
-        }
-
-        .trust-note h3 span {
-            color: var(--coral);
-        }
-
-        .trust-note p {
-            color: var(--muted);
-            font-size: 0.95rem;
-            line-height: 1.65;
-        }
-
-        .trust-note p + p {
-            margin-top: 14px;
-        }
-
-        .trust-features {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .trust-feature-item {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--coral);
-            border-radius: 14px;
-            padding: 20px 22px;
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease, border-color .3s ease;
-        }
-
-        .trust-feature-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .trust-feature-item:hover {
-            border-left-color: var(--teal);
-        }
-
-        .trust-feature-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .trust-feature-icon svg {
-            width: 22px;
-            height: 22px;
-            stroke: #fff;
-        }
-
-        .trust-feature-text h4 {
-            font-family: var(--font-display);
-            font-size: 1.02rem;
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
-
-        .trust-feature-text p {
-            color: var(--muted);
-            font-size: 0.85rem;
-        }
-
-        /* ---------- BADGE ROW ---------- */
-        .badge-row {
-            max-width: 1100px;
-            margin: 46px auto 0;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
-
-        @media (max-width: 760px) {
-            .badge-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .badge-card {
-            background: var(--gradient);
-            border-radius: 14px;
-            padding: 26px 16px;
-            text-align: center;
-            box-shadow: 0 14px 32px rgba(59, 130, 246, 0.28);
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease, box-shadow .3s ease;
-        }
-
-        .badge-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .badge-card:hover {
-            box-shadow: 0 18px 40px rgba(59, 130, 246, 0.4);
-        }
-
-        .badge-card:nth-child(even) {
-            background: linear-gradient(135deg, #FF9A6B 0%, #FF6B4A 55%, #C43F27 100%);
-            box-shadow: 0 14px 32px rgba(255, 107, 74, 0.28);
-        }
-
-        .badge-card:nth-child(even):hover {
-            box-shadow: 0 18px 40px rgba(255, 107, 74, 0.4);
-        }
-
-        .badge-icon {
-            width: 54px;
-            height: 54px;
-            margin: 0 auto 14px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .badge-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: #fff;
-        }
-
-        .badge-value {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.35rem;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-
-        .badge-label {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.92);
-            letter-spacing: 0.02em;
-        }
-
-        /* ---------- FAQ ---------- */
-        .faq {
-            position: relative;
-            background: var(--bg-elev);
-            padding: 90px 6% 110px;
-        }
-
-        .faq-head {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 46px;
-            opacity: 0;
-            transform: translateY(28px);
-            transition: transform .6s cubic-bezier(.22, .9, .3, 1), opacity .6s ease;
-        }
-
-        .faq-head.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .faq-head h2 {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: clamp(1.5rem, 3vw, 2.1rem);
-        }
-
-        .faq-list {
-            max-width: 980px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .faq-item {
-            border-radius: 12px;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(24px);
-            transition: transform .5s cubic-bezier(.22, .9, .3, 1), opacity .5s ease;
-        }
-
-        .faq-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .faq-question {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            width: 100%;
-            text-align: left;
-            background: var(--gradient);
-            color: #fff;
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 0.98rem;
-            padding: 18px 22px;
-            transition: filter .25s ease;
-        }
-
-        .faq-question:hover {
-            filter: brightness(1.08);
-        }
-
-        .faq-item:nth-child(even) .faq-question {
-            background: linear-gradient(135deg, #FF9A6B 0%, #FF6B4A 55%, #C43F27 100%);
-        }
-
-        .faq-icon {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.22);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1rem;
-            line-height: 1;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-top: none;
-            transition: max-height .4s ease;
-        }
-
-        .faq-item.open .faq-answer {
-            max-height: 400px;
-        }
-
-        .faq-answer-inner {
-            padding: 20px 24px;
-            color: var(--text);
-            font-size: 0.92rem;
-            line-height: 1.7;
-        }
-
-        /* ---------- FOOTER ---------- */
-        footer {
-            padding: 40px 6%;
-            background: var(--bg);
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        footer .brand {
-            font-size: 1.05rem;
-        }
-
-        footer .foot-meta {
-            color: var(--muted);
-            font-size: 0.85rem;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* ---------- AI ASSISTANT ---------- */
-        .ai-fab {
-            position: fixed;
-            right: 26px;
-            bottom: 26px;
-            z-index: 90;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            background: var(--gradient);
-            color: #f5f9ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.35);
-            transition: transform .3s ease, box-shadow .3s ease;
-            animation: aiFloat 3s ease-in-out infinite;
-        }
-
-        .ai-fab svg {
-            width: 26px;
-            height: 26px;
-        }
-
-        .ai-fab:hover {
-            transform: scale(1.08);
-            box-shadow: 0 14px 36px rgba(59, 130, 246, 0.5);
-        }
-
-        .ai-fab::after {
-            content: "";
-            position: absolute;
-            inset: -5px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(59, 130, 246, 0.4);
-            animation: aiPulse 2.4s ease-out infinite;
-        }
-
-        @keyframes aiFloat {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        @keyframes aiPulse {
-            0% {
-                transform: scale(1);
-                opacity: .7;
-            }
-
-            100% {
-                transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        .ai-panel {
-            position: fixed;
-            right: 26px;
-            bottom: 98px;
-            z-index: 91;
-            width: 340px;
-            max-width: calc(100vw - 40px);
-            height: 440px;
-            max-height: calc(100vh - 150px);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.9) translateY(16px);
-            transform-origin: bottom right;
-            transition: opacity .3s ease, transform .35s cubic-bezier(.2, 1.3, .4, 1), visibility .3s ease;
-        }
-
-        .ai-panel.open {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1) translateY(0);
-        }
-
-        .ai-panel-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 18px;
-            border-bottom: 1px solid var(--border);
-            background: var(--bg-elev);
-        }
-
-        .ai-panel-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .ai-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--teal);
-            box-shadow: 0 0 8px var(--teal);
-            flex-shrink: 0;
-        }
-
-        .ai-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .ai-status {
-            font-size: 0.74rem;
-            color: var(--muted);
-        }
-
-        .ai-close {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted);
-            background: var(--surface-2);
-            font-size: 0.9rem;
-            transition: all .25s ease;
-        }
-
-        .ai-close:hover {
-            background: var(--coral);
-            color: #1a0700;
-        }
-
-        .ai-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .ai-msg {
-            max-width: 82%;
-            padding: 10px 14px;
-            border-radius: 14px;
-            font-size: 0.86rem;
-            line-height: 1.5;
-        }
-
-        .ai-msg.bot {
-            background: var(--surface-2);
-            color: var(--text);
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-
-        .ai-msg.user {
-            background: var(--teal);
-            color: #081226;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-
-        .ai-input-row {
-            display: flex;
-            gap: 10px;
-            padding: 14px;
-            border-top: 1px solid var(--border);
-            background: var(--bg-elev);
-        }
-
-        .ai-input-row input {
-            flex: 1;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 11px 14px;
-            color: var(--text);
-            font-size: 0.86rem;
-            font-family: var(--font-body);
-        }
-
-        .ai-input-row input:focus {
-            outline: none;
-            border-color: var(--teal);
-        }
-
-        .ai-send {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            flex-shrink: 0;
-            background: var(--gradient);
-            color: #f5f9ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: filter .25s ease;
-        }
-
-        .ai-send svg {
-            width: 17px;
-            height: 17px;
-        }
-
-        .ai-send:hover {
-            filter: brightness(1.15);
-        }
-
-        @media (max-width:480px) {
-            .ai-panel {
-                right: 16px;
-                bottom: 88px;
-            }
-
-            .ai-fab {
-                right: 16px;
-                bottom: 16px;
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
             }
         }
     </style>
 </head>
 
-<body>
+<body class="bg-white text-gray-900 font-sans overflow-x-hidden antialiased">
 
     <!-- HERO -->
-    <section class="hero">
-        <canvas id="netCanvas"></canvas>
-        <div class="hero-overlay"></div>
-        <div class="hero-grid">
-            <div class="hero-text">
-                <div class="eyebrow slide-in" style="animation-delay:.1s">MLM Software Company</div>
-                <h1 class="slide-in" style="animation-delay:.25s"><span class="rotate-text" id="rotateText">Simple
-                        software your whole team can use</span></h1>
-                <p class="slide-in" style="animation-delay:.42s"><span class="rotate-text" id="rotateSubText">From
-                        compensation plans to leader websites, everything is made simple for your team.</span></p>
-                <div class="hero-ctas slide-in" style="animation-delay:.58s">
-                    <a href="#services" class="btn btn-primary">View Services</a>
-                    <button class="btn btn-ghost" id="heroContactBtn">Contact Us</button>
+    <section class="relative min-h-[100vh] flex items-center overflow-hidden hero-bg">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-primary/80 z-0"></div>
+        <canvas id="netCanvas" class="absolute inset-0 w-full h-full opacity-30 z-0 pointer-events-none"></canvas>
+        
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-24">
+            <div class="text-left max-w-xl">
+                <div class="inline-flex items-center gap-3 text-sm font-semibold tracking-wide uppercase text-white mb-6">
+                    <span class="w-8 h-[2px] bg-white"></span> MLM Software Company
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white font-display">
+                    <span id="rotateText" class="inline-block transition-all duration-500">Simple software your whole team can use</span>
+                </h1>
+                <p class="text-lg md:text-xl font-medium mb-8 text-gray-200">
+                    <span id="rotateSubText" class="inline-block transition-all duration-500">From compensation plans to leader websites, everything is made simple for your team.</span>
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#services" class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold rounded-full bg-accent text-primary hover:bg-yellow-400 transition-colors shadow-lg">View Services</a>
+                    <button id="heroContactBtn" class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold rounded-full border border-gray-400 text-white hover:border-accent hover:text-accent transition-colors">Contact Us</button>
                 </div>
             </div>
-            <div class="hero-media">
-                <div class="hero-form-card slide-in" style="animation-delay:.3s">
-                    <div class="modal-eyebrow">Get in touch</div>
-                    <h2>Talk to our team</h2>
-                    <p>Fill in your details and we'll call you back soon.</p>
-
-                    <form id="heroPageForm" novalidate>
-                        <div class="field" id="heroNameField">
-                            <label for="heroName">Full Name</label>
-                            <input type="text" id="heroName" placeholder="Your name">
-                            <div class="err">Please enter your name.</div>
-                        </div>
-                        <div class="field" id="heroMobileField">
-                            <label for="heroMobile">Mobile Number</label>
-                            <input type="tel" id="heroMobile" placeholder="10-digit mobile number">
-                            <div class="err">Please enter a valid mobile number.</div>
-                        </div>
-                        <div class="field" id="heroEmailField">
-                            <label for="heroEmail">Email Address</label>
-                            <input type="email" id="heroEmail" placeholder="you@example.com">
-                            <div class="err">Please enter a valid email address.</div>
-                        </div>
-                        <button type="submit" class="modal-submit">Submit</button>
-                    </form>
-                    <div class="success-view" id="heroSuccessView" style="display: none; text-align: center; margin-top: 20px;">
-                        <div class="check-wrap" style="width: 50px; height: 50px; margin: 0 auto 10px;">
-                            <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10.5"></circle>
-                                <path d="M7 12.5l3.2 3.2L17 9"></path>
-                            </svg>
-                        </div>
-                        <h2 style="font-size: 1.1rem; margin-bottom: 5px;">Submitted successfully</h2>
-                        <p style="margin-bottom: 0;">We will get back to you soon.</p>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-2xl relative border-t-4 border-accent transform transition-all duration-500 hover:scale-[1.02]">
+                <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono">Get in touch</div>
+                <h2 class="text-2xl font-bold text-primary mb-2 font-display">Talk to our team</h2>
+                <p class="text-sm text-gray-500 mb-6">Fill in your details and we'll call you back soon.</p>
+                
+                <form id="heroPageForm" class="space-y-4" novalidate>
+                    <div class="field" id="heroNameField">
+                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroName">Full Name</label>
+                        <input type="text" id="heroName" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="Your name">
+                        <div class="err hidden text-red-500 text-xs mt-1">Please enter your name.</div>
                     </div>
+                    <div class="field" id="heroMobileField">
+                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroMobile">Mobile Number</label>
+                        <input type="tel" id="heroMobile" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="10-digit mobile number">
+                        <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid mobile number.</div>
+                    </div>
+                    <div class="field" id="heroEmailField">
+                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroEmail">Email Address</label>
+                        <input type="email" id="heroEmail" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="you@example.com">
+                        <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid email address.</div>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-gray-800 transition-colors mt-2 shadow-md">Submit</button>
+                </form>
+                
+                <div id="heroSuccessView" class="hidden text-center mt-6">
+                    <div class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4 text-green-500">
+                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-primary mb-1 font-display">Submitted successfully</h2>
+                    <p class="text-sm text-gray-500">We will get back to you soon.</p>
                 </div>
             </div>
         </div>
-
     </section>
 
-    <button class="side-tab" id="sideTab">Get In Touch</button>
+    <!-- Side Tab -->
+    <button class="fixed right-0 top-1/2 -translate-y-1/2 rotate-180 bg-accent text-primary font-bold text-sm tracking-wide py-4 px-2 z-40 rounded-l-lg hover:pr-4 hover:bg-yellow-400 transition-all duration-300 shadow-xl" style="writing-mode: vertical-rl;" id="sideTab">Get In Touch</button>
 
     <!-- MODAL -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-card">
-            <button class="modal-close" id="modalClose">&#10005;</button>
+    <div class="fixed inset-0 z-50 bg-primary/80 flex items-center justify-center opacity-0 invisible transition-all duration-300 p-4" id="modalOverlay">
+        <div class="relative w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl transform scale-95 opacity-0 transition-all duration-300 border-t-4 border-accent" id="modalCard">
+            <button class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-accent hover:text-primary hover:rotate-90 transition-all duration-300" id="modalClose">&#10005;</button>
 
-            <div class="form-view" id="formView">
-                <div class="modal-eyebrow">Get in touch</div>
-                <h2>Talk to our team</h2>
-                <p>Fill in your details and we'll call you back soon.</p>
+            <div id="formView">
+                <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono">Get in touch</div>
+                <h2 class="text-2xl font-bold text-primary mb-2 font-display">Talk to our team</h2>
+                <p class="text-sm text-gray-500 mb-6">Fill in your details and we'll call you back soon.</p>
 
-                <form id="enquiryForm" novalidate>
+                <form id="enquiryForm" class="space-y-4" novalidate>
                     <div class="field" id="nameField">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" placeholder="Your name">
-                        <div class="err">Please enter your name.</div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="name">Full Name</label>
+                        <input type="text" id="name" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all" placeholder="Your name">
+                        <div class="err hidden text-red-500 text-xs mt-1">Please enter your name.</div>
                     </div>
                     <div class="field" id="mobileField">
-                        <label for="mobile">Mobile Number</label>
-                        <input type="tel" id="mobile" placeholder="10-digit mobile number">
-                        <div class="err">Please enter a valid mobile number.</div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all" placeholder="10-digit mobile number">
+                        <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid mobile number.</div>
                     </div>
                     <div class="field" id="emailField">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="you@example.com">
-                        <div class="err">Please enter a valid email address.</div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="email">Email Address</label>
+                        <input type="email" id="email" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all" placeholder="you@example.com">
+                        <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid email address.</div>
                     </div>
-                    <button type="submit" class="modal-submit">Submit</button>
+                    <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-gray-800 transition-colors mt-2 shadow-md">Submit</button>
                 </form>
             </div>
 
-            <div class="success-view" id="successView">
-                <div class="check-wrap">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10.5"></circle>
-                        <path d="M7 12.5l3.2 3.2L17 9"></path>
+            <div class="hidden text-center" id="successView">
+                <div class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4 text-green-500">
+                    <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                 </div>
-                <h2>Your details are submitted successfully</h2>
-                <p>We will get back to you soon. You can also reach us directly:</p>
-                <div class="contact-row">
-                    <a class="contact-chip" href="tel:832765638">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path
-                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                        </svg>
+                <h2 class="text-xl font-bold text-primary mb-2 font-display">Submitted successfully</h2>
+                <p class="text-sm text-gray-500 mb-6">We will get back to you soon. You can also reach us directly:</p>
+                <div class="flex flex-wrap justify-center gap-3 mb-6">
+                    <a class="flex items-center gap-2 bg-gray-50 border border-gray-200 px-4 py-2 rounded-full text-sm font-semibold hover:border-accent transition-colors" href="tel:832765638">
+                        <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
                         832765638
                     </a>
-                    <a class="contact-chip" href="https://wa.me/919237377196" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path
-                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                        </svg>
-                        WhatsApp: 9237377196
+                    <a class="flex items-center gap-2 bg-green-50 border border-green-200 px-4 py-2 rounded-full text-sm font-semibold text-green-700 hover:border-green-400 transition-colors" href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
+                        WhatsApp
                     </a>
                 </div>
-                <button class="modal-done-btn" id="modalDone">Close</button>
+                <button class="px-8 py-2 rounded-lg border border-gray-200 text-sm font-semibold hover:border-accent hover:text-accent transition-colors" id="modalDone">Close</button>
             </div>
         </div>
     </div>
 
     <!-- SERVICES -->
-    <section class="services" id="services">
-        <div class="services-layout">
-            <div class="services-left">
-                <div class="sticky-video-wrapper" style="position: sticky; top: 120px;">
-                    <div class="hero-video-frame" style="opacity: 1; transform: none;">
-                        <video autoplay muted loop playsinline
-                            poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg">
-                            <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="video-info-card">
-                        <h4>Don't just buy. Test it yourself before spending a single rupee!</h4>
-                        <p>Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.</p>
-                    </div>
+    <section class="py-24 px-6 bg-gray-50" id="services">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div class="lg:sticky lg:top-32">
+                <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200 relative aspect-video bg-dark">
+                    <video autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg" class="w-full h-full object-cover">
+                        <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent pointer-events-none"></div>
+                </div>
+                <div class="bg-white rounded-xl p-6 mt-6 shadow-lg border border-gray-100">
+                    <h4 class="text-accent font-semibold text-lg mb-3 font-display">Don't just buy. Test it yourself before spending a single rupee!</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.</p>
                 </div>
             </div>
             
-            <div class="services-right">
-                <div class="services-head" style="text-align: left; margin: 0 0 24px 0;">
-                    <div class="eyebrow-static">Our Services</div>
-                    <h2>Everything your MLM business needs</h2>
+            <div>
+                <div class="mb-12">
+                    <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
+                        <span class="w-6 h-[1px] bg-accent"></span> Our Services
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-4">Everything your MLM business needs</h2>
+                    <p class="text-gray-500">Comprehensive solutions to build, grow, and scale your network.</p>
                 </div>
 
-                <div class="services-grid" id="servicesGrid">
-
-                    <a href="custom-mlm.html" class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="14" rx="2" />
-                                <path d="M8 22h8M12 18v4" />
-                            </svg></div>
-                        <div class="service-content">
-                            <h3>01. Customized MLM Software</h3>
-                            <p>Powerful backend dashboards tailored to your business with smart automation.</p>
-                            <span class="service-link">Explore Service &rarr;</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Service 1 -->
+                    <a href="custom-mlm.html" class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" /></svg>
                         </div>
+                        <h3 class="font-bold text-primary mb-2 font-display">01. Customized MLM Software</h3>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Powerful backend dashboards tailored to your business with smart automation.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-primary transition-colors flex items-center gap-1">Explore Service &rarr;</span>
+                    </a>
+                    
+                    <!-- Service 2 -->
+                    <a href="plan-pdf.html" class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 11h2" /></svg>
+                        </div>
+                        <h3 class="font-bold text-primary mb-2 font-display">02. MLM Plan PDF Making</h3>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Professional compensation plan PDF design with premium presentation.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-primary transition-colors flex items-center gap-1">View PDF &rarr;</span>
                     </a>
 
-                    <a href="#" class="service-card" data-open-modal>
-                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                <path d="M14 2v6h6M9 15h6M9 11h2" />
-                            </svg></div>
-                        <div class="service-content">
-                            <h3>02. MLM Plan PDF Making</h3>
-                            <p>Professional compensation plan PDF design with premium presentation.</p>
-                            <span class="service-link">View PDF &rarr;</span>
+                    <!-- Service 3 -->
+                    <a href="#" data-open-modal class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" /></svg>
                         </div>
+                        <h3 class="font-bold text-primary mb-2 font-display">03. MLM Plan Video Making</h3>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">HD animated presentation videos with voice-over and effects.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-primary transition-colors flex items-center gap-1">Watch Video &rarr;</span>
                     </a>
 
-                    <a href="#" class="service-card" data-open-modal>
-                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="5" width="20" height="14" rx="2" />
-                                <path d="M10 9.5v5l4-2.5z" />
-                            </svg></div>
-                        <div class="service-content">
-                            <h3>03. MLM Plan Video Making</h3>
-                            <p>HD animated presentation videos with voice-over and effects.</p>
-                            <span class="service-link">Watch Video &rarr;</span>
+                    <!-- Service 4 -->
+                    <a href="#" data-open-modal class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 5-7" /></svg>
                         </div>
+                        <h3 class="font-bold text-primary mb-2 font-display">04. Result Based Promotion</h3>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Reach targeted audiences using automated marketing campaigns.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-primary transition-colors flex items-center gap-1">Promotion &rarr;</span>
+                    </a>
+                    
+                    <!-- Service 5 -->
+                    <a href="#" data-open-modal class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div class="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center text-pink-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" /></svg>
+                        </div>
+                        <h3 class="font-bold text-primary mb-2 font-display">05. Latest MLM Database</h3>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Fresh verified databases with high quality genuine contacts.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-primary transition-colors flex items-center gap-1">Access Database &rarr;</span>
                     </a>
 
-                    <a href="#" class="service-card" data-open-modal>
-                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 3v18h18" />
-                                <path d="M7 15l4-5 3 3 5-7" />
-                            </svg></div>
-                        <div class="service-content">
-                            <h3>04. Result Based Promotion</h3>
-                            <p>Reach targeted audiences using automated marketing campaigns.</p>
-                            <span class="service-link">Promotion &rarr;</span>
+                    <!-- Service 6 -->
+                    <a href="#" data-open-modal class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div class="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" /></svg>
                         </div>
+                        <h3 class="font-bold text-primary mb-2 font-display">06. MLM Leader Website</h3>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Modern responsive website for personal branding and business.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-primary transition-colors flex items-center gap-1">Visit Website &rarr;</span>
                     </a>
-
-                    <a href="#" class="service-card" data-open-modal>
-                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <ellipse cx="12" cy="5" rx="8" ry="3" />
-                                <path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" />
-                            </svg></div>
-                        <div class="service-content">
-                            <h3>05. Latest MLM Database</h3>
-                            <p>Fresh verified databases with high quality genuine contacts.</p>
-                            <span class="service-link">Access Database &rarr;</span>
-                        </div>
-                    </a>
-
-                    <a href="#" class="service-card" data-open-modal>
-                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="8" r="4" />
-                                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
-                            </svg></div>
-                        <div class="service-content">
-                            <h3>06. MLM Leader Website</h3>
-                            <p>Modern responsive website for personal branding and business.</p>
-                            <span class="service-link">Visit Website &rarr;</span>
-                        </div>
-                    </a>
-
                 </div>
             </div>
         </div>
     </section>
 
     <!-- TESTIMONIALS (Video) -->
-    <section class="testimonials" id="testimonials">
-        <div class="testimonials-head">
-            <div class="eyebrow-static">Testimonials</div>
-            <h2>What our happy clients say</h2>
-            <p>Real video reviews from MLM leaders and business owners across India.</p>
+    <section class="py-24 px-6 bg-white" id="testimonials">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
+                <span class="w-6 h-[1px] bg-accent"></span> Testimonials <span class="w-6 h-[1px] bg-accent"></span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-4">What our happy clients say</h2>
+            <p class="text-gray-500">Real video reviews from MLM leaders and business owners across India.</p>
         </div>
 
-        <div class="video-testimonials-grid">
-
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Card 1 -->
-            <div class="video-tcard">
-                <div class="vtcard-placeholder">
-                    <div class="vtcard-placeholder-icon">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
-                <div class="video-tcard-overlay"></div>
-                <div class="vtcard-play">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="video-tcard-info">
-                    <div class="vtcard-name">Mr. Srinivas</div>
-                    <div class="vtcard-role">Founder &amp; CEO &ndash; Parivrat in-corporation<br>(Andrapradesh)</div>
-                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <h4 class="text-white font-bold font-display mb-1">Mr. Srinivas</h4>
+                    <p class="text-gray-300 text-xs mb-3">Founder & CEO - Parivrat<br>(Andhra Pradesh)</p>
+                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
                         Contact us
                     </a>
                 </div>
             </div>
-
             <!-- Card 2 -->
-            <div class="video-tcard">
-                <div class="vtcard-placeholder">
-                    <div class="vtcard-placeholder-icon">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
-                <div class="video-tcard-overlay"></div>
-                <div class="vtcard-play">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="video-tcard-info">
-                    <div class="vtcard-name">Mr. Bhagbat Chohan</div>
-                    <div class="vtcard-role">Founder &amp; CEO &ndash; Ai Abacus<br>(Maharashtra)</div>
-                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <h4 class="text-white font-bold font-display mb-1">Mr. Bhagbat Chohan</h4>
+                    <p class="text-gray-300 text-xs mb-3">Founder & CEO - Ai Abacus<br>(Maharashtra)</p>
+                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
                         Contact us
                     </a>
                 </div>
             </div>
-
             <!-- Card 3 -->
-            <div class="video-tcard">
-                <div class="vtcard-placeholder">
-                    <div class="vtcard-placeholder-icon">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
-                <div class="video-tcard-overlay"></div>
-                <div class="vtcard-play">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="video-tcard-info">
-                    <div class="vtcard-name">Mr. Ammba Das</div>
-                    <div class="vtcard-role">Founder &amp; CEO &ndash; Direct Sellar<br>(Telangana)</div>
-                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <h4 class="text-white font-bold font-display mb-1">Mr. Ammba Das</h4>
+                    <p class="text-gray-300 text-xs mb-3">Founder & CEO - Direct Sellar<br>(Telangana)</p>
+                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
                         Contact us
                     </a>
                 </div>
             </div>
-
             <!-- Card 4 -->
-            <div class="video-tcard">
-                <div class="vtcard-placeholder">
-                    <div class="vtcard-placeholder-icon">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
-                <div class="video-tcard-overlay"></div>
-                <div class="vtcard-play">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="video-tcard-info">
-                    <div class="vtcard-name">Mr. Srinivas</div>
-                    <div class="vtcard-role">Founder &amp; CEO &ndash; Parivrat in-corporation<br>(Andrapradesh)</div>
-                    <a class="vtcard-wa" href="https://wa.me/919237377196" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <h4 class="text-white font-bold font-display mb-1">Mr. Srinivas</h4>
+                    <p class="text-gray-300 text-xs mb-3">Founder & CEO - Parivrat<br>(Andhra Pradesh)</p>
+                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
                         Contact us
                     </a>
                 </div>
             </div>
-
         </div>
     </section>
 
     <!-- OUR CLIENTS -->
-    <section class="our-clients" id="clients">
-        <div class="our-clients-inner">
-            <div class="our-clients-head">
-                <div class="eyebrow-static" style="font-family:var(--font-body);font-size:.92rem;font-weight:500;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;">Our Clients</div>
-                <h2 style="font-family:var(--font-body);font-weight:600;font-size:clamp(1.4rem,2.2vw,1.8rem);margin-bottom:10px;">Trusted by Growing MLM Businesses</h2>
-                <p style="color:var(--muted);font-size:1rem;">Hundreds of MLM leaders and companies across India trust our solutions.</p>
-            </div>
-            <div class="clients-logo-grid">
-                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9670;</span><span class="clc-name">MYGOLDENWAY</span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#d81b60;">&#9752;</span><span class="clc-name">My Shops<span style="color:#e53935;">247</span></span></div>
-                <div class="client-logo-card"><span class="clc-name" style="letter-spacing:.05em;">TRENDSWAVE<br><span style="font-size:.65rem;font-weight:400;letter-spacing:.15em;color:var(--muted);">FASHION</span></span></div>
-                <div class="client-logo-card"><span class="clc-name" style="color:#FFB020;">1X<span style="color:#fff;">KING</span></span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;font-size:1.4rem;">&#9650;</span><span class="clc-name" style="color:#43a047;">AGN</span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#8987;</span><span class="clc-name">TimeHelp</span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#8962;</span><span class="clc-name">Vaishnocity</span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#FF6B4A;">&#9670;</span><span class="clc-name">Lifetym<span style="color:#3B82F6;">Profit</span></span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#3B82F6;">&#9739;</span><span class="clc-name">GLOBALHELP<span style="color:#FFB020;">24</span></span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;">&#10022;</span><span class="clc-name">SUCCESSYOURLIFE</span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#FFB020;">&#9788;</span><span class="clc-name" style="color:#FFB020;">RISEMON</span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9775;</span><span class="clc-name">MONEY LINK<br><span style="font-size:.65rem;color:var(--muted);letter-spacing:.1em;">PRO</span></span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#e53935;">&#9883;</span><span class="clc-name">XTREME FX TRADES<br><span style="font-size:.65rem;color:#FFB020;letter-spacing:.05em;">GO RICH LIFE</span></span></div>
-                <div class="client-logo-card"><span class="clc-icon" style="color:#43a047;">&#8962;</span><span class="clc-name">Ecartal<span style="color:#3B82F6;"> India</span></span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TRUST / GUARANTEE -->
-    <!-- STATS + CTA BAND -->
-    <section class="stats-cta" id="statsCta">
-        <div class="stats-cta-inner">
-
-            <div class="stats-cta-head">
-                <h2>India's <span class="accent">#1 All-in-One</span> MLM Hub</h2>
-                <p>From software to scale, we handle everything &mdash; 9+ years of industry excellence.</p>
-            </div>
-
-            <div class="stats-band">
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="stat-num">9+</div>
-                        <div class="stat-label">Years of Excellence</div>
-                    </div>
+    <section class="py-20 px-6 bg-gray-50 border-t border-gray-100" id="clients">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
+                    <span class="w-6 h-[1px] bg-accent"></span> Our Clients <span class="w-6 h-[1px] bg-accent"></span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="stat-num">2800+</div>
-                        <div class="stat-label">Happy Clients</div>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="5" width="20" height="14" rx="2" />
-                            <path d="M10 9.5v5l4-2.5z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="stat-num">1.7 Lakh+</div>
-                        <div class="stat-label">MLMSUCCESSTIPS</div>
-                    </div>
-                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-4">Trusted by Growing MLM Businesses</h2>
+                <p class="text-gray-500">Hundreds of MLM leaders and companies across India trust our solutions.</p>
             </div>
-
-            <div class="cta-box">
-                <div class="cta-banner">
-                    <div class="line1">READY TO START YOUR MLM BUSINESS TODAY?</div>
-                    <div class="line2">Get 100% expert assistance &amp; 24/7 dedicated support from India's best development team.</div>
-                </div>
-                <div class="cta-contact">CALL / WHATSAPP: <a href="tel:+918927656368">+91 8927656368</a></div>
-                <div class="cta-subtext">(Available anytime for free consultation after you check our live demos)</div>
-            </div>
-
             
-
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                    <span class="text-red-500 text-xl">&#9670;</span><span class="font-bold text-primary text-sm tracking-wide">MYGOLDENWAY</span>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                    <span class="text-pink-600 text-xl">&#9752;</span><span class="font-bold text-primary text-sm tracking-wide">My Shops<span class="text-red-500">247</span></span>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                    <span class="font-bold text-primary text-sm tracking-widest">TRENDSWAVE</span>
+                    <span class="text-[10px] text-gray-400 tracking-widest">FASHION</span>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                    <span class="font-bold text-yellow-500 text-sm">1X<span class="text-primary">KING</span></span>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                    <span class="text-green-600 text-2xl leading-none">&#9650;</span><span class="font-bold text-green-600 text-sm tracking-wide">AGN</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- SERVICES SHOWCASE -->
-    <section class="services-showcase" id="servicesShowcase">
-        <div class="ssc-banner">
-            <h2>Our Services</h2>
-        </div>
-
-        <div class="ssc-carousel">
-            <button class="ssc-arrow prev" id="sscPrev" aria-label="Previous">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M15 18l-6-6 6-6" />
-                </svg>
-            </button>
-
-            <div class="ssc-track" id="sscTrack">
-
-                <div class="ssc-card">
-                    <div class="ssc-visual">
-                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="g1lap" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0" stop-color="#60A5FA" />
-                                    <stop offset="1" stop-color="#1E3A8A" />
-                                </linearGradient>
-                            </defs>
-                            <ellipse cx="200" cy="240" rx="150" ry="14" fill="#000" opacity="0.25" />
-                            <rect x="110" y="150" width="180" height="12" rx="4" fill="#22314f" />
-                            <path d="M95 150 L145 90 L255 90 L305 150 Z" fill="url(#g1lap)" opacity="0.9" />
-                            <rect x="150" y="60" width="100" height="70" rx="4" fill="#0b1526" stroke="#3B82F6" stroke-width="2" />
-                            <circle cx="176" cy="80" r="8" fill="none" stroke="#60A5FA" stroke-width="2" />
-                            <circle cx="200" cy="102" r="8" fill="none" stroke="#FF6B4A" stroke-width="2" />
-                            <circle cx="224" cy="80" r="8" fill="none" stroke="#60A5FA" stroke-width="2" />
-                            <path d="M182 84 L196 98 M208 98 L220 84" stroke="#8B93A6" stroke-width="1.5" />
-                            <circle cx="90" cy="70" r="14" fill="#101C33" stroke="#3B82F6" stroke-width="2" />
-                            <path d="M84 70h12M90 64v12" stroke="#60A5FA" stroke-width="2" />
-                            <circle cx="310" cy="100" r="16" fill="#101C33" stroke="#FF6B4A" stroke-width="2" />
-                            <path d="M303 100h14M310 93v14" stroke="#FF6B4A" stroke-width="2" />
-                        </svg>
-                    </div>
-                    <div class="ssc-label">
-                        <h3>Latest MLM Database</h3>
-                    </div>
-                </div>
-
-                <div class="ssc-card">
-                    <div class="ssc-visual">
-                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="g2brow" x1="0" y1="0" x2="1" y2="0">
-                                    <stop offset="0" stop-color="#60A5FA" />
-                                    <stop offset="1" stop-color="#3B82F6" />
-                                </linearGradient>
-                            </defs>
-                            <rect x="70" y="60" width="260" height="180" rx="10" fill="#0b1526" stroke="#22314f" stroke-width="2" />
-                            <rect x="70" y="60" width="260" height="28" rx="10" fill="url(#g2brow)" />
-                            <circle cx="86" cy="74" r="4" fill="#fff" opacity="0.8" />
-                            <circle cx="100" cy="74" r="4" fill="#fff" opacity="0.6" />
-                            <circle cx="114" cy="74" r="4" fill="#fff" opacity="0.4" />
-                            <rect x="150" y="66" width="120" height="16" rx="8" fill="rgba(255,255,255,0.25)" />
-                            <rect x="90" y="104" width="220" height="34" rx="6" fill="#172542" />
-                            <rect x="102" y="114" width="70" height="14" rx="3" fill="#60A5FA" />
-                            <rect x="90" y="150" width="100" height="60" rx="6" fill="#172542" />
-                            <rect x="200" y="150" width="110" height="60" rx="6" fill="#172542" />
-                            <rect x="102" y="162" width="76" height="8" rx="3" fill="#3B82F6" opacity="0.7" />
-                            <rect x="102" y="176" width="50" height="8" rx="3" fill="#8B93A6" opacity="0.5" />
-                            <rect x="212" y="162" width="86" height="8" rx="3" fill="#FF6B4A" opacity="0.7" />
-                            <rect x="212" y="176" width="60" height="8" rx="3" fill="#8B93A6" opacity="0.5" />
-                        </svg>
-                    </div>
-                    <div class="ssc-label">
-                        <h3>MLM Leader Website</h3>
-                    </div>
-                </div>
-
-                <div class="ssc-card">
-                    <div class="ssc-visual">
-                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="g3code" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0" stop-color="#FF9A6B" />
-                                    <stop offset="1" stop-color="#C43F27" />
-                                </linearGradient>
-                            </defs>
-                            <ellipse cx="200" cy="240" rx="150" ry="14" fill="#000" opacity="0.25" />
-                            <path d="M95 150 L145 90 L255 90 L305 150 Z" fill="#1E3A8A" opacity="0.8" />
-                            <rect x="110" y="150" width="180" height="12" rx="4" fill="#22314f" />
-                            <rect x="150" y="58" width="100" height="72" rx="4" fill="#081226" stroke="#3B82F6" stroke-width="2" />
-                            <rect x="160" y="68" width="26" height="6" rx="3" fill="#60A5FA" />
-                            <rect x="160" y="80" width="46" height="6" rx="3" fill="#FF6B4A" />
-                            <rect x="160" y="92" width="34" height="6" rx="3" fill="#8B93A6" />
-                            <rect x="160" y="104" width="54" height="6" rx="3" fill="#60A5FA" />
-                            <rect x="160" y="116" width="20" height="6" rx="3" fill="#FF6B4A" />
-                            <circle cx="308" cy="76" r="20" fill="url(#g3code)" />
-                            <path d="M300 76l5 5 10-10" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="ssc-label">
-                        <h3>Customized MLM Software Development</h3>
-                    </div>
-                </div>
-
-                <div class="ssc-card">
-                    <div class="ssc-visual">
-                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="g4pdf" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0" stop-color="#FF6B4A" />
-                                    <stop offset="1" stop-color="#C43F27" />
-                                </linearGradient>
-                            </defs>
-                            <circle cx="130" cy="120" r="42" fill="#172542" stroke="#3B82F6" stroke-width="2" />
-                            <circle cx="130" cy="104" r="14" fill="#22314f" />
-                            <path d="M104 148c0-16 12-26 26-26s26 10 26 26" fill="#22314f" />
-                            <rect x="200" y="60" width="120" height="160" rx="8" fill="#f4f6f9" />
-                            <path d="M296 60v28h24z" fill="#d8dee8" />
-                            <rect x="216" y="98" width="88" height="8" rx="3" fill="#c3cad6" />
-                            <rect x="216" y="114" width="70" height="8" rx="3" fill="#c3cad6" />
-                            <rect x="216" y="130" width="80" height="8" rx="3" fill="#c3cad6" />
-                            <rect x="204" y="150" width="72" height="34" rx="6" fill="url(#g4pdf)" />
-                            <text x="240" y="173" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">PDF</text>
-                            <rect x="216" y="196" width="88" height="8" rx="3" fill="#c3cad6" />
-                        </svg>
-                    </div>
-                    <div class="ssc-label">
-                        <h3>MLM Plan PDF Making</h3>
-                    </div>
-                </div>
-
-                <div class="ssc-card">
-                    <div class="ssc-visual">
-                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="g5vid" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0" stop-color="#60A5FA" />
-                                    <stop offset="1" stop-color="#1E3A8A" />
-                                </linearGradient>
-                            </defs>
-                            <rect x="80" y="60" width="240" height="150" rx="10" fill="#0b1526" stroke="#22314f" stroke-width="2" />
-                            <rect x="150" y="216" width="100" height="10" rx="4" fill="#22314f" />
-                            <rect x="130" y="226" width="140" height="8" rx="4" fill="#172542" />
-                            <circle cx="200" cy="135" r="34" fill="url(#g5vid)" opacity="0.95" />
-                            <path d="M192 120l24 15-24 15z" fill="#fff" />
-                            <rect x="96" y="176" width="208" height="8" rx="4" fill="#172542" />
-                            <rect x="96" y="176" width="120" height="8" rx="4" fill="#FF6B4A" />
-                            <circle cx="216" cy="180" r="6" fill="#fff" />
-                        </svg>
-                    </div>
-                    <div class="ssc-label">
-                        <h3>MLM Plan Video Making</h3>
-                    </div>
-                </div>
-
-                <div class="ssc-card">
-                    <div class="ssc-visual">
-                        <svg class="ssc-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="g6promo" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0" stop-color="#FF9A6B" />
-                                    <stop offset="1" stop-color="#C43F27" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M110 130l50-24v88l-50-24z" fill="url(#g6promo)" />
-                            <path d="M160 106l60-26v112l-60-26z" fill="#172542" stroke="#3B82F6" stroke-width="2" />
-                            <rect x="100" y="130" width="14" height="40" rx="4" fill="#22314f" />
-                            <path d="M175 92c14 8 14 46 0 54" stroke="#60A5FA" stroke-width="3" fill="none" stroke-linecap="round" />
-                            <path d="M185 82c22 12 22 66 0 78" stroke="#60A5FA" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6" />
-                            <polyline points="230,190 260,150 285,168 315,120" fill="none" stroke="#FF6B4A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                            <circle cx="315" cy="120" r="7" fill="#FF6B4A" />
-                            <circle cx="285" cy="168" r="5" fill="#fff" />
-                            <circle cx="260" cy="150" r="5" fill="#fff" />
-                        </svg>
-                    </div>
-                    <div class="ssc-label">
-                        <h3>Result Based Promotion</h3>
-                    </div>
-                </div>
-
+    <!-- STATS + CTA BAND -->
+    <section class="py-24 px-6 bg-dark text-white relative overflow-hidden" id="statsCta">
+        <!-- Subtle background pattern -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 34px 34px;"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold font-display mb-4">India's <span class="text-accent">#1 All-in-One</span> MLM Hub</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">From software to scale, we handle everything — 9+ years of industry excellence.</p>
             </div>
 
-            <button class="ssc-arrow next" id="sscNext" aria-label="Next">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 18l6-6-6-6" />
-                </svg>
-            </button>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-2xl mb-16 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                <div class="p-8 flex items-center justify-center gap-5">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" /></svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-3xl font-display text-white">9+</div>
+                        <div class="text-sm text-gray-400">Years of Excellence</div>
+                    </div>
+                </div>
+                <div class="p-8 flex items-center justify-center gap-5">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-3xl font-display text-white">2800+</div>
+                        <div class="text-sm text-gray-400">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="p-8 flex items-center justify-center gap-5">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" /></svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-3xl font-display text-white">1.7L+</div>
+                        <div class="text-sm text-gray-400">MLMSUCCESSTIPS</div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="ssc-dots" id="sscDots"></div>
+            <div class="border-2 border-dashed border-white/20 rounded-2xl p-10 text-center bg-white/5">
+                <div class="inline-block bg-accent rounded-xl px-8 py-4 mb-6 shadow-xl">
+                    <div class="font-bold text-primary font-display mb-1 text-lg">READY TO START YOUR MLM BUSINESS TODAY?</div>
+                    <div class="text-primary/80 text-sm font-medium">Get 100% expert assistance & 24/7 dedicated support from India's best team.</div>
+                </div>
+                <div class="text-2xl md:text-3xl font-bold font-display mb-3">CALL / WHATSAPP: <a href="tel:+918927656368" class="text-accent hover:text-yellow-400 transition-colors">+91 8927656368</a></div>
+                <div class="text-gray-400 text-sm">(Available anytime for free consultation after you check our live demos)</div>
+            </div>
+
+            <!-- OUR SERVICES CAROUSEL -->
+            <div class="mt-16">
+                <div class="flex items-end justify-between mb-8 flex-wrap gap-4">
+                    <div>
+                        <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-3">
+                            <span class="w-6 h-[1px] bg-accent"></span> Our Services
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold font-display text-white">Explore what we offer</h3>
+                    </div>
+                    <div class="flex gap-3">
+                        <button id="svcScrollLeft" aria-label="Scroll left" class="w-11 h-11 rounded-full border border-white/20 bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary hover:border-accent transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+                        </button>
+                        <button id="svcScrollRight" aria-label="Scroll right" class="w-11 h-11 rounded-full border border-white/20 bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary hover:border-accent transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="svcTrack" class="flex gap-5 overflow-x-auto scroll-smooth scrollbar-hide pb-2 snap-x snap-mandatory">
+                    <!-- Card: Latest MLM Database -->
+                    <a href="#" data-open-modal class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-pink-500/15 flex items-center justify-center text-pink-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" /></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 font-display">Latest MLM Database</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Fresh verified databases with high quality genuine contacts.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
+                    </a>
+
+                    <!-- Card: MLM Leader Website -->
+                    <a href="#" data-open-modal class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-teal-500/15 flex items-center justify-center text-teal-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" /></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 font-display">MLM Leader Website</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Modern responsive website for personal branding and business.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
+                    </a>
+
+                    <!-- Card: Customized MLM Software Development -->
+                    <a href="custom-mlm.html" class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-blue-500/15 flex items-center justify-center text-blue-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" /></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 font-display">Customized MLM Software Development</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Powerful backend dashboards tailored to your business with smart automation.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
+                    </a>
+
+                    <!-- Card: MLM Plan PDF Making -->
+                    <a href="plan-pdf.html" class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-orange-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 11h2" /></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 font-display">MLM Plan PDF Making</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Professional compensation plan PDF design with premium presentation.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
+                    </a>
+
+                    <!-- Card: MLM Plan Video Making -->
+                    <a href="#" data-open-modal class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-purple-500/15 flex items-center justify-center text-purple-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" /></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 font-display">MLM Plan Video Making</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">HD animated presentation videos with voice-over and effects.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
+                    </a>
+
+                    <!-- Card: Result Based Promotion -->
+                    <a href="#" data-open-modal class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-green-500/15 flex items-center justify-center text-green-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 5-7" /></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 font-display">Result Based Promotion</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Reach targeted audiences using automated marketing campaigns.</p>
+                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- TRUST / GUARANTEE -->
-    <section class="stats-cta" style="padding-top: 60px; padding-bottom: 60px;">
-        <div class="trust-block">
-            <div class="trust-note">
-                <h3><span>Note :-</span> Our 100% Verified Tech Guarantee</h3>
-                <p>You are not risking your money or dealing with unverified technology here. We are the only agency in India that gives you direct access to test live admin panels and user dashboards before you make a decision.</p>
-                <p>Simply click on any of our services above, check the live working CRM software, view our real design catalogs, and call us only when you are 100% satisfied.</p>
+    <section class="py-20 px-6 bg-white border-b border-gray-100">
+        <div class="max-w-5xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+            <div class="lg:w-3/5">
+                <h3 class="text-2xl font-bold font-display mb-4 text-primary"><span class="text-accent mr-2">Note:-</span> Our 100% Verified Tech Guarantee</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">You are not risking your money or dealing with unverified technology here. We are the only agency in India that gives you direct access to test live admin panels and user dashboards before you make a decision.</p>
+                <p class="text-gray-600 leading-relaxed">Simply click on any of our services above, check the live working CRM software, view our real design catalogs, and call us only when you are 100% satisfied.</p>
             </div>
-            <div class="trust-features">
-                <div class="trust-feature-item">
-                    <div class="trust-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" />
-                        </svg>
+            <div class="lg:w-2/5 flex flex-col gap-6">
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" /></svg>
                     </div>
-                    <div class="trust-feature-text">
-                        <h4>Live Testing</h4>
-                        <p>Experience real software flow instantly.</p>
+                    <div>
+                        <h4 class="font-bold text-primary mb-1">Live Testing</h4>
+                        <p class="text-sm text-gray-500">Experience real software flow instantly.</p>
                     </div>
                 </div>
-                <div class="trust-feature-item">
-                    <div class="trust-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="9" cy="8" r="4" />
-                            <path d="M2 21c0-4 3.1-7 7-7s7 3 7 7" />
-                            <path d="M17 12a4 4 0 0 0 0-8" />
-                            <path d="M22 21c0-3.3-2-6-5-7" />
-                        </svg>
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="4" /><path d="M2 21c0-4 3.1-7 7-7s7 3 7 7" /><path d="M17 12a4 4 0 0 0 0-8" /><path d="M22 21c0-3.3-2-6-5-7" /></svg>
                     </div>
-                    <div class="trust-feature-text">
-                        <h4>Secure Payments</h4>
-                        <p>PCI-DSS compliant transaction engines.</p>
+                    <div>
+                        <h4 class="font-bold text-primary mb-1">Secure Payments</h4>
+                        <p class="text-sm text-gray-500">PCI-DSS compliant transaction engines.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
- <div class="cta-box">
-                <div class="cta-banner">
-                    <div class="line1">READY TO START YOUR MLM BUSINESS TODAY?</div>
-                    <div class="line2">Get 100% expert assistance &amp; 24/7 dedicated support from India's best development team.</div>
-                </div>
-                <div class="cta-contact">CALL / WHATSAPP: <a href="tel:+918927656368">+91 8927656368</a></div>
-                <div class="cta-subtext">(Available anytime for free consultation after you check our live demos)</div>
-            </div>
 
-            <div class="badge-row">
-                <div class="badge-card">
-                    <div class="badge-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <!-- STAT HIGHLIGHTS -->
+    <section class="py-20 px-6 bg-primary">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-primary to-gray-700 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-14 h-14 mx-auto rounded-full bg-white/15 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
                     </div>
-                    <div class="badge-value">4.9 / 5</div>
-                    <div class="badge-label">Client Rating</div>
+                    <div class="font-bold text-2xl md:text-3xl font-display text-white mb-1">4.9 / 5</div>
+                    <div class="text-sm font-semibold text-gray-300">Client Rating</div>
                 </div>
-                <div class="badge-card">
-                    <div class="badge-icon">
-                        <svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zM22 10.5c0-1.1-.9-2-2-2h-5.6l.8-4.1V4a1.5 1.5 0 0 0-1.5-1.5c-.4 0-.7.16-1 .44L8 8v13h11c.83 0 1.54-.5 1.84-1.22l2-4.71c.1-.25.16-.51.16-.79v-2z"/></svg>
+                <!-- Card 2 -->
+                <div class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-accent to-yellow-500 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-14 h-14 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21h2a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H2v10zm19.83-9.06a2 2 0 0 0-1.5-1.94H15.4l.86-3.6a2.2 2.2 0 0 0-2-2.6c-.36 0-.71.15-.96.42L8 9.24V21h10.72a2 2 0 0 0 1.95-1.57l1.16-6.5a1.94 1.94 0 0 0 0-.99z"/></svg>
                     </div>
-                    <div class="badge-value">100%</div>
-                    <div class="badge-label">Assistance</div>
+                    <div class="font-bold text-2xl md:text-3xl font-display text-primary mb-1">100%</div>
+                    <div class="text-sm font-semibold text-primary/80">Assistance</div>
                 </div>
-                <div class="badge-card">
-                    <div class="badge-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm1-16h-2v6l5.25 3.15L17 13.65 13 11.3z"/></svg>
+                <!-- Card 3 -->
+                <div class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-primary to-gray-700 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-14 h-14 mx-auto rounded-full bg-white/15 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
                     </div>
-                    <div class="badge-value">24/7</div>
-                    <div class="badge-label">Support</div>
+                    <div class="font-bold text-2xl md:text-3xl font-display text-white mb-1">24/7</div>
+                    <div class="text-sm font-semibold text-gray-300">Support</div>
                 </div>
-                <div class="badge-card">
-                    <div class="badge-icon">
-                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                <!-- Card 4 -->
+                <div class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-accent to-yellow-500 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-14 h-14 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>
                     </div>
-                    <div class="badge-value">Start Now</div>
-                    <div class="badge-label">Your Company</div>
+                    <div class="font-bold text-2xl md:text-3xl font-display text-primary mb-1">Start Now</div>
+                    <div class="text-sm font-semibold text-primary/80">Your Company</div>
                 </div>
             </div>
+        </div>
+    </section>
+
     <!-- FAQ -->
-    <section class="faq" id="faq">
-        <div class="faq-head">
-            <h2>Frequently Asked Questions (FAQs)</h2>
-        </div>
+    <section class="py-24 px-6 bg-dark relative overflow-hidden" id="faq">
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 34px 34px;"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-14">
+                <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
+                    <span class="w-6 h-[1px] bg-accent"></span> FAQ <span class="w-6 h-[1px] bg-accent"></span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold font-display text-white">Frequently Asked Questions</h2>
+            </div>
 
-        <div class="faq-list" id="faqList">
+            <div class="flex flex-col gap-4" id="faqAccordion">
+                <!-- Q1 -->
+                <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
+                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
+                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-white text-base md:text-lg">Customized MLM Software की Delivery में कितना समय (Time) लगता है?</span>
+                    </button>
+                    <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">Customized MLM Software की Delivery पूरी तरह से आपके Plan की Complexity और Requirements पर Depend करती है। नॉर्मली एक बेसिक Plan का Software 5 से 7 Working Days में रेडी हो जाता है। अगर आपका Plan बहुत ज्यादा एडवांस या यूनिक है, तो उसमें 10 से 15 Days का समय लग सकता है। हमारी टीम हमेशा टाइमली और एरर-फ्री Delivery सुनिश्चित करती है।</p>
+                    </div>
+                </div>
 
-            <div class="faq-item open">
-                <button class="faq-question" data-faq-toggle>
-                    <span class="faq-icon">&minus;</span>
-                    <span>Q1. Customized MLM Software की Delivery में कितना समय (Time) लगता है?</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        Customized MLM Software की Delivery पूरी तरह से आपके Plan की Complexity और Requirements पर Depend करती है। नॉर्मली एक बेसिक Plan का Software 5 से 7 Working Days में रेडी हो जाता है। अगर आपका Plan बहुत ज्यादा एडवांस या यूनिक है, तो उसमें 10 से 15 Days का समय लग सकता है। हमारी टीम हमेशा टाइमली और एरर-फ्री Delivery सुनिश्चित करती है।
+                <!-- Q2 -->
+                <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
+                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-accent to-yellow-500 hover:brightness-110 transition-all">
+                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/25 flex items-center justify-center text-primary font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-primary text-base md:text-lg">₹99/- वाले MLM Plan PDF Making पैकेज में डिज़ाइन (Design) कस्टमाइज़्ड होता है?</span>
+                    </button>
+                    <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">जी हाँ, ₹99/- पैकेज में भी आपके ब्रांड के अनुसार बेसिक कस्टमाइज़ेशन शामिल होता है, जैसे कि आपका लोगो, कलर थीम और कंपनी डिटेल्स। पूरी तरह से यूनिक और एडवांस डिज़ाइन के लिए हमारे प्रीमियम पैकेज उपलब्ध हैं।</p>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
+                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
+                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-white text-base md:text-lg">Result-Based Promotion में Lead की क्या गारंटी होती है और Data कैसे मिलता है?</span>
+                    </button>
+                    <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">हमारी Result-Based Promotion सर्विस में आपको एक तय संख्या में जेन्यूइन और टारगेटेड Leads दिए जाते हैं। सभी Data रियल-टाइम में एक शेयर्ड शीट या डैशबोर्ड के ज़रिए दिया जाता है, जिससे आप हर लीड को खुद ट्रैक कर सकें।</p>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
+                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-accent to-yellow-500 hover:brightness-110 transition-all">
+                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/25 flex items-center justify-center text-primary font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-primary text-base md:text-lg">आपके Latest MLM Database की Accuracy कितनी है और क्या यह Fresh डेटा है?</span>
+                    </button>
+                    <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">हमारा डेटाबेस रेगुलर बेसिस पर वेरीफाई और अपडेट किया जाता है, जिससे 95%+ Accuracy मेंटेन रहती है। हर लिस्ट फ्रेश होती है और डुप्लीकेट या डेड कॉन्टैक्ट्स को हटाकर ही आपको दी जाती है।</p>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
+                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
+                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-white text-base md:text-lg">MLM Leader Website का 1 साल के बाद Renewal Charge क्या होगा?</span>
+                    </button>
+                    <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">पहले साल की होस्टिंग और डोमेन हमारी तरफ से कवर होते हैं। 1 साल के बाद एक छोटा सा Annual Renewal Charge लगता है, जो होस्टिंग और डोमेन मेंटेनेंस के लिए होता है। सही अमाउंट जानने के लिए हमारी टीम से संपर्क करें।</p>
                     </div>
                 </div>
             </div>
-
-            <div class="faq-item">
-                <button class="faq-question" data-faq-toggle>
-                    <span class="faq-icon">&plus;</span>
-                    <span>क्या ₹99/- वाले MLM Plan PDF Making पैकेज में डिज़ाइन (Design) कस्टमाइज़्ड होता है?</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        जी हाँ, ₹99/- वाले पैकेज में भी आपके Plan के हिसाब से बेसिक कस्टमाइज़ेशन किया जाता है, जैसे कलर थीम, लोगो और आपका कंटेंट। पूरी तरह प्रीमियम और एडवांस डिज़ाइन के लिए हमारे हायर पैकेज उपलब्ध हैं, जहाँ अनलिमिटेड रिवीज़न भी मिलते हैं।
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" data-faq-toggle>
-                    <span class="faq-icon">&plus;</span>
-                    <span>Result-Based Promotion में Lead की क्या गारंटी होती है और Data कैसे मिलता है?</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        हमारे Result-Based Promotion में आपको वेरिफाइड और जेन्युइन लीड्स दी जाती हैं, जो रियल-टाइम में आपके CRM Dashboard पर अपडेट होती रहती हैं। लीड की क्वालिटी और क्वांटिटी आपके चुने गए पैकेज पर डिपेंड करती है, और पूरी रिपोर्टिंग ट्रांसपेरेंट होती है।
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" data-faq-toggle>
-                    <span class="faq-icon">&plus;</span>
-                    <span>आपके Latest MLM Database की Accuracy कितनी है और क्या यह Fresh डेटा है?</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        हमारा Database रेगुलरली अपडेट किया जाता है और इसकी एक्यूरेसी 90% से ज्यादा रहती है। हर एंट्री को वेरिफाई करने के बाद ही डेटाबेस में शामिल किया जाता है, ताकि आपको सिर्फ जेन्युइन और फ्रेश कॉन्टैक्ट्स ही मिलें।
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" data-faq-toggle>
-                    <span class="faq-icon">&plus;</span>
-                    <span>MLM Leader Website का 1 साल के बाद Renewal Charge क्या होगा?</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        MLM Leader Website का पहला साल पैकेज में शामिल होता है। उसके बाद Hosting, Domain और Support के लिए एक मिनिमल एनुअल रिन्यूअल चार्ज लगता है, जो आपके प्लान के हिसाब से पहले ही बता दिया जाता है — कोई हिडन चार्ज नहीं होता।
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <footer>
-        <div class="brand"><span class="dot"></span>MLM</div>
-        <div class="foot-meta">832765638 &nbsp;·&nbsp; WhatsApp 9237377196 &nbsp;·&nbsp; © 2026 MLM Technologies
-        </div>
-    </footer>
-
-    <!-- AI ASSISTANT -->
-    <button class="ai-fab" id="aiFab" aria-label="Open AI assistant">
-        <img src="./assets/image/ai-assistant.png" alt="AI assistant" width="40" height="40">
+    <!-- AI Assistant -->
+    <button class="fixed bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-2xl flex items-center justify-center border border-gray-100 hover:scale-110 transition-transform z-40" id="aiFab" aria-label="Open AI assistant">
+        <img src="./assets/image/ai-assistant.png" alt="AI" class="w-10 h-10" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRjU5RTBCIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yMSAxNWEyIDIgMCAwIDEtMiAySDdhMiAyIDAgMCAxLTItMnoiLz48L3N2Zz4='">
     </button>
 
-    <div class="ai-panel" id="aiPanel">
-        <div class="ai-panel-head">
-            <div class="ai-panel-title">
-                <span class="ai-dot"></span>
+    <div class="fixed bottom-24 right-6 w-80 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 invisible" id="aiPanel">
+        <div class="bg-primary text-white p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
                 <div>
-                    <div class="ai-name">MLM Assistant</div>
-                    <div class="ai-status">Online now</div>
+                    <div class="font-bold text-sm">MLM Assistant</div>
+                    <div class="text-xs text-gray-400">Online now</div>
                 </div>
             </div>
-            <button class="ai-close" id="aiClose">&#10005;</button>
+            <button class="text-gray-400 hover:text-white" id="aiClose">&#10005;</button>
         </div>
-        <div class="ai-body" id="aiBody">
-            <div class="ai-msg bot">Hi! I'm here to help. Ask me anything about our MLM software or services.</div>
+        <div class="p-4 h-64 overflow-y-auto bg-gray-50 flex flex-col gap-3 text-sm" id="aiBody">
+            <div class="bg-white border border-gray-200 p-3 rounded-2xl rounded-tl-sm text-gray-700 self-start shadow-sm max-w-[85%]">Hi! I'm here to help. Ask me anything about our MLM software or services.</div>
         </div>
-        <form class="ai-input-row" id="aiForm">
-            <input type="text" id="aiInput" placeholder="Type your message..." autocomplete="off">
-            <button type="submit" class="ai-send" aria-label="Send">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 2 11 13" />
-                    <path d="M22 2 15 22l-4-9-9-4z" />
-                </svg>
+        <form class="flex border-t border-gray-200 bg-white p-2" id="aiForm">
+            <input type="text" id="aiInput" class="flex-1 px-3 py-2 outline-none text-sm bg-transparent" placeholder="Type your message..." autocomplete="off">
+            <button type="submit" class="w-10 h-10 flex items-center justify-center text-accent hover:bg-gray-50 rounded-full transition-colors" aria-label="Send">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4z" /></svg>
             </button>
         </form>
     </div>
 
     <script>
-        /* ---------- Network particle background ---------- */
-        const canvas = document.getElementById('netCanvas');
-        const ctx = canvas.getContext('2d');
-        let w, h, particles;
-
-        function resize() {
-            w = canvas.width = canvas.offsetWidth;
-            h = canvas.height = canvas.offsetHeight;
-        }
-        function initParticles() {
-            const count = Math.min(60, Math.floor((w * h) / 22000));
-            particles = Array.from({ length: count }, () => ({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                vx: (Math.random() - 0.5) * 0.35,
-                vy: (Math.random() - 0.5) * 0.35,
-                r: Math.random() * 1.6 + 1
-            }));
-        }
-        function tick() {
-            ctx.clearRect(0, 0, w, h);
-            for (const p of particles) {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > w) p.vx *= -1;
-                if (p.y < 0 || p.y > h) p.vy *= -1;
-            }
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const a = particles[i], b = particles[j];
-                    const d = Math.hypot(a.x - b.x, a.y - b.y);
-                    if (d < 140) {
-                        ctx.strokeStyle = `rgba(59,130,246,${(1 - d / 140) * 0.22})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-                    }
-                }
-            }
-            for (const p of particles) {
-                ctx.fillStyle = 'rgba(59,130,246,0.75)';
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
-            }
-            requestAnimationFrame(tick);
-        }
-        window.addEventListener('resize', () => { resize(); initParticles(); });
-        resize(); initParticles(); tick();
-
-        /* ---------- Rotating headline + sub-text (synced together) ---------- */
+        /* ---------- Rotating headline + sub-text ---------- */
         const rotateText = document.getElementById('rotateText');
         const rotateSubText = document.getElementById('rotateSubText');
         const phrases = [
@@ -3094,57 +692,50 @@
 
         if (rotateText && rotateSubText) {
             setInterval(() => {
-                rotateText.classList.add('swap-out');
-                rotateSubText.classList.add('swap-out');
+                rotateText.style.opacity = '0';
+                rotateText.style.transform = 'translateY(10px)';
+                rotateSubText.style.opacity = '0';
+                rotateSubText.style.transform = 'translateY(10px)';
+                
                 setTimeout(() => {
                     rotateIndex = (rotateIndex + 1) % phrases.length;
                     rotateText.textContent = phrases[rotateIndex];
                     rotateSubText.textContent = subPhrases[rotateIndex];
 
-                    rotateText.classList.add('no-transition');
-                    rotateSubText.classList.add('no-transition');
-
-                    rotateText.classList.remove('swap-out');
-                    rotateSubText.classList.remove('swap-out');
-                    rotateText.classList.add('swap-in');
-                    rotateSubText.classList.add('swap-in');
-
-                    void rotateText.offsetWidth;
-
-                    rotateText.classList.remove('no-transition');
-                    rotateSubText.classList.remove('no-transition');
-
-                    rotateText.classList.remove('swap-in');
-                    rotateSubText.classList.remove('swap-in');
-                }, 450);
+                    rotateText.style.opacity = '1';
+                    rotateText.style.transform = 'translateY(0)';
+                    rotateSubText.style.opacity = '1';
+                    rotateSubText.style.transform = 'translateY(0)';
+                }, 500);
             }, 4000);
         }
 
         /* ---------- Modal logic ---------- */
         const overlay = document.getElementById('modalOverlay');
+        const modalCard = document.getElementById('modalCard');
         const formView = document.getElementById('formView');
         const successView = document.getElementById('successView');
         const form = document.getElementById('enquiryForm');
 
         function openModal() {
-            overlay.classList.add('open');
+            overlay.classList.remove('opacity-0', 'invisible');
+            modalCard.classList.remove('scale-95', 'opacity-0');
             document.body.style.overflow = 'hidden';
         }
         function closeModal() {
-            overlay.classList.remove('open');
+            overlay.classList.add('opacity-0', 'invisible');
+            modalCard.classList.add('scale-95', 'opacity-0');
             document.body.style.overflow = '';
         }
         function resetModalToForm() {
-            successView.classList.remove('show');
-            formView.classList.remove('hide');
+            successView.classList.add('hidden');
+            formView.classList.remove('hidden');
         }
-
-        // auto-open on page load removed
 
         document.getElementById('modalClose').addEventListener('click', closeModal);
         document.getElementById('modalDone').addEventListener('click', () => { closeModal(); setTimeout(resetModalToForm, 400); });
         overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.classList.contains('invisible')) closeModal(); });
 
         document.getElementById('heroContactBtn').addEventListener('click', openModal);
         document.getElementById('sideTab').addEventListener('click', openModal);
@@ -3152,32 +743,78 @@
             el.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
         });
 
+        /* ---------- FAQ accordion ---------- */
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const btn = item.querySelector('.faq-q');
+            const answer = item.querySelector('.faq-a');
+            const icon = item.querySelector('.faq-icon');
+            btn.addEventListener('click', () => {
+                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+                document.querySelectorAll('.faq-a').forEach(a => { a.style.maxHeight = '0px'; });
+                document.querySelectorAll('.faq-icon').forEach(ic => { ic.textContent = '+'; ic.style.transform = 'rotate(0deg)'; });
+                if (!isOpen) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.textContent = '\u2212';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        /* ---------- Services carousel scroll ---------- */
+        const svcTrack = document.getElementById('svcTrack');
+        const svcLeftBtn = document.getElementById('svcScrollLeft');
+        const svcRightBtn = document.getElementById('svcScrollRight');
+        if (svcTrack && svcLeftBtn && svcRightBtn) {
+            const scrollAmount = 280;
+            svcLeftBtn.addEventListener('click', () => {
+                svcTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+            svcRightBtn.addEventListener('click', () => {
+                svcTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+        }
+
         /* ---------- Form validation & submit ---------- */
         function validateField(id, testFn) {
             const field = document.getElementById(id + 'Field');
+            if(!field) return true;
             const input = document.getElementById(id);
+            const err = field.querySelector('.err');
             const ok = testFn(input.value.trim());
-            field.classList.toggle('invalid', !ok);
+            if (!ok) {
+                input.classList.add('border-red-500', 'focus:ring-red-500');
+                input.classList.remove('border-gray-200', 'focus:ring-accent');
+                if(err) err.classList.remove('hidden');
+            } else {
+                input.classList.remove('border-red-500', 'focus:ring-red-500');
+                input.classList.add('border-gray-200', 'focus:ring-accent');
+                if(err) err.classList.add('hidden');
+            }
             return ok;
         }
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const okName = validateField('name', v => v.length > 1);
-            const okMobile = validateField('mobile', v => /^[0-9+\-\s]{10,15}$/.test(v));
-            const okEmail = validateField('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+        if(form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const okName = validateField('name', v => v.length > 1);
+                const okMobile = validateField('mobile', v => /^[0-9+\-\s]{10,15}$/.test(v));
+                const okEmail = validateField('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
 
-            if (okName && okMobile && okEmail) {
-                formView.classList.add('hide');
-                successView.classList.add('show');
-            }
-        });
-
-        ['name', 'mobile', 'email'].forEach(id => {
-            document.getElementById(id).addEventListener('input', () => {
-                document.getElementById(id + 'Field').classList.remove('invalid');
+                if (okName && okMobile && okEmail) {
+                    formView.classList.add('hidden');
+                    successView.classList.remove('hidden');
+                }
             });
-        });
+
+            ['name', 'mobile', 'email'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.addEventListener('input', () => {
+                        validateField(id, () => true);
+                    });
+                }
+            });
+        }
 
         const heroForm = document.getElementById('heroPageForm');
         if (heroForm) {
@@ -3188,15 +825,18 @@
                 const okEmail = validateField('heroEmail', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
 
                 if (okName && okMobile && okEmail) {
-                    heroForm.style.display = 'none';
-                    document.getElementById('heroSuccessView').style.display = 'block';
+                    heroForm.classList.add('hidden');
+                    document.getElementById('heroSuccessView').classList.remove('hidden');
                 }
             });
 
             ['heroName', 'heroMobile', 'heroEmail'].forEach(id => {
-                document.getElementById(id).addEventListener('input', () => {
-                    document.getElementById(id + 'Field').classList.remove('invalid');
-                });
+                const el = document.getElementById(id);
+                if(el) {
+                    el.addEventListener('input', () => {
+                        validateField(id, () => true);
+                    });
+                }
             });
         }
 
@@ -3208,9 +848,13 @@
         const aiInput = document.getElementById('aiInput');
         const aiBody = document.getElementById('aiBody');
 
-        function toggleAiPanel() { aiPanel.classList.toggle('open'); }
-        aiFab.addEventListener('click', toggleAiPanel);
-        aiClose.addEventListener('click', () => aiPanel.classList.remove('open'));
+        function toggleAiPanel() { 
+            aiPanel.classList.toggle('opacity-0');
+            aiPanel.classList.toggle('invisible');
+            aiPanel.classList.toggle('scale-95');
+        }
+        if(aiFab) aiFab.addEventListener('click', toggleAiPanel);
+        if(aiClose) aiClose.addEventListener('click', toggleAiPanel);
 
         const canned = [
             "Thanks for reaching out! Our team will get back to you shortly.",
@@ -3220,100 +864,78 @@
         ];
         let replyIndex = 0;
 
-        aiForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const text = aiInput.value.trim();
-            if (!text) return;
-            const userMsg = document.createElement('div');
-            userMsg.className = 'ai-msg user';
-            userMsg.textContent = text;
-            aiBody.appendChild(userMsg);
-            aiInput.value = '';
-            aiBody.scrollTop = aiBody.scrollHeight;
-
-            setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = 'ai-msg bot';
-                botMsg.textContent = canned[replyIndex % canned.length];
-                replyIndex++;
-                aiBody.appendChild(botMsg);
+        if(aiForm) {
+            aiForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const text = aiInput.value.trim();
+                if (!text) return;
+                
+                const userMsg = document.createElement('div');
+                userMsg.className = 'bg-primary text-white p-3 rounded-2xl rounded-tr-sm self-end shadow-sm max-w-[85%] mt-2';
+                userMsg.textContent = text;
+                aiBody.appendChild(userMsg);
+                
+                aiInput.value = '';
                 aiBody.scrollTop = aiBody.scrollHeight;
-            }, 500);
-        });
 
-        /* ---------- Services showcase carousel ---------- */
-        const sscTrack = document.getElementById('sscTrack');
-        const sscPrev = document.getElementById('sscPrev');
-        const sscNext = document.getElementById('sscNext');
-        const sscDotsWrap = document.getElementById('sscDots');
-
-        if (sscTrack) {
-            const sscCards = Array.from(sscTrack.children);
-
-            sscCards.forEach((_, i) => {
-                const dot = document.createElement('div');
-                dot.className = 'ssc-dot' + (i === 0 ? ' active' : '');
-                dot.addEventListener('click', () => {
-                    sscCards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-                });
-                sscDotsWrap.appendChild(dot);
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'bg-white border border-gray-200 p-3 rounded-2xl rounded-tl-sm text-gray-700 self-start shadow-sm max-w-[85%] mt-2';
+                    botMsg.textContent = canned[replyIndex % canned.length];
+                    replyIndex++;
+                    aiBody.appendChild(botMsg);
+                    aiBody.scrollTop = aiBody.scrollHeight;
+                }, 500);
             });
-            const sscDots = Array.from(sscDotsWrap.children);
+        }
+        
+        /* ---------- Network particle background ---------- */
+        const canvas = document.getElementById('netCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let w, h, particles;
 
-            function sscStep() {
-                const card = sscTrack.querySelector('.ssc-card');
-                if (!card) return 300;
-                const style = getComputedStyle(sscTrack);
-                const gap = parseFloat(style.columnGap || style.gap || 22);
-                return card.getBoundingClientRect().width + gap;
+            function resize() {
+                w = canvas.width = canvas.offsetWidth;
+                h = canvas.height = canvas.offsetHeight;
             }
-
-            sscPrev.addEventListener('click', () => sscTrack.scrollBy({ left: -sscStep(), behavior: 'smooth' }));
-            sscNext.addEventListener('click', () => sscTrack.scrollBy({ left: sscStep(), behavior: 'smooth' }));
-
-            let sscTicking = false;
-            sscTrack.addEventListener('scroll', () => {
-                if (sscTicking) return;
-                sscTicking = true;
-                requestAnimationFrame(() => {
-                    const trackRect = sscTrack.getBoundingClientRect();
-                    let closestIdx = 0;
-                    let closestDist = Infinity;
-                    sscCards.forEach((c, i) => {
-                        const dist = Math.abs(c.getBoundingClientRect().left - trackRect.left);
-                        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
-                    });
-                    sscDots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
-                    sscTicking = false;
-                });
-            });
-        }
-
-        /* ---------- FAQ accordion ---------- */
-        const faqList = document.getElementById('faqList');
-        if (faqList) {
-            faqList.querySelectorAll('[data-faq-toggle]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const item = btn.closest('.faq-item');
-                    const icon = btn.querySelector('.faq-icon');
-                    const isOpen = item.classList.contains('open');
-                    item.classList.toggle('open', !isOpen);
-                    icon.innerHTML = !isOpen ? '&minus;' : '&plus;';
-                });
-            });
-        }
-
-        const animElements = document.querySelectorAll('.service-card, .video-tcard, .services-head, .testimonials-head, .stats-cta-head, .stats-band, .cta-box, .ssc-banner, .ssc-card, .trust-note, .trust-feature-item, .badge-card, .faq-head, .faq-item');
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), i * 70);
-                    io.unobserve(entry.target);
+            function initParticles() {
+                const count = Math.min(60, Math.floor((w * h) / 22000));
+                particles = Array.from({ length: count }, () => ({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.35,
+                    vy: (Math.random() - 0.5) * 0.35,
+                    r: Math.random() * 1.6 + 1
+                }));
+            }
+            function tick() {
+                ctx.clearRect(0, 0, w, h);
+                for (const p of particles) {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0 || p.x > w) p.vx *= -1;
+                    if (p.y < 0 || p.y > h) p.vy *= -1;
                 }
-            });
-        }, { threshold: 0.15 });
-        animElements.forEach(el => io.observe(el));
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const a = particles[i], b = particles[j];
+                        const d = Math.hypot(a.x - b.x, a.y - b.y);
+                        if (d < 140) {
+                            ctx.strokeStyle = `rgba(255,255,255,${(1 - d / 140) * 0.22})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+                        }
+                    }
+                }
+                for (const p of particles) {
+                    ctx.fillStyle = 'rgba(255,255,255,0.75)';
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+                }
+                requestAnimationFrame(tick);
+            }
+            window.addEventListener('resize', () => { resize(); initParticles(); });
+            resize(); initParticles(); tick();
+        }
     </script>
 </body>
-
 </html>
