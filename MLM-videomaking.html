@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MLM Video Production — Turn Visitors Into Downlines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#111827',
+          accent: '#F59E0B',
+          bg: '#FFFFFF',
+          text: '#111827',
+          dark: '#111827',
+        },
+        fontFamily: {
+          display: ['Sora', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['IBM Plex Mono', 'monospace'],
+        },
+        keyframes: {
+          pulseDot: { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.25 } },
+          playRing: {
+            '0%': { boxShadow: '0 0 0 0 rgba(245,158,11,0.45)' },
+            '70%': { boxShadow: '0 0 0 22px rgba(245,158,11,0)' },
+            '100%': { boxShadow: '0 0 0 0 rgba(245,158,11,0)' },
+          },
+          wave: { '0%,100%': { transform: 'scaleY(0.35)' }, '50%': { transform: 'scaleY(1)' } },
+        },
+        animation: {
+          'pulse-dot': 'pulseDot 1.8s ease-in-out infinite',
+          'play-ring': 'playRing 2.2s ease-out infinite',
+          wave: 'wave 1.4s ease-in-out infinite',
+        },
+      },
+    },
+  }
+</script>
+<style>
+  body{ font-family:'Inter',sans-serif; }
+  h1,h2,h3,.font-display{ font-family:'Sora',sans-serif; }
+  .font-mono-plex{ font-family:'IBM Plex Mono',monospace; }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body class="bg-white text-[#111827] antialiased">
+
+<!-- HERO -->
+<section class="relative overflow-hidden bg-[#111827] text-white py-10 sm:py-12 px-7 m-4 sm:m-8 rounded-3xl">
+  <svg class="absolute inset-0 w-full h-full opacity-50 pointer-events-none" viewBox="0 0 1160 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <g stroke="#F59E0B" stroke-opacity="0.28" stroke-width="1">
+      <line x1="580" y1="70" x2="380" y2="180"/>
+      <line x1="580" y1="70" x2="780" y2="180"/>
+      <line x1="380" y1="180" x2="220" y2="290"/>
+      <line x1="380" y1="180" x2="420" y2="300"/>
+      <line x1="780" y1="180" x2="740" y2="300"/>
+      <line x1="780" y1="180" x2="940" y2="290"/>
+      <line x1="220" y1="290" x2="120" y2="400"/>
+      <line x1="220" y1="290" x2="260" y2="410"/>
+      <line x1="420" y1="300" x2="380" y2="420"/>
+      <line x1="740" y1="300" x2="780" y2="420"/>
+      <line x1="940" y1="290" x2="900" y2="410"/>
+      <line x1="940" y1="290" x2="1040" y2="400"/>
+    </g>
+    <g fill="#F59E0B">
+      <circle cx="580" cy="70" r="6" fill-opacity="0.9"/>
+      <circle cx="380" cy="180" r="5" fill-opacity="0.7"/>
+      <circle cx="780" cy="180" r="5" fill-opacity="0.7"/>
+      <circle cx="220" cy="290" r="4" fill-opacity="0.55"/>
+      <circle cx="420" cy="300" r="4" fill-opacity="0.55"/>
+      <circle cx="740" cy="300" r="4" fill-opacity="0.55"/>
+      <circle cx="940" cy="290" r="4" fill-opacity="0.55"/>
+      <circle cx="120" cy="400" r="3" fill-opacity="0.4"/>
+      <circle cx="260" cy="410" r="3" fill-opacity="0.4"/>
+      <circle cx="380" cy="420" r="3" fill-opacity="0.4"/>
+      <circle cx="780" cy="420" r="3" fill-opacity="0.4"/>
+      <circle cx="900" cy="410" r="3" fill-opacity="0.4"/>
+      <circle cx="1040" cy="400" r="3" fill-opacity="0.4"/>
+    </g>
+  </svg>
+
+  <div class="relative z-10 max-w-3xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 font-mono-plex text-xs uppercase tracking-wider text-accent bg-accent/10 border border-accent/30 px-3.5 py-1.5 rounded-full mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot"></span>
+      Built for network marketing teams
+    </div>
+
+    <h1 class="font-display font-extrabold tracking-tight leading-[1.2] text-xl sm:text-2xl lg:text-3xl mb-3 max-w-2xl mx-auto">
+      Convert Every Visitor Into a <span class="text-accent">Customer</span> with Professional MLM Plan Videos
+    </h1>
+
+   
+
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      <div class="flex items-center gap-1.5 text-xs font-medium text-white/90 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+        100% White-Label Branding
+      </div>
+      <div class="flex items-center gap-1.5 text-xs font-medium text-white/90 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+        Ultra HD Voice Over &amp; Animation
+      </div>
+      <div class="flex items-center gap-1.5 text-xs font-medium text-white/90 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+        Attract Massive Downlines Instantly
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="py-24 px-7" id="showcase">
+  <div class="max-w-[1160px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+    <!-- LEFT: video mock -->
+    <div class="relative rounded-[20px] overflow-hidden shadow-[0_30px_60px_-20px_rgba(17,24,39,0.45)] w-full max-w-[560px] mx-auto"
+         style="aspect-ratio:16/10; min-height:260px; background:
+           radial-gradient(circle at 30% 20%, rgba(245,158,11,0.35), transparent 55%),
+           radial-gradient(circle at 75% 80%, rgba(245,158,11,0.18), transparent 50%),
+           linear-gradient(160deg,#1f2937 0%, #111827 60%, #0b0f1a 100%);">
+      <div class="absolute inset-0"
+           style="background-image:
+             linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+             linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+             background-size:28px 28px;
+             mask-image:radial-gradient(circle at center, black 40%, transparent 85%);
+             -webkit-mask-image:radial-gradient(circle at center, black 40%, transparent 85%);"></div>
+
+      <div class="absolute top-0 left-0 right-0 flex justify-between items-center px-5 py-4.5 z-10">
+        <span class="font-mono-plex text-[11px] font-semibold text-white bg-white/10 border border-white/20 px-2.5 py-1 rounded-md tracking-wide">SAMPLE PLAN VIDEO</span>
+        <span class="font-mono-plex text-[11px] font-semibold text-primary bg-accent border border-accent px-2.5 py-1 rounded-md tracking-wide">ULTRA HD</span>
+      </div>
+
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[78px] h-[78px] rounded-full bg-accent/95 flex items-center justify-center animate-play-ring z-10">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#111827" class="ml-1"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+
+      <div class="absolute bottom-0 left-0 right-0 z-10 p-5 bg-gradient-to-t from-black/55 to-transparent">
+        <div class="flex items-end gap-[3px] h-[26px] mb-3">
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:60%;animation-delay:0s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:90%;animation-delay:.1s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:40%;animation-delay:.2s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:75%;animation-delay:.3s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:55%;animation-delay:.4s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:95%;animation-delay:.5s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:35%;animation-delay:.6s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:70%;animation-delay:.7s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:50%;animation-delay:.8s"></span>
+          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:80%;animation-delay:.9s"></span>
+        </div>
+        <div class="text-white font-semibold text-sm">Compensation Plan Walkthrough</div>
+        <div class="text-white/60 text-xs mt-0.5">Voiceover · Motion Graphics · Brand Intro</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: copy + pricing -->
+    <div>
+      <div class="font-mono-plex text-xs uppercase tracking-wider text-accent mb-3.5">What you get</div>
+      <h2 class="font-display font-extrabold tracking-tight leading-tight text-3xl sm:text-4xl mb-4">
+        Professional <span class="text-accent">MLM Video</span> Making, Delivered Fast
+      </h2>
+      <p class="text-[#111827]/60 text-base leading-relaxed max-w-[460px] mb-8">
+        We script, voice, animate and brand your entire plan video end-to-end — so your leaders can share one link and let the video do the recruiting.
+      </p>
+
+      <div id="pricing" class="border border-[#111827]/10 rounded-2xl p-7 bg-gradient-to-b from-white to-neutral-50 shadow-sm mb-8 max-w-[460px]">
+        <div class="flex items-baseline justify-between gap-4 flex-wrap">
+          <div class="flex items-baseline gap-2.5">
+            <span class="font-mono-plex font-semibold text-3xl sm:text-4xl text-primary">₹2,499/-</span>
+            <span class="text-sm text-[#111827]/60 font-medium">+ GST</span>
+          </div>
+          <span class="font-mono-plex text-[11px] font-semibold uppercase tracking-wide text-accent border border-accent px-3 py-1.5 rounded-full -rotate-2 whitespace-nowrap">Fixed Rate</span>
+        </div>
+        <div class="text-[13px] text-[#111827]/60 mt-3">High-quality delivery, one flat price — no hidden add-ons.</div>
+      </div>
+
+      <ul class="flex flex-col gap-3.5 max-w-[460px] mb-9">
+        <li class="flex items-start gap-3 text-[15px] font-medium">
+          <span class="flex-shrink-0 w-[22px] h-[22px] rounded-full bg-accent/10 flex items-center justify-center mt-0.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          100% white-label branding
+        </li>
+        <li class="flex items-start gap-3 text-[15px] font-medium">
+          <span class="flex-shrink-0 w-[22px] h-[22px] rounded-full bg-accent/10 flex items-center justify-center mt-0.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          Full HD professional voiceover
+        </li>
+        <li class="flex items-start gap-3 text-[15px] font-medium">
+          <span class="flex-shrink-0 w-[22px] h-[22px] rounded-full bg-accent/10 flex items-center justify-center mt-0.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          Ultra HD videos &amp; annotation
+        </li>
+        <li class="flex items-start gap-3 text-[15px] font-medium">
+          <span class="flex-shrink-0 w-[22px] h-[22px] rounded-full bg-accent/10 flex items-center justify-center mt-0.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          Free attractive thumbnail
+        </li>
+        <li class="flex items-start gap-3 text-[15px] font-medium">
+          <span class="flex-shrink-0 w-[22px] h-[22px] rounded-full bg-accent/10 flex items-center justify-center mt-0.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          Unlimited video length
+        </li>
+      </ul>
+
+      <a href="#" class="inline-block bg-accent text-primary font-bold text-sm px-7 py-4 rounded-xl shadow-[0_8px_24px_rgba(245,158,11,0.28)] hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(245,158,11,0.4)] transition">
+        Order Your MLM Video Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="pt-5 pb-24 px-7">
+  <div class="max-w-[1160px] mx-auto">
+    <div class="text-center max-w-xl mx-auto mb-13">
+      <div class="font-mono-plex text-xs uppercase tracking-wider text-accent mb-3.5">How it works</div>
+      <h2 class="font-display font-extrabold tracking-tight leading-tight text-3xl sm:text-4xl">
+        Our Systematic <span class="text-accent">3 Working Day</span> Production Timeline
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+      <div class="relative border border-[#111827]/10 rounded-2xl p-7 bg-neutral-50 hover:-translate-y-1 hover:shadow-[0_16px_32px_-12px_rgba(17,24,39,0.16)] transition">
+        <span class="absolute top-6.5 right-6.5 font-mono-plex text-[11px] font-semibold text-[#111827]/60 bg-white border border-[#111827]/10 px-2.5 py-1 rounded-full">Day 1</span>
+        <div class="w-[34px] h-[34px] rounded-[9px] bg-primary text-accent flex items-center justify-center font-mono-plex font-bold text-sm mb-4">01</div>
+        <h3 class="font-display font-bold text-lg mb-2">Advance &amp; Scripting</h3>
+        <p class="text-sm text-[#111827]/60 leading-relaxed">You pay the advance, share your plan details, and our writers craft a compelling script tailored to your compensation structure.</p>
+      </div>
+
+      <div class="relative border border-[#111827]/10 rounded-2xl p-7 bg-neutral-50 hover:-translate-y-1 hover:shadow-[0_16px_32px_-12px_rgba(17,24,39,0.16)] transition">
+        <span class="absolute top-6.5 right-6.5 font-mono-plex text-[11px] font-semibold text-[#111827]/60 bg-white border border-[#111827]/10 px-2.5 py-1 rounded-full">Day 2</span>
+        <div class="w-[34px] h-[34px] rounded-[9px] bg-primary text-accent flex items-center justify-center font-mono-plex font-bold text-sm mb-4">02</div>
+        <h3 class="font-display font-bold text-lg mb-2">Confirmation &amp; Voiceover</h3>
+        <p class="text-sm text-[#111827]/60 leading-relaxed">Script gets your sign-off, then our voice artists record a full HD professional voiceover in your chosen language and tone.</p>
+      </div>
+
+      <div class="relative border border-[#111827]/10 rounded-2xl p-7 bg-neutral-50 hover:-translate-y-1 hover:shadow-[0_16px_32px_-12px_rgba(17,24,39,0.16)] transition">
+        <span class="absolute top-6.5 right-6.5 font-mono-plex text-[11px] font-semibold text-[#111827]/60 bg-white border border-[#111827]/10 px-2.5 py-1 rounded-full">Day 3</span>
+        <div class="w-[34px] h-[34px] rounded-[9px] bg-primary text-accent flex items-center justify-center font-mono-plex font-bold text-sm mb-4">03</div>
+        <h3 class="font-display font-bold text-lg mb-2">Animation &amp; Final Delivery</h3>
+        <p class="text-sm text-[#111827]/60 leading-relaxed">Our animators bring the script to life with ultra HD visuals and annotation, then deliver your finished, white-labeled video.</p>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <div class="inline-flex items-center gap-3 bg-primary text-white px-6 py-3.5 rounded-full shadow-[0_10px_30px_-8px_rgba(17,24,39,0.35)] border border-accent/40">
+        <span class="w-2 h-2 rounded-full bg-accent animate-pulse-dot"></span>
+        <p class="font-mono-plex text-sm font-semibold tracking-wide">
+          Trusted by over <span class="text-accent">1,71,000+</span> Network Marketing Creators
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-14">
+      <div class="border border-[#111827]/10 rounded-2xl p-7 bg-neutral-50">
+        <h3 class="font-display font-bold text-lg mb-5">Our Channels</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="#" class="group flex items-center gap-3 bg-white border border-[#111827]/10 rounded-xl p-3.5 hover:border-accent hover:shadow-[0_8px_20px_-8px_rgba(245,158,11,0.35)] transition">
+            <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M10 9.5v5l5-2.5z" fill="#F59E0B" stroke="none"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="text-sm font-semibold text-text truncate">MLM SUCCESS TIPS</div>
+              <div class="text-[11px] text-[#111827]/50 font-mono-plex">Channel</div>
+            </div>
+          </a>
+          <a href="#" class="group flex items-center gap-3 bg-white border border-[#111827]/10 rounded-xl p-3.5 hover:border-accent hover:shadow-[0_8px_20px_-8px_rgba(245,158,11,0.35)] transition">
+            <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M10 9.5v5l5-2.5z" fill="#F59E0B" stroke="none"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="text-sm font-semibold text-text truncate">VKSERVICES ENTERPRISES</div>
+              <div class="text-[11px] text-[#111827]/50 font-mono-plex">Channel</div>
+            </div>
+          </a>
+          <a href="#" class="group flex items-center gap-3 bg-white border border-[#111827]/10 rounded-xl p-3.5 hover:border-accent hover:shadow-[0_8px_20px_-8px_rgba(245,158,11,0.35)] transition">
+            <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M10 9.5v5l5-2.5z" fill="#F59E0B" stroke="none"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="text-sm font-semibold text-text truncate">VIPRESA</div>
+              <div class="text-[11px] text-[#111827]/50 font-mono-plex">Channel</div>
+            </div>
+          </a>
+          <a href="#" class="group flex items-center gap-3 bg-white border border-[#111827]/10 rounded-xl p-3.5 hover:border-accent hover:shadow-[0_8px_20px_-8px_rgba(245,158,11,0.35)] transition">
+            <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M10 9.5v5l5-2.5z" fill="#F59E0B" stroke="none"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="text-sm font-semibold text-text truncate">VKS TECH</div>
+              <div class="text-[11px] text-[#111827]/50 font-mono-plex">Channel</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="border border-[#111827]/10 rounded-2xl p-7 bg-neutral-50">
+        <h3 class="font-display font-bold text-lg mb-5">Official Commercial Terms &amp; Refund Policy</h3>
+        <ul class="flex flex-col gap-3.5">
+          <li class="flex items-start gap-3 text-sm text-[#111827]/75 leading-relaxed">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent/15 flex items-center justify-center mt-0.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            Advance payment is required to begin scripting; work starts only after payment confirmation.
+          </li>
+          <li class="flex items-start gap-3 text-sm text-[#111827]/75 leading-relaxed">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent/15 flex items-center justify-center mt-0.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            Refunds are only applicable before script confirmation; no refund once voiceover or animation has begun.
+          </li>
+          <li class="flex items-start gap-3 text-sm text-[#111827]/75 leading-relaxed">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent/15 flex items-center justify-center mt-0.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            Revisions are limited to the scope agreed at script confirmation stage.
+          </li>
+          <li class="flex items-start gap-3 text-sm text-[#111827]/75 leading-relaxed">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent/15 flex items-center justify-center mt-0.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            Final delivery is provided in fully white-labeled, ready-to-share format within the 3 working day timeline.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO VIDEOS -->
+<section class="py-24 px-7 bg-primary text-white m-4 sm:m-8 rounded-3xl">
+  <div class="max-w-[1160px] mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="font-mono-plex text-xs uppercase tracking-wider text-accent mb-3.5">Watch our work</div>
+      <h2 class="font-display font-extrabold tracking-tight leading-tight text-2xl sm:text-3xl text-white">
+        MLM Plan Video Making &amp; <span class="text-accent">White Board Animation</span> Video Making Demo
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">Bluesky Plan (Whiteboard)</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">Bluesky Launching</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">Blue Sky Logo Animation</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">Blue Sky Trades — English</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">Blue Sky Trades — Hindi</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">WG Services MLM — English Demo</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">WG Services MLM — Demo 7</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">Ejiearn Video</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+      <a href="#" class="group block rounded-2xl overflow-hidden border border-[#111827]/10 bg-white hover:shadow-[0_14px_28px_-14px_rgba(17,24,39,0.25)] hover:-translate-y-1 transition">
+        <div class="relative aspect-video bg-gradient-to-br from-[#1f2937] to-[#0b0f1a] flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-accent/95 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#111827" class="ml-0.5"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </div>
+        <div class="p-3.5">
+          <div class="text-sm font-semibold text-text leading-snug mb-1">Econish Whiteboard</div>
+          <div class="text-xs text-accent font-mono-plex font-semibold">Click to Watch →</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+ <!-- ================= TESTIMONIALS ================= -->
+  <section id="testimonials" class="mt-24 mx-4 sm:mx-8 bg-white text-primary px-6 sm:px-8 py-20 rounded-3xl border border-gray-100">
+    <div class="max-w-xl mx-auto text-center mb-12">
+      <div class="inline-flex items-center gap-2.5 font-mono text-xs font-semibold tracking-[0.1em] uppercase text-accent mb-3.5">
+        <span class="w-5 h-px bg-accent"></span> Testimonials <span class="w-5 h-px bg-accent"></span>
+      </div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl mb-3.5 text-primary">What our happy clients say</h2>
+      <p class="text-gray-500 text-base leading-relaxed">Real video reviews from MLM leaders and business owners across India.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="testimonialGrid">
+      <!-- cards injected identically 4x below (kept static to match source markup) -->
+    </div>
+  </section>
+
+  <!-- ================= OUR CLIENTS ================= -->
+  <section id="clients" class="mt-24">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2.5 font-display text-sm font-medium text-accent mb-3.5">Our Clients</div>
+      <h2 class="font-display font-bold text-2xl sm:text-3xl mb-2.5 text-primary">Trusted by Growing MLM Businesses</h2>
+      <p class="text-gray-500 text-base">Hundreds of MLM leaders and companies across India trust our solutions.</p>
+    </div>
+    <div id="clientsGrid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3.5"></div>
+  </section>
+
+ <!-- ================= STATS + CTA ================= -->
+<section id="statsCta" class="mt-24 mx-4 sm:mx-8 bg-primary text-white px-6 sm:px-8 py-24 rounded-3xl relative overflow-hidden">
+    <div class="relative max-w-[1100px] mx-auto">
+
+        <!-- HEADING -->
+        <div class="text-center mb-11">
+            <h2 class="font-body font-bold text-[1.7rem] sm:text-[2.3rem] leading-tight mb-3.5 text-white">
+                India's <span class="text-accent">#1 All-in-One</span> MLM Hub
+            </h2>
+            <p class="text-gray-300 text-base max-w-xl mx-auto">
+                From software to scale, we handle everything — 9+ years of industry excellence.
+            </p>
+        </div>
+
+        <!-- STATS BAND (softer amber background, better contrast) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 bg-amber-600 rounded-2xl shadow-accent-glow overflow-hidden mb-11 divide-y sm:divide-y-0 sm:divide-x divide-white/25">
+            <div class="flex items-center justify-center gap-4 px-5 py-8">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/></svg>
+                </div>
+                <div>
+                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">9+</div>
+                    <div class="text-[0.85rem] text-white/85">Years of Excellence</div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center gap-4 px-5 py-8">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">2800+</div>
+                    <div class="text-[0.85rem] text-white/85">Happy Clients</div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center gap-4 px-5 py-8">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg>
+                </div>
+                <div>
+                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">1.7 Lakh+</div>
+                    <div class="text-[0.85rem] text-white/85">MLMSUCCESSTIPS</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA BOX (softer amber, much better readability) -->
+        <div class="border-[1.5px] border-dashed border-accent/50 rounded-2xl px-6 sm:px-10 pt-9 pb-10 text-center">
+            <div class="bg-amber-600 rounded-xl px-6 py-4 max-w-xl mx-auto mb-7 shadow-accent-glow">
+                <div class="font-display font-bold text-[1.05rem] text-white tracking-wide">READY TO START YOUR MLM BUSINESS TODAY?</div>
+                <div class="text-[0.85rem] text-white/90 font-medium mt-1">Get 100% expert assistance &amp; 24/7 dedicated support from India's best development team.</div>
+            </div>
+            <div class="font-display font-bold text-[1.3rem] sm:text-[1.9rem] tracking-wide mb-2.5">
+                CALL / WHATSAPP: <a href="tel:+918927656368" class="text-accent hover:text-yellow-300 transition">+91 8927656368</a>
+            </div>
+            <div class="text-gray-300 text-[0.88rem]">(Available anytime for free consultation after you check our live demos)</div>
+        </div>
+
+    </div>
+</section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services" class="mt-24 max-w-[1220px] mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-9 items-stretch">
+      <div>
+        <div class="flex flex-col h-full">
+          <div class="relative rounded-[20px] overflow-hidden border border-gray-200 shadow-card flex-1 min-h-[260px] before:content-[''] before:absolute before:-top-px before:-left-px before:-right-px before:h-[3px] before:bg-accent before:z-10">
+            <video autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg" class="w-full h-full object-cover block">
+              <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="mt-4 px-5 py-4.5 py-4 rounded-2xl bg-primary text-white flex-shrink-0">
+            <h4 class="font-display font-bold text-lg mb-2 text-white">Don't just buy. Test it yourself before spending a single rupee!</h4>
+            <p class="text-sm leading-relaxed text-gray-300">Watch the complete presentation video above to see our live proof and explore our full suite of premium MLM services below.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="mb-6">
+          <div class="inline-flex items-center gap-2.5 font-mono text-xs font-semibold tracking-[0.1em] uppercase text-accent mb-3">Our Services</div>
+          <h2 class="font-display font-bold text-2xl sm:text-[30px] text-primary">Everything your MLM business needs</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="servicesGrid"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= BADGE ROW ================= -->
+  <div class="max-w-[1100px] mx-auto mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4.5 gap-4" id="badgeRow"></div>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq" class="mt-24 mx-4 sm:mx-8 bg-primary text-white px-6 sm:px-8 py-24 rounded-3xl">
+    <div class="text-center max-w-2xl mx-auto mb-11">
+      <h2 class="font-body font-bold text-2xl sm:text-[2.1rem] text-white">Frequently Asked Questions (FAQs)</h2>
+    </div>
+
+    <div class="max-w-[980px] mx-auto flex flex-col gap-3" id="faqList">
+
+      <div class="faq-item rounded-xl overflow-hidden">
+        <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-accent text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-105">
+          <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">&plus;</span>
+          <span>Q1. Customized MLM Software की Delivery में कितना समय (Time) लगता है?</span>
+        </button>
+        <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0">
+          <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+            Customized MLM Software की Delivery पूरी तरह से आपके Plan की Complexity और Requirements पर Depend करती है। नॉर्मली एक बेसिक Plan का Software 5 से 7 Working Days में रेडी हो जाता है। अगर आपका Plan बहुत ज्यादा एडवांस या यूनिक है, तो उसमें 10 से 15 Days का समय लग सकता है। हमारी टीम हमेशा टाइमली और एरर-फ्री Delivery सुनिश्चित करती है।
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item rounded-xl overflow-hidden">
+        <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-gray-800 text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-110">
+          <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">&plus;</span>
+          <span>क्या ₹99/- वाले MLM Plan PDF Making पैकेज में डिज़ाइन (Design) कस्टमाइज़्ड होता है?</span>
+        </button>
+        <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0">
+          <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+            जी हाँ, ₹99/- वाले पैकेज में भी आपके Plan के हिसाब से बेसिक कस्टमाइज़ेशन किया जाता है, जैसे कलर थीम, लोगो और आपका कंटेंट। पूरी तरह प्रीमियम और एडवांस डिज़ाइन के लिए हमारे हायर पैकेज उपलब्ध हैं, जहाँ अनलिमिटेड रिवीज़न भी मिलते हैं।
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item rounded-xl overflow-hidden">
+        <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-accent text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-105">
+          <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">&plus;</span>
+          <span>Result-Based Promotion में Lead की क्या गारंटी होती है और Data कैसे मिलता है?</span>
+        </button>
+        <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0">
+          <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+            हमारे Result-Based Promotion में आपको वेरिफाइड और जेन्युइन लीड्स दी जाती हैं, जो रियल-टाइम में आपके CRM Dashboard पर अपडेट होती रहती हैं। लीड की क्वालिटी और क्वांटिटी आपके चुने गए पैकेज पर डिपेंड करती है, और पूरी रिपोर्टिंग ट्रांसपेरेंट होती है।
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item rounded-xl overflow-hidden">
+        <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-gray-800 text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-110">
+          <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">&plus;</span>
+          <span>आपके Latest MLM Database की Accuracy कितनी है और क्या यह Fresh डेटा है?</span>
+        </button>
+        <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0">
+          <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+            हमारा Database रेगुलरली अपडेट किया जाता है और इसकी एक्यूरेसी 90% से ज्यादा रहती है। हर एंट्री को वेरिफाई करने के बाद ही डेटाबेस में शामिल किया जाता है, ताकि आपको सिर्फ जेन्युइन और फ्रेश कॉन्टैक्ट्स ही मिलें।
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item rounded-xl overflow-hidden">
+        <button data-faq-toggle class="faq-question w-full flex items-center gap-3.5 text-left bg-accent text-white font-semibold text-[0.98rem] px-5 sm:px-6 py-4.5 py-4 transition hover:brightness-105">
+          <span class="faq-icon w-[22px] h-[22px] rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 text-base leading-none">&plus;</span>
+          <span>MLM Leader Website का 1 साल के बाद Renewal Charge क्या होगा?</span>
+        </button>
+        <div class="faq-answer bg-gray-800 border border-gray-700 border-t-0">
+          <div class="px-6 py-5 text-gray-200 text-[0.92rem] leading-relaxed">
+            MLM Leader Website का पहला साल पैकेज में शामिल होता है। उसके बाद Hosting, Domain और Support के लिए एक मिनिमल एनुअल रिन्यूअल चार्ज लगता है, जो आपके प्लान के हिसाब से पहले ही बता दिया जाता है — कोई हिडन चार्ज नहीं होता।
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+
+
+<footer class="bg-primary text-white/55 py-8.5 px-7 text-center text-[13px] border-t border-white/10">
+  <div class="max-w-[1160px] mx-auto">© 2026 MLM Video Studio · Crafted for network marketing leaders · <span class="text-accent font-semibold">100% White-Label</span></div>
+</footer>
+<script>
+      /* ---------------- TESTIMONIALS ---------------- */
+  const waIcon = `<svg viewBox="0 0 24 24" class="w-4 h-4 fill-current"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>`;
+  const playIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5 fill-white"><path d="M8 5v14l11-7z"/></svg>`;
+     const testimonials = [
+    { name: "Mr. Srinivas", role: "Founder &amp; CEO &ndash; Parivrat in-corporation<br>(Andrapradesh)" },
+    { name: "Mr. Bhagbat Chohan", role: "Founder &amp; CEO &ndash; Ai Abacus<br>(Maharashtra)" },
+    { name: "Mr. Ammba Das", role: "Founder &amp; CEO &ndash; Direct Sellar<br>(Telangana)" },
+    { name: "Mr. Srinivas", role: "Founder &amp; CEO &ndash; Parivrat in-corporation<br>(Andrapradesh)" }
+  ];
+
+  document.getElementById('testimonialGrid').innerHTML = testimonials.map(t => `
+    <div class="relative rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden transition hover:-translate-y-1.5 hover:shadow-2xl hover:border-accent/60">
+      <div class="relative aspect-[9/16] bg-gradient-to-br from-gray-800 to-black flex items-center justify-center overflow-hidden">
+        <svg viewBox="0 0 24 24" class="w-12 h-12 fill-white/5"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent pointer-events-none"></div>
+      <div class="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[54px] h-[54px] rounded-full bg-accent flex items-center justify-center shadow-accent-glow cursor-pointer transition hover:scale-110 z-10">${playIcon}</div>
+      <div class="absolute bottom-0 left-0 right-0 px-5 py-6 z-10">
+        <div class="font-display text-[17px] font-bold text-white mb-1.5 leading-tight">${t.name}</div>
+        <div class="text-[13px] text-gray-300 leading-snug mb-4">${t.role}</div>
+        <a href="https://wa.me/919237377196" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent text-white px-3.5 py-2 rounded-lg text-[13px] font-semibold transition hover:-translate-y-0.5 hover:bg-amber-600">
+          ${waIcon} Contact us
+        </a>
+      </div>
+    </div>
+  `).join('');
+
+  /* ---------------- CLIENTS ---------------- */
+  const clients = [
+    { icon: "&#9670;", color: "text-red-500", name: "MYGOLDENWAY" },
+    { icon: "&#9752;", color: "text-pink-600", name: 'My Shops<span class="text-red-500">247</span>' },
+    { name: 'TRENDSWAVE<br><span class="text-[0.65rem] font-normal tracking-[0.15em] text-gray-400">FASHION</span>' },
+    { name: '<span class="text-amber-500">1X</span><span class="text-primary">KING</span>' },
+    { icon: "&#9650;", color: "text-green-600", name: "AGN", nameColor: "text-green-600" },
+    { icon: "&#8987;", color: "text-red-500", name: "TimeHelp" },
+    { icon: "&#8962;", color: "text-red-500", name: "Vaishnocity" },
+    { icon: "&#9670;", color: "text-accent", name: 'Lifetym<span class="text-primary">Profit</span>' },
+    { icon: "&#9739;", color: "text-primary", name: 'GLOBALHELP<span class="text-amber-500">24</span>' },
+    { icon: "&#10022;", color: "text-green-600", name: "SUCCESSYOURLIFE" },
+    { icon: "&#9788;", color: "text-amber-500", name: "RISEMON", nameColor: "text-amber-500" },
+    { icon: "&#9775;", color: "text-red-500", name: 'MONEY LINK<br><span class="text-[0.65rem] text-gray-400 tracking-[0.1em]">PRO</span>' },
+    { icon: "&#9883;", color: "text-red-500", name: 'XTREME FX TRADES<br><span class="text-[0.65rem] text-amber-500">GO RICH LIFE</span>' },
+    { icon: "&#8962;", color: "text-green-600", name: 'Ecartal<span class="text-primary"> India</span>' }
+  ];
+
+  document.getElementById('clientsGrid').innerHTML = clients.map(c => `
+    <div class="bg-white border border-gray-200 rounded-lg px-3.5 py-4.5 py-4 flex items-center justify-center gap-2 min-h-[72px] text-center transition hover:-translate-y-0.5 hover:border-accent shadow-sm">
+      ${c.icon ? `<span class="text-lg leading-none ${c.color}">${c.icon}</span>` : ''}
+      <span class="font-display text-[0.82rem] font-bold tracking-wide leading-snug whitespace-nowrap ${c.nameColor || 'text-primary'}">${c.name}</span>
+    </div>
+  `).join('');
+
+  /* ---------------- SERVICES ---------------- */
+  const services = [
+    { n: "01", title: "Customized MLM Software", desc: "Powerful backend dashboards tailored to your business with smart automation.", link: "Explore Service →", href: "custom-mlm.html", icon: `<rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" />` },
+    { n: "02", title: "MLM Plan PDF Making", desc: "Professional compensation plan PDF design with premium presentation.", link: "View PDF →", href: "#", icon: `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 11h2" />` },
+    { n: "03", title: "MLM Plan Video Making", desc: "HD animated presentation videos with voice-over and effects.", link: "Watch Video →", href: "#", icon: `<rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" />` },
+    { n: "04", title: "Result Based Promotion", desc: "Reach targeted audiences using automated marketing campaigns.", link: "Promotion →", href: "#", icon: `<path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 5-7" />` },
+    { n: "05", title: "Latest MLM Database", desc: "Fresh verified databases with high quality genuine contacts.", link: "Access Database →", href: "#", icon: `<ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" />` },
+    { n: "06", title: "MLM Leader Website", desc: "High-converting leader pages with smart automation and branding.", link: "View Website →", href: "#", icon: `<path d="M12 3l9 5v8l-9 5-9-5V8z" /><path d="M12 7v10" />` }
+  ];
+
+  document.getElementById('servicesGrid').innerHTML = services.map(s => `
+    <a href="${s.href}" class="flex gap-3.5 items-start bg-white border border-gray-200 rounded-2xl p-4.5 p-4 transition hover:-translate-y-0.5 hover:border-accent hover:shadow-card no-underline">
+      <div class="w-11 h-11 flex-shrink-0 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5">${s.icon}</svg>
+      </div>
+      <div>
+        <h3 class="text-[15px] font-semibold text-primary mb-1.5">${s.n}. ${s.title}</h3>
+        <p class="text-[13px] leading-relaxed text-gray-500 mb-2">${s.desc}</p>
+        <span class="text-xs font-bold text-accent">${s.link}</span>
+      </div>
+    </a>
+  `).join('');
+
+ 
+
+ 
+
+  /* ---------------- BADGES ---------------- */
+  const badges = [
+    { value: "4.9 / 5", label: "Client Rating", icon: `<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>` },
+    { value: "100%", label: "Assistance", icon: `<path d="M2 21h4V9H2v12zM22 10.5c0-1.1-.9-2-2-2h-5.6l.8-4.1V4a1.5 1.5 0 0 0-1.5-1.5c-.4 0-.7.16-1 .44L8 8v13h11c.83 0 1.54-.5 1.84-1.22l2-4.71c.1-.25.16-.51.16-.79v-2z"/>` },
+    { value: "24/7", label: "Support", icon: `<path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm1-16h-2v6l5.25 3.15L17 13.65 13 11.3z"/>` },
+    { value: "Start Now", label: "Your Company", icon: `<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>` }
+  ];
+
+  document.getElementById('badgeRow').innerHTML = badges.map((b, i) => `
+    <div class="${i % 2 === 0 ? 'bg-primary' : 'bg-accent'} text-white rounded-2xl px-4 py-6.5 py-6 text-center shadow-card">
+      <div class="w-[54px] h-[54px] mx-auto mb-3.5 rounded-full bg-white/20 flex items-center justify-center">
+        <svg viewBox="0 0 24 24" class="w-6.5 h-6.5 w-[26px] h-[26px] fill-white">${b.icon}</svg>
+      </div>
+      <div class="font-display font-bold text-[1.35rem] text-white mb-1">${b.value}</div>
+      <div class="text-[0.82rem] font-semibold text-white/90 tracking-wide">${b.label}</div>
+    </div>
+  `).join('');
+
+  /* ---------------- FAQ ACCORDION ---------------- */
+  document.querySelectorAll('[data-faq-toggle]').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const icon = button.querySelector('.faq-icon');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.faq-item').forEach(faqItem => {
+        faqItem.classList.remove('open');
+        faqItem.querySelector('.faq-answer').style.maxHeight = null;
+        const ic = faqItem.querySelector('.faq-icon');
+        if (ic) ic.textContent = '+';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        if (icon) icon.textContent = '−';
+      }
+    });
+  });
+</script>
+</body>
+</html>
