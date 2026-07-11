@@ -1018,5 +1018,75 @@
   }
 </script>
 
+    <script src="api-config.js"></script>
+    <script>
+        async function submitEnquiryForm(e, formId, serviceName, nameId, mobileId, emailId, successViewId) {
+            e.preventDefault();
+            
+            const nameField = document.getElementById(nameId);
+            const mobileField = document.getElementById(mobileId);
+            const emailField = document.getElementById(emailId);
+            
+            const data = {
+                service_name: serviceName,
+                name: nameField ? nameField.value.trim() : "",
+                mobile: mobileField ? mobileField.value.trim() : "",
+                email: emailField ? emailField.value.trim() : ""
+            };
+            
+            if (!data.name || !data.mobile) {
+                alert("Please fill in Name and Mobile Number");
+                return;
+            }
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn ? btn.innerText : 'Submit';
+            if(btn) { btn.innerText = 'Submitting...'; btn.disabled = true; }
+
+            try {
+                const response = await fetch(`${CONFIG.API_BASE_URL}/enquiry/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    const form = document.getElementById(formId);
+                    const successView = document.getElementById(successViewId);
+                    if (form && formId === 'enquiryForm') {
+                        const parentText = form.previousElementSibling;
+                        const parentTitle = parentText?.previousElementSibling;
+                        const parentSub = parentTitle?.previousElementSibling;
+                        if(parentText) parentText.style.display = 'none';
+                        if(parentTitle) parentTitle.style.display = 'none';
+                        if(parentSub) parentSub.style.display = 'none';
+                    }
+                    if (form) form.style.display = 'none';
+                    if (successView) {
+                        successView.classList.remove('hidden');
+                        successView.style.display = 'block';
+                    }
+                    else alert("Enquiry submitted successfully!");
+                } else {
+                    alert("Error submitting enquiry. Please try again.");
+                    if(btn) { btn.innerText = originalText; btn.disabled = false; }
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error connecting to server. Please try again.");
+                if(btn) { btn.innerText = originalText; btn.disabled = false; }
+            }
+        }
+
+        const heroEnquiryForm = document.getElementById('heroPageForm');
+        if (heroEnquiryForm) {
+            heroEnquiryForm.addEventListener('submit', (e) => submitEnquiryForm(e, 'heroPageForm', 'Customized MLM Software', 'heroName', 'heroMobile', 'heroEmail', 'heroSuccessView'));
+        }
+
+        const enquiryForm = document.getElementById('enquiryForm');
+        if (enquiryForm) {
+            enquiryForm.addEventListener('submit', (e) => submitEnquiryForm(e, 'enquiryForm', 'Customized MLM Software', 'name', 'mobile', 'email', 'successView'));
+        }
+    </script>
 </body>
 </html>

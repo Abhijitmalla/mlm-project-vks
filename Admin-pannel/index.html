@@ -256,9 +256,19 @@
           Leads <span id="leadBadge" class="font-mono text-[0.68rem] px-2 py-0.5 rounded-full" style="background:rgba(0,0,0,.06);color:rgba(10,13,16,.45);">0</span>
         </button>
       </div>
-      <div class="flex items-center gap-2.5 text-xs font-medium" style="color:rgba(10,13,16,.5);">
-        Total on board
-        <span id="statTotal" class="font-mono text-base font-bold px-3.5 py-1.5 rounded-full bg-white/60 backdrop-blur-md border border-black/10 shadow-sm" style="color:#0a0d10;">04</span>
+      <div class="flex items-center gap-4">
+        <select id="serviceFilter" onchange="filterByService(this.value)" class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/60 backdrop-blur-md border border-black/10 shadow-sm outline-none cursor-pointer" style="color:#0a0d10;">
+          <option value="All">All Services</option>
+          <option value="Main Page">Main Page</option>
+          <option value="Custom MLM Software">Custom MLM Software</option>
+          <option value="MLM Plan PDF Making">MLM Plan PDF Making</option>
+          <option value="MLM Video Production">MLM Video Production</option>
+          <option value="MLM Database Pack">MLM Database Pack</option>
+        </select>
+        <div class="flex items-center gap-2.5 text-xs font-medium" style="color:rgba(10,13,16,.5);">
+          Total on board
+          <span id="statTotal" class="font-mono text-base font-bold px-3.5 py-1.5 rounded-full bg-white/60 backdrop-blur-md border border-black/10 shadow-sm" style="color:#0a0d10;">04</span>
+        </div>
       </div>
     </div>
 
@@ -296,14 +306,11 @@
     </div>
   </div>
 
+<script src="../api-config.js"></script>
 <script>
   // ── Data ──────────────────────────────────────────────────────────────────
-  let enquiries = [
-    { id: 1, name: "Rajesh Kumar", mobile: "9876543210", service: "MLM Database Pack" },
-    { id: 2, name: "Amit Patel",   mobile: "8765432109", service: "Custom MLM Software" },
-    { id: 3, name: "Srinivas M.", mobile: "7654321098", service: "MLM Plan PDF Making" },
-    { id: 4, name: "Vikram Singh", mobile: "6543210987", service: "MLM Video Production" }
-  ];
+  let allEnquiries = [];
+  let enquiries = [];
   let leads = [];
 
   const STATUS = [
@@ -510,15 +517,36 @@
   }
 
   // ── Actions ───────────────────────────────────────────────────────────────
-  function moveToLead(id) {
-    const idx = enquiries.findIndex(e => e.id === id);
-    if (idx === -1) return;
-    const [e] = enquiries.splice(idx, 1);
-    leads.unshift({ ...e, status: 'Accepted', amount: '' });
-    renderEnquiries(); renderLeads(); updateCounts();
-    showToast(`${e.name} accepted onto the board`);
-    switchTab('leads');
-  }
+async function moveToLead(id) {
+    try {
+        const response = await fetch(`${CONFIG.API_BASE_URL}/leads/convert/${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            showToast(data.message);
+
+            // Refresh enquiries
+            await fetchEnquiries();
+
+            // Refresh leads (if you have this API)
+            await fetchLeads();
+
+            switchTab("leads");
+        } else {
+            showToast(data.message || "Failed to convert enquiry.");
+        }
+
+    } catch (error) {
+        console.error(error);
+        showToast("Server Error");
+    }
+}
 
   function updateLeadAmount(id, val) {
     const l = leads.find(l => l.id === id);
@@ -597,9 +625,94 @@
     }, 2800);
   }
 
+  // ── Data Fetching & Filtering ─────────────────────────────────────────────
+  async function fetchEnquiries() {
+    try {
+      const response = await fetch(`${CONFIG.API_BASE_URL}/enquiry/all`);
+      if (response.ok) {
+        const payload = await response.json();
+        const data = Array.isArray(payload) ? payload : (Array.isArray(payload?.data) ? payload.data : []);
+
+        allEnquiries = data.map(e => ({
+          id: e._id || e.id,
+          name: e.name,
+          mobile: e.mobile,
+          service: e.service_name || e.service || "Main Page",
+          email: e.email
+        }));
+        applyFilter();
+      } else {
+        showToast("Failed to fetch enquiries");
+      }
+    } catch (err) {
+      console.error(err);
+      showToast("Error connecting to server");
+    }
+  }
+
+
+
+async function fetchLeads() {
+    try {
+        const response = await fetch(`${CONFIG.API_BASE_URL}/leads/all`);
+
+        if (response.ok) {
+            const payload = await response.json();
+
+            leads = payload.data.map(item => ({
+                id: item.id,
+                name: item.name,
+                mobile: item.mobile,
+                email: item.email,
+                service: item.service_name,
+                status: item.status || "Accepted",
+                amount: item.amount || ""
+            }));
+
+            renderLeads();
+            updateCounts();
+        }
+
+    } catch (err) {
+        console.error(err);
+        showToast("Failed to load leads");
+    }
+}
+
+
+  function filterByService(serviceName) {
+    applyFilter(serviceName);
+  }
+
+  function applyFilter(filterVal) {
+    const val = filterVal || document.getElementById('serviceFilter').value;
+    
+    // Get IDs of items already moved to leads to prevent them from showing in enquiries
+    const leadIds = new Set(leads.map(l => l.id));
+    
+    if (val === 'All') {
+      enquiries = allEnquiries.filter(e => !leadIds.has(e.id));
+    } else {
+      enquiries = allEnquiries.filter(e => e.service === val && !leadIds.has(e.id));
+    }
+    
+    renderEnquiries();
+    updateCounts();
+  }
+
   // ── Init ──────────────────────────────────────────────────────────────────
-  document.getElementById('todayLabel').textContent = new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-  renderEnquiries(); renderLeads(); updateCounts(); switchTab('enquiries');
+document.getElementById('todayLabel').textContent =
+    new Date().toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+    });
+
+(async () => {
+    await fetchEnquiries();
+    await fetchLeads();
+    switchTab("enquiries");
+})();
 </script>
 </body>
 </html>
