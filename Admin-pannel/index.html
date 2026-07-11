@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLM Admin · Sales Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          },
+          keyframes: {
+            fadeUp: { '0%': { opacity: 0, transform: 'translateY(8px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            dropIn: { '0%': { opacity: 0, transform: 'scale(0.95) translateY(-4px)' }, '100%': { opacity: 1, transform: 'scale(1) translateY(0)' } },
+          },
+          animation: {
+            fadeUp: 'fadeUp 0.35s cubic-bezier(0.16,1,0.3,1) both',
+            dropIn: 'dropIn 0.18s ease both',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ── colours ── */
+    :root {
+      --ink: #0a0d10;
+      --brass: #a3690f;
+      --ok-bg: #eff6ff; --ok-text: #1d4ed8; --ok-border: #bfdbfe;
+      --pos-bg: #fffbeb; --pos-text: #b45309; --pos-border: #fde68a;
+      --conv-bg: #f0fdf4; --conv-text: #15803d; --conv-border: #bbf7d0;
+      --neg-bg: #fff1f2; --neg-text: #be123c; --neg-border: #fecdd3;
+    }
+
+    body { background: #f5f2ed; }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 99px; }
+
+    /* suppress number input arrows */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    /* ── status colours ── */
+    .s-Accepted      { background: var(--ok-bg);   color: var(--ok-text);   border-color: var(--ok-border); }
+    .s-Positive      { background: var(--pos-bg);  color: var(--pos-text);  border-color: var(--pos-border); }
+    .s-Conversion    { background: var(--conv-bg); color: var(--conv-text); border-color: var(--conv-border); }
+    .s-Negative      { background: var(--neg-bg);  color: var(--neg-text);  border-color: var(--neg-border); }
+
+    /* dot colours */
+    .d-Accepted   { background: var(--ok-text); }
+    .d-Positive   { background: var(--pos-text); }
+    .d-Conversion { background: var(--conv-text); }
+    .d-Negative   { background: var(--neg-text); }
+
+    /* left stripe on lead rows */
+    .stripe-Accepted   { border-left-color: var(--ok-text); }
+    .stripe-Positive   { border-left-color: var(--pos-text); }
+    .stripe-Conversion { border-left-color: var(--conv-text); }
+    .stripe-Negative   { border-left-color: var(--neg-text); }
+
+    /* ── components ── */
+    .tag-pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.18rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.08);
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .accept-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0.42rem 1rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(163,105,15,0.08);
+      border: 1px solid rgba(163,105,15,0.22);
+      color: #b45309;
+      transition: all .2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .accept-btn:hover {
+      background: #d97706;
+      border-color: #d97706;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px -6px rgba(217,119,6,.35);
+    }
+
+    /* Status trigger pill */
+    .status-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid;
+      cursor: pointer;
+      transition: filter .15s ease, box-shadow .15s ease;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .status-trigger:hover { filter: brightness(0.96); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+
+    /* Connect icon buttons */
+    .icon-btn {
+      width: 2rem; height: 2rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(3px);
+      cursor: pointer;
+      transition: all .2s ease;
+      flex-shrink: 0;
+    }
+    .icon-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 12px -4px rgba(0,0,0,.18); }
+    .icon-btn.whatsapp:hover { background: #25d366; border-color: #25d366; color: #fff; }
+    .icon-btn.call:hover      { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
+    .icon-btn.telegram:hover  { background: #229ed9; border-color: #229ed9; color: #fff; }
+    .icon-btn.copy:hover      { background: #0a0d10; border-color: #0a0d10; color: #fff; }
+
+    .amount-wrap {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      border-bottom: 1.5px solid rgba(0,0,0,.12);
+      width: fit-content;
+      transition: border-color .15s;
+    }
+    .amount-wrap:focus-within { border-color: #b45309; }
+    .amount-input {
+      width: 64px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: 0.82rem;
+      background: transparent;
+      outline: none;
+      border: none;
+      color: var(--ink);
+    }
+
+    /* ── Global dropdown (fixed, rendered in body) ── */
+    #globalDropdown {
+      position: fixed;
+      z-index: 9999;
+      min-width: 172px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.1);
+      border-radius: 14px;
+      box-shadow: 0 12px 40px -8px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.04);
+      padding: 5px;
+      display: none;
+      animation: dropIn 0.18s ease both;
+    }
+    .drop-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 9px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: rgba(10,13,16,0.7);
+      transition: background .12s ease, color .12s ease;
+    }
+    .drop-option:hover { background: rgba(0,0,0,.05); color: var(--ink); }
+    .drop-option.active { background: rgba(0,0,0,.05); color: var(--ink); font-weight: 600; }
+    .drop-dot { width: 8px; height: 8px; border-radius: 99px; flex-shrink: 0; }
+
+    /* avatar colours */
+    .av { display: flex; align-items: center; justify-content: center; border-radius: 99px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.72rem; border: 1.5px solid rgba(0,0,0,0.1); flex-shrink: 0; }
+    .av-0 { background: #fef3c7; color: #92400e; }
+    .av-1 { background: #dbeafe; color: #1e40af; }
+    .av-2 { background: #d1fae5; color: #065f46; }
+    .av-3 { background: #fce7f3; color: #9d174d; }
+
+    /* table header */
+    .th { font-size: 0.69rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(10,13,16,.45); }
+
+    /* row */
+    .enq-row { border-left: 3px solid #f59e0b; animation: fadeUp .3s ease both; }
+    .lead-row { border-left: 4px solid; animation: fadeUp .3s ease both; }
+
+    /* panel */
+    .panel { background: rgba(255,255,255,.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(0,0,0,.08); border-radius: 20px; }
+  </style>
+</head>
+
+<body class="min-h-screen font-sans relative">
+
+  <!-- Background -->
+  <div class="fixed inset-0 -z-20 bg-cover bg-center brightness-110 contrast-[0.95]" style="background-image:url('./../assets/image/banner6.jpg');"></div>
+  <div class="fixed inset-0 -z-10" style="background:linear-gradient(to bottom, rgba(244,241,234,0.55), rgba(244,241,234,0.75), rgba(244,241,234,0.9));"></div>
+
+  <!-- Global dropdown (portal) -->
+  <div id="globalDropdown" role="menu">
+    <!-- items injected by JS -->
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" style="position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(0.5rem);z-index:9998;transition:all .3s ease;opacity:0;pointer-events:none;" class="flex items-center gap-2.5 bg-[#0a0d10] text-white px-5 py-3 rounded-full text-sm font-semibold shadow-2xl">
+    <span class="w-1 h-4 rounded-full bg-[#f59e0b]"></span>
+    <span id="toastText">Done</span>
+  </div>
+
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8 py-7">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl flex items-center justify-center font-display font-bold text-sm flex-shrink-0 shadow" style="background:#f59e0b22;border:1.5px solid #f59e0b44;color:#b45309;">MLM</div>
+        <div>
+          <h1 class="font-display text-2xl font-bold tracking-tight text-[#0a0d10]">Admin <span style="color:rgba(10,13,16,0.45);font-weight:500;">Panel</span></h1>
+          <p class="text-sm mt-0.5" style="color:rgba(10,13,16,.5);">Enquiry intake and lead pipeline · real time</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full bg-white/60 backdrop-blur-md border border-black/10 shadow-sm" style="color:rgba(10,13,16,.55);">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_0_3px_rgba(34,197,94,.2)] animate-pulse"></span>
+        live &mdash; <span id="todayLabel"></span>
+      </div>
+    </div>
+
+    <!-- TABS + STAT -->
+    <div class="flex items-center justify-between flex-wrap gap-4 mb-5">
+      <div class="relative flex bg-white/60 backdrop-blur-md border border-black/10 rounded-full p-1 gap-0.5 shadow-sm" id="switchEl">
+        <div id="switchThumb" class="absolute inset-1 w-[calc(50%-2px)] rounded-full transition-transform duration-300 ease-out" style="background:rgba(0,0,0,.07);border:1px solid rgba(0,0,0,.12);"></div>
+        <button id="tabEnq" onclick="switchTab('enquiries')" class="relative z-10 px-5 py-2 text-[0.82rem] font-semibold cursor-pointer flex items-center gap-2 rounded-full transition-colors" style="color:#0a0d10;">
+          Enquiries <span id="enqBadge" class="font-mono text-[0.68rem] px-2 py-0.5 rounded-full" style="background:rgba(163,105,15,.12);color:#b45309;">4</span>
+        </button>
+        <button id="tabLead" onclick="switchTab('leads')" class="relative z-10 px-5 py-2 text-[0.82rem] font-semibold cursor-pointer flex items-center gap-2 rounded-full transition-colors" style="color:rgba(10,13,16,.45);">
+          Leads <span id="leadBadge" class="font-mono text-[0.68rem] px-2 py-0.5 rounded-full" style="background:rgba(0,0,0,.06);color:rgba(10,13,16,.45);">0</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-2.5 text-xs font-medium" style="color:rgba(10,13,16,.5);">
+        Total on board
+        <span id="statTotal" class="font-mono text-base font-bold px-3.5 py-1.5 rounded-full bg-white/60 backdrop-blur-md border border-black/10 shadow-sm" style="color:#0a0d10;">04</span>
+      </div>
+    </div>
+
+    <!-- PANEL -->
+    <div class="panel shadow-xl shadow-black/5 overflow-hidden">
+
+      <!-- ── ENQUIRIES ── -->
+      <div id="viewEnquiries">
+        <!-- header row -->
+        <div class="grid px-5 sm:px-7 py-3 border-b border-black/[0.06]" style="grid-template-columns:2rem 2fr 1.3fr 1.8fr 7rem;background:rgba(0,0,0,.025);">
+          <span class="th">No.</span><span class="th">Client</span><span class="th">Mobile</span><span class="th hidden sm:block">Service</span><span class="th text-right">Action</span>
+        </div>
+        <div id="enquiriesBody"></div>
+        <div id="enqEmpty" class="hidden py-16 text-center px-6">
+          <div class="w-16 h-16 rounded-full bg-black/[0.04] flex items-center justify-center mx-auto mb-4 text-2xl">📭</div>
+          <h4 class="font-display text-base font-bold mb-1">No enquiries waiting</h4>
+          <p class="text-sm" style="color:rgba(10,13,16,.5)">New form submissions will land here first.</p>
+        </div>
+      </div>
+
+      <!-- ── LEADS ── -->
+      <div id="viewLeads" class="hidden">
+        <!-- header row -->
+        <div class="grid px-5 sm:px-7 py-3 border-b border-black/[0.06]" style="grid-template-columns:2rem 1.8fr 1.3fr 1.6fr 11rem 9rem 9rem;background:rgba(0,0,0,.025);">
+          <span class="th">No.</span><span class="th">Name</span><span class="th">Mobile</span><span class="th hidden sm:block">Service</span><span class="th">Status</span><span class="th">Amount</span><span class="th text-center">Connect</span>
+        </div>
+        <div id="leadsBody"></div>
+        <div id="leadEmpty" class="hidden py-16 text-center px-6">
+          <div class="w-16 h-16 rounded-full bg-black/[0.04] flex items-center justify-center mx-auto mb-4 text-2xl">📋</div>
+          <h4 class="font-display text-base font-bold mb-1">Pipeline is empty</h4>
+          <p class="text-sm" style="color:rgba(10,13,16,.5)">Accept an enquiry to add it here.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  // ── Data ──────────────────────────────────────────────────────────────────
+  let enquiries = [
+    { id: 1, name: "Rajesh Kumar", mobile: "9876543210", service: "MLM Database Pack" },
+    { id: 2, name: "Amit Patel",   mobile: "8765432109", service: "Custom MLM Software" },
+    { id: 3, name: "Srinivas M.", mobile: "7654321098", service: "MLM Plan PDF Making" },
+    { id: 4, name: "Vikram Singh", mobile: "6543210987", service: "MLM Video Production" }
+  ];
+  let leads = [];
+
+  const STATUS = [
+    { key: 'Accepted',       label: 'Accepted',    cls: 's-Accepted',   dot: 'd-Accepted' },
+    { key: 'Positive Lead',  label: 'Positive',    cls: 's-Positive',   dot: 'd-Positive' },
+    { key: 'Negative Lead',  label: 'Negative',    cls: 's-Negative',   dot: 'd-Negative' },
+    { key: 'Conversion Lead',label: 'Conversion',  cls: 's-Conversion', dot: 'd-Conversion' },
+  ];
+
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function initials(name){ return name.trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase(); }
+  const avatarColors = ['av-0','av-1','av-2','av-3'];
+
+  // ── Global dropdown ───────────────────────────────────────────────────────
+  let activeDropLeadId = null;
+  const gDrop = document.getElementById('globalDropdown');
+
+  function openStatusDropdown(leadId, btn) {
+    // toggle off if same
+    if (activeDropLeadId === leadId) { closeStatusDropdown(); return; }
+    activeDropLeadId = leadId;
+
+    const lead = leads.find(l => l.id === leadId);
+    const st = STATUS.find(s => s.key === (lead && lead.status)) || STATUS[0];
+
+    // Build items
+    gDrop.innerHTML = STATUS.map(s => `
+      <div class="drop-option ${s.key === (lead && lead.status) ? 'active' : ''}"
+           onclick="selectStatus(${leadId},'${s.key}')">
+        <span class="drop-dot ${s.dot}"></span>
+        ${s.label}
+        ${s.key === (lead && lead.status) ? '<span style="margin-left:auto;font-size:0.7rem;opacity:.5;">✓</span>' : ''}
+      </div>
+    `).join('');
+
+    // Position using getBoundingClientRect (avoids overflow clipping entirely)
+    const rect = btn.getBoundingClientRect();
+    const dropW = 172;
+    let left = rect.left;
+    // clamp to viewport
+    if (left + dropW > window.innerWidth - 8) left = window.innerWidth - dropW - 8;
+    let top = rect.bottom + 6;
+    // if dropdown would overflow bottom, show above
+    if (top + 200 > window.innerHeight) top = rect.top - 200 - 6;
+
+    gDrop.style.left = left + 'px';
+    gDrop.style.top  = top + 'px';
+    gDrop.style.display = 'block';
+    gDrop.style.animation = 'none';
+    requestAnimationFrame(() => { gDrop.style.animation = ''; });
+  }
+
+  function closeStatusDropdown() {
+    gDrop.style.display = 'none';
+    activeDropLeadId = null;
+  }
+
+  function selectStatus(leadId, statusKey) {
+    const lead = leads.find(l => l.id === leadId);
+    if (!lead) return;
+    lead.status = statusKey;
+    closeStatusDropdown();
+    renderLeads();
+    const label = STATUS.find(s => s.key === statusKey)?.label || statusKey;
+    showToast(`Status updated to ${label}`);
+  }
+
+  // Close dropdown on outside click
+  document.addEventListener('click', e => {
+    if (activeDropLeadId !== null && !gDrop.contains(e.target)) {
+      // also allow clicks on trigger buttons (they call openStatusDropdown themselves)
+      if (!e.target.closest('.status-trigger-btn')) closeStatusDropdown();
+    }
+  });
+
+  // ── Enquiry render ────────────────────────────────────────────────────────
+  function renderEnquiries() {
+    const body  = document.getElementById('enquiriesBody');
+    const empty = document.getElementById('enqEmpty');
+    body.innerHTML = '';
+    if (enquiries.length === 0) { empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+
+    enquiries.forEach((e, i) => {
+      const row = document.createElement('div');
+      row.className = 'enq-row grid items-center px-5 sm:px-7 py-3.5 border-b border-black/[0.05] last:border-b-0 hover:bg-black/[0.02] transition-colors';
+      row.style.gridTemplateColumns = '2rem 2fr 1.3fr 1.8fr 7rem';
+      row.style.animationDelay = `${i * 40}ms`;
+      row.innerHTML = `
+        <span class="font-mono text-[0.7rem] font-semibold" style="color:rgba(10,13,16,.35);">${pad(i+1)}</span>
+        <div class="flex items-center gap-3">
+          <div class="av ${avatarColors[i % 4]} w-8 h-8">${initials(e.name)}</div>
+          <span class="font-semibold text-sm truncate" style="color:#0a0d10;">${e.name}</span>
+        </div>
+        <span class="font-mono text-[0.82rem]" style="color:#0a0d10;">${e.mobile}</span>
+        <span class="hidden sm:inline-block"><span class="tag-pill">${e.service}</span></span>
+        <div class="flex justify-end">
+          <button onclick="moveToLead(${e.id})" class="accept-btn">
+            Accept
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      `;
+      body.appendChild(row);
+    });
+  }
+
+  // ── Lead render ───────────────────────────────────────────────────────────
+  function renderLeads() {
+    const body  = document.getElementById('leadsBody');
+    const empty = document.getElementById('leadEmpty');
+    body.innerHTML = '';
+    if (leads.length === 0) { empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+
+    leads.forEach((l, i) => {
+      const st = STATUS.find(s => s.key === l.status) || STATUS[0];
+      const stripeColor = {
+        'Accepted':'#1d4ed8', 'Positive Lead':'#b45309',
+        'Negative Lead':'#be123c', 'Conversion Lead':'#15803d'
+      }[l.status] || '#aaa';
+
+      const row = document.createElement('div');
+      row.className = 'lead-row grid items-center px-5 sm:px-7 py-3.5 border-b border-black/[0.05] last:border-b-0 hover:bg-black/[0.02] transition-colors';
+      row.style.gridTemplateColumns = '2rem 1.8fr 1.3fr 1.6fr 11rem 9rem 9rem';
+      row.style.borderLeftColor = stripeColor;
+      row.style.animationDelay = `${i * 40}ms`;
+
+      row.innerHTML = `
+        <span class="font-mono text-[0.7rem] font-semibold" style="color:rgba(10,13,16,.35);">${pad(i+1)}</span>
+
+        <!-- Name -->
+        <div class="flex items-center gap-3">
+          <div class="av ${avatarColors[i % 4]} w-8 h-8">${initials(l.name)}</div>
+          <span class="font-semibold text-sm truncate" style="color:#0a0d10;">${l.name}</span>
+        </div>
+
+        <!-- Mobile -->
+        <span class="font-mono text-[0.82rem]" style="color:#0a0d10;">${l.mobile}</span>
+
+        <!-- Service -->
+        <span class="hidden sm:inline-block"><span class="tag-pill">${l.service}</span></span>
+
+        <!-- Status dropdown trigger -->
+        <div class="pr-2">
+          <button
+            class="status-trigger-btn status-trigger ${st.cls}"
+            onclick="openStatusDropdown(${l.id}, this)"
+            aria-haspopup="true"
+          >
+            <span class="flex items-center gap-2">
+              <span class="drop-dot ${st.dot}"></span>
+              <span>${st.label}</span>
+            </span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.6;"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+
+        <!-- Amount -->
+        <div style="display:flex;align-items:center;gap:5px;">
+          <div class="amount-wrap" style="flex:1;">
+            <span class="text-xs font-mono pl-1" style="color:rgba(10,13,16,.4);">₹</span>
+            <input
+              id="amt-${l.id}"
+              type="number"
+              class="amount-input"
+              value="${l.amount || ''}"
+              placeholder="0"
+              onkeydown="if(event.key==='Enter'){confirmAmount(${l.id});}"
+              oninput="showAmountBtn(${l.id})"
+            />
+          </div>
+          <button
+            id="amt-btn-${l.id}"
+            onclick="confirmAmount(${l.id})"
+            title="Set amount"
+            style="display:${l.amount ? 'flex' : 'none'};width:1.7rem;height:1.7rem;border-radius:99px;background:#f59e0b;border:none;color:#fff;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s ease;box-shadow:0 2px 8px rgba(245,158,11,.35);"
+            onmouseover="this.style.transform='scale(1.1)'"
+            onmouseout="this.style.transform='scale(1)'"
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
+
+        <!-- Connect -->
+        <div class="flex items-center gap-1.5 justify-center">
+          <button class="icon-btn whatsapp" title="WhatsApp" onclick="openWhatsApp('${l.mobile}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </button>
+          <button class="icon-btn call" title="Call" onclick="window.location.href='tel:${l.mobile}'">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2.3" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </button>
+          <button class="icon-btn telegram" title="Telegram" onclick="openTelegram('${l.mobile}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#229ed9"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.686c.223-.195-.054-.31-.353-.111l-6.4 4.024-2.76-.86c-.6-.184-.61-.6.125-.89l10.736-4.136c.498-.183.927.11 1.332.314z"/></svg>
+          </button>
+          <button class="icon-btn copy" title="Copy number" onclick="copyNumber('${l.mobile}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+          </button>
+        </div>
+      `;
+      body.appendChild(row);
+    });
+  }
+
+  // ── Actions ───────────────────────────────────────────────────────────────
+  function moveToLead(id) {
+    const idx = enquiries.findIndex(e => e.id === id);
+    if (idx === -1) return;
+    const [e] = enquiries.splice(idx, 1);
+    leads.unshift({ ...e, status: 'Accepted', amount: '' });
+    renderEnquiries(); renderLeads(); updateCounts();
+    showToast(`${e.name} accepted onto the board`);
+    switchTab('leads');
+  }
+
+  function updateLeadAmount(id, val) {
+    const l = leads.find(l => l.id === id);
+    if (l) l.amount = val;
+  }
+
+  function showAmountBtn(id) {
+    const btn = document.getElementById(`amt-btn-${id}`);
+    const inp = document.getElementById(`amt-${id}`);
+    if (btn) btn.style.display = inp && inp.value ? 'flex' : 'none';
+  }
+
+  function confirmAmount(id) {
+    const inp = document.getElementById(`amt-${id}`);
+    if (!inp) return;
+    const val = inp.value;
+    updateLeadAmount(id, val);
+    const btn = document.getElementById(`amt-btn-${id}`);
+    // flash button green to confirm
+    if (btn) {
+      btn.style.background = '#15803d';
+      btn.style.transform = 'scale(1.15)';
+      setTimeout(() => {
+        btn.style.background = '#f59e0b';
+        btn.style.transform = 'scale(1)';
+      }, 600);
+    }
+    showToast(val ? `Amount set: ₹${Number(val).toLocaleString('en-IN')}` : 'Amount cleared');
+  }
+
+  function updateCounts() {
+    document.getElementById('enqBadge').textContent  = enquiries.length;
+    document.getElementById('leadBadge').textContent = leads.length;
+    document.getElementById('statTotal').textContent = pad(enquiries.length + leads.length);
+  }
+
+  function openWhatsApp(m)  { window.open(`https://wa.me/91${m.replace(/\D/g,'')}`, '_blank'); }
+  function openTelegram(m)  { window.open(`https://t.me/+91${m.replace(/\D/g,'')}`, '_blank'); }
+  function copyNumber(m)    { navigator.clipboard.writeText(m).then(() => showToast(`Copied ${m}`)); }
+
+  // ── Tab switch ────────────────────────────────────────────────────────────
+  function switchTab(tab) {
+    closeStatusDropdown();
+    const eV = document.getElementById('viewEnquiries');
+    const lV = document.getElementById('viewLeads');
+    const eB = document.getElementById('tabEnq');
+    const lB = document.getElementById('tabLead');
+    const th = document.getElementById('switchThumb');
+    const eBadge = document.getElementById('enqBadge');
+    const lBadge = document.getElementById('leadBadge');
+
+    if (tab === 'enquiries') {
+      eV.classList.remove('hidden'); lV.classList.add('hidden');
+      eB.style.color = '#0a0d10'; lB.style.color = 'rgba(10,13,16,.45)';
+      eBadge.style.cssText = 'background:rgba(163,105,15,.12);color:#b45309;';
+      lBadge.style.cssText = 'background:rgba(0,0,0,.06);color:rgba(10,13,16,.45);';
+      th.style.transform = 'translateX(0)';
+    } else {
+      eV.classList.add('hidden'); lV.classList.remove('hidden');
+      lB.style.color = '#0a0d10'; eB.style.color = 'rgba(10,13,16,.45)';
+      lBadge.style.cssText = 'background:rgba(163,105,15,.12);color:#b45309;';
+      eBadge.style.cssText = 'background:rgba(0,0,0,.06);color:rgba(10,13,16,.45);';
+      th.style.transform = 'translateX(100%)';
+    }
+  }
+
+  // ── Toast ─────────────────────────────────────────────────────────────────
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastText').textContent = msg;
+    t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(0.5rem)';
+    }, 2800);
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  document.getElementById('todayLabel').textContent = new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+  renderEnquiries(); renderLeads(); updateCounts(); switchTab('enquiries');
+</script>
+</body>
+</html>
