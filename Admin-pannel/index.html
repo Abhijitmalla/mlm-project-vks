@@ -278,8 +278,8 @@
       <!-- ── ENQUIRIES ── -->
       <div id="viewEnquiries">
         <!-- header row -->
-        <div class="grid px-5 sm:px-7 py-3 border-b border-black/[0.06]" style="grid-template-columns:2rem 2fr 1.3fr 1.8fr 7rem;background:rgba(0,0,0,.025);">
-          <span class="th">No.</span><span class="th">Client</span><span class="th">Mobile</span><span class="th hidden sm:block">Service</span><span class="th text-right">Action</span>
+        <div class="grid px-5 sm:px-7 py-3 border-b border-black/[0.06]" style="grid-template-columns:2rem 1.6fr 1.2fr 1.8fr 1.6fr 7rem;background:rgba(0,0,0,.025);">
+          <span class="th">No.</span><span class="th">Client</span><span class="th">Mobile</span><span class="th">Email</span><span class="th hidden sm:block">Service</span><span class="th text-right">Action</span>
         </div>
         <div id="enquiriesBody"></div>
         <div id="enqEmpty" class="hidden py-16 text-center px-6">
@@ -292,8 +292,8 @@
       <!-- ── LEADS ── -->
       <div id="viewLeads" class="hidden">
         <!-- header row -->
-        <div class="grid px-5 sm:px-7 py-3 border-b border-black/[0.06]" style="grid-template-columns:2rem 1.8fr 1.3fr 1.6fr 11rem 9rem 9rem;background:rgba(0,0,0,.025);">
-          <span class="th">No.</span><span class="th">Name</span><span class="th">Mobile</span><span class="th hidden sm:block">Service</span><span class="th">Status</span><span class="th">Amount</span><span class="th text-center">Connect</span>
+        <div class="grid px-5 sm:px-7 py-3 border-b border-black/[0.06]" style="grid-template-columns:2rem 1.6fr 1.2fr 1.8fr 1.6fr 11rem 9rem 9rem;background:rgba(0,0,0,.025);">
+          <span class="th">No.</span><span class="th">Name</span><span class="th">Mobile</span><span class="th">Email</span><span class="th hidden sm:block">Service</span><span class="th">Status</span><span class="th">Amount</span><span class="th text-center">Connect</span>
         </div>
         <div id="leadsBody"></div>
         <div id="leadEmpty" class="hidden py-16 text-center px-6">
@@ -369,14 +369,36 @@
     activeDropLeadId = null;
   }
 
-  function selectStatus(leadId, statusKey) {
+  async function selectStatus(leadId, statusKey) {
     const lead = leads.find(l => l.id === leadId);
     if (!lead) return;
-    lead.status = statusKey;
-    closeStatusDropdown();
-    renderLeads();
-    const label = STATUS.find(s => s.key === statusKey)?.label || statusKey;
-    showToast(`Status updated to ${label}`);
+    
+    try {
+        const response = await fetch(`${CONFIG.API_BASE_URL}/leads/status/${leadId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: statusKey })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+            lead.status = statusKey;
+            closeStatusDropdown();
+            renderLeads();
+            const label = STATUS.find(s => s.key === statusKey)?.label || statusKey;
+            showToast(`Status updated to ${label}`);
+        } else {
+            showToast(data.message || "Failed to update status");
+            closeStatusDropdown();
+        }
+    } catch(err) {
+        console.error(err);
+        showToast("Error updating status");
+        closeStatusDropdown();
+    }
   }
 
   // Close dropdown on outside click
@@ -398,15 +420,16 @@
     enquiries.forEach((e, i) => {
       const row = document.createElement('div');
       row.className = 'enq-row grid items-center px-5 sm:px-7 py-3.5 border-b border-black/[0.05] last:border-b-0 hover:bg-black/[0.02] transition-colors';
-      row.style.gridTemplateColumns = '2rem 2fr 1.3fr 1.8fr 7rem';
+      row.style.gridTemplateColumns = '2rem 1.6fr 1.2fr 1.8fr 1.6fr 7rem';
       row.style.animationDelay = `${i * 40}ms`;
       row.innerHTML = `
         <span class="font-mono text-[0.7rem] font-semibold" style="color:rgba(10,13,16,.35);">${pad(i+1)}</span>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 min-w-0">
           <div class="av ${avatarColors[i % 4]} w-8 h-8">${initials(e.name)}</div>
           <span class="font-semibold text-sm truncate" style="color:#0a0d10;">${e.name}</span>
         </div>
         <span class="font-mono text-[0.82rem]" style="color:#0a0d10;">${e.mobile}</span>
+        <span class="text-[0.82rem] truncate" style="color:#0a0d10;">${e.email || '—'}</span>
         <span class="hidden sm:inline-block"><span class="tag-pill">${e.service}</span></span>
         <div class="flex justify-end">
           <button onclick="moveToLead(${e.id})" class="accept-btn">
@@ -436,7 +459,7 @@
 
       const row = document.createElement('div');
       row.className = 'lead-row grid items-center px-5 sm:px-7 py-3.5 border-b border-black/[0.05] last:border-b-0 hover:bg-black/[0.02] transition-colors';
-      row.style.gridTemplateColumns = '2rem 1.8fr 1.3fr 1.6fr 11rem 9rem 9rem';
+      row.style.gridTemplateColumns = '2rem 1.6fr 1.2fr 1.8fr 1.6fr 11rem 9rem 9rem';
       row.style.borderLeftColor = stripeColor;
       row.style.animationDelay = `${i * 40}ms`;
 
@@ -444,13 +467,16 @@
         <span class="font-mono text-[0.7rem] font-semibold" style="color:rgba(10,13,16,.35);">${pad(i+1)}</span>
 
         <!-- Name -->
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 min-w-0">
           <div class="av ${avatarColors[i % 4]} w-8 h-8">${initials(l.name)}</div>
           <span class="font-semibold text-sm truncate" style="color:#0a0d10;">${l.name}</span>
         </div>
 
         <!-- Mobile -->
         <span class="font-mono text-[0.82rem]" style="color:#0a0d10;">${l.mobile}</span>
+
+        <!-- Email -->
+        <span class="text-[0.82rem] truncate" style="color:#0a0d10;">${l.email || '—'}</span>
 
         <!-- Service -->
         <span class="hidden sm:inline-block"><span class="tag-pill">${l.service}</span></span>
@@ -559,22 +585,42 @@ async function moveToLead(id) {
     if (btn) btn.style.display = inp && inp.value ? 'flex' : 'none';
   }
 
-  function confirmAmount(id) {
+  async function confirmAmount(id) {
     const inp = document.getElementById(`amt-${id}`);
     if (!inp) return;
     const val = inp.value;
-    updateLeadAmount(id, val);
-    const btn = document.getElementById(`amt-btn-${id}`);
-    // flash button green to confirm
-    if (btn) {
-      btn.style.background = '#15803d';
-      btn.style.transform = 'scale(1.15)';
-      setTimeout(() => {
-        btn.style.background = '#f59e0b';
-        btn.style.transform = 'scale(1)';
-      }, 600);
+    
+    try {
+      const response = await fetch(`${CONFIG.API_BASE_URL}/leads/amount/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ amount: val })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        updateLeadAmount(id, val);
+        const btn = document.getElementById(`amt-btn-${id}`);
+        // flash button green to confirm
+        if (btn) {
+          btn.style.background = '#15803d';
+          btn.style.transform = 'scale(1.15)';
+          setTimeout(() => {
+            btn.style.background = '#f59e0b';
+            btn.style.transform = 'scale(1)';
+          }, 600);
+        }
+        showToast(val ? `Amount set: ₹${Number(val).toLocaleString('en-IN')}` : 'Amount cleared');
+      } else {
+        showToast(data.message || "Failed to save amount");
+      }
+    } catch(err) {
+      console.error(err);
+      showToast("Error saving amount");
     }
-    showToast(val ? `Amount set: ₹${Number(val).toLocaleString('en-IN')}` : 'Amount cleared');
   }
 
   function updateCounts() {
