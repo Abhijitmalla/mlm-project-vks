@@ -223,23 +223,64 @@
 
 <!-- SERVICES DETAILS BANNER -->
 <section class="py-16 px-4 sm:px-7">
-  <div class="max-w-[1220px] mx-auto">
+  <div class=" mx-auto">
 
     <div class="rounded-3xl px-6 sm:px-10 py-6 sm:py-7 mb-10 text-center shadow-xl relative overflow-hidden bg-primary">
       <h2 class="font-display font-extrabold tracking-wide text-white text-2xl sm:text-4xl uppercase">MLM Leader Website Services Details</h2>
       <div class="w-16 h-[3px] bg-accent rounded-full mx-auto mt-3.5"></div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-8 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-8 items-stretch">
 
       <!-- Video / services showcase card -->
-      <div class="relative rounded-[22px] p-1.5 shadow-2xl bg-accent">
-        <div class="relative rounded-[18px] overflow-hidden bg-[#0b0f1a] aspect-[4/3] sm:aspect-[16/11]">
-          <video autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg" class="absolute inset-0 w-full h-full object-cover">
-            <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
-          </video>
+      <div class="flex flex-col gap-5 h-full">
+        <!-- Watch banner -->
+        <div class="bg-primary text-white rounded-2xl shadow-lg px-6 py-5 cursor-pointer hover:-translate-y-0.5 transition-transform">
+          <h3 class="font-display font-bold text-lg">Watch this video — see exactly how your leader website works</h3>
+          <div class="w-11 h-[3px] rounded-full bg-accent mt-2"></div>
+        </div>
+        <div class="flex-1 rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-card flex flex-col">
+          <!-- shimmer bar -->
+          <div class="h-[3px] w-full" style="background-image:linear-gradient(90deg,#F59E0B,#111827,#F59E0B);background-size:200% 100%;animation:shimmerBarLW 3.5s linear infinite;"></div>
+          <style>@keyframes shimmerBarLW{0%{background-position:0% 0}100%{background-position:200% 0}}</style>
 
-        
+          <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200">
+            <div class="w-9 h-9 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold text-[13px]">VK</div>
+            <div>
+              <div class="text-[14.5px] font-semibold text-primary">MLM Leader Website — Live Walkthrough</div>
+              <div class="text-xs text-gray-400">Real demo · updated weekly</div>
+            </div>
+          </div>
+
+          <div class="m-4 rounded-xl border-2 border-accent overflow-hidden bg-primary" style="box-shadow:0 10px 28px -6px rgba(245,158,11,0.45);">
+            <div class="relative bg-black/90" style="aspect-ratio:16/9;">
+              <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM Leader Website — VK Services Enterprise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="absolute left-3.5 bottom-11 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
+            </div>
+            <div class="flex items-center justify-between gap-2.5 px-4 py-3 bg-black/80 backdrop-blur">
+              <div class="flex items-center gap-3.5">
+                <span title="Share" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">↗</span>
+                <span title="Watch later" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">🕐</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm font-semibold text-white">
+                <span class="w-[26px] h-5 rounded bg-accent flex items-center justify-center text-[10px]">▤</span> More videos
+              </div>
+              <div class="flex items-center gap-1.5 text-sm font-bold text-white">
+                <span class="w-[22px] h-4 rounded bg-red-600 flex items-center justify-center text-[8px] text-white">▶</span> YouTube
+              </div>
+            </div>
+          </div>
+
+          <p class="px-5 pb-4 text-[13.5px] leading-relaxed text-gray-500">
+            <span class="text-accent font-bold italic">Live Demo:</span> This video shows how your MLM leader website will look and function — including the plan details, team pages, and contact sections.
+          </p>
+
+          <div class="mt-auto flex items-center justify-between gap-3 flex-wrap px-5 py-4 bg-primary text-white rounded-b-2xl">
+            <div class="text-xs font-semibold flex items-center gap-1.5">▶ More demo videos</div>
+            <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
+              <span class="w-[22px] h-[22px] rounded-full bg-accent flex items-center justify-center text-xs">✆</span> Call / WhatsApp for details
+            </a>
+          </div>
         </div>
       </div>
 
@@ -253,7 +294,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl px-6 sm:px-8 py-8 text-center border-2 border-dashed border-accent/50 bg-neutral-50">
+        <div class="flex-1 flex flex-col justify-center items-center rounded-2xl px-6 sm:px-8 py-8 text-center border-2 border-dashed border-accent/50 bg-neutral-50">
           <p class="font-display font-extrabold text-primary text-base sm:text-xl leading-snug uppercase mb-6">
             Explore the live demo to see how the website works and looks in action.
           </p>
@@ -269,7 +310,7 @@
 
 <!-- NEED MORE INFO CTA -->
 <section class="px-4 sm:px-7">
-  <div class="max-w-[1220px] mx-auto">
+  <div class=" mx-auto">
     <div class="rounded-2xl border-2 border-dashed border-white/40 bg-primary px-5 sm:px-10 py-7 sm:py-9 text-center">
       <div class="max-w-2xl mx-auto rounded-xl px-6 py-5 sm:py-6 mb-7 shadow-lg bg-gradient-to-r from-accent to-yellow-500">
         <div class="font-display font-extrabold text-white text-lg sm:text-2xl tracking-wide uppercase">Need Any More Information?</div>
@@ -284,7 +325,7 @@
 
 <!-- MLM WEBSITE DEMO GALLERY -->
 <section class="pt-16 pb-8 px-4 sm:px-7">
-  <div class="max-w-[1220px] mx-auto">
+  <div class=" mx-auto">
 
     <div class="rounded-3xl px-6 sm:px-10 py-6 sm:py-7 mb-10 text-center shadow-xl bg-primary">
       <h2 class="font-display font-extrabold tracking-wide text-white text-2xl sm:text-4xl uppercase">MLM Leader Website Demo</h2>
@@ -336,7 +377,7 @@
 
 <!-- WEBSITE SERVICES DETAILS + PRICING -->
 <section class="pt-8 pb-16 px-4 sm:px-7">
-  <div class="max-w-[1220px] mx-auto">
+  <div class=" mx-auto">
 
     <div class="rounded-3xl px-6 sm:px-10 py-6 sm:py-7 mb-12 text-center shadow-xl bg-primary">
       <h2 class="font-display font-extrabold tracking-wide text-white text-2xl sm:text-4xl uppercase">MLM Leader Website Services Details</h2>
@@ -402,7 +443,7 @@
 
  <!-- ================= TESTIMONIALS ================= -->
   <section id="testimonials" class=" mx-4 sm:mx-8 bg-white text-primary px-6 sm:px-8 py-20 rounded-3xl border border-gray-100">
-    <div class="max-w-xl mx-auto text-center mb-12">
+    <div class=" mx-auto text-center mb-12">
       <div class="inline-flex items-center gap-2.5 font-mono text-xs font-semibold tracking-[0.1em] uppercase text-accent mb-3.5">
         <span class="w-5 h-px bg-accent"></span> Testimonials <span class="w-5 h-px bg-accent"></span>
       </div>
@@ -427,7 +468,7 @@
 
  <!-- ================= STATS + CTA ================= -->
 <section id="statsCta" class="mt-24 mx-4 sm:mx-8 bg-primary text-white px-6 sm:px-8 py-24 rounded-3xl relative overflow-hidden">
-    <div class="relative max-w-[1100px] mx-auto">
+    <div class="relative mx-auto">
 
         <!-- HEADING -->
         <div class="text-center mb-11">
@@ -486,7 +527,7 @@
 </section>
 
   <!-- ================= SERVICES ================= -->
-  <section id="services" class="mt-24 max-w-[1220px] mx-auto px-6">
+  <section id="services" class="mt-24  mx-auto px-6">
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-9 items-stretch">
       <div>
         <div class="flex flex-col h-full">

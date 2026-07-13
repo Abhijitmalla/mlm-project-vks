@@ -190,51 +190,63 @@
     <section class="py-24 px-6 bg-gray-50" id="services">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div class="lg:sticky lg:top-28">
-                <div class="rounded-[28px] overflow-hidden shadow-2xl relative aspect-video bg-dark ring-1 ring-black/5 group">
-                    <video autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg" class="w-full h-full object-cover">
-                        <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent pointer-events-none"></div>
-
-                    <!-- Live proof badge -->
-                    <div class="absolute top-5 left-5 inline-flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-full pl-2.5 pr-4 py-1.5 shadow-lg">
-                        <span class="relative flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
-                        </span>
-                        <span class="text-[11px] font-bold tracking-widest uppercase text-primary font-mono">Live Proof</span>
-                    </div>
-
-                    <!-- Play affordance -->
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-16 h-16 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
-                            <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                    </div>
-
-                    <!-- Caption bar -->
-                    <div class="absolute bottom-0 left-0 right-0 px-6 py-5">
-                        <div class="text-white font-display font-bold text-lg leading-snug">See the dashboard, plans & campaigns in action</div>
-                        <div class="text-gray-300 text-xs mt-1">60-second walkthrough &middot; no signup required</div>
-                    </div>
+                <!-- Watch Banner -->
+                <div class="bg-primary text-white rounded-2xl shadow-lg px-6 py-5 mb-5 cursor-pointer hover:-translate-y-0.5 transition-transform">
+                  <h3 class="font-display font-bold text-lg">Watch this video before you order — see exactly what you get</h3>
+                  <div class="w-11 h-[3px] rounded-full bg-accent mt-2"></div>
                 </div>
+                <p class="text-gray-500 text-[14.5px] leading-relaxed mb-4">
+                  See our complete walkthrough of the MLM database pack — data quality, instant delivery, and how to use it for your campaign.
+                </p>
+                <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-card">
+                  <!-- shimmer top bar -->
+                  <div class="h-[3px] w-full" style="background-image:linear-gradient(90deg,#F59E0B,#111827,#F59E0B);background-size:200% 100%;animation:shimmerBar 3.5s linear infinite;"></div>
+                  <style>@keyframes shimmerBar{0%{background-position:0% 0}100%{background-position:200% 0}}</style>
 
-                <div class="bg-white rounded-2xl p-6 mt-6 shadow-lg border border-gray-100 flex gap-4 items-start">
-                    <div class="w-11 h-11 rounded-full bg-accent/15 flex items-center justify-center shrink-0 text-accent">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="9" /></svg>
-                    </div>
+                  <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200">
+                    <div class="w-9 h-9 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold text-[13px]">VK</div>
                     <div>
-                        <h4 class="text-primary font-bold text-base mb-1.5 font-display">Don't just buy. Test it yourself before spending a single rupee!</h4>
-                        <p class="text-gray-500 text-sm leading-relaxed">Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.</p>
+                      <div class="text-[14.5px] font-semibold text-primary">Looking for a targeted MLM database pack?</div>
+                      <div class="text-xs text-gray-400">Live dashboard walkthrough — updated weekly</div>
                     </div>
+                  </div>
+
+                  <div class="m-4 rounded-xl border-2 border-accent overflow-hidden bg-primary" style="box-shadow:0 10px 28px -6px rgba(245,158,11,0.45);">
+                    <div class="relative bg-black/90" style="aspect-ratio:16/8.2;">
+                      <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM Database Pack — VK Services Enterprise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <div class="absolute left-3.5 bottom-11 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
+                    </div>
+                    <div class="flex items-center justify-between gap-2.5 px-4 py-3 bg-black/80 backdrop-blur">
+                      <div class="flex items-center gap-3.5">
+                        <span title="Share" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">↗</span>
+                        <span title="Watch later" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">🕐</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-sm font-semibold text-white">
+                        <span class="w-[26px] h-5 rounded bg-accent flex items-center justify-center text-[10px]">▤</span> More videos
+                      </div>
+                      <div class="flex items-center gap-1.5 text-sm font-bold text-white">
+                        <span class="w-[22px] h-4 rounded bg-red-600 flex items-center justify-center text-[8px] text-white">▶</span> YouTube
+                      </div>
+                    </div>
+                  </div>
+
+                  <p class="px-5 pb-4 text-[13.5px] leading-relaxed text-gray-500">
+                    <span class="text-accent font-bold italic">Quick Guide:</span> This video explains how to use the MLM database pack for high-converting campaigns. See data freshness, delivery speed, and marketing tips inside.
+                  </p>
+
+                  <div class="flex items-center justify-between gap-3 flex-wrap px-5 py-4 bg-primary text-white">
+                    <div class="text-xs font-semibold flex items-center gap-1.5">▶ More demo videos</div>
+                    <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
+                      <span class="w-[22px] h-[22px] rounded-full bg-accent flex items-center justify-center text-xs">✆</span> Call / WhatsApp for details
+                    </a>
+                  </div>
                 </div>
+
             </div>
             
             <div>
                 <div class="mb-10">
-                    <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
-                        <span class="w-6 h-[1px] bg-accent"></span> Our Services
-                    </div>
+                  
                     <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-5 leading-tight">Latest MLM Database Pack<br class="hidden sm:block">Price:-₹4999/- +GST(Limited Time Promotional Offer)</h2>
                     <p class="text-gray-500 text-base leading-relaxed max-w-xl">Because you pay for outcomes, not impressions. Every rupee is tied to a verified, answered lead &mdash; so your marketing budget only ever works as hard as the results it brings back.</p>
                 </div>

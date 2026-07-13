@@ -230,7 +230,7 @@
 
 
   <!-- ================= VIDEO + FEATURES ================= -->
-  <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-9 items-stretch mb-24">
+  <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-9 items-stretch mt-20 mb-24 mx-auto px-6 sm:px-8">
 
   <!-- LEFT: video -->
 <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-card flex flex-col">
@@ -244,12 +244,10 @@
   </div>
 
   <div class="m-4 rounded-xl border-2 border-accent overflow-hidden shadow-accent-glow bg-primary flex-1">
-<div class="relative aspect-video bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center h-full">
-          <span class="absolute left-3.5 bottom-4 font-display font-bold text-[13px] tracking-wide text-white/55">VK SERVICES ENTERPRISE</span>
-      <div id="playBtn" title="Play walkthrough" class="w-16 h-16 rounded-full bg-accent text-white border-2 border-white/50 shadow-accent-glow flex items-center justify-center cursor-pointer transition-transform hover:scale-105">
-        <span class="border-l-[18px] border-l-white border-y-[11px] border-y-transparent ml-1.5"></span>
-      </div>
-    </div>
+  <div class="relative bg-black/90" style="aspect-ratio:16/8.2;">
+            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM Plan PDF — VK Services Enterprise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="absolute left-3.5 bottom-11 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
+  </div>
   </div>
 
   <div class="flex items-center justify-between gap-3 flex-wrap px-5 py-4 bg-primary text-white">
@@ -603,9 +601,6 @@
 </div>
 
 <script>
-  document.getElementById('playBtn').addEventListener('click', () => {
-    alert('This would play the walkthrough video.');
-  });
 
   /* ---------------- FEATURES ---------------- */
   const features = [

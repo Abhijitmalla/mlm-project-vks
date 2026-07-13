@@ -178,15 +178,56 @@
     <section class="py-24 px-6 bg-gray-50" id="services">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div class="lg:sticky lg:top-32">
-                <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200 relative aspect-video bg-dark">
-                    <video autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg" class="w-full h-full object-cover">
-                        <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent pointer-events-none"></div>
+                <!-- Watch Banner -->
+                <div class="bg-primary text-white rounded-2xl shadow-lg px-6 py-5 mb-5 cursor-pointer hover:-translate-y-0.5 transition-transform">
+                  <h3 class="font-display font-bold text-lg">Watch this live video before testing the services below</h3>
+                  <div class="w-11 h-[3px] rounded-full bg-accent mt-2"></div>
                 </div>
-                <div class="bg-white rounded-xl p-6 mt-6 shadow-lg border border-gray-100">
-                    <h4 class="text-accent font-semibold text-lg mb-3 font-display">Don't just buy. Test it yourself before spending a single rupee!</h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.</p>
+                <p class="text-gray-500 text-[14.5px] leading-relaxed mb-4">
+                  See the complete walkthrough of our admin control panels and user wallets, with real-time commission calculations.
+                </p>
+                <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-card">
+                  <!-- shimmer top bar -->
+                  <div class="h-[3px] w-full" style="background-image:linear-gradient(90deg,#F59E0B,#111827,#F59E0B);background-size:200% 100%;animation:shimmerBarIdx 3.5s linear infinite;"></div>
+                  <style>@keyframes shimmerBarIdx{0%{background-position:0% 0}100%{background-position:200% 0}}</style>
+
+                  <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200">
+                    <div class="w-9 h-9 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold text-[13px]">VK</div>
+                    <div>
+                      <div class="text-[14.5px] font-semibold text-primary">Looking for a customized MLM software service?</div>
+                      <div class="text-xs text-gray-400">Live dashboard walkthrough — updated weekly</div>
+                    </div>
+                  </div>
+
+                  <div class="m-4 rounded-xl border-2 border-accent overflow-hidden bg-primary" style="box-shadow:0 10px 28px -6px rgba(245,158,11,0.45);">
+                    <div class="relative bg-black/90" style="aspect-ratio:16/8.2;">
+                      <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM service provider video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <div class="absolute left-3.5 bottom-11 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
+                    </div>
+                    <div class="flex items-center justify-between gap-2.5 px-4 py-3 bg-black/80 backdrop-blur">
+                      <div class="flex items-center gap-3.5">
+                        <span title="Share" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">↗</span>
+                        <span title="Watch later" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">🕐</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-sm font-semibold text-white">
+                        <span class="w-[26px] h-5 rounded bg-accent flex items-center justify-center text-[10px]">▤</span> More videos
+                      </div>
+                      <div class="flex items-center gap-1.5 text-sm font-bold text-white">
+                        <span class="w-[22px] h-4 rounded bg-red-600 flex items-center justify-center text-[8px] text-white">▶</span> YouTube
+                      </div>
+                    </div>
+                  </div>
+
+                  <p class="px-5 pb-4 text-[13.5px] leading-relaxed text-gray-500">
+                    <span class="text-accent font-bold italic">Quick Testing Guide:</span> Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.
+                  </p>
+
+                  <div class="flex items-center justify-between gap-3 flex-wrap px-5 py-4 bg-primary text-white">
+                    <div class="text-xs font-semibold flex items-center gap-1.5">▶ More demo videos</div>
+                    <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
+                      <span class="w-[22px] h-[22px] rounded-full bg-accent flex items-center justify-center text-xs">✆</span> Call / WhatsApp for details
+                    </a>
+                  </div>
                 </div>
             </div>
             

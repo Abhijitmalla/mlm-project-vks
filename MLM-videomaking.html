@@ -226,48 +226,65 @@
 <section class="py-24 px-7" id="showcase">
   <div class="max-w-[1160px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
-    <!-- LEFT: video mock -->
-    <div class="relative rounded-[20px] overflow-hidden shadow-[0_30px_60px_-20px_rgba(17,24,39,0.45)] w-full max-w-[560px] mx-auto"
-         style="aspect-ratio:16/10; min-height:260px; background:
-           radial-gradient(circle at 30% 20%, rgba(245,158,11,0.35), transparent 55%),
-           radial-gradient(circle at 75% 80%, rgba(245,158,11,0.18), transparent 50%),
-           linear-gradient(160deg,#1f2937 0%, #111827 60%, #0b0f1a 100%);">
-      <div class="absolute inset-0"
-           style="background-image:
-             linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-             linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-             background-size:28px 28px;
-             mask-image:radial-gradient(circle at center, black 40%, transparent 85%);
-             -webkit-mask-image:radial-gradient(circle at center, black 40%, transparent 85%);"></div>
-
-      <div class="absolute top-0 left-0 right-0 flex justify-between items-center px-5 py-4.5 z-10">
-        <span class="font-mono-plex text-[11px] font-semibold text-white bg-white/10 border border-white/20 px-2.5 py-1 rounded-md tracking-wide">SAMPLE PLAN VIDEO</span>
-        <span class="font-mono-plex text-[11px] font-semibold text-primary bg-accent border border-accent px-2.5 py-1 rounded-md tracking-wide">ULTRA HD</span>
+    <!-- LEFT: YouTube video card -->
+    <div class="flex flex-col gap-5">
+      <!-- Watch banner -->
+      <div class="bg-primary text-white rounded-2xl shadow-lg px-6 py-5 cursor-pointer hover:-translate-y-0.5 transition-transform">
+        <h3 class="font-display font-bold text-lg">Watch a real MLM video we made — see the quality yourself</h3>
+        <div class="w-11 h-[3px] rounded-full bg-accent mt-2"></div>
       </div>
+      <p class="text-[#111827]/60 text-[14.5px] leading-relaxed">
+        See the exact style, animation quality, and voiceover we deliver. This is a live sample — your video will be 100% customised with your brand and plan.
+      </p>
+      <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-card">
+        <!-- shimmer bar -->
+        <div class="h-[3px] w-full" style="background-image:linear-gradient(90deg,#F59E0B,#111827,#F59E0B);background-size:200% 100%;animation:shimmerBarV 3.5s linear infinite;"></div>
+        <style>@keyframes shimmerBarV{0%{background-position:0% 0}100%{background-position:200% 0}}</style>
 
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[78px] h-[78px] rounded-full bg-accent/95 flex items-center justify-center animate-play-ring z-10">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#111827" class="ml-1"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-
-      <div class="absolute bottom-0 left-0 right-0 z-10 p-5 bg-gradient-to-t from-black/55 to-transparent">
-        <div class="flex items-end gap-[3px] h-[26px] mb-3">
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:60%;animation-delay:0s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:90%;animation-delay:.1s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:40%;animation-delay:.2s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:75%;animation-delay:.3s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:55%;animation-delay:.4s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:95%;animation-delay:.5s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:35%;animation-delay:.6s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:70%;animation-delay:.7s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:50%;animation-delay:.8s"></span>
-          <span class="w-[3px] bg-accent rounded-sm animate-wave" style="height:80%;animation-delay:.9s"></span>
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200">
+          <div class="w-9 h-9 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold text-[13px]">VK</div>
+          <div>
+            <div class="text-[14.5px] font-semibold text-primary">Sample MLM Plan Video — Ultra HD</div>
+            <div class="text-xs text-gray-400">Voiceover · Motion Graphics · Brand Intro</div>
+          </div>
         </div>
-        <div class="text-white font-semibold text-sm">Compensation Plan Walkthrough</div>
-        <div class="text-white/60 text-xs mt-0.5">Voiceover · Motion Graphics · Brand Intro</div>
+
+        <div class="m-4 rounded-xl border-2 border-accent overflow-hidden bg-primary" style="box-shadow:0 10px 28px -6px rgba(245,158,11,0.45);">
+          <div class="relative bg-black/90" style="aspect-ratio:16/8.2;">
+            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM Video Making — VK Services Enterprise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="absolute left-3.5 bottom-11 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
+          </div>
+          <div class="flex items-center justify-between gap-2.5 px-4 py-3 bg-black/80 backdrop-blur">
+            <div class="flex items-center gap-3.5">
+              <span title="Share" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">↗</span>
+              <span title="Watch later" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">🕐</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm font-semibold text-white">
+              <span class="w-[26px] h-5 rounded bg-accent flex items-center justify-center text-[10px]">▤</span> More videos
+            </div>
+            <div class="flex items-center gap-1.5 text-sm font-bold text-white">
+              <span class="w-[22px] h-4 rounded bg-red-600 flex items-center justify-center text-[8px] text-white">▶</span> YouTube
+            </div>
+          </div>
+        </div>
+
+        <p class="px-5 pb-4 text-[13.5px] leading-relaxed text-gray-500">
+          <span class="text-accent font-bold italic">Sample Video:</span> This is a real MLM plan video we produced. Your video will include your company name, plan details, branding, voice-over, and HD animation.
+        </p>
+
+        <div class="flex items-center justify-between gap-3 flex-wrap px-5 py-4 bg-primary text-white">
+          <div class="text-xs font-semibold flex items-center gap-1.5">▶ More sample videos</div>
+          <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
+            <span class="w-[22px] h-[22px] rounded-full bg-accent flex items-center justify-center text-xs">✆</span> Call / WhatsApp for details
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- RIGHT: copy + pricing -->
+
+    <!-- RIGHT: copy + pricing -->
+
     <div>
       <div class="font-mono-plex text-xs uppercase tracking-wider text-accent mb-3.5">What you get</div>
       <h2 class="font-display font-extrabold tracking-tight leading-tight text-3xl sm:text-4xl mb-4">
