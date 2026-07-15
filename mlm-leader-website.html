@@ -7,13 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="./assets/index-hero.css">
+<script src="./assets/index-hero.js" defer></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
           primary: '#111827',
-          accent: '#F59E0B',
+          accent: '#F1521E',
+          accentLight: '#FF7A45',
           bg: '#FFFFFF',
           text: '#111827',
           dark: '#111827',
@@ -223,91 +226,35 @@
 
 <!-- SERVICES DETAILS BANNER -->
 <section class="py-16 px-4 sm:px-7">
-  <div class=" mx-auto">
+  <div class="mx-auto">
 
     <div class="rounded-3xl px-6 sm:px-10 py-6 sm:py-7 mb-10 text-center shadow-xl relative overflow-hidden bg-primary">
       <h2 class="font-display font-extrabold tracking-wide text-white text-2xl sm:text-4xl uppercase">MLM Leader Website Services Details</h2>
       <div class="w-16 h-[3px] bg-accent rounded-full mx-auto mt-3.5"></div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-8 items-stretch">
-
-      <!-- Video / services showcase card -->
-      <div class="flex flex-col gap-5 h-full">
-        <!-- Watch banner -->
-        <div class="bg-primary text-white rounded-2xl shadow-lg px-6 py-5 cursor-pointer hover:-translate-y-0.5 transition-transform">
-          <h3 class="font-display font-bold text-lg">Watch this video — see exactly how your leader website works</h3>
-          <div class="w-11 h-[3px] rounded-full bg-accent mt-2"></div>
-        </div>
-        <div class="flex-1 rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-card flex flex-col">
-          <!-- shimmer bar -->
-          <div class="h-[3px] w-full" style="background-image:linear-gradient(90deg,#F59E0B,#111827,#F59E0B);background-size:200% 100%;animation:shimmerBarLW 3.5s linear infinite;"></div>
-          <style>@keyframes shimmerBarLW{0%{background-position:0% 0}100%{background-position:200% 0}}</style>
-
-          <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200">
-            <div class="w-9 h-9 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold text-[13px]">VK</div>
-            <div>
-              <div class="text-[14.5px] font-semibold text-primary">MLM Leader Website — Live Walkthrough</div>
-              <div class="text-xs text-gray-400">Real demo · updated weekly</div>
-            </div>
-          </div>
-
-          <div class="m-4 rounded-xl border-2 border-accent overflow-hidden bg-primary" style="box-shadow:0 10px 28px -6px rgba(245,158,11,0.45);">
-            <div class="relative bg-black/90" style="aspect-ratio:16/9;">
-              <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM Leader Website — VK Services Enterprise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <div class="absolute left-3.5 bottom-11 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
-            </div>
-            <div class="flex items-center justify-between gap-2.5 px-4 py-3 bg-black/80 backdrop-blur">
-              <div class="flex items-center gap-3.5">
-                <span title="Share" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">↗</span>
-                <span title="Watch later" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">🕐</span>
-              </div>
-              <div class="flex items-center gap-2 text-sm font-semibold text-white">
-                <span class="w-[26px] h-5 rounded bg-accent flex items-center justify-center text-[10px]">▤</span> More videos
-              </div>
-              <div class="flex items-center gap-1.5 text-sm font-bold text-white">
-                <span class="w-[22px] h-4 rounded bg-red-600 flex items-center justify-center text-[8px] text-white">▶</span> YouTube
-              </div>
-            </div>
-          </div>
-
-          <p class="px-5 pb-4 text-[13.5px] leading-relaxed text-gray-500">
-            <span class="text-accent font-bold italic">Live Demo:</span> This video shows how your MLM leader website will look and function — including the plan details, team pages, and contact sections.
-          </p>
-
-          <div class="mt-auto flex items-center justify-between gap-3 flex-wrap px-5 py-4 bg-primary text-white rounded-b-2xl">
-            <div class="text-xs font-semibold flex items-center gap-1.5">▶ More demo videos</div>
-            <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
-              <span class="w-[22px] h-[22px] rounded-full bg-accent flex items-center justify-center text-xs">✆</span> Call / WhatsApp for details
-            </a>
-          </div>
-        </div>
+    <!-- Description + CTA -->
+    <div class="max-w-3xl mx-auto flex flex-col gap-6">
+      <div class="rounded-2xl p-7 sm:p-8 shadow-xl text-white bg-primary border-t-4 border-accent">
+        <p class="text-[15px] sm:text-base leading-relaxed">
+          <span class="font-bold text-accent">VK Services Enterprise</span> has expertise in all MLM Services such as
+          <span class="font-semibold">Customized MLM Software Development, MLM Plan video Making and, Results base MLM Plan Promotion, MLM Leader website, Meta &amp; Google Ads Services</span>
+          and many more&hellip;
+        </p>
       </div>
 
-      <!-- Right column: description + CTA -->
-      <div class="flex flex-col gap-6 h-full">
-        <div class="rounded-2xl p-7 sm:p-8 shadow-xl text-white bg-primary border-t-4 border-accent">
-          <p class="text-[15px] sm:text-base leading-relaxed">
-            <span class="font-bold text-accent">VK Services Enterprise</span> has expertise in all MLM Services such as
-            <span class="font-semibold">Customized MLM Software Development, MLM Plan video Making and, Results base MLM Plan Promotion, MLM Leader website, Meta &amp; Google Ads Services</span>
-            and many more&hellip;
-          </p>
-        </div>
-
-        <div class="flex-1 flex flex-col justify-center items-center rounded-2xl px-6 sm:px-8 py-8 text-center border-2 border-dashed border-accent/50 bg-neutral-50">
-          <p class="font-display font-extrabold text-primary text-base sm:text-xl leading-snug uppercase mb-6">
-            Explore the live demo to see how the website works and looks in action.
-          </p>
-          <a href="#showcase" class="inline-flex items-center justify-center bg-accent text-primary font-bold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-lg hover:-translate-y-0.5 hover:shadow-xl hover:bg-yellow-400 transition">
-            Click to View Live Demo
-          </a>
-        </div>
+      <div class="flex flex-col justify-center items-center rounded-2xl px-6 sm:px-8 py-8 text-center border-2 border-dashed border-accent/50 bg-neutral-50">
+        <p class="font-display font-extrabold text-primary text-base sm:text-xl leading-snug uppercase mb-6">
+          Explore the live demo to see how the website works and looks in action.
+        </p>
+        <a href="#showcase" class="inline-flex items-center justify-center bg-accent text-primary font-bold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-lg hover:-translate-y-0.5 hover:shadow-xl hover:bg-yellow-400 transition">
+          Click to View Live Demo
+        </a>
       </div>
-
     </div>
+
   </div>
 </section>
-
 <!-- NEED MORE INFO CTA -->
 <section class="px-4 sm:px-7">
   <div class=" mx-auto">
@@ -456,105 +403,207 @@
     </div>
   </section>
 
+
   <!-- ================= OUR CLIENTS ================= -->
-  <section id="clients" class="mt-24">
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2.5 font-display text-sm font-medium text-accent mb-3.5">Our Clients</div>
+<section id="clients" class="mt-24 -mx-6 sm:-mx-8 bg-gray-200 px-6 sm:px-8 py-16 rounded-3xl">
+      <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2.5 font-display text-md font-medium text-accent px-3 py-1 rounded-full mb-3.5">Our Clients</div>
       <h2 class="font-display font-bold text-2xl sm:text-3xl mb-2.5 text-primary">Trusted by Growing MLM Businesses</h2>
       <p class="text-gray-500 text-base">Hundreds of MLM leaders and companies across India trust our solutions.</p>
     </div>
     <div id="clientsGrid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3.5"></div>
   </section>
 
- <!-- ================= STATS + CTA ================= -->
-<section id="statsCta" class="mt-24 mx-4 sm:mx-8 bg-primary text-white px-6 sm:px-8 py-24 rounded-3xl relative overflow-hidden">
-    <div class="relative mx-auto">
 
-        <!-- HEADING -->
-        <div class="text-center mb-11">
-            <h2 class="font-body font-bold text-[1.7rem] sm:text-[2.3rem] leading-tight mb-3.5 text-white">
-                India's <span class="text-accent">#1 All-in-One</span> MLM Hub
-            </h2>
-            <p class="text-gray-300 text-base max-w-xl mx-auto">
-                From software to scale, we handle everything — 9+ years of industry excellence.
-            </p>
+
+
+ <!-- STATS + CTA BAND -->
+   <section class="mt-24 -mx-6 sm:-mx-8 py-8 md:py-24 px-6 sm:px-8 md:px-8 bg-dark text-white relative overflow-hidden" id="statsCta">
+
+        <!-- Subtle background pattern -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none"
+            style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 34px 34px;">
         </div>
 
-        <!-- STATS BAND (softer amber background, better contrast) -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 bg-amber-600 rounded-2xl shadow-accent-glow overflow-hidden mb-11 divide-y sm:divide-y-0 sm:divide-x divide-white/25">
-            <div class="flex items-center justify-center gap-4 px-5 py-8">
-                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/></svg>
-                </div>
-                <div>
-                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">9+</div>
-                    <div class="text-[0.85rem] text-white/85">Years of Excellence</div>
-                </div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            
+<div class="text-center mb-8 md:mb-16">
+    <h2 class="text-3xl md:text-5xl font-bold font-display mb-4">India's <span class="text-accent">#1
+                        All-in-One</span> MLM Hub</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">From software to scale, we handle everything — 9+
+                    years of industry excellence.</p>
             </div>
-            <div class="flex items-center justify-center gap-4 px-5 py-8">
-                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <div>
-                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">2800+</div>
-                    <div class="text-[0.85rem] text-white/85">Happy Clients</div>
-                </div>
-            </div>
-            <div class="flex items-center justify-center gap-4 px-5 py-8">
-                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" class="w-6 h-6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg>
-                </div>
-                <div>
-                    <div class="font-display font-bold text-[1.55rem] text-white leading-tight">1.7 Lakh+</div>
-                    <div class="text-[0.85rem] text-white/85">MLMSUCCESSTIPS</div>
-                </div>
-            </div>
-        </div>
 
-        <!-- CTA BOX (softer amber, much better readability) -->
-        <div class="border-[1.5px] border-dashed border-accent/50 rounded-2xl px-6 sm:px-10 pt-9 pb-10 text-center">
-            <div class="bg-amber-600 rounded-xl px-6 py-4 max-w-xl mx-auto mb-7 shadow-accent-glow">
-                <div class="font-display font-bold text-[1.05rem] text-white tracking-wide">READY TO START YOUR MLM BUSINESS TODAY?</div>
-                <div class="text-[0.85rem] text-white/90 font-medium mt-1">Get 100% expert assistance &amp; 24/7 dedicated support from India's best development team.</div>
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-2xl mb-16 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                <div
+                    class="p-6 md:p-8 flex items-center justify-start md:justify-center gap-5 w-full max-w-[260px] md:max-w-none mx-auto">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-3xl font-display text-white">9+</div>
+                        <div class="text-base text-gray-400">Years of Excellence</div>
+                    </div>
+                </div>
+                <div
+                    class="p-6 md:p-8 flex items-center justify-start md:justify-center gap-5 w-full max-w-[260px] md:max-w-none mx-auto">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-3xl font-display text-white">2800+</div>
+                        <div class="text-base text-gray-400">Happy Clients</div>
+                    </div>
+                </div>
+                <div
+                    class="p-6 md:p-8 flex items-center justify-start md:justify-center gap-5 w-full max-w-[260px] md:max-w-none mx-auto">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <path d="M10 9.5v5l4-2.5z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-3xl font-display text-white">1.7L+</div>
+                        <div class="text-sm text-gray-400">MLMSUCCESSTIPS</div>
+                    </div>
+                </div>
             </div>
-            <div class="font-display font-bold text-[1.3rem] sm:text-[1.9rem] tracking-wide mb-2.5">
-                CALL / WHATSAPP: <a href="tel:+918927656368" class="text-accent hover:text-yellow-300 transition">+91 8927656368</a>
-            </div>
-            <div class="text-gray-300 text-[0.88rem]">(Available anytime for free consultation after you check our live demos)</div>
-        </div>
 
+
+
+            <!-- OUR SERVICES CAROUSEL -->
+            <div class="mt-16">
+              <div class="mb-8">
+    <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-3">
+        <span class="w-6 h-[1px] bg-accent"></span> Our Services
     </div>
-</section>
+    <h3 class="text-2xl md:text-3xl font-bold font-display text-white">Explore what we offer</h3>
+</div>
 
-  <!-- ================= SERVICES ================= -->
-  <section id="services" class="mt-24  mx-auto px-6">
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-9 items-stretch">
-      <div>
-        <div class="flex flex-col h-full">
-          <div class="relative rounded-[20px] overflow-hidden border border-gray-200 shadow-card flex-1 min-h-[260px] before:content-[''] before:absolute before:-top-px before:-left-px before:-right-px before:h-[3px] before:bg-accent before:z-10">
-            <video autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg" class="w-full h-full object-cover block">
-              <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
-            </video>
-            <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent pointer-events-none"></div>
-          </div>
-          <div class="mt-4 px-5 py-4.5 py-4 rounded-2xl bg-primary text-white flex-shrink-0">
-            <h4 class="font-display font-bold text-lg mb-2 text-white">Don't just buy. Test it yourself before spending a single rupee!</h4>
-            <p class="text-sm leading-relaxed text-gray-300">Watch the complete presentation video above to see our live proof and explore our full suite of premium MLM services below.</p>
-          </div>
+              <div id="svcTrack"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <!-- Card: Latest MLM Database -->
+    <a href="mlm-leader-website.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="8" ry="3" />
+                <path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" />
+            </svg>
         </div>
-      </div>
+        <h4 class="font-bold text-white mb-2 font-display">Latest MLM Database</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Fresh verified databases with high
+            quality genuine contacts.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
 
-      <div>
-        <div class="mb-6">
-          <div class="inline-flex items-center gap-2.5 font-mono text-xs font-semibold tracking-[0.1em] uppercase text-accent mb-3">Our Services</div>
-          <h2 class="font-display font-bold text-2xl sm:text-[30px] text-primary">Everything your MLM business needs</h2>
+    <!-- Card: MLM Leader Website -->
+    <a href="#" data-open-modal
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+            </svg>
         </div>
+        <h4 class="font-bold text-white mb-2 font-display">MLM Leader Website</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Modern responsive website for personal
+            branding and business.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="servicesGrid"></div>
-      </div>
-    </div>
-  </section>
+    <!-- Card: Customized MLM Software Development -->
+    <a href="custom-mlm.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="14" rx="2" />
+                <path d="M8 22h8M12 18v4" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">Customized MLM Software Development</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Powerful backend dashboards tailored to
+            your business with smart automation.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
 
+    <!-- Card: MLM Plan PDF Making -->
+    <a href="plan-pdf.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <path d="M14 2v6h6M9 15h6M9 11h2" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">MLM Plan PDF Making</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Professional compensation plan PDF
+            design with premium presentation.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
+
+    <!-- Card: MLM Plan Video Making -->
+    <a href="mlm-videomaking.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <path d="M10 9.5v5l4-2.5z" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">MLM Plan Video Making</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">HD animated presentation videos with
+            voice-over and effects.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
+
+    <!-- Card: Result Based Promotion -->
+    <a href="result-based-promotion.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3v18h18" />
+                <path d="M7 15l4-5 3 3 5-7" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">Result Based Promotion</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Reach targeted audiences using automated
+            marketing campaigns.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
+</div>
+            </div>
+        </div>
+    </section>
 
   <!-- ================= BADGE ROW ================= -->
   <div class="max-w-[1100px] mx-auto mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4.5 gap-4" id="badgeRow"></div>
@@ -690,29 +739,6 @@
     </div>
   `).join('');
 
-  /* ---------------- SERVICES ---------------- */
-  const services = [
-    { n: "01", title: "Customized MLM Software", desc: "Powerful backend dashboards tailored to your business with smart automation.", link: "Explore Service →", href: "custom-mlm.html", icon: `<rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" />` },
-    { n: "02", title: "MLM Plan PDF Making", desc: "Professional compensation plan PDF design with premium presentation.", link: "View PDF →", href: "#", icon: `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 11h2" />` },
-    { n: "03", title: "MLM Plan Video Making", desc: "HD animated presentation videos with voice-over and effects.", link: "Watch Video →", href: "#", icon: `<rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" />` },
-    { n: "04", title: "Result Based Promotion", desc: "Reach targeted audiences using automated marketing campaigns.", link: "Promotion →", href: "#", icon: `<path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 5-7" />` },
-    { n: "05", title: "Latest MLM Database", desc: "Fresh verified databases with high quality genuine contacts.", link: "Access Database →", href: "#", icon: `<ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" />` },
-    { n: "06", title: "MLM Leader Website", desc: "High-converting leader pages with smart automation and branding.", link: "View Website →", href: "#", icon: `<path d="M12 3l9 5v8l-9 5-9-5V8z" /><path d="M12 7v10" />` }
-  ];
-
-  document.getElementById('servicesGrid').innerHTML = services.map(s => `
-    <a href="${s.href}" class="flex gap-3.5 items-start bg-white border border-gray-200 rounded-2xl p-4.5 p-4 transition hover:-translate-y-0.5 hover:border-accent hover:shadow-card no-underline">
-      <div class="w-11 h-11 flex-shrink-0 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" class="w-5 h-5">${s.icon}</svg>
-      </div>
-      <div>
-        <h3 class="text-[15px] font-semibold text-primary mb-1.5">${s.n}. ${s.title}</h3>
-        <p class="text-[13px] leading-relaxed text-gray-500 mb-2">${s.desc}</p>
-        <span class="text-xs font-bold text-accent">${s.link}</span>
-      </div>
-    </a>
-  `).join('');
-
  
 
  
@@ -731,7 +757,7 @@
         <svg viewBox="0 0 24 24" class="w-6.5 h-6.5 w-[26px] h-[26px] fill-white">${b.icon}</svg>
       </div>
       <div class="font-display font-bold text-[1.35rem] text-white mb-1">${b.value}</div>
-      <div class="text-[0.82rem] font-semibold text-white/90 tracking-wide">${b.label}</div>
+      <div class="text-base font-semibold text-white/90 tracking-wide">${b.label}</div>
     </div>
   `).join('');
 

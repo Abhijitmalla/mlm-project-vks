@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> MLM Database</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -14,7 +17,8 @@
                 extend: {
                     colors: {
                         primary: "#111827",
-                        accent: "#F59E0B",
+                        accent: "#F1521E",
+                        accentLight: "#FF7A45",
                         dark: "#111827",
                     },
                     fontFamily: {
@@ -58,6 +62,7 @@
         }
     </style>
 </head>
+
 <body class="bg-white text-gray-900 font-sans overflow-x-hidden antialiased">
 
     <!-- HERO -->
@@ -65,65 +70,120 @@
         <!-- Overlay -->
         <div class="absolute inset-0 bg-primary/80 z-0"></div>
         <canvas id="netCanvas" class="absolute inset-0 w-full h-full opacity-30 z-0 pointer-events-none"></canvas>
-        
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-24">
-            <div class="text-left max-w-xl">
-                <div class="inline-flex items-center gap-3 text-sm font-semibold tracking-wide uppercase text-white mb-6">
+
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 pt-4 pb-8 md:py-20">
+            <!-- Top: full-width rotating headline -->
+            <div class="max-w-5xl mx-auto text-center mb-6 md:mb-14">
+                <div class="inline-flex items-center gap-3 text-sm font-semibold tracking-wide uppercase text-white mb-4">
                     <span class="w-8 h-[2px] bg-white"></span> MLM Software Company
                 </div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white font-display">
-                    <span id="rotateText" class="inline-block transition-all duration-500">Scale Your MLM Company Fast with Automated Call Broad Casting Systems</span>
-                </h1>
-                <p class="text-lg md:text-xl font-medium mb-8 text-gray-200">
-                    <span id="rotateSubText" class="inline-block transition-all duration-500">From compensation plans to leader websites, everything is made simple for your team.</span>
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#services" class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold rounded-full bg-accent text-primary hover:bg-yellow-400 transition-colors shadow-lg">View Services</a>
-                    <button id="heroContactBtn" class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold rounded-full border border-gray-400 text-white hover:border-accent hover:text-accent transition-colors">Contact Us</button>
+                <div class="flex items-center justify-center gap-3 md:gap-5">
+                    <button id="rotatePrevBtn" aria-label="Previous"
+                        class="shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-full border border-white/20 bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:border-accent transition-colors">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="flex-1 min-w-0">
+                        <div class="overflow-hidden flex items-center justify-center min-h-[120px] md:min-h-[88px] lg:min-h-[96px]">
+                            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-white font-display w-full">
+                                <span id="rotateText" class="inline-block transition-all duration-500 ease-out">Scale Your Network Marketing Team Instantly with 5 lakhs Genuine MLM Leads</span>
+                            </h1>
+                        </div>
+                        <div class="hidden md:flex overflow-hidden items-center justify-center md:min-h-[48px] mt-2">
+                            <p class="text-sm md:text-base font-medium text-gray-300 w-full">
+                                <span id="rotateSubText" class="inline-block transition-all duration-500 ease-out">100% Active & Updated Profiles | Fresh Directory from the Last 3 Months | 70%–80% Verified Contact Accuracy</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <button id="rotateNextBtn" aria-label="Next"
+                        class="shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-full border border-white/20 bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:border-accent transition-colors">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-            
-            <div class="bg-white rounded-2xl p-8 shadow-2xl relative border-t-4 border-accent transform transition-all duration-500 hover:scale-[1.02]">
-                <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono">Get in touch</div>
-                <h2 class="text-2xl font-bold text-primary mb-2 font-display">Talk to our team</h2>
-                <p class="text-sm text-gray-500 mb-6">Fill in your details and we'll call you back soon.</p>
-                
-                <form id="heroPageForm" class="space-y-4" novalidate>
-                    <div class="field" id="heroNameField">
-                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroName">Full Name</label>
-                        <input type="text" id="heroName" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="Your name">
-                        <div class="err hidden text-red-500 text-xs mt-1">Please enter your name.</div>
+
+            <!-- Bottom: video left, form right -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch">
+                <!-- Video card -->
+                <div class="rounded-2xl border-2 border-accent overflow-hidden bg-primary shadow-2xl flex flex-col">
+                    <div class="h-[3px] w-full"
+                        style="background-image:linear-gradient(90deg,#F1521E,#FF7A45,#F1521E);background-size:200% 100%;animation:shimmerBarHero 3.5s linear infinite;">
                     </div>
-                    <div class="field" id="heroMobileField">
-                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroMobile">Mobile Number</label>
-                        <input type="tel" id="heroMobile" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="10-digit mobile number">
-                        <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid mobile number.</div>
+                    <style>
+                        @keyframes shimmerBarHero {
+                            0% { background-position: 0% 0 }
+                            100% { background-position: 200% 0 }
+                        }
+                    </style>
+
+                    <div class="relative bg-black/90 flex-1" style="aspect-ratio:16/10;">
+                        <iframe class="absolute inset-0 w-full h-full"
+                            src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM service provider video"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <div class="absolute left-3.5 bottom-3.5 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
                     </div>
-                    <div class="field" id="heroEmailField">
-                        <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroEmail">Email Address</label>
-                        <input type="email" id="heroEmail" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="you@example.com">
-                        <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid email address.</div>
+                    <div class="flex items-center justify-between gap-2.5 px-4 py-3 bg-black/80 backdrop-blur">
+                        <div class="flex items-center gap-2 text-sm font-semibold text-white">
+                            <span class="w-[26px] h-5 rounded flex items-center justify-center text-[10px]" style="background-color:#F1521E;">▤</span> Watch Free Demo
+                        </div>
+                        <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
+                            <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center text-xs" style="background-color:#F1521E;">✆</span> Call Now
+                        </a>
                     </div>
-                    <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-gray-800 transition-colors mt-2 shadow-md">Submit</button>
-                </form>
-                
-                <div id="heroSuccessView" class="hidden text-center mt-6">
-                    <div class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4 text-green-500">
-                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                    </div>
-                    <h2 class="text-xl font-bold text-primary mb-1 font-display">Submitted successfully</h2>
-                    <p class="text-sm text-gray-500 mb-4">We will call you back soon. You can reach us at:</p>
-                    <div class="flex flex-col items-center justify-center gap-2 text-sm font-semibold text-primary">
-                      <a href="tel:892765638" class="hover:text-accent transition-colors flex items-center gap-2">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                        Call: 892765638
-                      </a>
-                      <a href="https://wa.me/919237377196" class="hover:text-green-500 transition-colors flex items-center gap-2 text-green-600">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
-                        WhatsApp: 9237377196
-                      </a>
+                    <p class="px-5 py-4 text-base leading-relaxed text-gray-200 bg-primary border-t border-white/10">
+                        <span class="text-accentLight font-bold italic">Don't just buy. Test it yourself before spending a single rupee!</span> Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.
+                    </p>
+                </div>
+
+                <!-- Form card -->
+                <div class="bg-white rounded-2xl p-8 shadow-2xl relative border-t-4 border-accent transform transition-all duration-500 hover:scale-[1.01]">
+                    <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono">Get in touch</div>
+                    <h2 class="text-2xl font-bold text-primary mb-2 font-display">Talk to our team</h2>
+                    <p class="text-sm text-gray-500 mb-6">Fill in your details and we'll call you back soon.</p>
+                    
+                    <form id="heroPageForm" class="space-y-4" novalidate>
+                        <div class="field" id="heroNameField">
+                            <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroName">Full Name</label>
+                            <input type="text" id="heroName" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="Your name">
+                            <div class="err hidden text-red-500 text-xs mt-1">Please enter your name.</div>
+                        </div>
+                        <div class="field" id="heroMobileField">
+                            <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroMobile">Mobile Number</label>
+                            <input type="tel" id="heroMobile" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="10-digit mobile number">
+                            <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid mobile number.</div>
+                        </div>
+                        <div class="field" id="heroEmailField">
+                            <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroEmail">Email Address</label>
+                            <input type="email" id="heroEmail" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="you@example.com">
+                            <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid email address.</div>
+                        </div>
+                        <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-gray-800 transition-colors mt-2 shadow-md">Submit</button>
+                    </form>
+                    
+                    <div id="heroSuccessView" class="hidden text-center mt-6">
+                        <div class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4 text-green-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-bold text-primary mb-1 font-display">Submitted successfully</h2>
+                        <p class="text-sm text-gray-500 mb-4">We will call you back soon. You can reach us at:</p>
+                        <div class="flex flex-col items-center justify-center gap-2 text-sm font-semibold text-primary">
+                          <a href="tel:892765638" class="hover:text-accent transition-colors flex items-center gap-2">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                            Call: 892765638
+                          </a>
+                          <a href="https://wa.me/919237377196" class="hover:text-green-500 transition-colors flex items-center gap-2 text-green-600">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
+                            WhatsApp: 9237377196
+                          </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,12 +191,18 @@
     </section>
 
     <!-- Side Tab -->
-    <button class="fixed right-0 top-1/2 -translate-y-1/2 rotate-180 bg-accent text-primary font-bold text-sm tracking-wide py-4 px-2 z-40 rounded-l-lg hover:pr-4 hover:bg-yellow-400 transition-all duration-300 shadow-xl" style="writing-mode: vertical-rl;" id="sideTab">Get In Touch</button>
+    <button
+        class="fixed right-0 top-1/2 -translate-y-1/2 rotate-180 bg-accent text-primary font-bold text-sm tracking-wide py-4 px-2 z-40 rounded-l-lg hover:pr-4 hover:bg-yellow-400 transition-all duration-300 shadow-xl"
+        style="writing-mode: vertical-rl;" id="sideTab">Get In Touch</button>
 
     <!-- MODAL -->
-    <div class="fixed inset-0 z-50 bg-primary/80 flex items-center justify-center opacity-0 invisible transition-all duration-300 p-4" id="modalOverlay">
-        <div class="relative w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl transform scale-95 opacity-0 transition-all duration-300 border-t-4 border-accent" id="modalCard">
-            <button class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-accent hover:text-primary hover:rotate-90 transition-all duration-300" id="modalClose">&#10005;</button>
+    <div class="fixed inset-0 z-50 bg-primary/80 flex items-center justify-center opacity-0 invisible transition-all duration-300 p-4"
+        id="modalOverlay">
+        <div class="relative w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl transform scale-95 opacity-0 transition-all duration-300 border-t-4 border-accent"
+            id="modalCard">
+            <button
+                class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-accent hover:text-primary hover:rotate-90 transition-all duration-300"
+                id="modalClose">&#10005;</button>
 
             <div id="formView">
                 <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono">Get in touch</div>
@@ -146,25 +212,33 @@
                 <form id="enquiryForm" class="space-y-4" novalidate>
                     <div class="field" id="nameField">
                         <label class="block text-xs font-semibold text-gray-600 mb-1" for="name">Full Name</label>
-                        <input type="text" id="name" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all" placeholder="Your name">
+                        <input type="text" id="name"
+                            class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                            placeholder="Your name">
                         <div class="err hidden text-red-500 text-xs mt-1">Please enter your name.</div>
                     </div>
                     <div class="field" id="mobileField">
                         <label class="block text-xs font-semibold text-gray-600 mb-1" for="mobile">Mobile Number</label>
-                        <input type="tel" id="mobile" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all" placeholder="10-digit mobile number">
+                        <input type="tel" id="mobile"
+                            class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                            placeholder="10-digit mobile number">
                         <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid mobile number.</div>
                     </div>
                     <div class="field" id="emailField">
                         <label class="block text-xs font-semibold text-gray-600 mb-1" for="email">Email Address</label>
-                        <input type="email" id="email" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all" placeholder="you@example.com">
+                        <input type="email" id="email"
+                            class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                            placeholder="you@example.com">
                         <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid email address.</div>
                     </div>
-                    <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-gray-800 transition-colors mt-2 shadow-md">Submit</button>
+                    <button type="submit"
+                        class="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-gray-800 transition-colors mt-2 shadow-md">Submit</button>
                 </form>
             </div>
 
             <div class="hidden text-center" id="successView">
-                <div class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4 text-green-500">
+                <div
+                    class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4 text-green-500">
                     <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
@@ -172,127 +246,111 @@
                 <h2 class="text-xl font-bold text-primary mb-2 font-display">Submitted successfully</h2>
                 <p class="text-sm text-gray-500 mb-6">We will call you back soon. You can reach us at:</p>
                 <div class="flex flex-wrap justify-center gap-3 mb-6">
-                    <a class="flex items-center gap-2 bg-gray-50 border border-gray-200 px-4 py-2 rounded-full text-sm font-semibold hover:border-accent transition-colors" href="tel:892765638">
-                        <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                    <a class="flex items-center gap-2 bg-gray-50 border border-gray-200 px-4 py-2 rounded-full text-sm font-semibold hover:border-accent transition-colors"
+                        href="tel:892765638">
+                        <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
                         Call: 892765638
                     </a>
-                    <a class="flex items-center gap-2 bg-green-50 border border-green-200 px-4 py-2 rounded-full text-sm font-semibold text-green-700 hover:border-green-400 transition-colors" href="https://wa.me/919237377196" target="_blank" rel="noopener">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
+                    <a class="flex items-center gap-2 bg-green-50 border border-green-200 px-4 py-2 rounded-full text-sm font-semibold text-green-700 hover:border-green-400 transition-colors"
+                        href="https://wa.me/919237377196" target="_blank" rel="noopener">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                        </svg>
                         WhatsApp: 9237377196
                     </a>
                 </div>
-                <button class="px-8 py-2 rounded-lg border border-gray-200 text-sm font-semibold hover:border-accent hover:text-accent transition-colors" id="modalDone">Close</button>
+                <button
+                    class="px-8 py-2 rounded-lg border border-gray-200 text-sm font-semibold hover:border-accent hover:text-accent transition-colors"
+                    id="modalDone">Close</button>
             </div>
         </div>
     </div>
 
     <!-- SERVICES -->
     <section class="py-24 px-6 bg-gray-50" id="services">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div class="lg:sticky lg:top-28">
-                <!-- Watch Banner -->
-                <div class="bg-primary text-white rounded-2xl shadow-lg px-6 py-5 mb-5 cursor-pointer hover:-translate-y-0.5 transition-transform">
-                  <h3 class="font-display font-bold text-lg">Watch this video before you order — see exactly what you get</h3>
-                  <div class="w-11 h-[3px] rounded-full bg-accent mt-2"></div>
-                </div>
-                <p class="text-gray-500 text-[14.5px] leading-relaxed mb-4">
-                  See our complete walkthrough of the MLM database pack — data quality, instant delivery, and how to use it for your campaign.
-                </p>
-                <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-card">
-                  <!-- shimmer top bar -->
-                  <div class="h-[3px] w-full" style="background-image:linear-gradient(90deg,#F59E0B,#111827,#F59E0B);background-size:200% 100%;animation:shimmerBar 3.5s linear infinite;"></div>
-                  <style>@keyframes shimmerBar{0%{background-position:0% 0}100%{background-position:200% 0}}</style>
+        <div class="max-w-7xl mx-auto items-start">
+            <div class="w-full">
+                <div class="mb-10 text-center">
 
-                  <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200">
-                    <div class="w-9 h-9 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold text-[13px]">VK</div>
-                    <div>
-                      <div class="text-[14.5px] font-semibold text-primary">Looking for a targeted MLM database pack?</div>
-                      <div class="text-xs text-gray-400">Live dashboard walkthrough — updated weekly</div>
-                    </div>
-                  </div>
-
-                  <div class="m-4 rounded-xl border-2 border-accent overflow-hidden bg-primary" style="box-shadow:0 10px 28px -6px rgba(245,158,11,0.45);">
-                    <div class="relative bg-black/90" style="aspect-ratio:16/8.2;">
-                      <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM Database Pack — VK Services Enterprise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      <div class="absolute left-3.5 bottom-11 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
-                    </div>
-                    <div class="flex items-center justify-between gap-2.5 px-4 py-3 bg-black/80 backdrop-blur">
-                      <div class="flex items-center gap-3.5">
-                        <span title="Share" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">↗</span>
-                        <span title="Watch later" class="w-[30px] h-[30px] rounded-full bg-white/10 border border-white/15 text-white text-[13px] flex items-center justify-center">🕐</span>
-                      </div>
-                      <div class="flex items-center gap-2 text-sm font-semibold text-white">
-                        <span class="w-[26px] h-5 rounded bg-accent flex items-center justify-center text-[10px]">▤</span> More videos
-                      </div>
-                      <div class="flex items-center gap-1.5 text-sm font-bold text-white">
-                        <span class="w-[22px] h-4 rounded bg-red-600 flex items-center justify-center text-[8px] text-white">▶</span> YouTube
-                      </div>
-                    </div>
-                  </div>
-
-                  <p class="px-5 pb-4 text-[13.5px] leading-relaxed text-gray-500">
-                    <span class="text-accent font-bold italic">Quick Guide:</span> This video explains how to use the MLM database pack for high-converting campaigns. See data freshness, delivery speed, and marketing tips inside.
-                  </p>
-
-                  <div class="flex items-center justify-between gap-3 flex-wrap px-5 py-4 bg-primary text-white">
-                    <div class="text-xs font-semibold flex items-center gap-1.5">▶ More demo videos</div>
-                    <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
-                      <span class="w-[22px] h-[22px] rounded-full bg-accent flex items-center justify-center text-xs">✆</span> Call / WhatsApp for details
-                    </a>
-                  </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-5 leading-tight">Latest MLM
+                        Database Pack<br class="hidden sm:block">Price:-₹4999/- +GST(Limited Time Promotional Offer)
+                    </h2>
+                    <p class="text-gray-500 text-base leading-relaxed max-w-2xl mx-auto">Because you pay for outcomes, not
+                        impressions. Every rupee is tied to a verified, answered lead &mdash; so your marketing budget
+                        only ever works as hard as the results it brings back.</p>
                 </div>
 
-            </div>
-            
-            <div>
-                <div class="mb-10">
-                  
-                    <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-5 leading-tight">Latest MLM Database Pack<br class="hidden sm:block">Price:-₹4999/- +GST(Limited Time Promotional Offer)</h2>
-                    <p class="text-gray-500 text-base leading-relaxed max-w-xl">Because you pay for outcomes, not impressions. Every rupee is tied to a verified, answered lead &mdash; so your marketing budget only ever works as hard as the results it brings back.</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                     <!-- Service 1 -->
-                    <a href="#" class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
-                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" /></svg>
+                    <a href="#"
+                        class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div
+                            class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="14" rx="2" />
+                                <path d="M8 22h8M12 18v4" />
+                            </svg>
                         </div>
                         <h3 class="font-bold text-primary mb-2 font-display">01. Fresh Last 3 Months Database</h3>
-                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Powerful backend dashboards tailored to your business with smart automation.</p>
-                       
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Powerful backend dashboards tailored to
+                            your business with smart automation.</p>
+
                     </a>
-                    
+
                     <!-- Service 2 -->
-                    <a href="#" class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
-                        <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 11h2" /></svg>
+                    <a href="#"
+                        class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div
+                            class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <path d="M14 2v6h6M9 15h6M9 11h2" />
+                            </svg>
                         </div>
                         <h3 class="font-bold text-primary mb-2 font-display">02. 100% Shuffled Integrity</h3>
-                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Professional compensation plan PDF design with premium presentation.</p>
-                        
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Professional compensation plan PDF design
+                            with premium presentation.</p>
+
                     </a>
 
                     <!-- Service 3 -->
-                    <a href="#" class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
-                        <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" /></svg>
+                    <a href="#"
+                        class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div
+                            class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="5" width="20" height="14" rx="2" />
+                                <path d="M10 9.5v5l4-2.5z" />
+                            </svg>
                         </div>
                         <h3 class="font-bold text-primary mb-2 font-display">03. Instant 10 minutes Delivery</h3>
-                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">HD animated presentation videos with voice-over and effects.</p>
-                       
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">HD animated presentation videos with
+                            voice-over and effects.</p>
+
                     </a>
 
                     <!-- Service 4 -->
-                    <a href="#" data-open-modal class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
-                        <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 5-7" /></svg>
+                    <a href="#" data-open-modal
+                        class="group block bg-white border border-gray-100 rounded-xl p-5 hover:border-accent hover:shadow-lg transition-all duration-300 relative">
+                        <div
+                            class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500 mb-4 group-hover:bg-accent group-hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18" />
+                                <path d="M7 15l4-5 3 3 5-7" />
+                            </svg>
                         </div>
                         <h3 class="font-bold text-primary mb-2 font-display">04.Free Bonus Marketing Video</h3>
-                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Reach targeted audiences using automated marketing campaigns.</p>
-                        
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Reach targeted audiences using automated
+                            marketing campaigns.</p>
+
                     </a>
-                    
-                 
+
+
                 </div>
             </div>
         </div>
@@ -305,17 +363,25 @@
                 <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
                     <span class="w-6 h-[1px] bg-accent"></span> Live Proof <span class="w-6 h-[1px] bg-accent"></span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-4">Recent Results & Purchase Proof</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">Real-time data of our clients scaling their MLM business with our database packs.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-4">Recent Results & Purchase
+                    Proof</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Real-time data of our clients scaling their MLM business with
+                    our database packs.</p>
             </div>
-            
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Data & Results -->
-                <div class="bg-gray-50 rounded-3xl p-8 md:p-10 border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-lg transition-all duration-300">
-                    <div class="absolute top-0 right-0 w-40 h-40 bg-accent/10 rounded-bl-full -z-10 transition-transform duration-500 group-hover:scale-110"></div>
+                <div
+                    class="bg-gray-50 rounded-3xl p-8 md:p-10 border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                    <div
+                        class="absolute top-0 right-0 w-40 h-40 bg-accent/10 rounded-bl-full -z-10 transition-transform duration-500 group-hover:scale-110">
+                    </div>
                     <h3 class="text-2xl font-bold text-primary font-display mb-8 flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
                         </div>
                         Last 30 Days Results
                     </h3>
@@ -357,91 +423,132 @@
                 </div>
 
                 <!-- Purchase Proof List -->
-                <div class="bg-white border border-gray-100 shadow-2xl shadow-gray-200/50 rounded-3xl overflow-hidden relative">
+                <div
+                    class="bg-white border border-gray-100 shadow-2xl shadow-gray-200/50 rounded-3xl overflow-hidden relative">
                     <!-- Live indicator -->
-                    <div class="absolute top-0 left-0 w-full bg-green-50 text-green-700 text-xs font-bold px-6 py-3 flex items-center gap-3 border-b border-green-100 z-10 shadow-sm">
+                    <div
+                        class="absolute top-0 left-0 w-full bg-green-50 text-green-700 text-xs font-bold px-6 py-3 flex items-center gap-3 border-b border-green-100 z-10 shadow-sm">
                         <span class="relative flex h-2.5 w-2.5">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                         </span>
                         LIVE PURCHASE FEED
                     </div>
-                    
+
                     <div class="p-6 pt-16 space-y-4 max-h-[420px] overflow-y-auto custom-scrollbar">
                         <!-- Item 1 -->
-                        <div class="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-accent hover:shadow-md hover:bg-white transition-all duration-300">
-                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg shrink-0">
+                        <div
+                            class="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-accent hover:shadow-md hover:bg-white transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg shrink-0">
                                 S
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between items-start mb-1.5">
                                     <h4 class="font-bold text-base text-primary">Srinivas M.</h4>
-                                    <span class="text-[11px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">12 mins ago</span>
+                                    <span
+                                        class="text-[11px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">12
+                                        mins ago</span>
                                 </div>
-                                <p class="text-sm text-gray-500 mb-2">Purchased <span class="font-semibold text-primary">Latest MLM Database Pack</span></p>
-                                <div class="inline-flex items-center gap-1.5 text-[11px] font-bold text-green-600 bg-green-100/80 px-2.5 py-1 rounded-md">
-                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                <p class="text-sm text-gray-500 mb-2">Purchased <span
+                                        class="font-semibold text-primary">Latest MLM Database Pack</span></p>
+                                <div
+                                    class="inline-flex items-center gap-1.5 text-[11px] font-bold text-green-600 bg-green-100/80 px-2.5 py-1 rounded-md">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
                                     Verified Payment: ₹4999
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Item 2 -->
-                        <div class="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-accent hover:shadow-md hover:bg-white transition-all duration-300">
-                            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-lg shrink-0">
+                        <div
+                            class="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-accent hover:shadow-md hover:bg-white transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-lg shrink-0">
                                 R
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between items-start mb-1.5">
                                     <h4 class="font-bold text-base text-primary">Rajesh Kumar</h4>
-                                    <span class="text-[11px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">38 mins ago</span>
+                                    <span
+                                        class="text-[11px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">38
+                                        mins ago</span>
                                 </div>
-                                <p class="text-sm text-gray-500 mb-2">Purchased <span class="font-semibold text-primary">Result Based Promotion</span></p>
-                                <div class="inline-flex items-center gap-1.5 text-[11px] font-bold text-green-600 bg-green-100/80 px-2.5 py-1 rounded-md">
-                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                <p class="text-sm text-gray-500 mb-2">Purchased <span
+                                        class="font-semibold text-primary">Result Based Promotion</span></p>
+                                <div
+                                    class="inline-flex items-center gap-1.5 text-[11px] font-bold text-green-600 bg-green-100/80 px-2.5 py-1 rounded-md">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
                                     Verified Payment
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 3 -->
-                        <div class="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-accent hover:shadow-md hover:bg-white transition-all duration-300">
-                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-lg shrink-0">
+                        <div
+                            class="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-accent hover:shadow-md hover:bg-white transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-lg shrink-0">
                                 A
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between items-start mb-1.5">
                                     <h4 class="font-bold text-base text-primary">Amit Patel</h4>
-                                    <span class="text-[11px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">1 hr ago</span>
+                                    <span
+                                        class="text-[11px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">1
+                                        hr ago</span>
                                 </div>
-                                <p class="text-sm text-gray-500 mb-2">Purchased <span class="font-semibold text-primary">Latest MLM Database Pack</span></p>
-                                <div class="inline-flex items-center gap-1.5 text-[11px] font-bold text-green-600 bg-green-100/80 px-2.5 py-1 rounded-md">
-                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                <p class="text-sm text-gray-500 mb-2">Purchased <span
+                                        class="font-semibold text-primary">Latest MLM Database Pack</span></p>
+                                <div
+                                    class="inline-flex items-center gap-1.5 text-[11px] font-bold text-green-600 bg-green-100/80 px-2.5 py-1 rounded-md">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
                                     Verified Payment: ₹4999
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Item 4 -->
-                        <div class="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-accent hover:shadow-md hover:bg-white transition-all duration-300">
-                            <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold text-lg shrink-0">
+                        <div
+                            class="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-accent hover:shadow-md hover:bg-white transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold text-lg shrink-0">
                                 V
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between items-start mb-1.5">
                                     <h4 class="font-bold text-base text-primary">Vikram Singh</h4>
-                                    <span class="text-[11px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">2 hrs ago</span>
+                                    <span
+                                        class="text-[11px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">2
+                                        hrs ago</span>
                                 </div>
-                                <p class="text-sm text-gray-500 mb-2">Purchased <span class="font-semibold text-primary">Custom MLM Software</span></p>
-                                <div class="inline-flex items-center gap-1.5 text-[11px] font-bold text-green-600 bg-green-100/80 px-2.5 py-1 rounded-md">
-                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                <p class="text-sm text-gray-500 mb-2">Purchased <span
+                                        class="font-semibold text-primary">Custom MLM Software</span></p>
+                                <div
+                                    class="inline-flex items-center gap-1.5 text-[11px] font-bold text-green-600 bg-green-100/80 px-2.5 py-1 rounded-md">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
                                     Verified Contract
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Blur fade at bottom -->
-                    <div class="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white to-transparent pointer-events-none">
+                    </div>
                 </div>
             </div>
         </div>
@@ -457,69 +564,113 @@
 
         <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Card 1 -->
-            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
-                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
-                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div
+                class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div
+                        class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
                     </div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none">
+                </div>
                 <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
                     <h4 class="text-white font-bold font-display mb-1">Mr. Srinivas</h4>
                     <p class="text-gray-300 text-xs mb-3">Founder & CEO - Parivrat<br>(Andhra Pradesh)</p>
-                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                    <a href="https://wa.me/919237377196" target="_blank"
+                        class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z" />
+                        </svg>
                         Contact us
                     </a>
                 </div>
             </div>
             <!-- Card 2 -->
-            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
-                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
-                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div
+                class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div
+                        class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
                     </div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none">
+                </div>
                 <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
                     <h4 class="text-white font-bold font-display mb-1">Mr. Bhagbat Chohan</h4>
                     <p class="text-gray-300 text-xs mb-3">Founder & CEO - Ai Abacus<br>(Maharashtra)</p>
-                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                    <a href="https://wa.me/919237377196" target="_blank"
+                        class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z" />
+                        </svg>
                         Contact us
                     </a>
                 </div>
             </div>
             <!-- Card 3 -->
-            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
-                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
-                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div
+                class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div
+                        class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
                     </div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none">
+                </div>
                 <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
                     <h4 class="text-white font-bold font-display mb-1">Mr. Ammba Das</h4>
                     <p class="text-gray-300 text-xs mb-3">Founder & CEO - Direct Sellar<br>(Telangana)</p>
-                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                    <a href="https://wa.me/919237377196" target="_blank"
+                        class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z" />
+                        </svg>
                         Contact us
                     </a>
                 </div>
             </div>
             <!-- Card 4 -->
-            <div class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
-                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
-                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div
+                class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-dark group shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-primary to-gray-800 flex items-center justify-center opacity-80">
+                    <div
+                        class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-accent group-hover:border-accent transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
                     </div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pointer-events-none">
+                </div>
                 <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
                     <h4 class="text-white font-bold font-display mb-1">Mr. Srinivas</h4>
                     <p class="text-gray-300 text-xs mb-3">Founder & CEO - Parivrat<br>(Andhra Pradesh)</p>
-                    <a href="https://wa.me/919237377196" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                    <a href="https://wa.me/919237377196" target="_blank"
+                        class="inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-600 transition-colors">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12.004 0C5.374 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 24l6.334-1.66A11.94 11.94 0 0 0 12.004 24C18.63 24 24 18.627 24 12S18.63 0 12.004 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.37l-.36-.214-3.757.985 1.003-3.657-.233-.374A9.786 9.786 0 0 1 2.18 12c0-5.42 4.403-9.818 9.824-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z" />
+                        </svg>
                         Contact us
                     </a>
                 </div>
@@ -534,26 +685,36 @@
                 <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
                     <span class="w-6 h-[1px] bg-accent"></span> Our Clients <span class="w-6 h-[1px] bg-accent"></span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-4">Trusted by Growing MLM Businesses</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary font-display mb-4">Trusted by Growing MLM
+                    Businesses</h2>
                 <p class="text-gray-500">Hundreds of MLM leaders and companies across India trust our solutions.</p>
             </div>
-            
+
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
-                    <span class="text-red-500 text-xl">&#9670;</span><span class="font-bold text-primary text-sm tracking-wide">MYGOLDENWAY</span>
+                <div
+                    class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                    <span class="text-red-500 text-xl">&#9670;</span><span
+                        class="font-bold text-primary text-sm tracking-wide">MYGOLDENWAY</span>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
-                    <span class="text-pink-600 text-xl">&#9752;</span><span class="font-bold text-primary text-sm tracking-wide">My Shops<span class="text-red-500">247</span></span>
+                <div
+                    class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                    <span class="text-pink-600 text-xl">&#9752;</span><span
+                        class="font-bold text-primary text-sm tracking-wide">My Shops<span
+                            class="text-red-500">247</span></span>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                <div
+                    class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
                     <span class="font-bold text-primary text-sm tracking-widest">TRENDSWAVE</span>
                     <span class="text-[10px] text-gray-400 tracking-widest">FASHION</span>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                <div
+                    class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
                     <span class="font-bold text-yellow-500 text-sm">1X<span class="text-primary">KING</span></span>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
-                    <span class="text-green-600 text-2xl leading-none">&#9650;</span><span class="font-bold text-green-600 text-sm tracking-wide">AGN</span>
+                <div
+                    class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center gap-2 hover:border-accent hover:shadow-md transition-all cursor-default min-h-[72px]">
+                    <span class="text-green-600 text-2xl leading-none">&#9650;</span><span
+                        class="font-bold text-green-600 text-sm tracking-wide">AGN</span>
                 </div>
             </div>
         </div>
@@ -562,18 +723,26 @@
     <!-- STATS + CTA BAND -->
     <section class="py-24 px-6 bg-dark text-white relative overflow-hidden" id="statsCta">
         <!-- Subtle background pattern -->
-        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 34px 34px;"></div>
-        
+        <div class="absolute inset-0 opacity-10 pointer-events-none"
+            style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 34px 34px;">
+        </div>
+
         <div class="max-w-6xl mx-auto relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold font-display mb-4">India's <span class="text-accent">#1 All-in-One</span> MLM Hub</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">From software to scale, we handle everything — 9+ years of industry excellence.</p>
+                <h2 class="text-3xl md:text-5xl font-bold font-display mb-4">India's <span class="text-accent">#1
+                        All-in-One</span> MLM Hub</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">From software to scale, we handle everything — 9+
+                    years of industry excellence.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-2xl mb-16 divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-2xl mb-16 divide-y md:divide-y-0 md:divide-x divide-white/10">
                 <div class="p-8 flex items-center justify-center gap-5">
                     <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" /></svg>
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" />
+                        </svg>
                     </div>
                     <div>
                         <div class="font-bold text-3xl font-display text-white">9+</div>
@@ -582,7 +751,12 @@
                 </div>
                 <div class="p-8 flex items-center justify-center gap-5">
                     <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
                     </div>
                     <div>
                         <div class="font-bold text-3xl font-display text-white">2800+</div>
@@ -591,7 +765,11 @@
                 </div>
                 <div class="p-8 flex items-center justify-center gap-5">
                     <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" /></svg>
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <path d="M10 9.5v5l4-2.5z" />
+                        </svg>
                     </div>
                     <div>
                         <div class="font-bold text-3xl font-display text-white">1.7L+</div>
@@ -602,106 +780,174 @@
 
             <div class="border-2 border-dashed border-white/20 rounded-2xl p-10 text-center bg-white/5">
                 <div class="inline-block bg-accent rounded-xl px-8 py-4 mb-6 shadow-xl">
-                    <div class="font-bold text-primary font-display mb-1 text-lg">READY TO START YOUR MLM BUSINESS TODAY?</div>
-                    <div class="text-primary/80 text-sm font-medium">Get 100% expert assistance & 24/7 dedicated support from India's best team.</div>
+                    <div class="font-bold text-primary font-display mb-1 text-lg">READY TO START YOUR MLM BUSINESS
+                        TODAY?</div>
+                    <div class="text-primary/80 text-sm font-medium">Get 100% expert assistance & 24/7 dedicated support
+                        from India's best team.</div>
                 </div>
-                <div class="text-2xl md:text-3xl font-bold font-display mb-3">CALL / WHATSAPP: <a href="tel:+918927656368" class="text-accent hover:text-yellow-400 transition-colors">+91 8927656368</a></div>
-                <div class="text-gray-400 text-sm">(Available anytime for free consultation after you check our live demos)</div>
+                <div class="text-2xl md:text-3xl font-bold font-display mb-3">CALL / WHATSAPP: <a
+                        href="tel:+918927656368" class="text-accent hover:text-yellow-400 transition-colors">+91
+                        8927656368</a></div>
+                <div class="text-gray-400 text-sm">(Available anytime for free consultation after you check our live
+                    demos)</div>
             </div>
 
             <!-- PROVEN EXPERTISE TIMELINE -->
             <div class="mt-24 mb-10">
                 <div class="text-center mb-12">
-                    <h3 class="text-2xl md:text-4xl font-bold font-display text-white mb-4 uppercase tracking-wide">Proven industry expertise backed by MLM success tips</h3>
+                    <h3 class="text-2xl md:text-4xl font-bold font-display text-white mb-4 uppercase tracking-wide">
+                        Proven industry expertise backed by MLM success tips</h3>
                     <div class="w-24 h-1 bg-accent mx-auto rounded-full mt-6"></div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- 2019 -->
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
-                        <div class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">2019</div>
-                        <div class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
-                            <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" muted loop playsinline poster="https://assets.mixkit.co/videos/1266/1266-thumb-720-0.jpg">
+                    <div
+                        class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
+                        <div
+                            class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">
+                            2019</div>
+                        <div
+                            class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
+                            <video
+                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                muted loop playsinline
+                                poster="https://assets.mixkit.co/videos/1266/1266-thumb-720-0.jpg">
                                 <source src="https://assets.mixkit.co/videos/1266/1266-720.mp4" type="video/mp4">
                             </video>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
-                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <div
+                                    class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
+                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 2020 -->
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
-                        <div class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">2020</div>
-                        <div class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
-                            <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg">
+                    <div
+                        class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
+                        <div
+                            class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">
+                            2020</div>
+                        <div
+                            class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
+                            <video
+                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg">
                                 <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
                             </video>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
-                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <div
+                                    class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
+                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 2021 -->
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
-                        <div class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">2021</div>
-                        <div class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
-                            <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" muted loop playsinline poster="https://assets.mixkit.co/videos/328/328-thumb-720-0.jpg">
+                    <div
+                        class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
+                        <div
+                            class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">
+                            2021</div>
+                        <div
+                            class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
+                            <video
+                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                muted loop playsinline poster="https://assets.mixkit.co/videos/328/328-thumb-720-0.jpg">
                                 <source src="https://assets.mixkit.co/videos/328/328-720.mp4" type="video/mp4">
                             </video>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
-                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <div
+                                    class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
+                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 2022 -->
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
-                        <div class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">2022</div>
-                        <div class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
-                            <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" muted loop playsinline poster="https://assets.mixkit.co/videos/428/428-thumb-720-0.jpg">
+                    <div
+                        class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
+                        <div
+                            class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">
+                            2022</div>
+                        <div
+                            class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
+                            <video
+                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                muted loop playsinline poster="https://assets.mixkit.co/videos/428/428-thumb-720-0.jpg">
                                 <source src="https://assets.mixkit.co/videos/428/428-720.mp4" type="video/mp4">
                             </video>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
-                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <div
+                                    class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
+                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 2023 -->
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
-                        <div class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">2023</div>
-                        <div class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
-                            <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" muted loop playsinline poster="https://assets.mixkit.co/videos/1266/1266-thumb-720-0.jpg">
+                    <div
+                        class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
+                        <div
+                            class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">
+                            2023</div>
+                        <div
+                            class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
+                            <video
+                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                muted loop playsinline
+                                poster="https://assets.mixkit.co/videos/1266/1266-thumb-720-0.jpg">
                                 <source src="https://assets.mixkit.co/videos/1266/1266-720.mp4" type="video/mp4">
                             </video>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
-                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <div
+                                    class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
+                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 2024 -->
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
-                        <div class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">2024</div>
-                        <div class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
-                            <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg">
+                    <div
+                        class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-accent hover:bg-white/10 transition-all duration-300 shadow-lg">
+                        <div
+                            class="inline-block bg-accent text-primary font-bold font-mono px-5 py-2 rounded-lg mb-4 text-sm shadow-md">
+                            2024</div>
+                        <div
+                            class="aspect-video bg-black/50 rounded-xl overflow-hidden relative group border border-white/10">
+                            <video
+                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                muted loop playsinline poster="https://assets.mixkit.co/videos/261/261-thumb-720-0.jpg">
                                 <source src="https://assets.mixkit.co/videos/261/261-720.mp4" type="video/mp4">
                             </video>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
-                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <div
+                                    class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-all duration-300 cursor-pointer">
+                                    <svg class="w-6 h-6 text-white ml-1 group-hover:text-primary transition-colors"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -711,84 +957,123 @@
 
             <!-- OUR SERVICES CAROUSEL -->
             <div class="mt-16">
-                <div class="flex items-end justify-between mb-8 flex-wrap gap-4">
-                    <div>
-                        <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-3">
-                            <span class="w-6 h-[1px] bg-accent"></span> Our Services
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-bold font-display text-white">Explore what we offer</h3>
-                    </div>
-                    <div class="flex gap-3">
-                        <button id="svcScrollLeft" aria-label="Scroll left" class="w-11 h-11 rounded-full border border-white/20 bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary hover:border-accent transition-colors">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
-                        </button>
-                        <button id="svcScrollRight" aria-label="Scroll right" class="w-11 h-11 rounded-full border border-white/20 bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary hover:border-accent transition-colors">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" /></svg>
-                        </button>
-                    </div>
-                </div>
+              <div class="mb-8">
+    <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-3">
+        <span class="w-6 h-[1px] bg-accent"></span> Our Services
+    </div>
+    <h3 class="text-2xl md:text-3xl font-bold font-display text-white">Explore what we offer</h3>
+</div>
 
-                <div id="svcTrack" class="flex gap-5 overflow-x-auto scroll-smooth scrollbar-hide pb-2 snap-x snap-mandatory">
-                    <!-- Card: Latest MLM Database -->
-                    <a href="#" data-open-modal class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-full bg-pink-500/15 flex items-center justify-center text-pink-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" /></svg>
-                        </div>
-                        <h4 class="font-bold text-white mb-2 font-display">Latest MLM Database</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Fresh verified databases with high quality genuine contacts.</p>
-                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
-                    </a>
+              <div id="svcTrack"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <!-- Card: Latest MLM Database -->
+    <a href="mlm-leader-website.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="8" ry="3" />
+                <path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">Latest MLM Database</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Fresh verified databases with high
+            quality genuine contacts.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
 
-                    <!-- Card: MLM Leader Website -->
-                    <a href="#" data-open-modal class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-full bg-teal-500/15 flex items-center justify-center text-teal-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" /></svg>
-                        </div>
-                        <h4 class="font-bold text-white mb-2 font-display">MLM Leader Website</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Modern responsive website for personal branding and business.</p>
-                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
-                    </a>
+    <!-- Card: MLM Leader Website -->
+    <a href="#" data-open-modal
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">MLM Leader Website</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Modern responsive website for personal
+            branding and business.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
 
-                    <!-- Card: Customized MLM Software Development -->
-                    <a href="custom-mlm.html" class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-full bg-blue-500/15 flex items-center justify-center text-blue-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4" /></svg>
-                        </div>
-                        <h4 class="font-bold text-white mb-2 font-display">Customized MLM Software Development</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Powerful backend dashboards tailored to your business with smart automation.</p>
-                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
-                    </a>
+    <!-- Card: Customized MLM Software Development -->
+    <a href="custom-mlm.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="14" rx="2" />
+                <path d="M8 22h8M12 18v4" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">Customized MLM Software Development</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Powerful backend dashboards tailored to
+            your business with smart automation.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
 
-                    <!-- Card: MLM Plan PDF Making -->
-                    <a href="plan-pdf.html" class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-orange-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 11h2" /></svg>
-                        </div>
-                        <h4 class="font-bold text-white mb-2 font-display">MLM Plan PDF Making</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Professional compensation plan PDF design with premium presentation.</p>
-                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
-                    </a>
+    <!-- Card: MLM Plan PDF Making -->
+    <a href="plan-pdf.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <path d="M14 2v6h6M9 15h6M9 11h2" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">MLM Plan PDF Making</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Professional compensation plan PDF
+            design with premium presentation.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
 
-                    <!-- Card: MLM Plan Video Making -->
-                    <a href="mlm-videomaking.html" class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-full bg-purple-500/15 flex items-center justify-center text-purple-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M10 9.5v5l4-2.5z" /></svg>
-                        </div>
-                        <h4 class="font-bold text-white mb-2 font-display">MLM Plan Video Making</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">HD animated presentation videos with voice-over and effects.</p>
-                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
-                    </a>
+    <!-- Card: MLM Plan Video Making -->
+    <a href="mlm-videomaking.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <path d="M10 9.5v5l4-2.5z" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">MLM Plan Video Making</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">HD animated presentation videos with
+            voice-over and effects.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
 
-                    <!-- Card: Result Based Promotion -->
-                    <a href="#" data-open-modal class="group snap-start shrink-0 w-[260px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-accent hover:bg-white/10 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-full bg-green-500/15 flex items-center justify-center text-green-400 mb-5 group-hover:bg-accent group-hover:text-primary transition-colors">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 5-7" /></svg>
-                        </div>
-                        <h4 class="font-bold text-white mb-2 font-display">Result Based Promotion</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Reach targeted audiences using automated marketing campaigns.</p>
-                        <span class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1">Learn more &rarr;</span>
-                    </a>
-                </div>
+    <!-- Card: Result Based Promotion -->
+    <a href="result-based-promotion.html"
+        class="group flex flex-col h-full bg-white/[0.08] backdrop-blur-sm border border-white/15 shadow-lg rounded-2xl p-6 hover:border-accent hover:bg-white/[0.14] hover:-translate-y-1 transition-all duration-300">
+        <div
+            class="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-accentLight mb-5 group-hover:bg-accent group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3v18h18" />
+                <path d="M7 15l4-5 3 3 5-7" />
+            </svg>
+        </div>
+        <h4 class="font-bold text-white mb-2 font-display">Result Based Promotion</h4>
+        <p class="text-base text-gray-200 leading-relaxed mb-4 flex-1">Reach targeted audiences using automated
+            marketing campaigns.</p>
+        <span
+            class="text-xs font-bold text-accent group-hover:text-white transition-colors flex items-center gap-1 mt-auto">Learn
+            more &rarr;</span>
+    </a>
+</div>
             </div>
         </div>
     </section>
@@ -797,14 +1082,22 @@
     <section class="py-20 px-6 bg-white border-b border-gray-100">
         <div class="max-w-5xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
             <div class="lg:w-3/5">
-                <h3 class="text-2xl font-bold font-display mb-4 text-primary"><span class="text-accent mr-2">Note:-</span> Our 100% Verified Tech Guarantee</h3>
-                <p class="text-gray-600 mb-4 leading-relaxed">You are not risking your money or dealing with unverified technology here. We are the only agency in India that gives you direct access to test live admin panels and user dashboards before you make a decision.</p>
-                <p class="text-gray-600 leading-relaxed">Simply click on any of our services above, check the live working CRM software, view our real design catalogs, and call us only when you are 100% satisfied.</p>
+                <h3 class="text-2xl font-bold font-display mb-4 text-primary"><span
+                        class="text-accent mr-2">Note:-</span> Our 100% Verified Tech Guarantee</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">You are not risking your money or dealing with unverified
+                    technology here. We are the only agency in India that gives you direct access to test live admin
+                    panels and user dashboards before you make a decision.</p>
+                <p class="text-gray-600 leading-relaxed">Simply click on any of our services above, check the live
+                    working CRM software, view our real design catalogs, and call us only when you are 100% satisfied.
+                </p>
             </div>
             <div class="lg:w-2/5 flex flex-col gap-6">
                 <div class="flex gap-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" /></svg>
+                    <div
+                        class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" />
+                        </svg>
                     </div>
                     <div>
                         <h4 class="font-bold text-primary mb-1">Live Testing</h4>
@@ -812,8 +1105,14 @@
                     </div>
                 </div>
                 <div class="flex gap-4">
-                    <div class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="4" /><path d="M2 21c0-4 3.1-7 7-7s7 3 7 7" /><path d="M17 12a4 4 0 0 0 0-8" /><path d="M22 21c0-3.3-2-6-5-7" /></svg>
+                    <div
+                        class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="8" r="4" />
+                            <path d="M2 21c0-4 3.1-7 7-7s7 3 7 7" />
+                            <path d="M17 12a4 4 0 0 0 0-8" />
+                            <path d="M22 21c0-3.3-2-6-5-7" />
+                        </svg>
                     </div>
                     <div>
                         <h4 class="font-bold text-primary mb-1">Secure Payments</h4>
@@ -829,33 +1128,52 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Card 1 -->
-                <div class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-primary to-gray-700 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+                <div
+                    class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-primary to-gray-700 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
                     <div class="w-14 h-14 mx-auto rounded-full bg-white/15 flex items-center justify-center mb-5">
-                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z" />
+                        </svg>
                     </div>
                     <div class="font-bold text-2xl md:text-3xl font-display text-white mb-1">4.9 / 5</div>
                     <div class="text-sm font-semibold text-gray-300">Client Rating</div>
                 </div>
                 <!-- Card 2 -->
-                <div class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-accent to-yellow-500 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+                <div
+                    class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-accent to-yellow-500 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
                     <div class="w-14 h-14 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-5">
-                        <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21h2a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H2v10zm19.83-9.06a2 2 0 0 0-1.5-1.94H15.4l.86-3.6a2.2 2.2 0 0 0-2-2.6c-.36 0-.71.15-.96.42L8 9.24V21h10.72a2 2 0 0 0 1.95-1.57l1.16-6.5a1.94 1.94 0 0 0 0-.99z"/></svg>
+                        <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M2 21h2a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H2v10zm19.83-9.06a2 2 0 0 0-1.5-1.94H15.4l.86-3.6a2.2 2.2 0 0 0-2-2.6c-.36 0-.71.15-.96.42L8 9.24V21h10.72a2 2 0 0 0 1.95-1.57l1.16-6.5a1.94 1.94 0 0 0 0-.99z" />
+                        </svg>
                     </div>
                     <div class="font-bold text-2xl md:text-3xl font-display text-primary mb-1">100%</div>
                     <div class="text-sm font-semibold text-primary/80">Assistance</div>
                 </div>
                 <!-- Card 3 -->
-                <div class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-primary to-gray-700 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+                <div
+                    class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-primary to-gray-700 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
                     <div class="w-14 h-14 mx-auto rounded-full bg-white/15 flex items-center justify-center mb-5">
-                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 7v5l3 3" />
+                        </svg>
                     </div>
                     <div class="font-bold text-2xl md:text-3xl font-display text-white mb-1">24/7</div>
                     <div class="text-sm font-semibold text-gray-300">Support</div>
                 </div>
                 <!-- Card 4 -->
-                <div class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-accent to-yellow-500 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+                <div
+                    class="rounded-2xl p-8 text-center shadow-xl bg-gradient-to-br from-accent to-yellow-500 border border-white/10 hover:-translate-y-1 transition-transform duration-300">
                     <div class="w-14 h-14 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-5">
-                        <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                        <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
                     </div>
                     <div class="font-bold text-2xl md:text-3xl font-display text-primary mb-1">Start Now</div>
                     <div class="text-sm font-semibold text-primary/80">Your Company</div>
@@ -866,7 +1184,9 @@
 
     <!-- FAQ -->
     <section class="py-24 px-6 bg-dark relative overflow-hidden" id="faq">
-        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 34px 34px;"></div>
+        <div class="absolute inset-0 opacity-10 pointer-events-none"
+            style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 34px 34px;">
+        </div>
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="text-center mb-14">
                 <div class="inline-flex items-center gap-3 text-sm font-semibold uppercase text-accent mb-4">
@@ -878,56 +1198,86 @@
             <div class="flex flex-col gap-4" id="faqAccordion">
                 <!-- Q1 -->
                 <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
-                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
-                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
-                        <span class="font-bold text-white text-base md:text-lg">Customized MLM Software की Delivery में कितना समय (Time) लगता है?</span>
+                    <button
+                        class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
+                        <span
+                            class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-white text-base md:text-lg">Customized MLM Software की Delivery में
+                            कितना समय (Time) लगता है?</span>
                     </button>
                     <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
-                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">Customized MLM Software की Delivery पूरी तरह से आपके Plan की Complexity और Requirements पर Depend करती है। नॉर्मली एक बेसिक Plan का Software 5 से 7 Working Days में रेडी हो जाता है। अगर आपका Plan बहुत ज्यादा एडवांस या यूनिक है, तो उसमें 10 से 15 Days का समय लग सकता है। हमारी टीम हमेशा टाइमली और एरर-फ्री Delivery सुनिश्चित करती है।</p>
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">Customized
+                            MLM Software की Delivery पूरी तरह से आपके Plan की Complexity और Requirements पर Depend करती
+                            है। नॉर्मली एक बेसिक Plan का Software 5 से 7 Working Days में रेडी हो जाता है। अगर आपका Plan
+                            बहुत ज्यादा एडवांस या यूनिक है, तो उसमें 10 से 15 Days का समय लग सकता है। हमारी टीम हमेशा
+                            टाइमली और एरर-फ्री Delivery सुनिश्चित करती है।</p>
                     </div>
                 </div>
 
                 <!-- Q2 -->
                 <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
-                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-accent to-yellow-500 hover:brightness-110 transition-all">
-                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/25 flex items-center justify-center text-primary font-bold text-lg transition-transform duration-300">+</span>
-                        <span class="font-bold text-primary text-base md:text-lg">₹99/- वाले MLM Plan PDF Making पैकेज में डिज़ाइन (Design) कस्टमाइज़्ड होता है?</span>
+                    <button
+                        class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-accent to-yellow-500 hover:brightness-110 transition-all">
+                        <span
+                            class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/25 flex items-center justify-center text-primary font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-primary text-base md:text-lg">₹99/- वाले MLM Plan PDF Making पैकेज
+                            में डिज़ाइन (Design) कस्टमाइज़्ड होता है?</span>
                     </button>
                     <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
-                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">जी हाँ, ₹99/- पैकेज में भी आपके ब्रांड के अनुसार बेसिक कस्टमाइज़ेशन शामिल होता है, जैसे कि आपका लोगो, कलर थीम और कंपनी डिटेल्स। पूरी तरह से यूनिक और एडवांस डिज़ाइन के लिए हमारे प्रीमियम पैकेज उपलब्ध हैं।</p>
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">जी हाँ,
+                            ₹99/- पैकेज में भी आपके ब्रांड के अनुसार बेसिक कस्टमाइज़ेशन शामिल होता है, जैसे कि आपका
+                            लोगो, कलर थीम और कंपनी डिटेल्स। पूरी तरह से यूनिक और एडवांस डिज़ाइन के लिए हमारे प्रीमियम
+                            पैकेज उपलब्ध हैं।</p>
                     </div>
                 </div>
 
                 <!-- Q3 -->
                 <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
-                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
-                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
-                        <span class="font-bold text-white text-base md:text-lg">Result-Based Promotion में Lead की क्या गारंटी होती है और Data कैसे मिलता है?</span>
+                    <button
+                        class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
+                        <span
+                            class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-white text-base md:text-lg">Result-Based Promotion में Lead की क्या
+                            गारंटी होती है और Data कैसे मिलता है?</span>
                     </button>
                     <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
-                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">हमारी Result-Based Promotion सर्विस में आपको एक तय संख्या में जेन्यूइन और टारगेटेड Leads दिए जाते हैं। सभी Data रियल-टाइम में एक शेयर्ड शीट या डैशबोर्ड के ज़रिए दिया जाता है, जिससे आप हर लीड को खुद ट्रैक कर सकें।</p>
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">हमारी
+                            Result-Based Promotion सर्विस में आपको एक तय संख्या में जेन्यूइन और टारगेटेड Leads दिए जाते
+                            हैं। सभी Data रियल-टाइम में एक शेयर्ड शीट या डैशबोर्ड के ज़रिए दिया जाता है, जिससे आप हर लीड
+                            को खुद ट्रैक कर सकें।</p>
                     </div>
                 </div>
 
                 <!-- Q4 -->
                 <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
-                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-accent to-yellow-500 hover:brightness-110 transition-all">
-                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/25 flex items-center justify-center text-primary font-bold text-lg transition-transform duration-300">+</span>
-                        <span class="font-bold text-primary text-base md:text-lg">आपके Latest MLM Database की Accuracy कितनी है और क्या यह Fresh डेटा है?</span>
+                    <button
+                        class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-accent to-yellow-500 hover:brightness-110 transition-all">
+                        <span
+                            class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/25 flex items-center justify-center text-primary font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-primary text-base md:text-lg">आपके Latest MLM Database की Accuracy
+                            कितनी है और क्या यह Fresh डेटा है?</span>
                     </button>
                     <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
-                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">हमारा डेटाबेस रेगुलर बेसिस पर वेरीफाई और अपडेट किया जाता है, जिससे 95%+ Accuracy मेंटेन रहती है। हर लिस्ट फ्रेश होती है और डुप्लीकेट या डेड कॉन्टैक्ट्स को हटाकर ही आपको दी जाती है।</p>
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">हमारा
+                            डेटाबेस रेगुलर बेसिस पर वेरीफाई और अपडेट किया जाता है, जिससे 95%+ Accuracy मेंटेन रहती है।
+                            हर लिस्ट फ्रेश होती है और डुप्लीकेट या डेड कॉन्टैक्ट्स को हटाकर ही आपको दी जाती है।</p>
                     </div>
                 </div>
 
                 <!-- Q5 -->
                 <div class="faq-item rounded-2xl overflow-hidden border border-white/10 shadow-lg">
-                    <button class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
-                        <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
-                        <span class="font-bold text-white text-base md:text-lg">MLM Leader Website का 1 साल के बाद Renewal Charge क्या होगा?</span>
+                    <button
+                        class="faq-q w-full flex items-center gap-4 text-left px-6 py-5 bg-gradient-to-r from-primary to-gray-700 hover:brightness-110 transition-all">
+                        <span
+                            class="faq-icon shrink-0 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300">+</span>
+                        <span class="font-bold text-white text-base md:text-lg">MLM Leader Website का 1 साल के बाद
+                            Renewal Charge क्या होगा?</span>
                     </button>
                     <div class="faq-a max-h-0 overflow-hidden transition-all duration-300 bg-white/5">
-                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">पहले साल की होस्टिंग और डोमेन हमारी तरफ से कवर होते हैं। 1 साल के बाद एक छोटा सा Annual Renewal Charge लगता है, जो होस्टिंग और डोमेन मेंटेनेंस के लिए होता है। सही अमाउंट जानने के लिए हमारी टीम से संपर्क करें।</p>
+                        <p class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">पहले साल की
+                            होस्टिंग और डोमेन हमारी तरफ से कवर होते हैं। 1 साल के बाद एक छोटा सा Annual Renewal Charge
+                            लगता है, जो होस्टिंग और डोमेन मेंटेनेंस के लिए होता है। सही अमाउंट जानने के लिए हमारी टीम से
+                            संपर्क करें।</p>
                     </div>
                 </div>
             </div>
@@ -935,11 +1285,15 @@
     </section>
 
     <!-- AI Assistant -->
-    <button class="fixed bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-2xl flex items-center justify-center border border-gray-100 hover:scale-110 transition-transform z-40" id="aiFab" aria-label="Open AI assistant">
-        <img src="./assets/image/ai-assistant.png" alt="AI" class="w-10 h-10" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRjU5RTBCIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yMSAxNWEyIDIgMCAwIDEtMiAySDdhMiAyIDAgMCAxLTItMnoiLz48L3N2Zz4='">
+    <button
+        class="fixed bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-2xl flex items-center justify-center border border-gray-100 hover:scale-110 transition-transform z-40"
+        id="aiFab" aria-label="Open AI assistant">
+        <img src="./assets/image/ai-assistant.png" alt="AI" class="w-10 h-10"
+            onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRjU5RTBCIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yMSAxNWEyIDIgMCAwIDEtMiAySDdhMiAyIDAgMCAxLTItMnoiLz48L3N2Zz4='">
     </button>
 
-    <div class="fixed bottom-24 right-6 w-80 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 invisible" id="aiPanel">
+    <div class="fixed bottom-24 right-6 w-80 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 invisible"
+        id="aiPanel">
         <div class="bg-primary text-white p-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <span class="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
@@ -951,49 +1305,130 @@
             <button class="text-gray-400 hover:text-white" id="aiClose">&#10005;</button>
         </div>
         <div class="p-4 h-64 overflow-y-auto bg-gray-50 flex flex-col gap-3 text-sm" id="aiBody">
-            <div class="bg-white border border-gray-200 p-3 rounded-2xl rounded-tl-sm text-gray-700 self-start shadow-sm max-w-[85%]">Hi! I'm here to help. Ask me anything about our MLM software or services.</div>
+            <div
+                class="bg-white border border-gray-200 p-3 rounded-2xl rounded-tl-sm text-gray-700 self-start shadow-sm max-w-[85%]">
+                Hi! I'm here to help. Ask me anything about our MLM software or services.</div>
         </div>
         <form class="flex border-t border-gray-200 bg-white p-2" id="aiForm">
-            <input type="text" id="aiInput" class="flex-1 px-3 py-2 outline-none text-sm bg-transparent" placeholder="Type your message..." autocomplete="off">
-            <button type="submit" class="w-10 h-10 flex items-center justify-center text-accent hover:bg-gray-50 rounded-full transition-colors" aria-label="Send">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4z" /></svg>
+            <input type="text" id="aiInput" class="flex-1 px-3 py-2 outline-none text-sm bg-transparent"
+                placeholder="Type your message..." autocomplete="off">
+            <button type="submit"
+                class="w-10 h-10 flex items-center justify-center text-accent hover:bg-gray-50 rounded-full transition-colors"
+                aria-label="Send">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2 11 13" />
+                    <path d="M22 2 15 22l-4-9-9-4z" />
+                </svg>
             </button>
         </form>
     </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary text-gray-400 py-12 px-4 md:px-6 border-t border-white/10 text-base">
+        <div class="max-w-7xl mx-auto flex flex-col gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-white font-display font-bold text-xl mb-4">VK SERVICES ENTERPRISE</h3>
+                    <p class="mb-2">Copyright © 2025 | By Vishwajit Kumar</p>
+                    <p class="mb-1"><span class="text-white font-semibold">Corporate Office:</span> Plot No: 1632/15509,
+                        Khata No: 1330/10531, Satya vihar, Rasulgarh, Bhubaneswar, Odisha, 751017</p>
+                    <p><span class="text-white font-semibold">Official Address:</span> 4th Floor, New Annex Building
+                        Arch Bishop’s House, Satya Nagar, Bhubaneswar, Odisha 751007</p>
+                </div>
+                <div class="flex flex-col md:items-end justify-center">
+                    <div class="flex flex-wrap gap-4 text-accentLight mb-4">
+                        <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                        <span>|</span>
+                        <a href="#" class="hover:text-white transition-colors">Disclosure</a>
+                        <span>|</span>
+                        <a href="#" class="hover:text-white transition-colors">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 text-base leading-relaxed text-white">
+                <p class="mb-4">This site is not a part of the Facebook™ website or Facebook™ Inc or Google.
+                    Additionally, This site is NOT endorsed by Facebook™ / Google in any way. FACEBOOK™ is a trademark
+                    of FACEBOOK™, Inc. As stipulated by law, we can not and do not make any guarantees about your
+                    ability to get results or earn any money with my ideas/software, information, tools or strategies. I
+                    just want to help you by giving great content, direction and strategies that worked well for me and
+                    my clients and that I believe can help you move forward.</p>
+                <p>All of my terms, privacy policies and disclaimers for this program and website can be accessed via
+                    the links. I feel transparency is important and I hold ourselves (you & me) to a high standard of
+                    integrity. Thanks for stopping by. I hope this training, software and content brings you a lot of
+                    value & results.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         /* ---------- Rotating headline + sub-text ---------- */
         const rotateText = document.getElementById('rotateText');
         const rotateSubText = document.getElementById('rotateSubText');
+        const rotatePrevBtn = document.getElementById('rotatePrevBtn');
+        const rotateNextBtn = document.getElementById('rotateNextBtn');
         const phrases = [
-            "Scale Your Network Marketing Team Instantly with % lakhs Genuine MLM Leads",
+            "Scale Your Network Marketing Team Instantly with 5 lakhs Genuine MLM Leads",
             "From plan to promotion — all in one place"
         ];
         const subPhrases = [
             "100% Active & Updated Profiles | Fresh Directory from the Last 3 Months | 70%–80% Verified Contact Accuracy",
-            "We build simple MLM software and create plans, videos, and websites that are easy for your whole team to use.",
-    
+            "We build simple MLM software and create plans, videos, and websites that are easy for your whole team to use."
         ];
         let rotateIndex = 0;
+        let rotateTimer = null;
+
+        function showSlide(newIndex, direction = 1) {
+            if (!rotateText || !rotateSubText) return;
+            const outX = '-40px';
+            const inX = '40px';
+
+            rotateText.style.opacity = '0';
+            rotateText.style.transform = `translateX(${outX})`;
+            rotateSubText.style.opacity = '0';
+            rotateSubText.style.transform = `translateX(${outX})`;
+
+            setTimeout(() => {
+                rotateIndex = newIndex;
+                rotateText.textContent = phrases[rotateIndex];
+                rotateSubText.textContent = subPhrases[rotateIndex];
+
+                rotateText.style.transition = 'none';
+                rotateSubText.style.transition = 'none';
+                rotateText.style.transform = `translateX(${inX})`;
+                rotateSubText.style.transform = `translateX(${inX})`;
+
+                void rotateText.offsetWidth;
+
+                requestAnimationFrame(() => {
+                    rotateText.style.transition = '';
+                    rotateSubText.style.transition = '';
+                    rotateText.style.opacity = '1';
+                    rotateText.style.transform = 'translateX(0)';
+                    rotateSubText.style.opacity = '1';
+                    rotateSubText.style.transform = 'translateX(0)';
+                });
+            }, 350);
+        }
+
+        function goToNext() {
+            showSlide((rotateIndex + 1) % phrases.length, 1);
+        }
+        function goToPrev() {
+            showSlide((rotateIndex - 1 + phrases.length) % phrases.length, -1);
+        }
+        function restartAutoRotate() {
+            if (rotateTimer) clearInterval(rotateTimer);
+            rotateTimer = setInterval(goToNext, 4000);
+        }
 
         if (rotateText && rotateSubText) {
-            setInterval(() => {
-                rotateText.style.opacity = '0';
-                rotateText.style.transform = 'translateY(10px)';
-                rotateSubText.style.opacity = '0';
-                rotateSubText.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    rotateIndex = (rotateIndex + 1) % phrases.length;
-                    rotateText.textContent = phrases[rotateIndex];
-                    rotateSubText.textContent = subPhrases[rotateIndex];
-
-                    rotateText.style.opacity = '1';
-                    rotateText.style.transform = 'translateY(0)';
-                    rotateSubText.style.opacity = '1';
-                    rotateSubText.style.transform = 'translateY(0)';
-                }, 500);
-            }, 4000);
+            restartAutoRotate();
+        }
+        if (rotateNextBtn) {
+            rotateNextBtn.addEventListener('click', () => { goToNext(); restartAutoRotate(); });
+        }
+        if (rotatePrevBtn) {
+            rotatePrevBtn.addEventListener('click', () => { goToPrev(); restartAutoRotate(); });
         }
 
         /* ---------- Modal logic ---------- */
@@ -1063,23 +1498,23 @@
         /* ---------- Form validation & submit ---------- */
         function validateField(id, testFn) {
             const field = document.getElementById(id + 'Field');
-            if(!field) return true;
+            if (!field) return true;
             const input = document.getElementById(id);
             const err = field.querySelector('.err');
             const ok = testFn(input.value.trim());
             if (!ok) {
                 input.classList.add('border-red-500', 'focus:ring-red-500');
                 input.classList.remove('border-gray-200', 'focus:ring-accent');
-                if(err) err.classList.remove('hidden');
+                if (err) err.classList.remove('hidden');
             } else {
                 input.classList.remove('border-red-500', 'focus:ring-red-500');
                 input.classList.add('border-gray-200', 'focus:ring-accent');
-                if(err) err.classList.add('hidden');
+                if (err) err.classList.add('hidden');
             }
             return ok;
         }
 
-        if(form) {
+        if (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 const okName = validateField('name', v => v.length > 1);
@@ -1094,7 +1529,7 @@
 
             ['name', 'mobile', 'email'].forEach(id => {
                 const el = document.getElementById(id);
-                if(el) {
+                if (el) {
                     el.addEventListener('input', () => {
                         validateField(id, () => true);
                     });
@@ -1118,7 +1553,7 @@
 
             ['heroName', 'heroMobile', 'heroEmail'].forEach(id => {
                 const el = document.getElementById(id);
-                if(el) {
+                if (el) {
                     el.addEventListener('input', () => {
                         validateField(id, () => true);
                     });
@@ -1134,13 +1569,13 @@
         const aiInput = document.getElementById('aiInput');
         const aiBody = document.getElementById('aiBody');
 
-        function toggleAiPanel() { 
+        function toggleAiPanel() {
             aiPanel.classList.toggle('opacity-0');
             aiPanel.classList.toggle('invisible');
             aiPanel.classList.toggle('scale-95');
         }
-        if(aiFab) aiFab.addEventListener('click', toggleAiPanel);
-        if(aiClose) aiClose.addEventListener('click', toggleAiPanel);
+        if (aiFab) aiFab.addEventListener('click', toggleAiPanel);
+        if (aiClose) aiClose.addEventListener('click', toggleAiPanel);
 
         const canned = [
             "Thanks for reaching out! Our team will get back to you shortly.",
@@ -1150,17 +1585,17 @@
         ];
         let replyIndex = 0;
 
-        if(aiForm) {
+        if (aiForm) {
             aiForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 const text = aiInput.value.trim();
                 if (!text) return;
-                
+
                 const userMsg = document.createElement('div');
                 userMsg.className = 'bg-primary text-white p-3 rounded-2xl rounded-tr-sm self-end shadow-sm max-w-[85%] mt-2';
                 userMsg.textContent = text;
                 aiBody.appendChild(userMsg);
-                
+
                 aiInput.value = '';
                 aiBody.scrollTop = aiBody.scrollHeight;
 
@@ -1174,7 +1609,7 @@
                 }, 500);
             });
         }
-        
+
         /* ---------- Network particle background ---------- */
         const canvas = document.getElementById('netCanvas');
         if (canvas) {
@@ -1227,26 +1662,26 @@
     <script>
         async function submitEnquiryForm(e, formId, serviceName, nameId, mobileId, emailId, successViewId) {
             e.preventDefault();
-            
+
             const nameField = document.getElementById(nameId);
             const mobileField = document.getElementById(mobileId);
             const emailField = document.getElementById(emailId);
-            
+
             const data = {
                 service_name: serviceName,
                 name: nameField ? nameField.value.trim() : "",
                 mobile: mobileField ? mobileField.value.trim() : "",
                 email: emailField ? emailField.value.trim() : ""
             };
-            
+
             if (!data.name || !data.mobile) {
                 alert("Please fill in Name and Mobile Number");
                 return;
             }
-            
+
             const btn = e.target.querySelector('button[type="submit"]');
             const originalText = btn ? btn.innerText : 'Submit';
-            if(btn) { btn.innerText = 'Submitting...'; btn.disabled = true; }
+            if (btn) { btn.innerText = 'Submitting...'; btn.disabled = true; }
 
             try {
                 const response = await fetch(`${CONFIG.API_BASE_URL}/enquiry/create`, {
@@ -1254,7 +1689,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-                
+
                 if (response.ok) {
                     const form = document.getElementById(formId);
                     const successView = document.getElementById(successViewId);
@@ -1262,9 +1697,9 @@
                         const parentText = form.previousElementSibling;
                         const parentTitle = parentText?.previousElementSibling;
                         const parentSub = parentTitle?.previousElementSibling;
-                        if(parentText) parentText.style.display = 'none';
-                        if(parentTitle) parentTitle.style.display = 'none';
-                        if(parentSub) parentSub.style.display = 'none';
+                        if (parentText) parentText.style.display = 'none';
+                        if (parentTitle) parentTitle.style.display = 'none';
+                        if (parentSub) parentSub.style.display = 'none';
                     }
                     if (form) form.style.display = 'none';
                     if (successView) {
@@ -1274,12 +1709,12 @@
                     else alert("Enquiry submitted successfully!");
                 } else {
                     alert("Error submitting enquiry. Please try again.");
-                    if(btn) { btn.innerText = originalText; btn.disabled = false; }
+                    if (btn) { btn.innerText = originalText; btn.disabled = false; }
                 }
             } catch (error) {
                 console.error("Error:", error);
                 alert("Error connecting to server. Please try again.");
-                if(btn) { btn.innerText = originalText; btn.disabled = false; }
+                if (btn) { btn.innerText = originalText; btn.disabled = false; }
             }
         }
 
@@ -1294,4 +1729,5 @@
         }
     </script>
 </body>
+
 </html>
