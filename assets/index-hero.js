@@ -26,7 +26,7 @@
     if (document.querySelector('.site-footer')) return;
     const footer = document.createElement('footer');
     footer.className = 'site-footer';
-    footer.innerHTML = '<div class="site-footer-inner"><div class="site-footer-top"><div class="site-footer-brand"><h2>VK Services Enterprise</h2><p>Practical MLM software, websites, videos, databases, and plan-design services built to help your network grow with confidence.</p></div><nav class="site-footer-links" aria-label="Contact links"><a href="tel:+918927656368">Call us</a><a href="https://wa.me/919237377196" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:info@vkservicesenterprise.com">Email us</a></nav></div><div class="site-footer-bottom">© 2026 VK Services Enterprise. All rights reserved.</div></div>';
+    footer.innerHTML = '';
     document.body.appendChild(footer);
   };
 

@@ -34,8 +34,8 @@
   </script>
   <style>
     body {
-      background: #F7F7F5;
-      color: #111827;
+      background: #0B0D12;
+      color: #E5E7EB;
       font-family: 'Inter', sans-serif;
       -webkit-font-smoothing: antialiased;
     }
@@ -46,7 +46,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #d1d5db;
+      background: #374151;
       border-radius: 99px;
     }
 
@@ -81,6 +81,21 @@
 
     .toast {
       transition: transform .35s ease, opacity .35s ease;
+    }
+
+    .stat-card { cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(0,0,0,.5); }
+    .stat-card.active { outline: 2px solid currentColor; outline-offset: 2px; }
+
+    select option {
+      background-color: #1f2937;
+      color: #f3f4f6;
+    }
+    select option:checked,
+    select option:hover,
+    select option:focus {
+      background-color: #374151;
+      color: #ffffff;
     }
   </style>
 </head>
@@ -218,15 +233,15 @@
 
       <!-- Topbar -->
       <header
-        class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-gray-200 px-4 sm:px-7 py-4 flex justify-between gap-4">
+        class="sticky top-0 z-20 bg-gray-900/90 backdrop-blur border-b border-gray-800 px-4 sm:px-7 py-4 flex justify-between gap-4">
         <div class="flex flex-col gap-4 pt-1">
           <div>
-            <h1 class="font-body font-bold text-lg sm:text-xl text-primary">Admin Panel</h1>
+            <h1 class="font-body font-bold text-lg sm:text-xl text-white">Admin Panel</h1>
             <p class="text-xs text-gray-500 mt-0.5">VK Services Enterprise</p>
           </div>
 
           <!-- Tab switcher -->
-          <div class="flex items-center bg-gray-50 border border-gray-200 rounded-full p-1 gap-1 w-fit shadow-sm">
+          <div class="flex items-center bg-gray-800 border border-gray-700 rounded-full p-1 gap-1 w-fit shadow-sm">
             <a href="enquiries.html"
               class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold bg-purple-600 text-white shadow-md transition-all">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -235,7 +250,7 @@
               Enquiries
             </a>
             <a href="leads.html"
-              class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:text-gray-800 hover:bg-white transition-all">
+              class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-gray-400 hover:text-gray-100 hover:bg-gray-700 transition-all">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
@@ -249,11 +264,11 @@
         <div class="flex flex-col items-end gap-3 pt-1">
           <div class="flex items-center gap-2.5">
             <span
-              class="hidden sm:inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-200">
+              class="hidden sm:inline-flex items-center gap-1.5 bg-green-900/30 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-800">
               <span class="w-2 h-2 rounded-full bg-green-500"></span> Live
             </span>
             <div
-              class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-body font-bold text-xs">
+              class="w-9 h-9 rounded-full bg-indigo-600 text-white flex items-center justify-center font-body font-bold text-xs">
               VK</div>
           </div>
         </div>
@@ -262,33 +277,43 @@
       <main class="p-4 sm:p-7">
 
         <!-- Stat cards -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6" id="statCards"></div>
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5 mb-6" id="statCards"></div>
+
+        <!-- Active filter pill -->
+        <div id="activeFilterPill" class="hidden mb-4 flex items-center gap-2">
+          <span class="inline-flex items-center gap-2 bg-blue-900/30 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-full border border-blue-800">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+            <span id="activeFilterLabel">Filtered</span>
+          </span>
+          <button id="clearFilterBtn" class="text-xs text-gray-500 hover:text-gray-300 underline transition-colors">Clear filter</button>
+        </div>
 
         <!-- Toolbar -->
         <div
-          class="bg-white border border-gray-200 rounded-2xl shadow-card p-4 mb-5 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+          class="bg-gradient-to-r from-indigo-950/60 via-purple-950/50 to-fuchsia-950/40 border border-purple-800/40 rounded-2xl shadow-card p-4 mb-5 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
           <div class="relative w-full md:max-w-sm">
-            <svg class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none"
+            <svg class="w-4 h-4 text-fuchsia-400 absolute left-4 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="7" />
               <path d="M21 21l-3.5-3.5" />
             </svg>
             <input id="searchInput" type="text" placeholder="Search name, mobile or email..."
-              class="w-full bg-gray-50 border border-gray-200 rounded-full pl-10 pr-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all">
+              class="w-full bg-gray-900/80 border-2 border-purple-600/50 rounded-full pl-10 pr-4 py-2.5 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 transition-all">
           </div>
           <div class="flex items-center gap-2.5 flex-wrap">
             <select id="serviceFilter"
-              class="bg-white border border-gray-200 rounded-full px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-accent">
-              <option value="">All Services</option>
+              class="bg-gray-900/80 border border-indigo-600/50 rounded-full px-4 py-2.5 text-sm text-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="" style="background:#1f2937;color:#f3f4f6;">All Services</option>
             </select>
             <select id="statusFilter"
-              class="bg-white border border-gray-200 rounded-full px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-accent">
-              <option value="">All Status</option>
-              <option value="New">New</option>
-              <option value="Contacted">Contacted</option>
+              class="bg-gray-900/80 border border-teal-600/50 rounded-full px-4 py-2.5 text-sm text-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <option value="" style="background:#1f2937;color:#f3f4f6;">All Status</option>
+              <option value="New" style="background:#1f2937;color:#f3f4f6;">New</option>
+              <option value="Contacted" style="background:#1f2937;color:#f3f4f6;">Contacted</option>
+              <option value="Not Interested" style="background:#1f2937;color:#f3f4f6;">Not Interested</option>
             </select>
             <span
-              class="inline-flex items-center gap-1.5 border border-gray-200 rounded-full px-4 py-2.5 text-sm font-semibold text-gray-600">
+              class="inline-flex items-center gap-1.5 border border-orange-600/50 bg-gray-900/80 rounded-full px-4 py-2.5 text-sm font-semibold text-orange-300">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
               </svg>
@@ -298,24 +323,24 @@
         </div>
 
         <!-- ===== Desktop table ===== -->
-        <div class="hidden md:block bg-white border border-gray-200 rounded-2xl shadow-card overflow-hidden">
+        <div class="hidden md:block bg-gray-800 border border-gray-700 rounded-2xl shadow-card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
-                <tr class="bg-gray-50/60 text-left border-b border-gray-100">
-                  <th class="px-5 py-4 font-semibold text-[11px] uppercase tracking-wider text-gray-400 w-14">Sl No.
+                <tr class="bg-gradient-to-r from-indigo-700 via-purple-700 to-fuchsia-700 text-left">
+                  <th class="px-5 py-4 font-bold text-[12px] uppercase tracking-wider text-white w-14">Sl No.
                   </th>
-                  <th class="px-5 py-4 font-semibold text-[11px] uppercase tracking-wider text-gray-400">Name</th>
-                  <th class="px-5 py-4 font-semibold text-[11px] uppercase tracking-wider text-gray-400">Mobile No.</th>
-                  <th class="px-5 py-4 font-semibold text-[11px] uppercase tracking-wider text-gray-400">Email</th>
-                  <th class="px-5 py-4 font-semibold text-[11px] uppercase tracking-wider text-gray-400">Service Name
+                 <th class="px-5 py-4 font-bold text-[12px] uppercase tracking-wider text-white">Name</th>
+                 <th class="px-5 py-4 font-bold text-[12px] uppercase tracking-wider text-white">Mobile No.</th>
+                 <th class="px-5 py-4 font-bold text-[12px] uppercase tracking-wider text-white">Email</th>
+                 <th class="px-5 py-4 font-bold text-[12px] uppercase tracking-wider text-white">Service Name
                   </th>
-                  <th class="px-5 py-4 font-semibold text-[11px] uppercase tracking-wider text-gray-400">Status</th>
-                  <th class="px-5 py-4 font-semibold text-[11px] uppercase tracking-wider text-gray-400 text-center">
+                 <th class="px-5 py-4 font-bold text-[12px] uppercase tracking-wider text-white">Status</th>
+                  <th class="px-5 py-4 font-bold text-[12px] uppercase tracking-wider text-white text-center">
                     Action</th>
                 </tr>
               </thead>
-              <tbody id="tableBody" class="divide-y divide-gray-100"></tbody>
+              <tbody id="tableBody" class="divide-y divide-gray-700"></tbody>
             </table>
           </div>
           <div id="emptyStateDesktop" class="hidden py-16 text-center text-gray-400 text-sm">No enquiries match your
@@ -333,7 +358,7 @@
 
   <!-- Toast -->
   <div id="toast"
-    class="toast fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 bg-primary text-white text-sm font-semibold px-5 py-3 rounded-full shadow-2xl z-50 flex items-center gap-2">
+    class="toast fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 bg-gray-800 text-white text-sm font-semibold px-5 py-3 rounded-full shadow-2xl z-50 flex items-center gap-2 border border-gray-700">
     <svg class="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M5 13l4 4L19 7" />
     </svg>
@@ -362,12 +387,14 @@
             mobile: e.mobile,
             email: e.email,
             service: e.service_name || e.service,
-            status: e.status || "New"
+            status: e.status || "New",
+            createdAt: e.created_at
           }));
           
-          document.getElementById('serviceFilter').innerHTML = '<option value="">All Services</option>';
+          document.getElementById('serviceFilter').innerHTML = '<option value="" style="background:#1f2937;color:#f3f4f6;">All Services</option>';
           populateServiceFilter();
-          renderStats();
+fetchArchive(false);
+fetchStats();
           renderAll();
         } else {
           console.error("Failed to fetch enquiries:", data.message);
@@ -387,22 +414,27 @@
     };
 
     const palette = [
-      { bg: 'bg-blue-500', chip: 'bg-blue-50 text-blue-600' },
-      { bg: 'bg-orange-500', chip: 'bg-orange-50 text-orange-600' },
-      { bg: 'bg-purple-500', chip: 'bg-purple-50 text-purple-600' },
-      { bg: 'bg-teal-500', chip: 'bg-teal-50 text-teal-600' },
+      { bg: 'bg-blue-500', chip: 'bg-blue-50 text-blue-600', border: 'border-blue-500', text: 'text-blue-400' },
+      { bg: 'bg-orange-500', chip: 'bg-orange-50 text-orange-600', border: 'border-orange-500', text: 'text-orange-400' },
+      { bg: 'bg-purple-500', chip: 'bg-purple-50 text-purple-600', border: 'border-purple-500', text: 'text-purple-400' },
+      { bg: 'bg-teal-500', chip: 'bg-teal-50 text-teal-600', border: 'border-teal-500', text: 'text-teal-400' },
     ];
     function avatarColor(i) { return palette[i % palette.length].bg; }
+    function avatarBorder(i) { return palette[i % palette.length].border; }
+    function avatarText(i) { return palette[i % palette.length].text; }
 
     let activeSearch = "";
     let activeService = "";
     let activeStatus = "";
+    let archivedEnquiries = [];
+    let viewMode = 'active'; // 'active' | 'archive'
 
     /* ============ ICONS ============ */
-    const waSvg = `<svg viewBox="0 0 448 512" class="w-4 h-4 fill-current"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>`;
-    const tgSvg = `<svg viewBox="0 0 24 24" class="w-4 h-4 fill-current"><path d="M22 4.3 18.8 20c-.2 1-.9 1.2-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.3-8.4c.4-.4-.1-.6-.6-.2L7 13.2 2.1 11.6c-1-.3-1-1 .2-1.5L20.6 2.9c.9-.3 1.7.2 1.4 1.4z"/></svg>`;
-    const callSvg = `<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+    const waSvg = `<svg viewBox="0 0 448 512" class="w-6 h-6 fill-current"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>`;
+    const tgSvg = `<svg viewBox="0 0 24 24" class="w-6 h-6 fill-current"><path d="M22 4.3 18.8 20c-.2 1-.9 1.2-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.3-8.4c.4-.4-.1-.6-.6-.2L7 13.2 2.1 11.6c-1-.3-1-1 .2-1.5L20.6 2.9c.9-.3 1.7.2 1.4 1.4z"/></svg>`;
+    const callSvg = `<svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
     const copySvg = `<svg viewBox="0 0 24 24" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+    const xSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>`;
 
     function toast(msg) {
       const t = document.getElementById('toast');
@@ -419,70 +451,272 @@
     }
 
     function actionIcons(e, size) {
-      const dim = size || 'w-8 h-8';
+      const dim = size || 'w-12 h-12';
       return `
     <a href="https://wa.me/91${e.mobile}" target="_blank" rel="noopener" title="WhatsApp"
-       class="${dim} rounded-full bg-green-50 text-green-600 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">${waSvg}</a>
+       class="${dim} rounded-full bg-green-900/30 text-green-400 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">${waSvg}</a>
     <a href="https://t.me/+91${e.mobile}" target="_blank" rel="noopener" title="Telegram"
-       class="${dim} rounded-full bg-sky-50 text-sky-500 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors">${tgSvg}</a>
+       class="${dim} rounded-full bg-sky-900/30 text-sky-400 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors">${tgSvg}</a>
     <a href="tel:+91${e.mobile}" title="Call"
-       class="${dim} rounded-full bg-orange-50 text-accent flex items-center justify-center hover:bg-accent hover:text-white transition-colors">${callSvg}</a>
+       class="${dim} rounded-full bg-orange-900/30 text-accentLight flex items-center justify-center hover:bg-accent hover:text-white transition-colors">${callSvg}</a>
+  `;
+    }
+
+    /* "Not interested" cross-mark button: deletes the enquiry (server moves it into the archive table) */
+    function notInterestedBtn(idx, size) {
+      const dim = size || 'w-8 h-8';
+      const iconSize = size === 'w-10 h-10' ? 'w-4 h-4' : 'w-3.5 h-3.5';
+      return `
+    <button data-notinterested="${idx}" title="Mark as not interested (archive)"
+      class="ni-btn ${dim} rounded-full bg-gray-700 text-gray-400 hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors">
+      <span class="${iconSize}">${xSvg}</span>
+    </button>
   `;
     }
 
     /* ============ RENDER STAT CARDS ============ */
-    function renderStats() {
-      const total = enquiries.length;
-      const contacted = enquiries.filter(e => e.status === 'Contacted').length;
-      const pending = total - contacted;
-      const services = new Set(enquiries.map(e => e.service)).size;
-      const stats = [
-        { label: 'Total Enquiries', value: total, icon: `<path d="M4 4h16v4H4zM4 12h16M4 16h16M4 20h10"/>`, chip: 'bg-blue-50 text-blue-600', highlight: true },
-        { label: 'New / Pending', value: pending, icon: `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>`, chip: 'bg-orange-50 text-accent' },
-        { label: 'Contacted', value: contacted, icon: `<path d="M5 13l4 4L19 7"/>`, chip: 'bg-green-50 text-green-600' },
-        { label: 'Services Enquired', value: services, icon: `<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4"/>`, chip: 'bg-purple-50 text-purple-600' },
-      ];
-      document.getElementById('statCards').innerHTML = stats.map(s => `
-    <div class="bg-white ${s.highlight ? 'border-2 border-blue-400' : 'border border-gray-200'} rounded-2xl shadow-card p-5">
-      <div class="flex items-center justify-between mb-4">
-        <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">${s.label}</span>
-        <div class="w-9 h-9 rounded-lg ${s.chip} flex items-center justify-center shrink-0">
-          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${s.icon}</svg>
-        </div>
-      </div>
-      <div class="font-body font-extrabold text-3xl text-primary leading-none">${s.value}</div>
-    </div>
-  `).join('');
+  async function fetchStats() {
+
+    const token = sessionStorage.getItem('adminToken');
+
+    const res = await fetch(`${CONFIG.API_BASE_URL}/enquiry/stats`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const data = await res.json();
+
+    if(data.success){
+        renderStats(data.data);
     }
 
-    /* ============ POPULATE SERVICE FILTER ============ */
+}
+
+/* ============ ARCHIVE (NOT INTERESTED) ============ */
+async function fetchArchive(renderAfter = true) {
+  const token = sessionStorage.getItem('adminToken');
+  if (!token) return;
+
+  try {
+    const res = await fetch(`${CONFIG.API_BASE_URL}/enquiry/archive`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (data.success) {
+      archivedEnquiries = data.data.map(e => ({
+        id: e.id,
+        name: e.name,
+        mobile: e.mobile,
+        email: e.email,
+        service: e.service_name || e.service,
+        status: 'Not Interested',
+        createdAt: e.archived_at || e.created_at
+      }));
+      if (renderAfter) {
+        renderStats();
+        renderAll();
+      }
+    } else {
+      console.error('Failed to fetch archive:', data.message);
+    }
+  } catch (err) {
+    console.error('Error fetching archive:', err);
+  }
+}
+
+   
+let currentStats = null;
+function renderStats(stats) {
+    if (stats) currentStats = stats;
+    if (!currentStats) return;
+
+    const notInterestedCount = archivedEnquiries.length;
+
+    const cards = [
+        {
+            key: 'total',
+            label: "TOTAL ENQUIRIES",
+            value: currentStats.total,
+            icon: `<path d="M4 4h16v4H4zM4 12h16M4 16h16M4 20h10"/>`,
+            gradient: 'from-blue-600 via-indigo-600 to-indigo-800'
+        },
+        {
+            key: 'New',
+            label: "NEW / PENDING",
+            value: currentStats.pending,
+            icon: `<path d="M7 14l3-3 3 3 5-6"/>`,
+            gradient: 'from-orange-500 via-amber-600 to-orange-700'
+        },
+        {
+            key: 'Contacted',
+            label: "CONTACTED",
+            value: currentStats.contacted,
+            icon: `<path d="M5 13l4 4L19 7"/>`,
+            gradient: 'from-emerald-500 via-teal-600 to-teal-800'
+        },
+        {
+            key: 'Not Interested',
+            label: "NOT INTERESTED",
+            value: notInterestedCount,
+            icon: `<path d="M18 6L6 18M6 6l12 12"/>`,
+            gradient: 'from-rose-600 via-red-600 to-red-800'
+        },
+        {
+            key: 'today',
+            label: "TODAY'S ENQUIRIES",
+            value: currentStats.today,
+            icon: `<circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/>`,
+            gradient: 'from-purple-600 via-fuchsia-600 to-purple-800'
+        }
+    ];
+
+    document.getElementById("statCards").innerHTML = cards.map(s => {
+       const isActive = activeCardFilter === s.key;
+
+const activeCls = isActive
+    ? `ring-2 ring-white/80 shadow-lg scale-[1.02]`
+    : "ring-1 ring-white/10";
+
+const clickHint = isActive
+    ? "opacity-100"
+    : "opacity-0 group-hover:opacity-70";
+        return `
+       <div data-card-key="${s.key}" class="stat-card group bg-gradient-to-br ${s.gradient} rounded-2xl shadow-card p-5 ${activeCls} relative select-none overflow-hidden">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm font-extrabold tracking-wide text-white/90 uppercase">${s.label}</span>
+            <div class="w-9 h-9 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0 backdrop-blur-sm">
+              <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${s.icon}</svg>
+            </div>
+          </div>
+         <div class="font-body font-extrabold text-3xl text-white">${s.value}</div>
+          <div class="mt-2 text-[10px] font-semibold text-white/80 ${clickHint} transition-opacity flex items-center gap-1">
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+            ${isActive ? 'Click to clear' : 'Click to filter'}
+          </div>
+        </div>
+        `;
+    }).join("");
+}
+
+/* ============ POPULATE SERVICE FILTER ============ */
     function populateServiceFilter() {
       const services = [...new Set(enquiries.map(e => e.service))];
       const sel = document.getElementById('serviceFilter');
       services.forEach(s => {
         const opt = document.createElement('option');
         opt.value = s; opt.textContent = s;
+        opt.style.background = '#1f2937';
+        opt.style.color = '#f3f4f6';
         sel.appendChild(opt);
       });
     }
 
+    /* ============ STAT CARD CLICK FILTER ============ */
+    let activeCardFilter = '';
+
+    document.getElementById('statCards').addEventListener('click', (e) => {
+      const card = e.target.closest('[data-card-key]');
+      if (!card) return;
+      const key = card.dataset.cardKey;
+
+     if (key === 'total') {
+    activeCardFilter = 'total';
+    activeStatus = '';
+    viewMode = 'active';
+    document.getElementById('statusFilter').value = '';
+    hidePill();
+    renderStats();
+    renderAll();
+    return;
+} 
+
+      if (activeCardFilter === key) return; // Do nothing if already selected
+      activeCardFilter = key;
+
+      if (key === 'Not Interested') {
+        viewMode = 'archive';
+        activeStatus = '';
+        document.getElementById('statusFilter').value = 'Not Interested';
+        showPill('Not Interested Enquiries');
+        renderStats();
+        fetchArchive(true);
+        return;
+      }
+
+      viewMode = 'active';
+      if (key === 'New' || key === 'Contacted') {
+        activeStatus = key;
+        document.getElementById('statusFilter').value = key;
+      } else {
+        activeStatus = '';
+        document.getElementById('statusFilter').value = '';
+      }
+      showPill(key === 'today' ? "Today's Enquiries" : key + ' Enquiries');
+
+      renderStats();
+      renderAll();
+    });
+
+    function showPill(label) {
+      const pill = document.getElementById('activeFilterPill');
+      document.getElementById('activeFilterLabel').textContent = 'Showing: ' + label;
+      pill.classList.remove('hidden');
+    }
+    function hidePill() {
+      document.getElementById('activeFilterPill').classList.add('hidden');
+    }
+    document.getElementById('clearFilterBtn').addEventListener('click', () => {
+      activeCardFilter = '';
+      activeStatus = '';
+      viewMode = 'active';
+      document.getElementById('statusFilter').value = '';
+      hidePill();
+      renderStats();
+      renderAll();
+    });
+
     /* ============ FILTER LOGIC ============ */
     function getFiltered() {
-      return enquiries
+      const source = viewMode === 'archive' ? archivedEnquiries : enquiries;
+      return source
         .map((e, i) => ({ ...e, sl: i + 1 }))
         .filter(e => {
           const q = activeSearch.toLowerCase();
           const matchesSearch = !q || e.name.toLowerCase().includes(q) || e.mobile.includes(q) || e.email.toLowerCase().includes(q);
           const matchesService = !activeService || e.service === activeService;
-          const matchesStatus = !activeStatus || e.status === activeStatus;
-          return matchesSearch && matchesService && matchesStatus;
+          const matchesStatus = viewMode === 'archive' || !activeStatus || e.status === activeStatus;
+          const matchesToday = activeCardFilter !== 'today' || (e.createdAt && new Date(e.createdAt).toDateString() === new Date().toDateString());
+          return matchesSearch && matchesService && matchesStatus && matchesToday;
         });
     }
 
     function statusBadge(status) {
-      return status === 'Contacted'
-        ? `<span class="inline-flex items-center bg-blue-50 text-blue-600 text-[12px] font-semibold px-3 py-1 rounded-md">Contacted</span>`
-        : `<span class="inline-flex items-center bg-orange-50 text-accent text-[12px] font-semibold px-3 py-1 rounded-md">New</span>`;
+      if (status === 'Contacted') {
+        return `<span class="inline-flex items-center bg-blue-900/30 text-blue-300 text-[12px] font-semibold px-3 py-1 rounded-md">Contacted</span>`;
+      }
+      if (status === 'Not Interested') {
+        return `<span class="inline-flex items-center bg-red-900/30 text-red-300 text-[12px] font-semibold px-3 py-1 rounded-md">Not Interested</span>`;
+      }
+      return `<span class="inline-flex items-center bg-orange-900/30 text-accentLight text-[12px] font-semibold px-3 py-1 rounded-md">New</span>`;
+    }
+
+    /* Editable status dropdown shown in the desktop table row */
+    function statusSelectHTML(e) {
+      const cls = e.status === 'Contacted'
+        ? 'bg-emerald-900/40 border-emerald-600 text-emerald-300'
+        : e.status === 'Not Interested'
+          ? 'bg-red-900/40 border-red-600 text-red-300'
+          : 'bg-orange-900/40 border-orange-600 text-orange-300';
+      return `
+    <select
+        class="status-select ${cls} border rounded-md px-2 py-1 text-sm font-semibold"
+        data-id="${e.id}">
+        <option value="New" ${e.status === "New" ? "selected" : ""} style="background:#1f2937;color:#f3f4f6;">New</option>
+        <option value="Contacted" ${e.status === "Contacted" ? "selected" : ""} style="background:#1f2937;color:#f3f4f6;">Contacted</option>
+        <option value="Not Interested" ${e.status === "Not Interested" ? "selected" : ""} style="background:#1f2937;color:#f3f4f6;">Not Interested</option>
+    </select>
+  `;
     }
 
     /* ============ RENDER TABLE (desktop) ============ */
@@ -491,45 +725,54 @@
       const body = document.getElementById('tableBody');
       document.getElementById('emptyStateDesktop').classList.toggle('hidden', rows.length !== 0);
 
-      body.innerHTML = rows.map(e => `
-    <tr class="row-fade hover:bg-gray-50/80 transition-colors" data-idx="${e.sl - 1}">
-      <td class="px-5 py-4 text-gray-700 font-mono text-sm font-bold align-middle">${String(e.sl).padStart(2, '0')}</td>
+      body.innerHTML = rows.map(e => {
+        const statusCell = viewMode === 'archive'
+          ? `<span class="inline-flex items-center bg-red-900/40 border border-red-600 text-red-300 rounded-md px-2 py-1 text-sm font-semibold">Not Interested</span>`
+          : statusSelectHTML(e);
+
+        const actionCell = viewMode === 'archive'
+          ? `<div class="flex items-center justify-center gap-1.5">${actionIcons(e, 'w-8 h-8')}</div>`
+          : `<div class="flex items-center justify-center gap-1.5">
+              ${actionIcons(e, 'w-8 h-8')}
+              ${notInterestedBtn(e.sl - 1, 'w-8 h-8')}
+              <button data-connect="${e.sl - 1}" title="${e.status === 'Contacted' ? 'Mark as new' : 'Mark as contacted'}"
+                class="connect-btn w-8 h-8 rounded-full ${e.status === 'Contacted' ? 'bg-green-500 text-white' : 'bg-gray-700 text-gray-400 hover:bg-green-900/40 hover:text-green-400'} flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              </button>
+            </div>`;
+
+        return `
+    <tr class="row-fade border-l-4 ${avatarBorder(e.sl - 1)} odd:bg-gray-800 even:bg-gray-800/40 hover:bg-purple-900/20 transition-colors" data-idx="${e.sl - 1}">
+      <td class="px-5 py-4 font-mono text-sm font-bold align-middle ${avatarText(e.sl - 1)}">${String(e.sl).padStart(2, '0')}</td>
       <td class="px-5 py-4 align-middle">
         <div class="flex items-center gap-2.5">
           <div class="w-9 h-9 rounded-full ${avatarColor(e.sl - 1)} text-white flex items-center justify-center font-display font-bold text-xs shrink-0">${e.name.split(' ').map(w => w[0]).slice(0, 2).join('')}</div>
-          <span class="font-semibold text-gray-900 text-base">${e.name}</span>
+          <span class="font-semibold text-gray-100 text-base">${e.name}</span>
         </div>
       </td>
       <td class="px-5 py-4 align-middle">
         <div class="flex items-center gap-2">
-          <span class="font-mono text-sm font-semibold text-gray-800">${e.mobile}</span>
-          <button data-copy="${e.mobile}" data-label="Mobile number" class="copy-btn w-6 h-6 rounded-md bg-gray-100 text-gray-500 hover:bg-primary hover:text-white flex items-center justify-center transition-colors" title="Copy mobile number">${copySvg}</button>
+          <span class="font-mono text-sm font-semibold text-cyan-300">${e.mobile}</span>
+          <button data-copy="${e.mobile}" data-label="Mobile number" class="copy-btn w-6 h-6 rounded-md bg-gray-700 text-gray-300 hover:bg-accent hover:text-white flex items-center justify-center transition-colors" title="Copy mobile number">${copySvg}</button>
         </div>
       </td>
       <td class="px-5 py-4 align-middle">
         <div class="flex items-center gap-2">
-          <span class="text-sm text-gray-700 truncate max-w-[160px]" title="${e.email}">${e.email}</span>
-          <button data-copy="${e.email}" data-label="Email" class="copy-btn w-6 h-6 rounded-md bg-gray-100 text-gray-500 hover:bg-primary hover:text-white flex items-center justify-center transition-colors shrink-0" title="Copy email">${copySvg}</button>
+          <span class="text-sm text-sky-300 truncate max-w-[160px]" title="${e.email}">${e.email}</span>
+          <button data-copy="${e.email}" data-label="Email" class="copy-btn w-6 h-6 rounded-md bg-gray-700 text-gray-300 hover:bg-accent hover:text-white flex items-center justify-center transition-colors shrink-0" title="Copy email">${copySvg}</button>
         </div>
       </td>
       <td class="px-5 py-4 align-middle">
         <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-accent shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${serviceIcons[e.service] || ''}</svg>
-          <span class="text-sm text-gray-700 font-medium">${e.service}</span>
+          <svg class="w-4 h-4 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${serviceIcons[e.service] || ''}</svg>
+          <span class="text-sm text-amber-200 font-medium">${e.service}</span>
         </div>
       </td>
-      <td class="px-5 py-4 align-middle">${statusBadge(e.status)}</td>
-      <td class="px-5 py-4 align-middle">
-        <div class="flex items-center justify-center gap-1.5">
-          ${actionIcons(e, 'w-8 h-8')}
-          <button data-connect="${e.sl - 1}" title="${e.status === 'Contacted' ? 'Mark as new' : 'Mark as contacted'}"
-            class="connect-btn ml-1 w-8 h-8 rounded-full ${e.status === 'Contacted' ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-400 hover:bg-green-50 hover:text-green-600'} flex items-center justify-center transition-colors">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
-          </button>
-        </div>
-      </td>
+      <td class="px-5 py-4 align-middle">${statusCell}</td>
+      <td class="px-5 py-4 align-middle">${actionCell}</td>
     </tr>
-  `).join('');
+  `;
+      }).join('');
     }
 
     /* ============ RENDER CARDS (mobile) ============ */
@@ -538,43 +781,50 @@
       const list = document.getElementById('cardList');
       document.getElementById('emptyStateMobile').classList.toggle('hidden', rows.length !== 0);
 
-      list.innerHTML = rows.map(e => `
-    <div class="row-fade bg-white border border-gray-200 rounded-2xl shadow-card p-4">
+      list.innerHTML = rows.map(e => {
+        const actionRow = viewMode === 'archive'
+          ? `<div class="flex items-center gap-2">${actionIcons(e, 'w-12 h-12')}</div>`
+          : `<div class="flex items-center gap-2">
+              ${actionIcons(e, 'w-12 h-12')}
+              ${notInterestedBtn(e.sl - 1, 'w-10 h-10')}
+              <button data-connect="${e.sl - 1}" title="${e.status === 'Contacted' ? 'Mark as new' : 'Mark as contacted'}"
+                class="connect-btn w-10 h-10 rounded-full ${e.status === 'Contacted' ? 'bg-green-500 text-white' : 'bg-gray-700 text-gray-400 hover:bg-green-900/40 hover:text-green-400'} flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              </button>
+            </div>`;
+
+        return `
+    <div class="row-fade bg-gray-800 border-l-4 ${avatarBorder(e.sl - 1)} border-t border-r border-b border-gray-700 rounded-2xl shadow-card p-4">
       <div class="flex items-start justify-between gap-3 mb-3">
         <div class="flex items-center gap-2.5">
           <div class="w-9 h-9 rounded-full ${avatarColor(e.sl - 1)} text-white flex items-center justify-center font-display font-bold text-xs shrink-0">${e.name.split(' ').map(w => w[0]).slice(0, 2).join('')}</div>
           <div>
-            <div class="font-semibold text-primary text-sm leading-tight">${e.name}</div>
-            <div class="text-[11px] text-gray-400 font-mono mt-0.5">Sl. ${String(e.sl).padStart(2, '0')}</div>
+            <div class="font-semibold text-gray-100 text-sm leading-tight">${e.name}</div>
+            <div class="text-[11px] ${avatarText(e.sl - 1)} font-mono mt-0.5">Sl. ${String(e.sl).padStart(2, '0')}</div>
           </div>
         </div>
         ${statusBadge(e.status)}
       </div>
 
       <div class="space-y-2 mb-3.5">
-        <div class="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
-          <span class="font-mono text-[13px] text-gray-700">${e.mobile}</span>
-          <button data-copy="${e.mobile}" data-label="Mobile number" class="copy-btn w-6 h-6 rounded-md bg-white border border-gray-200 text-gray-500 hover:bg-primary hover:text-white flex items-center justify-center transition-colors">${copySvg}</button>
+        <div class="flex items-center justify-between bg-gray-900 rounded-lg px-3 py-2">
+          <span class="font-mono text-[13px] text-cyan-300">${e.mobile}</span>
+          <button data-copy="${e.mobile}" data-label="Mobile number" class="copy-btn w-6 h-6 rounded-md bg-gray-800 border border-gray-700 text-gray-300 hover:bg-accent hover:text-white flex items-center justify-center transition-colors">${copySvg}</button>
         </div>
-        <div class="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
-          <span class="text-[13px] text-gray-700 truncate max-w-[190px]">${e.email}</span>
-          <button data-copy="${e.email}" data-label="Email" class="copy-btn w-6 h-6 rounded-md bg-white border border-gray-200 text-gray-500 hover:bg-primary hover:text-white flex items-center justify-center transition-colors shrink-0">${copySvg}</button>
+        <div class="flex items-center justify-between bg-gray-900 rounded-lg px-3 py-2">
+          <span class="text-[13px] text-sky-300 truncate max-w-[190px]">${e.email}</span>
+          <button data-copy="${e.email}" data-label="Email" class="copy-btn w-6 h-6 rounded-md bg-gray-800 border border-gray-700 text-gray-300 hover:bg-accent hover:text-white flex items-center justify-center transition-colors shrink-0">${copySvg}</button>
         </div>
         <div class="flex items-center gap-2 px-1">
-          <svg class="w-4 h-4 text-accent shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${serviceIcons[e.service] || ''}</svg>
-          <span class="text-[13px] text-gray-700">${e.service}</span>
+          <svg class="w-4 h-4 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${serviceIcons[e.service] || ''}</svg>
+          <span class="text-[13px] text-amber-200">${e.service}</span>
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
-        ${actionIcons(e, 'w-9 h-9')}
-        <button data-connect="${e.sl - 1}" title="${e.status === 'Contacted' ? 'Mark as new' : 'Mark as contacted'}"
-          class="connect-btn w-10 h-10 rounded-full ${e.status === 'Contacted' ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-400 hover:bg-green-50 hover:text-green-600'} flex items-center justify-center transition-colors">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
-        </button>
-      </div>
+      ${actionRow}
     </div>
-  `).join('');
+  `;
+      }).join('');
     }
 
     function renderAll() { renderTable(); renderCards(); }
@@ -586,6 +836,42 @@
         copyText(copyBtn.dataset.copy, copyBtn.dataset.label);
         return;
       }
+
+      const niBtn = e.target.closest('.ni-btn');
+      if (niBtn) {
+        const idx = Number(niBtn.dataset.notinterested);
+        const enq = enquiries[idx];
+        const token = sessionStorage.getItem('adminToken');
+        if (!token || !enq) return;
+
+        niBtn.disabled = true;
+
+        fetch(`${CONFIG.API_BASE_URL}/enquiry/delete/${enq.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => res.json())
+        .then(data => {
+          niBtn.disabled = false;
+          if (data.success) {
+            toast(`${enq.name.split(' ')[0]} marked as not interested & archived`);
+            fetchEnquiries();
+            fetchArchive(false);
+          } else {
+            toast(data.message || 'Failed to archive enquiry');
+          }
+        })
+        .catch(err => {
+          niBtn.disabled = false;
+          console.error(err);
+          toast('Error occurred');
+        });
+        return;
+      }
+
       const connectBtn = e.target.closest('.connect-btn');
       if (connectBtn) {
         const idx = Number(connectBtn.dataset.connect);
@@ -621,12 +907,65 @@
       }
     });
 
+
+document.addEventListener("change", async (e) => {
+
+    if (!e.target.classList.contains("status-select")) return;
+
+    const id = e.target.dataset.id;
+    const status = e.target.value;
+    const token = sessionStorage.getItem("adminToken");
+
+    try {
+
+        const res = await fetch(`${CONFIG.API_BASE_URL}/enquiry/status/${id}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ status })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            toast("Status updated successfully");
+            fetchEnquiries();
+        } else {
+            toast(data.message || "Failed to update status");
+        }
+
+    } catch (err) {
+        console.error(err);
+        toast("Server error");
+    }
+
+});
+
+
     document.getElementById('searchInput').addEventListener('input', (e) => { activeSearch = e.target.value; renderAll(); });
     document.getElementById('serviceFilter').addEventListener('change', (e) => { activeService = e.target.value; renderAll(); });
-    document.getElementById('statusFilter').addEventListener('change', (e) => { activeStatus = e.target.value; renderAll(); });
+    document.getElementById('statusFilter').addEventListener('change', (e) => { 
+      activeStatus = e.target.value; 
+      activeCardFilter = activeStatus || '';
+
+      if (activeStatus === 'Not Interested') {
+        viewMode = 'archive';
+        showPill('Not Interested Enquiries');
+        renderStats();
+        fetchArchive(true);
+        return;
+      }
+
+      viewMode = 'active';
+      if (!activeStatus) hidePill();
+      else showPill(activeStatus + ' Enquiries');
+      renderStats();
+      renderAll(); 
+    });
 
     /* ============ INIT ============ */
-    renderStats();
     populateServiceFilter();
     renderAll();
 
