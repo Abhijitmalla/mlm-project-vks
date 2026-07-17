@@ -7,14 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../api-config.js"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          primary: '#111827',
-          accent: '#F1521E',
-          accentLight: '#FF7A45',
+          primary: '#181A2E',
+          accent: '#4F46E5',
+          accentDark: '#4338CA',
+          accentLight: '#8B5CF6',
+          accentTeal: '#14B8A6',
+          accentOrange: '#F97316',
           bg: '#FFFFFF',
           text: '#111827',
           dark: '#111827',
@@ -47,22 +51,32 @@
 
 <div class="min-h-screen relative overflow-hidden bg-primary flex items-center justify-center px-4 py-10">
   <canvas id="netCanvas" class="absolute inset-0 w-full h-full opacity-30 z-0 pointer-events-none"></canvas>
+  <div class="absolute -top-32 -left-24 w-[420px] h-[420px] rounded-full blur-[110px] opacity-40 z-0" style="background:#4F46E5;"></div>
+  <div class="absolute top-10 -right-20 w-[380px] h-[380px] rounded-full blur-[110px] opacity-35 z-0" style="background:#F97316;"></div>
+  <div class="absolute -bottom-28 left-10 w-[360px] h-[360px] rounded-full blur-[110px] opacity-35 z-0" style="background:#14B8A6;"></div>
+  <div class="absolute bottom-0 right-0 w-[340px] h-[340px] rounded-full blur-[110px] opacity-40 z-0" style="background:#8B5CF6;"></div>
   <div class="absolute inset-0 bg-primary/70 backdrop-blur-md z-0"></div>
 
   <div class="relative z-10 w-full max-w-md">
 
     <!-- Brand -->
     <div class="text-center mb-7">
+      <div class="flex items-center justify-center gap-1.5 mb-3">
+        <span class="w-2 h-2 rounded-full" style="background:#4F46E5;"></span>
+        <span class="w-2 h-2 rounded-full" style="background:#F97316;"></span>
+        <span class="w-2 h-2 rounded-full" style="background:#8B5CF6;"></span>
+        <span class="w-2 h-2 rounded-full" style="background:#14B8A6;"></span>
+      </div>
       <div class="inline-flex items-center gap-2.5 font-mono-plex text-xs font-semibold tracking-[0.1em] uppercase text-accentLight mb-3">
-        <span class="w-5 h-px bg-accentLight"></span> Admin Panel <span class="w-5 h-px bg-accentLight"></span>
+        <span class="w-5 h-px" style="background:linear-gradient(90deg,#4F46E5,#14B8A6);"></span> Admin Panel <span class="w-5 h-px" style="background:linear-gradient(90deg,#14B8A6,#4F46E5);"></span>
       </div>
       <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-white tracking-tight">VK SERVICES ENTERPRISE</h1>
       <p class="text-sm text-gray-400 mt-2">Sign in to manage enquiries, orders &amp; content</p>
     </div>
 
     <!-- Login card -->
-    <div class="bg-white rounded-2xl p-8 shadow-2xl relative border-t-4 border-accent">
-      <div class="h-[3px] w-full absolute top-0 left-0 rounded-t-2xl overflow-hidden" style="background-image:linear-gradient(90deg,#F1521E,#FF7A45,#F1521E);background-size:200% 100%;animation:shimmerBarLogin 3.5s linear infinite;"></div>
+    <div class="bg-white rounded-2xl p-8 relative border-t-4 border-accent" style="box-shadow:0 25px 60px -15px rgba(30,27,51,0.5), 0 0 0 1px rgba(139,92,246,0.06);">
+      <div class="h-[3px] w-full absolute top-0 left-0 rounded-t-2xl overflow-hidden" style="background-image:linear-gradient(90deg,#4F46E5,#F97316,#8B5CF6,#14B8A6,#4F46E5);background-size:300% 100%;animation:shimmerBarLogin 5s linear infinite;"></div>
       <style>@keyframes shimmerBarLogin{0%{background-position:0% 0}100%{background-position:200% 0}}</style>
 
       <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono-plex">Restricted Access</div>
@@ -109,7 +123,7 @@
           Invalid username or password. Please try again.
         </div>
 
-        <button type="submit" id="loginSubmitBtn" class="w-full text-white font-semibold py-3.5 rounded-lg transition-colors mt-2 shadow-md" style="background-image:linear-gradient(135deg,#FF7A45,#F1521E);">
+        <button type="submit" id="loginSubmitBtn" class="w-full text-white font-semibold py-3.5 rounded-lg transition-colors mt-2 shadow-md" style="background-image:linear-gradient(135deg,#4F46E5,#8B5CF6);box-shadow:0 8px 24px -6px rgba(79,70,229,0.5);">
           Sign In
         </button>
       </form>
@@ -149,16 +163,17 @@
     function resize() { w = canvas.width = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight; }
     function initParticles() {
       const count = Math.min(60, Math.floor((w * h) / 22000));
-      particles = Array.from({ length: count }, () => ({ x: Math.random()*w, y: Math.random()*h, vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35, r:Math.random()*1.6+1 }));
+      const palette = ['99,102,241','249,115,22','139,92,246','20,184,166'];
+      particles = Array.from({ length: count }, () => ({ x: Math.random()*w, y: Math.random()*h, vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35, r:Math.random()*1.6+1, c: palette[Math.floor(Math.random()*palette.length)] }));
     }
     function tick() {
       ctx.clearRect(0,0,w,h);
       for(const p of particles){ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1; }
       for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++){
         const a=particles[i],b=particles[j],d=Math.hypot(a.x-b.x,a.y-b.y);
-        if(d<140){ ctx.strokeStyle=`rgba(255,255,255,${(1-d/140)*.22})`; ctx.lineWidth=1; ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke(); }
+        if(d<140){ ctx.strokeStyle=`rgba(${a.c},${(1-d/140)*.22})`; ctx.lineWidth=1; ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke(); }
       }
-      for(const p of particles){ ctx.fillStyle='rgba(255,255,255,0.75)'; ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill(); }
+      for(const p of particles){ ctx.fillStyle=`rgba(${p.c},0.9)`; ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill(); }
       requestAnimationFrame(tick);
     }
     window.addEventListener('resize',()=>{resize();initParticles();});
@@ -217,19 +232,46 @@
       const okPass = validateField('password', v => v.length > 0);
       if (!okUser || !okPass) return;
 
+      const email = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
       loginSubmitBtn.innerText = 'Signing in...';
       loginSubmitBtn.disabled = true;
 
-      // Replace this timeout with a real auth call to your backend.
-      setTimeout(() => {
-        loginForm.classList.add('hidden');
-        loginSuccessView.classList.remove('hidden');
-        showSnackbar();
+      fetch(`${CONFIG.API_BASE_URL}/admin/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+          if (data.success || data.token) {
+              loginForm.classList.add('hidden');
+              loginSuccessView.classList.remove('hidden');
+              showSnackbar();
 
-        setTimeout(() => {
-          window.location.href = 'http://127.0.0.1:5501/frontend/Admin-pannel/index.html';
-        }, 1500);
-      }, 700);
+              sessionStorage.setItem('adminLoggedIn', 'true');
+              if (data.token) {
+                  sessionStorage.setItem('adminToken', data.token);
+              }
+
+              setTimeout(() => {
+                  window.location.href = 'http://127.0.0.1:5501/frontend/Admin-pannel/index.html';
+              }, 1500);
+          } else {
+              loginError.innerText = data.message || 'Invalid username or password. Please try again.';
+              loginError.classList.remove('hidden');
+              loginSubmitBtn.innerText = 'Sign In';
+              loginSubmitBtn.disabled = false;
+          }
+      })
+      .catch(err => {
+          console.error(err);
+          loginError.innerText = 'An error occurred during login. Please try again.';
+          loginError.classList.remove('hidden');
+          loginSubmitBtn.innerText = 'Sign In';
+          loginSubmitBtn.disabled = false;
+      });
     });
 
     ['username', 'password'].forEach(id => {

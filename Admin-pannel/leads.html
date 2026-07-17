@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leads — Admin Panel | VK Services Enterprise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../api-config.js"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#111827',
+          accent:  '#2563EB',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+        boxShadow: {
+          card: '0 1px 2px rgba(17,24,39,0.04), 0 1px 12px -4px rgba(17,24,39,0.06)',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body{background:#F7F8FA;color:#111827;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  ::-webkit-scrollbar{height:8px;width:8px;}
+  ::-webkit-scrollbar-thumb{background:#e2e5ea;border-radius:99px;}
+  .row-fade{animation:fadeIn .35s ease both;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+  .toast{transition:transform .35s ease, opacity .35s ease;}
+  .status-select{appearance:none;-webkit-appearance:none;background-repeat:no-repeat;background-position:right .6rem center;background-size:12px;padding-right:1.9rem;}
+  .amt-tick.saved{animation:pop .4s ease;}
+  @keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.25);}100%{transform:scale(1);}}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+</style>
+</head>
+<body>
+
+<div class="min-h-screen">
+  <div class=" mx-auto">
+
+    <!-- Topbar -->
+    <header class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-gray-200 px-4 sm:px-7 py-4 flex justify-between gap-4">
+      <div class="flex flex-col gap-4 pt-1">
+        <div>
+          <h1 class="font-body font-bold text-lg sm:text-xl text-primary">Admin Panel</h1>
+          <p class="text-xs text-gray-500 mt-0.5">VK Services Enterprise</p>
+        </div>
+
+        <!-- Tab switcher -->
+        <div class="flex items-center bg-gray-50 border border-gray-200 rounded-full p-1 gap-1 w-fit shadow-sm">
+          <a href="index.html"
+            class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-gray-500 hover:text-gray-800 hover:bg-white transition-all">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16v4H4zM4 12h16M4 16h16M4 20h10"/>
+            </svg>
+            Enquiries
+          </a>
+          <a href="leads.html"
+            class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold bg-purple-600 text-white shadow-md transition-all">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Leads
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-end gap-3 pt-1">
+        <div class="flex items-center gap-2.5">
+          <span class="hidden sm:inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 text-xs font-semibold px-3 py-1.5 rounded-full border border-blue-100">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span> Live
+          </span>
+          <div class="w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center font-display font-bold text-xs">VK</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="p-4 sm:p-7">
+
+      <!-- Stat cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5 mb-6" id="statCards"></div>
+
+      <!-- Table card -->
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-card overflow-hidden">
+
+        <!-- Card header / toolbar -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3.5 px-5 sm:px-6 py-5 border-b border-gray-100">
+          <div class="flex items-center gap-2.5">
+            <h2 class="font-display font-bold text-[17px] text-gray-900">All Leads</h2>
+            <span id="resultsBadge" class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-2.5 py-1 rounded-full">12 results</span>
+          </div>
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <div class="relative">
+              <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>
+              <input id="searchInput" type="text" placeholder="Search name, mobile, email..." class="w-full sm:w-64 bg-gray-50 border border-gray-200 rounded-full pl-10 pr-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 transition-all">
+            </div>
+            <select id="serviceFilter" class="bg-white border border-gray-200 rounded-full px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <option value="">All Services</option>
+            </select>
+            <select id="statusFilterTop" class="bg-white border border-gray-200 rounded-full px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <option value="">All Status</option>
+              <option value="Positive">Positive</option>
+              <option value="Negative">Negative</option>
+              <option value="Accepted">Accepted</option>
+              <option value="Conversion">Conversion</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ===== Desktop table ===== -->
+        <div class="hidden lg:block overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50/80 text-left border-b border-gray-100">
+                <th class="px-5 py-4 font-bold text-sm uppercase tracking-wider text-gray-900 w-14">Sl No.</th>
+                <th class="px-5 py-4 font-bold text-sm uppercase tracking-wider text-gray-900">Name</th>
+                <th class="px-5 py-4 font-bold text-sm uppercase tracking-wider text-gray-900">Mobile No.</th>
+                <th class="px-5 py-4 font-bold text-sm uppercase tracking-wider text-gray-900">Email</th>
+                <th class="px-5 py-4 font-bold text-sm uppercase tracking-wider text-gray-900">Service</th>
+                <th class="px-5 py-4 font-bold text-sm uppercase tracking-wider text-gray-900">Status</th>
+                <th class="px-5 py-4 font-bold text-sm uppercase tracking-wider text-gray-900">Amount</th>
+                <th class="px-5 py-4 font-bold text-sm uppercase tracking-wider text-gray-900 text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody" class="divide-y divide-gray-100"></tbody>
+          </table>
+          <div id="emptyStateDesktop" class="hidden py-16 text-center text-gray-400 text-sm">No leads match your search.</div>
+        </div>
+
+        <!-- ===== Mobile / tablet cards ===== -->
+        <div id="cardList" class="lg:hidden flex flex-col gap-3.5 p-4 sm:p-5"></div>
+        <div id="emptyStateMobile" class="hidden lg:hidden py-16 text-center text-gray-400 text-sm">No leads match your search.</div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 bg-gray-900 text-white text-sm font-semibold px-5 py-3 rounded-full shadow-2xl z-50 flex items-center gap-2">
+  <svg class="w-4 h-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+  <span id="toastText">Updated</span>
+</div>
+
+<script>
+/* ============ DATA STATE ============ */
+let leads = [];
+
+async function fetchLeads() {
+  const token = sessionStorage.getItem('adminToken');
+  if (!token) {
+    window.location.href = 'index.html';
+    return;
+  }
+  
+  try {
+    const res = await fetch(`${CONFIG.API_BASE_URL}/leads/all`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (data.success) {
+      leads = data.data.map(l => ({
+        id: l.id,
+        name: l.name,
+        mobile: l.mobile,
+        email: l.email,
+        service: l.service_name || l.service,
+        status: statusStyles[l.status] ? l.status : "Positive",
+        amount: Number(l.amount) || 0
+      }));
+      document.getElementById('serviceFilter').innerHTML = '<option value="">All Services</option>';
+      document.getElementById('serviceFilter').dataset.done = "";
+      populateServiceFilter();
+      renderStats();
+      renderAll();
+    } else {
+      console.error("Failed to fetch leads:", data.message);
+    }
+  } catch(err) {
+    console.error("Error fetching leads:", err);
+  }
+}
+
+const serviceIcons = {
+  "MLM Plan Video Making": `<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9.5v5l4-2.5z"/>`,
+  "Customized MLM Software Development": `<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4"/>`,
+  "MLM Plan PDF Making": `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h2"/>`,
+  "Latest MLM Database": `<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>`,
+  "Result Based Promotion": `<path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/>`,
+  "MLM Leader Website": `<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>`,
+};
+
+/* Pastel badge palette to match the reference screenshot */
+const statusStyles = {
+  Positive:   { bg:'bg-blue-50',   text:'text-blue-700'  },
+  Negative:   { bg:'bg-gray-100',  text:'text-gray-600'  },
+  Accepted:   { bg:'bg-amber-50',  text:'text-amber-700' },
+  Conversion: { bg:'bg-green-50',  text:'text-green-700' },
+};
+const arrowFor = (hex) => {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="${hex}" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+};
+const arrowColor = { Positive:'#1d4ed8', Negative:'#4b5563', Accepted:'#b45309', Conversion:'#15803d' };
+
+let activeSearch = "";
+let activeService = "";
+let activeStatus = "";
+
+/* ============ ICONS ============ */
+const waSvg = `<svg viewBox="0 0 448 512" class="w-4 h-4 fill-current"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>`;
+const tgSvg = `<svg viewBox="0 0 240 240" class="w-4 h-4 fill-current"><path d="M120 0a120 120 0 1 0 0 240 120 120 0 0 0 0-240zm54.5 81.6-19.6 92.5c-1.5 6.6-5.4 8.2-10.9 5.1l-30.1-22.2-14.5 14c-1.6 1.6-3 3-6.1 3l2.2-30.9 56.3-50.9c2.4-2.2-.5-3.4-3.8-1.2l-69.6 43.9-30-9.4c-6.5-2-6.6-6.5 1.4-9.7l117.3-45.2c5.4-2 10.1 1.3 8.4 9z"/></svg>`;
+const callSvg = `<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+const instaSvg = `<svg viewBox="0 0 448 512" class="w-4 h-4 fill-current"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 275.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>`;
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  document.getElementById('toastText').textContent = msg;
+  t.style.transform = 'translate(-50%,0)';
+  t.style.opacity = '1';
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(()=>{ t.style.transform='translate(-50%,5rem)'; t.style.opacity='0'; }, 1600);
+}
+
+function actionIcons(l, size){
+  const dim = size || 'w-8 h-8';
+  return `
+    <a href="https://wa.me/91${l.mobile}" target="_blank" rel="noopener" title="WhatsApp"
+       class="${dim} rounded-full bg-green-50 text-green-600 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">${waSvg}</a>
+    <a href="https://t.me/+91${l.mobile}" target="_blank" rel="noopener" title="Telegram"
+       class="${dim} rounded-full bg-sky-50 text-sky-500 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors">${tgSvg}</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"
+       class="${dim} rounded-full bg-pink-50 text-pink-500 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-colors">${instaSvg}</a>
+    <a href="tel:+91${l.mobile}" title="Call"
+       class="${dim} rounded-full bg-orange-50 text-orange-500 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-colors">${callSvg}</a>
+  `;
+}
+
+/* ============ STAT CARDS ============ */
+function renderStats(){
+  const total = leads.length;
+  const positive = leads.filter(l=>l.status==='Positive').length;
+  const accepted = leads.filter(l=>l.status==='Accepted').length;
+  const conversion = leads.filter(l=>l.status==='Conversion').length;
+  const revenue = leads.reduce((sum,l)=> l.status==='Conversion' ? sum + Number(l.amount||0) : sum, 0);
+
+  const stats = [
+    { label:'TOTAL LEADS', value: total, icon:`<path d="M4 4h16v4H4zM4 12h16M4 16h16M4 20h10"/>`, iconBg:'bg-blue-50', iconText:'text-blue-600', valueText:'text-blue-600', highlight:true },
+    { label:'POSITIVE', value: positive, icon:`<path d="M7 14l3-3 3 3 5-6"/>`, iconBg:'bg-blue-50', iconText:'text-blue-600', valueText:'text-blue-600' },
+    { label:'ACCEPTED', value: accepted, icon:`<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>`, iconBg:'bg-purple-50', iconText:'text-purple-600', valueText:'text-purple-600' },
+    { label:'CONVERSION', value: conversion, icon:`<path d="M5 13l4 4L19 7"/>`, iconBg:'bg-green-50', iconText:'text-green-600', valueText:'text-green-600' },
+    { label:'REVENUE (₹)', value: revenue.toLocaleString('en-IN'), icon:`<path d="M18 8A6 6 0 1 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>`, iconBg:'bg-orange-50', iconText:'text-orange-500', valueText:'text-orange-500' },
+  ];
+  document.getElementById('statCards').innerHTML = stats.map(s => `
+    <div class="bg-white rounded-2xl shadow-card p-5 ${s.highlight ? 'border-2 border-blue-500' : 'border border-gray-200'}">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-[11px] font-semibold tracking-wider text-gray-400 uppercase">${s.label}</span>
+        <div class="w-9 h-9 rounded-lg ${s.iconBg} ${s.iconText} flex items-center justify-center shrink-0">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${s.icon}</svg>
+        </div>
+      </div>
+      <div class="font-body font-bold text-3xl ${s.valueText}">${s.value}</div>
+    </div>
+  `).join('');
+}
+
+function populateServiceFilter(){
+  const services = [...new Set(leads.map(l=>l.service))];
+  const sel = document.getElementById('serviceFilter');
+  if(sel.dataset.done) return;
+  services.forEach(s=>{
+    const opt = document.createElement('option');
+    opt.value = s; opt.textContent = s;
+    sel.appendChild(opt);
+  });
+  sel.dataset.done = "1";
+}
+
+function getFiltered(){
+  return leads
+    .map((l,i)=>({...l, sl:i+1}))
+    .filter(l=>{
+      const q = activeSearch.toLowerCase();
+      const matchesSearch = !q || l.name.toLowerCase().includes(q) || l.mobile.includes(q) || l.email.toLowerCase().includes(q);
+      const matchesService = !activeService || l.service === activeService;
+      const matchesStatus = !activeStatus || l.status === activeStatus;
+      return matchesSearch && matchesService && matchesStatus;
+    });
+}
+
+function statusSelect(l, idx){
+  const s = statusStyles[l.status] || statusStyles['Positive'];
+  const arrow = arrowFor(arrowColor[l.status] || arrowColor['Positive']);
+  return `
+    <select data-status-idx="${idx}" style='background-image:${arrow}' class="status-select ${s.bg} ${s.text} text-sm font-bold rounded-full pl-3.5 pr-8 py-2 border border-current focus:outline-none focus:ring-2 focus:ring-offset-1 cursor-pointer">
+      <option value="Positive" ${l.status==='Positive'?'selected':''}>Positive</option>
+      <option value="Negative" ${l.status==='Negative'?'selected':''}>Negative</option>
+      <option value="Accepted" ${l.status==='Accepted'?'selected':''}>Accepted</option>
+      <option value="Conversion" ${l.status==='Conversion'?'selected':''}>Conversion</option>
+    </select>
+  `;
+}
+
+function amountBlock(l, idx){
+  return `
+    <div class="flex items-center gap-1.5">
+      <span class="text-gray-400 text-xs font-mono">₹</span>
+      <input type="number" min="0" data-amount-idx="${idx}" value="${l.amount || ''}" placeholder="0"
+             class="amount-input w-20 bg-gray-50 border border-gray-200 rounded-lg px-2 py-1.5 text-[13px] font-mono text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300">
+      <button data-tick-idx="${idx}" title="Save amount"
+              class="amt-tick w-7 h-7 rounded-lg bg-green-50 text-green-600 hover:bg-green-500 hover:text-white flex items-center justify-center transition-colors shrink-0">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+      </button>
+    </div>
+  `;
+}
+
+/* ============ RENDER TABLE ============ */
+function renderTable(){
+  const rows = getFiltered();
+  document.getElementById('resultsBadge').textContent = `${rows.length} results`;
+  const body = document.getElementById('tableBody');
+  document.getElementById('emptyStateDesktop').classList.toggle('hidden', rows.length !== 0);
+
+  body.innerHTML = rows.map(l => `
+    <tr class="row-fade hover:bg-gray-50/70 transition-colors">
+      <td class="px-5 py-4 text-gray-700 font-mono text-sm font-bold align-middle">${String(l.sl).padStart(2,'0')}</td>
+      <td class="px-5 py-4 align-middle">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-display font-bold text-xs shrink-0">${l.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</div>
+          <span class="font-semibold text-gray-900 text-base">${l.name}</span>
+        </div>
+      </td>
+      <td class="px-5 py-4 align-middle font-mono text-sm font-semibold text-gray-800">${l.mobile}</td>
+      <td class="px-5 py-4 align-middle text-sm text-gray-700 truncate max-w-[190px]" title="${l.email}">${l.email}</td>
+      <td class="px-5 py-4 align-middle">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-blue-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${serviceIcons[l.service] || ''}</svg>
+          <span class="text-sm text-gray-700 font-medium">${l.service}</span>
+        </div>
+      </td>
+      <td class="px-5 py-4 align-middle">${statusSelect(l, l.sl-1)}</td>
+      <td class="px-5 py-4 align-middle">${amountBlock(l, l.sl-1)}</td>
+      <td class="px-5 py-4 align-middle">
+        <div class="flex items-center justify-center gap-1.5">${actionIcons(l, 'w-9 h-9')}</div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+/* ============ RENDER CARDS (mobile/tablet) ============ */
+function renderCards(){
+  const rows = getFiltered();
+  const list = document.getElementById('cardList');
+  document.getElementById('emptyStateMobile').classList.toggle('hidden', rows.length !== 0);
+
+  list.innerHTML = rows.map(l => `
+    <div class="row-fade bg-white border border-gray-200 rounded-2xl p-4">
+      <div class="flex items-start justify-between gap-3 mb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-display font-bold text-xs shrink-0">${l.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</div>
+          <div>
+            <div class="font-semibold text-gray-800 text-sm leading-tight">${l.name}</div>
+            <div class="text-[11px] text-gray-400 font-mono mt-0.5">Sl. ${String(l.sl).padStart(2,'0')} · ${l.mobile}</div>
+          </div>
+        </div>
+        ${statusSelect(l, l.sl-1)}
+      </div>
+
+      <div class="space-y-2 mb-3.5">
+        <div class="flex items-center gap-2 px-1">
+          <svg class="w-4 h-4 text-gray-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <span class="text-[13px] text-gray-600 truncate">${l.email}</span>
+        </div>
+        <div class="flex items-center gap-2 px-1">
+          <svg class="w-4 h-4 text-blue-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${serviceIcons[l.service] || ''}</svg>
+          <span class="text-[13px] text-gray-600">${l.service}</span>
+        </div>
+        <div class="flex items-center gap-2 px-1 pt-1">
+          <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Amount</span>
+          ${amountBlock(l, l.sl-1)}
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 pt-3 border-t border-gray-100 mt-1">${actionIcons(l, 'w-9 h-9')}</div>
+    </div>
+  `).join('');
+}
+
+function renderAll(){ renderTable(); renderCards(); }
+
+/* ============ EVENTS ============ */
+document.addEventListener('change', (e)=>{
+  const sel = e.target.closest('[data-status-idx]');
+  if(sel){
+    const idx = Number(sel.dataset.statusIdx);
+    const ld = leads[idx];
+    const newStatus = sel.value;
+    const token = sessionStorage.getItem('adminToken');
+    
+    sel.disabled = true;
+    fetch(`${CONFIG.API_BASE_URL}/leads/status/${ld.id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: newStatus })
+    })
+    .then(res => res.json())
+    .then(data => {
+      sel.disabled = false;
+      if (data.success) {
+        ld.status = newStatus;
+        toast(`${ld.name.split(' ')[0]}'s status set to ${newStatus}`);
+        renderStats();
+        renderAll();
+      } else {
+        toast('Failed to update status');
+        sel.value = ld.status;
+      }
+    })
+    .catch(err => {
+      sel.disabled = false;
+      sel.value = ld.status;
+      console.error(err);
+      toast('Error updating status');
+    });
+  }
+});
+
+document.addEventListener('click', (e)=>{
+  const tick = e.target.closest('[data-tick-idx]');
+  if(tick){
+    const idx = Number(tick.dataset.tickIdx);
+    const ld = leads[idx];
+    const input = document.querySelector(`.amount-input[data-amount-idx="${idx}"]`);
+    const val = Number(input.value) || 0;
+    const token = sessionStorage.getItem('adminToken');
+    
+    tick.disabled = true;
+    fetch(`${CONFIG.API_BASE_URL}/leads/amount/${ld.id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ amount: val })
+    })
+    .then(res => res.json())
+    .then(data => {
+      tick.disabled = false;
+      if (data.success) {
+        ld.amount = val;
+        tick.classList.remove('saved'); void tick.offsetWidth; tick.classList.add('saved');
+        toast(`Amount ₹${val.toLocaleString('en-IN')} saved for ${ld.name.split(' ')[0]}`);
+        renderStats();
+      } else {
+        toast('Failed to update amount');
+      }
+    })
+    .catch(err => {
+      tick.disabled = false;
+      console.error(err);
+      toast('Error updating amount');
+    });
+  }
+});
+
+document.getElementById('searchInput').addEventListener('input', (e)=>{ activeSearch = e.target.value; renderAll(); });
+document.getElementById('serviceFilter').addEventListener('change', (e)=>{ activeService = e.target.value; renderAll(); });
+document.getElementById('statusFilterTop').addEventListener('change', (e)=>{ activeStatus = e.target.value; renderAll(); });
+
+/* ============ INIT ============ */
+fetchLeads();
+</script>
+</body>
+</html>

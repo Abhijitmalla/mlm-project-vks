@@ -69,82 +69,99 @@
 
 <div class="fixed inset-0 grid-dots pointer-events-none z-0"></div>
 
-<section class="relative min-h-screen flex items-center overflow-hidden hero-bg">
+<section class="relative overflow-hidden hero-bg">
   <canvas id="netCanvas" class="absolute inset-0 w-full h-full opacity-30 z-0 pointer-events-none"></canvas>
-  <div class="absolute inset-0 bg-primary/80 z-0"></div>
-  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center py-20">
-    <div class="text-left max-w-2xl">
-      <div class="inline-flex items-center gap-3 text-sm font-semibold tracking-wide uppercase text-white mb-6">
-        <span class="w-8 h-[2px] bg-white"></span> MLM Plan PDF Making
+  <div class="absolute inset-0 bg-primary/85 z-0"></div>
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 pt-4 pb-8 md:py-20">
+    <!-- Top: full-width headline text -->
+    <div class="max-w-5xl mx-auto text-center mb-6 md:mb-14">
+      <div class="inline-flex items-center gap-3 text-sm font-semibold tracking-wide uppercase text-white mb-4">
+        <span class="w-8 h-[2px] bg-white"></span> MLM Plan PDF Making <span class="w-8 h-[2px] bg-white"></span>
       </div>
-      <h1 id="rotateText" class="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-4 text-white font-display transition-all duration-500">Give your MLM plan a multimillion-dollar look with premium PDF designing</h1>
-      <p id="rotateSubText" class="text-lg md:text-xl font-medium mb-8 text-gray-200 transition-all duration-500">Professional photoshop layout &middot; crisp, error-free calculation rendering &middot; HD deliverables &mdash; ready within 48&ndash;72 hours.</p>
-      <!-- Feature badges -->
-      <div class="flex flex-wrap gap-3 mb-8">
-        <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-sm font-medium px-4 py-2 rounded-full backdrop-blur-sm">
-          <svg class="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
-          Professional Photoshop Layout
-        </span>
-        <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-sm font-medium px-4 py-2 rounded-full backdrop-blur-sm">
-          <svg class="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
-          Crisp Error-Free Calculations
-        </span>
-        <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-sm font-medium px-4 py-2 rounded-full backdrop-blur-sm">
-          <svg class="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
-          HD Deliverables
-        </span>
-        <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-sm font-medium px-4 py-2 rounded-full backdrop-blur-sm">
-          <svg class="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
-          Ready in 48&ndash;72 Hours
-        </span>
-      </div>
-      <div class="flex flex-wrap gap-4">
-        <a href="#samples" class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold rounded-full bg-accent text-primary hover:bg-yellow-400 transition-colors shadow-lg">View Samples</a>
-        <button id="heroContactBtn" class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold rounded-full border border-gray-400 text-white hover:border-accent hover:text-accent transition-colors">Contact Us</button>
-      </div>
+      <h1 id="rotateText" class="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-white font-display mb-4 transition-all duration-500">Give your MLM plan a multimillion-dollar look with premium PDF designing</h1>
+      <p id="rotateSubText" class="text-sm md:text-base font-medium text-gray-300 mb-6 transition-all duration-500">Professional photoshop layout &middot; crisp, error-free calculation rendering &middot; HD deliverables &mdash; ready within 48&ndash;72 hours.</p>
+    
+     
     </div>
 
-    <div class="bg-white rounded-2xl p-8 shadow-2xl relative border-t-4 border-accent">
-      <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono">Get in touch</div>
-      <h2 class="text-2xl font-bold text-primary mb-2 font-display">Talk to our team</h2>
-      <p class="text-sm text-gray-500 mb-6">Share your plan details and we will create a premium PDF layout for you.</p>
+    <!-- Bottom: video left, form right -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch">
 
-      <form id="heroPageForm" class="space-y-4" novalidate>
-        <div class="field" id="heroNameField">
-          <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroName">Full Name</label>
-          <input type="text" id="heroName" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="Your name">
-          <div class="err hidden text-red-500 text-xs mt-1">Please enter your name.</div>
-        </div>
-        <div class="field" id="heroMobileField">
-          <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroMobile">Mobile Number</label>
-          <input type="tel" id="heroMobile" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="10-digit mobile number">
-          <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid mobile number.</div>
-        </div>
-        <div class="field" id="heroEmailField">
-          <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroEmail">Email Address</label>
-          <input type="email" id="heroEmail" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="you@example.com">
-          <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid email address.</div>
-        </div>
-        <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-gray-800 transition-colors mt-2 shadow-md">Submit</button>
-      </form>
+      <!-- Video card -->
+      <div class="rounded-2xl border-2 border-accent overflow-hidden bg-primary shadow-2xl flex flex-col">
+        <div class="h-[3px] w-full" style="background-image:linear-gradient(90deg,#F1521E,#FF7A45,#F1521E);background-size:200% 100%;animation:shimmerBarHero 3.5s linear infinite;"></div>
+        <style>
+          @keyframes shimmerBarHero {
+            0% { background-position: 0% 0 }
+            100% { background-position: 200% 0 }
+          }
+        </style>
 
-      <div id="heroSuccessView" class="hidden text-center mt-6">
-        <div class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4 text-green-500">
-          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-          </svg>
+        <div class="relative bg-black/90 flex-1" style="aspect-ratio:16/10;">
+          <iframe class="absolute inset-0 w-full h-full"
+            src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM Plan PDF service video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+          <div class="absolute left-3.5 bottom-3.5 font-display font-bold text-[13px] tracking-wide text-white/85 pointer-events-none">VK SERVICES ENTERPRISE</div>
         </div>
-        <h2 class="text-xl font-bold text-primary mb-1 font-display">Submitted successfully</h2>
-        <p class="text-sm text-gray-500 mb-4">We will call you back soon. You can reach us at:</p>
-        <div class="flex flex-col items-center justify-center gap-2 text-sm font-semibold text-primary">
-          <a href="tel:892765638" class="hover:text-accent transition-colors flex items-center gap-2">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-            Call: 892765638
+        <div class="flex items-center justify-between gap-2.5 px-4 py-3 bg-black/80 backdrop-blur">
+          <div class="flex items-center gap-2 text-sm font-semibold text-white">
+            <span class="w-[26px] h-5 rounded flex items-center justify-center text-[10px]" style="background-color:#F1521E;">▤</span> Watch Free Demo
+          </div>
+          <a href="tel:+918927656368" class="flex items-center gap-2 text-sm font-bold text-white">
+            <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center text-xs" style="background-color:#F1521E;">✆</span> Call Now
           </a>
-          <a href="https://wa.me/919237377196" class="hover:text-green-500 transition-colors flex items-center gap-2 text-green-600">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
-            WhatsApp: 9237377196
-          </a>
+        </div>
+        <p class="px-5 py-4 text-base leading-relaxed text-gray-200 bg-primary border-t border-white/10">
+          <span class="text-accentLight font-bold italic">Don't just buy. Test it yourself before spending a single rupee!</span> Watch the complete presentation video above to see our live proof and premium PDF samples.
+        </p>
+      </div>
+
+      <!-- Form card -->
+      <div class="bg-white rounded-2xl p-8 shadow-2xl relative border-t-4 border-accent transform transition-all duration-500 hover:scale-[1.01]">
+        <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono">Get in touch</div>
+        <h2 class="text-2xl font-bold text-primary mb-2 font-display">Talk to our team</h2>
+        <p class="text-sm text-gray-500 mb-6">Share your plan details and we will create a premium PDF layout for you.</p>
+
+        <form id="heroPageForm" class="space-y-4" novalidate>
+          <div class="field" id="heroNameField">
+            <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroName">Full Name</label>
+            <input type="text" id="heroName" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="Your name">
+            <div class="err hidden text-red-500 text-xs mt-1">Please enter your name.</div>
+          </div>
+          <div class="field" id="heroMobileField">
+            <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroMobile">Mobile Number</label>
+            <input type="tel" id="heroMobile" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="10-digit mobile number">
+            <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid mobile number.</div>
+          </div>
+          <div class="field" id="heroEmailField">
+            <label class="block text-xs font-semibold text-gray-600 mb-1" for="heroEmail">Email Address</label>
+            <input type="email" id="heroEmail" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" placeholder="you@example.com">
+            <div class="err hidden text-red-500 text-xs mt-1">Please enter a valid email address.</div>
+          </div>
+          <button type="submit" class="w-full text-white font-semibold py-3.5 rounded-lg transition-colors mt-2 shadow-md" style="background-image:linear-gradient(135deg,#FF7A45,#F1521E);">Submit</button>
+        </form>
+
+        <div id="heroSuccessView" class="hidden text-center mt-6">
+          <div class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4 text-green-500">
+            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold text-primary mb-1 font-display">Submitted successfully</h2>
+          <p class="text-sm text-gray-500 mb-4">We will call you back soon. You can reach us at:</p>
+          <div class="flex flex-col items-center justify-center gap-2 text-sm font-semibold text-primary">
+            <a href="tel:892765638" class="hover:text-accent transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+              Call: 892765638
+            </a>
+            <a href="https://wa.me/919237377196" class="hover:text-green-500 transition-colors flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
+              WhatsApp: 9237377196
+            </a>
+          </div>
         </div>
       </div>
     </div>
