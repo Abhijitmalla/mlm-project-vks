@@ -7,29 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#111827",
-                        accent: "#F1521E",
-                        accentLight: "#FF7A45",
-                        dark: "#111827",
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
+<link rel="stylesheet" href="./dist/output.css">    
+    <style>
             .hero-bg {
                 background-image: url('./assets/image/banner2.jpg');
                 background-size: cover;
@@ -43,7 +22,6 @@
                 -ms-overflow-style: none;
                 scrollbar-width: none;
             }
-        }
     </style>
 </head>
 <body class="bg-white text-gray-900 font-sans overflow-x-hidden antialiased">
@@ -103,7 +81,7 @@
                         }
                     </style>
 
-                    <div class="relative bg-black/90 flex-1" style="aspect-ratio:16/10;">
+                    <div class="relative bg-black/90 w-full aspect-video">
                         <iframe class="absolute inset-0 w-full h-full"
                             src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM service provider video"
                             frameborder="0"
@@ -119,9 +97,11 @@
                             <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center text-xs" style="background-color:#F1521E;">✆</span> Call Now
                         </a>
                     </div>
-                    <p class="px-5 py-4 text-base leading-relaxed text-gray-200 bg-primary border-t border-white/10">
-                        <span class="text-accentLight font-bold italic">Don't just buy. Test it yourself before spending a single rupee!</span> Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.
-                    </p>
+                    <div class="flex-1 bg-primary border-t border-white/10 flex flex-col justify-center">
+                        <p class="px-5 py-4 text-base leading-relaxed text-gray-200">
+                            <span class="text-accentLight font-bold italic">Don't just buy. Test it yourself before spending a single rupee!</span> Watch the complete presentation video above to see our live proof, and explore our full suite of premium MLM services below.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Form card -->
@@ -1051,9 +1031,10 @@
                     body: JSON.stringify(data)
                 });
 
+                const result = await response.json();
+                const form = document.getElementById(formId);
+                const successView = document.getElementById(successViewId);
                 if (response.ok) {
-                    const form = document.getElementById(formId);
-                    const successView = document.getElementById(successViewId);
                     if (form) form.style.display = 'none';
                     if (successView) {
                         successView.classList.remove('hidden');
@@ -1062,19 +1043,37 @@
                         alert("Enquiry submitted successfully!");
                     }
                 } else {
-                    alert("Error submitting enquiry. Please try again.");
-                    if (btn) {
-                        btn.innerText = originalText;
-                        btn.disabled = false;
+                    if (successView) { successView.classList.add('hidden'); successView.style.display = 'none'; }
+                    if (form) { form.style.display = ''; form.classList.remove('hidden'); }
+                    const fv = document.getElementById('formView');
+                    if (fv && formId === 'enquiryForm') { fv.classList.remove('hidden'); }
+                    let errEl = form ? form.querySelector('.enquiry-inline-error') : null;
+                    if (!errEl && form) {
+                        errEl = document.createElement('div');
+                        errEl.className = 'enquiry-inline-error';
+                        errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+                        form.appendChild(errEl);
                     }
+                    if (errEl) errEl.textContent = result.message || "Error submitting enquiry. Please try again.";
+                    if (btn) { btn.innerText = originalText; btn.disabled = false; }
                 }
             } catch (error) {
-                console.error("Error:", error);
-                alert("Error connecting to server. Please try again.");
-                if (btn) {
-                    btn.innerText = originalText;
-                    btn.disabled = false;
+                const form = document.getElementById(formId);
+                const successView = document.getElementById(successViewId);
+                if (successView) { successView.classList.add('hidden'); successView.style.display = 'none'; }
+                if (form) { form.style.display = ''; form.classList.remove('hidden'); }
+                const fv = document.getElementById('formView');
+                if (fv && formId === 'enquiryForm') { fv.classList.remove('hidden'); }
+                let errEl = form ? form.querySelector('.enquiry-inline-error') : null;
+                if (!errEl && form) {
+                    errEl = document.createElement('div');
+                    errEl.className = 'enquiry-inline-error';
+                    errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+                    form.appendChild(errEl);
                 }
+                if (errEl) errEl.textContent = "Error connecting to server. Please try again.";
+                console.error("Error:", error);
+                if (btn) { btn.innerText = originalText; btn.disabled = false; }
             }
         }
 

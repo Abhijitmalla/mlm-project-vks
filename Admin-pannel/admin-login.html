@@ -6,38 +6,8 @@
 <title>Admin Login — VK Services Enterprise</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="./../dist/output.css">
 <script src="../api-config.js"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          primary: '#181A2E',
-          accent: '#4F46E5',
-          accentDark: '#4338CA',
-          accentLight: '#8B5CF6',
-          accentTeal: '#14B8A6',
-          accentOrange: '#F97316',
-          bg: '#FFFFFF',
-          text: '#111827',
-          dark: '#111827',
-        },
-        fontFamily: {
-          display: ['Sora', 'sans-serif'],
-          body: ['Inter', 'sans-serif'],
-          mono: ['IBM Plex Mono', 'monospace'],
-        },
-        keyframes: {
-          pulseDot: { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.25 } },
-        },
-        animation: {
-          'pulse-dot': 'pulseDot 1.8s ease-in-out infinite',
-        },
-      },
-    },
-  }
-</script>
 <style>
   body{ font-family:'Inter',sans-serif; }
   h1,h2,h3,.font-display{ font-family:'Sora',sans-serif; }
@@ -75,8 +45,8 @@
     </div>
 
     <!-- Login card -->
-    <div class="bg-white rounded-2xl p-8 relative border-t-4 border-accent" style="box-shadow:0 25px 60px -15px rgba(30,27,51,0.5), 0 0 0 1px rgba(139,92,246,0.06);">
-      <div class="h-[3px] w-full absolute top-0 left-0 rounded-t-2xl overflow-hidden" style="background-image:linear-gradient(90deg,#4F46E5,#F97316,#8B5CF6,#14B8A6,#4F46E5);background-size:300% 100%;animation:shimmerBarLogin 5s linear infinite;"></div>
+    <div class="bg-white rounded-2xl overflow-hidden p-8 relative pt-9" style="box-shadow:0 25px 60px -15px rgba(30,27,51,0.5), 0 0 0 1px rgba(139,92,246,0.06);">
+      <div class="h-[4px] w-full absolute top-0 left-0" style="background-image:linear-gradient(90deg,#4F46E5,#F97316,#8B5CF6,#14B8A6,#4F46E5);background-size:300% 100%;animation:shimmerBarLogin 5s linear infinite;"></div>
       <style>@keyframes shimmerBarLogin{0%{background-position:0% 0}100%{background-position:200% 0}}</style>
 
       <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2 font-mono-plex">Restricted Access</div>

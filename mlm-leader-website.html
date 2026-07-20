@@ -9,42 +9,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#111827',
-            accent: '#F1521E',
-            accentLight: '#FF7A45',
-            bg: '#FFFFFF',
-            text: '#111827',
-            dark: '#111827',
-          },
-          fontFamily: {
-            display: ['Sora', 'sans-serif'],
-            body: ['Inter', 'sans-serif'],
-            mono: ['IBM Plex Mono', 'monospace'],
-          },
-          keyframes: {
-            pulseDot: { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.25 } },
-            playRing: {
-              '0%': { boxShadow: '0 0 0 0 rgba(245,158,11,0.45)' },
-              '70%': { boxShadow: '0 0 0 22px rgba(245,158,11,0)' },
-              '100%': { boxShadow: '0 0 0 0 rgba(245,158,11,0)' },
-            },
-            wave: { '0%,100%': { transform: 'scaleY(0.35)' }, '50%': { transform: 'scaleY(1)' } },
-          },
-          animation: {
-            'pulse-dot': 'pulseDot 1.8s ease-in-out infinite',
-            'play-ring': 'playRing 2.2s ease-out infinite',
-            wave: 'wave 1.4s ease-in-out infinite',
-          },
-        },
-      },
-    }
-  </script>
+<link rel="stylesheet" href="./dist/output.css">
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -91,11 +56,12 @@
     .index-demo-card{overflow:hidden;border:2px solid #F1521E;border-radius:1rem;background:#111827;box-shadow:0 25px 50px -12px rgba(0,0,0,.55);display:flex;flex-direction:column}
     .index-demo-shimmer{height:3px;background:linear-gradient(90deg,#F1521E,#FF7A45,#F1521E);background-size:200% 100%;animation:indexHeroShimmer 3.5s linear infinite}
     @keyframes indexHeroShimmer{to{background-position:200% 0}}
-    .index-demo-frame{position:relative;background:rgba(0,0,0,.9);aspect-ratio:16/10;flex:1}
+    .index-demo-frame{position:relative;background:rgba(0,0,0,.9);aspect-ratio:16/9;width:100%}
     .index-demo-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
     .index-demo-label{position:absolute;left:.875rem;bottom:.875rem;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.85);pointer-events:none}
     .index-demo-footer{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.75rem 1rem;background:rgba(0,0,0,.8);color:#fff;font-size:.875rem;font-weight:700}
-    .index-demo-note{padding:1rem 1.25rem;margin:0;background:#111827;border-top:1px solid rgba(255,255,255,.1);color:#e5e7eb;font-size:1rem;line-height:1.6}
+    .index-demo-note-wrap{flex:1;background:#111827;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;justify-content:center}
+    .index-demo-note{padding:1rem 1.25rem;margin:0;color:#e5e7eb;font-size:1rem;line-height:1.6}
     .index-demo-note strong{color:#FF7A45;font-style:italic}
     .index-hero-form{border-top-color:#F1521E!important}
     .index-hero-form button[type="submit"]{background:linear-gradient(135deg,#FF7A45,#F1521E)!important}
@@ -140,8 +106,10 @@
             <span>▶ Watch Free Demo</span>
             <a href="tel:+918927656368" style="color:#fff;text-decoration:none">✆ Call Now</a>
           </div>
-          <p class="index-demo-note"><strong>Don't just buy. Test it yourself before spending a single rupee!</strong>
-            Watch the complete presentation video above, then explore our services below.</p>
+          <div class="index-demo-note-wrap">
+            <p class="index-demo-note"><strong>Don't just buy. Test it yourself before spending a single rupee!</strong>
+              Watch the complete presentation video above, then explore our services below.</p>
+          </div>
         </div>
 
         <div class="bg-white rounded-2xl p-8 shadow-2xl relative border-t-4 border-accent index-hero-form">
@@ -1240,9 +1208,10 @@
           body: JSON.stringify(data)
         });
 
+        const result = await response.json();
+        const form = document.getElementById(formId);
+        const successView = document.getElementById(successViewId);
         if (response.ok) {
-          const form = document.getElementById(formId);
-          const successView = document.getElementById(successViewId);
           if (form && formId === 'enquiryForm') {
             const parentText = form.previousElementSibling;
             const parentTitle = parentText?.previousElementSibling;
@@ -1258,12 +1227,32 @@
           }
           else alert("Enquiry submitted successfully!");
         } else {
-          alert("Error submitting enquiry. Please try again.");
+          if (successView) { successView.classList.add('hidden'); successView.style.display = 'none'; }
+          if (form) { form.style.display = ''; form.classList.remove('hidden'); }
+          let errEl = form ? form.querySelector('.enquiry-inline-error') : null;
+          if (!errEl && form) {
+            errEl = document.createElement('div');
+            errEl.className = 'enquiry-inline-error';
+            errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+            form.appendChild(errEl);
+          }
+          if (errEl) errEl.textContent = result.message || "Error submitting enquiry. Please try again.";
           if (btn) { btn.innerText = originalText; btn.disabled = false; }
         }
       } catch (error) {
+        const form = document.getElementById(formId);
+        const successView = document.getElementById(successViewId);
+        if (successView) { successView.classList.add('hidden'); successView.style.display = 'none'; }
+        if (form) { form.style.display = ''; form.classList.remove('hidden'); }
+        let errEl = form ? form.querySelector('.enquiry-inline-error') : null;
+        if (!errEl && form) {
+          errEl = document.createElement('div');
+          errEl.className = 'enquiry-inline-error';
+          errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+          form.appendChild(errEl);
+        }
+        if (errEl) errEl.textContent = "Error connecting to server. Please try again.";
         console.error("Error:", error);
-        alert("Error connecting to server. Please try again.");
         if (btn) { btn.innerText = originalText; btn.disabled = false; }
       }
     }

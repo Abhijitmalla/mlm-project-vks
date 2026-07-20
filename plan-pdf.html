@@ -6,25 +6,7 @@
 <title>MLM Plan PDF Making — Premium Design Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: { primary: '#111827', accent: '#F1521E', accentLight: '#FF7A45', dark: '#111827' },
-        fontFamily: {
-          display: ['"Space Grotesk"', 'sans-serif'],
-          body: ['Inter', 'sans-serif'],
-          mono: ['"JetBrains Mono"', 'monospace'],
-        },
-        boxShadow: {
-          card: '0 10px 30px -8px rgba(17,24,39,0.12)',
-          'accent-glow': '0 10px 28px -6px rgba(245,158,11,0.45)',
-        },
-      },
-    },
-  };
-</script>
+<link rel="stylesheet" href="./dist/output.css">
 <style>
   @keyframes pulseRing { 0%{box-shadow:0 0 0 0 rgba(245,158,11,.55);} 70%{box-shadow:0 0 0 8px rgba(245,158,11,0);} 100%{box-shadow:0 0 0 0 rgba(245,158,11,0);} }
   .live-dot{ animation: pulseRing 1.8s infinite; }
@@ -98,7 +80,7 @@
           }
         </style>
 
-        <div class="relative bg-black/90 flex-1" style="aspect-ratio:16/10;">
+        <div class="relative bg-black/90 w-full aspect-video">
           <iframe class="absolute inset-0 w-full h-full"
             src="https://www.youtube.com/embed/hAPZLXoTxks?rel=0" title="MLM Plan PDF service video"
             frameborder="0"
@@ -114,9 +96,11 @@
             <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center text-xs" style="background-color:#F1521E;">✆</span> Call Now
           </a>
         </div>
-        <p class="px-5 py-4 text-base leading-relaxed text-gray-200 bg-primary border-t border-white/10">
-          <span class="text-accentLight font-bold italic">Don't just buy. Test it yourself before spending a single rupee!</span> Watch the complete presentation video above to see our live proof and premium PDF samples.
-        </p>
+        <div class="flex-1 bg-primary border-t border-white/10 flex flex-col justify-center">
+          <p class="px-5 py-4 text-base leading-relaxed text-gray-200">
+            <span class="text-accentLight font-bold italic">Don't just buy. Test it yourself before spending a single rupee!</span> Watch the complete presentation video above to see our live proof and premium PDF samples.
+          </p>
+        </div>
       </div>
 
       <!-- Form card -->
@@ -940,18 +924,37 @@ if (form) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       })
-      .then(response => {
-        if (response.ok) {
+      .then(response => response.json().then(result => ({ ok: response.ok, result })))
+      .then(({ ok, result }) => {
+        if (ok) {
           formView.classList.add('hidden');
           successView.classList.remove('hidden');
         } else {
-          alert('Error submitting enquiry. Please try again.');
+          successView.classList.add('hidden');
+          formView.classList.remove('hidden');
+          let errEl = formView.querySelector('.enquiry-inline-error');
+          if (!errEl) {
+              errEl = document.createElement('div');
+              errEl.className = 'enquiry-inline-error';
+              errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+              formView.appendChild(errEl);
+          }
+          errEl.textContent = result.message || 'Error submitting enquiry. Please try again.';
         }
         if (btn) { btn.innerText = originalText; btn.disabled = false; }
       })
       .catch(error => {
+        successView.classList.add('hidden');
+        formView.classList.remove('hidden');
+        let errEl = formView.querySelector('.enquiry-inline-error');
+        if (!errEl) {
+            errEl = document.createElement('div');
+            errEl.className = 'enquiry-inline-error';
+            errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+            formView.appendChild(errEl);
+        }
+        errEl.textContent = 'Error connecting to server. Please try again.';
         console.error('Error:', error);
-        alert('Error connecting to server. Please try again.');
         if (btn) { btn.innerText = originalText; btn.disabled = false; }
       });
     }
@@ -1054,18 +1057,37 @@ if (heroForm) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       })
-      .then(response => {
-        if (response.ok) {
+      .then(response => response.json().then(result => ({ ok: response.ok, result })))
+      .then(({ ok, result }) => {
+        if (ok) {
           heroForm.classList.add('hidden');
           document.getElementById('heroSuccessView').classList.remove('hidden');
         } else {
-          alert('Error submitting enquiry. Please try again.');
+          document.getElementById('heroSuccessView').classList.add('hidden');
+          heroForm.classList.remove('hidden');
+          let errEl = heroForm.querySelector('.enquiry-inline-error');
+          if (!errEl) {
+              errEl = document.createElement('div');
+              errEl.className = 'enquiry-inline-error';
+              errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+              heroForm.appendChild(errEl);
+          }
+          errEl.textContent = result.message || 'Error submitting enquiry. Please try again.';
         }
         if (btn) { btn.innerText = originalText; btn.disabled = false; }
       })
       .catch(error => {
+        document.getElementById('heroSuccessView').classList.add('hidden');
+        heroForm.classList.remove('hidden');
+        let errEl = heroForm.querySelector('.enquiry-inline-error');
+        if (!errEl) {
+            errEl = document.createElement('div');
+            errEl.className = 'enquiry-inline-error';
+            errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+            heroForm.appendChild(errEl);
+        }
+        errEl.textContent = 'Error connecting to server. Please try again.';
         console.error('Error:', error);
-        alert('Error connecting to server. Please try again.');
         if (btn) { btn.innerText = originalText; btn.disabled = false; }
       });
     }
@@ -1240,9 +1262,10 @@ if (!emailRegex.test(data.email)) {
                     body: JSON.stringify(data)
                 });
                 
+                const result = await response.json();
+                const form = document.getElementById(formId);
+                const successView = document.getElementById(successViewId);
                 if (response.ok) {
-                    const form = document.getElementById(formId);
-                    const successView = document.getElementById(successViewId);
                     if (form && formId === 'enquiryForm') {
                         const parentText = form.previousElementSibling;
                         const parentTitle = parentText?.previousElementSibling;
@@ -1258,12 +1281,32 @@ if (!emailRegex.test(data.email)) {
                     }
                     else alert("Enquiry submitted successfully!");
                 } else {
-                    alert("Error submitting enquiry. Please try again.");
+                    if (successView) { successView.classList.add('hidden'); successView.style.display = 'none'; }
+                    if (form) { form.style.display = ''; }
+                    let errEl = form ? form.querySelector('.enquiry-inline-error') : null;
+                    if (!errEl && form) {
+                        errEl = document.createElement('div');
+                        errEl.className = 'enquiry-inline-error';
+                        errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+                        form.appendChild(errEl);
+                    }
+                    if (errEl) errEl.textContent = result.message || "Error submitting enquiry. Please try again.";
                     if(btn) { btn.innerText = originalText; btn.disabled = false; }
                 }
             } catch (error) {
+                const form = document.getElementById(formId);
+                const successView = document.getElementById(successViewId);
+                if (successView) { successView.classList.add('hidden'); successView.style.display = 'none'; }
+                if (form) { form.style.display = ''; }
+                let errEl = form ? form.querySelector('.enquiry-inline-error') : null;
+                if (!errEl && form) {
+                    errEl = document.createElement('div');
+                    errEl.className = 'enquiry-inline-error';
+                    errEl.style.cssText = 'margin-top:14px;padding:12px 16px;background:#fff0f0;border:1.5px solid #e74c3c;border-radius:10px;color:#c0392b;font-size:14px;font-weight:600;text-align:center;';
+                    form.appendChild(errEl);
+                }
+                if (errEl) errEl.textContent = "Error connecting to server. Please try again.";
                 console.error("Error:", error);
-                alert("Error connecting to server. Please try again.");
                 if(btn) { btn.innerText = originalText; btn.disabled = false; }
             }
         }

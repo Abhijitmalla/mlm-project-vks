@@ -9,29 +9,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="./../dist/output.css">
   <script src="../api-config.js"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#111827',
-            accent: '#F1521E',
-            accentLight: '#FF7A45',
-          },
-          fontFamily: {
-            display: ['"Space Grotesk"', 'sans-serif'],
-            body: ['Inter', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          boxShadow: {
-            card: '0 10px 30px -8px rgba(17,24,39,0.10)',
-          },
-        },
-      },
-    };
-  </script>
   <style>
     body {
       background: #0B0D12;
@@ -125,9 +104,9 @@
       </div>
 
       <!-- Login card -->
-      <div class="bg-white rounded-2xl p-8 relative border-t-4 border-[#4F46E5]"
+      <div class="bg-white rounded-2xl overflow-hidden p-8 relative pt-9"
         style="box-shadow:0 25px 60px -15px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.06);">
-        <div class="h-[3px] w-full absolute top-0 left-0 rounded-t-2xl overflow-hidden"
+        <div class="h-[4px] w-full absolute top-0 left-0"
           style="background-image:linear-gradient(90deg,#4F46E5,#F97316,#8B5CF6,#14B8A6,#4F46E5);background-size:300% 100%;animation:shimmerBarLogin 5s linear infinite;">
         </div>
         <style>
@@ -267,9 +246,26 @@
               class="hidden sm:inline-flex items-center gap-1.5 bg-green-900/30 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-800">
               <span class="w-2 h-2 rounded-full bg-green-500"></span> Live
             </span>
-            <div
-              class="w-9 h-9 rounded-full bg-indigo-600 text-white flex items-center justify-center font-body font-bold text-xs">
-              VK</div>
+            <div class="relative">
+              <button id="userMenuBtn" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-full pl-1 pr-3 py-1 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm">
+                <div class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center font-body font-bold text-[10px]">VK</div>
+                <span class="text-sm font-semibold text-gray-200">Admin</span>
+                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-800 border border-gray-700 rounded-xl shadow-lg py-1.5 z-50">
+                <button id="openChangePasswordBtn" class="w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-white transition-colors flex items-center gap-2.5">
+                  <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path></svg>
+                  Change Password
+                </button>
+                <div class="h-px bg-gray-700 my-1"></div>
+                <button id="logoutBtn" class="w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-white transition-colors flex items-center gap-2.5">
+                  <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                  Sign Out
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -356,6 +352,32 @@
     </div>
   </div>
 
+  <!-- Change Password Modal -->
+  <div id="changePasswordModal" class="fixed inset-0 z-[100] hidden bg-black/50 backdrop-blur-sm flex items-center justify-center px-4 py-10 transition-opacity duration-300">
+    <div class="relative z-10 w-full max-w-sm bg-gray-800 rounded-2xl p-6 shadow-2xl border border-gray-700">
+      <h3 class="text-xl font-bold mb-5 text-white font-display">Change Password</h3>
+      <form id="changePasswordForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-semibold text-gray-400 mb-1">Old Password</label>
+          <input type="password" id="oldPassword" autocomplete="current-password" class="w-full bg-gray-900 border border-gray-600 rounded-lg px-3 py-2.5 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-400 mb-1">New Password</label>
+          <input type="password" id="newPassword" autocomplete="new-password" class="w-full bg-gray-900 border border-gray-600 rounded-lg px-3 py-2.5 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-400 mb-1">Confirm Password</label>
+          <input type="password" id="confirmPassword" autocomplete="new-password" class="w-full bg-gray-900 border border-gray-600 rounded-lg px-3 py-2.5 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+        </div>
+        <div id="changePasswordError" class="hidden text-red-400 text-sm bg-red-900/30 border border-red-800 rounded px-3 py-2"></div>
+        <div class="flex justify-end gap-3 mt-6 pt-2">
+          <button type="button" id="closeChangePasswordModal" class="px-4 py-2.5 text-sm font-semibold text-gray-300 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">Cancel</button>
+          <button type="submit" id="submitChangePasswordBtn" class="px-4 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors shadow-md">Change Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div id="toast"
     class="toast fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 bg-gray-800 text-white text-sm font-semibold px-5 py-3 rounded-full shadow-2xl z-50 flex items-center gap-2 border border-gray-700">
@@ -386,6 +408,7 @@
             name: e.name,
             mobile: e.mobile,
             email: e.email,
+            source: e.source || '',
             service: e.service_name || e.service,
             status: e.status || "New",
             createdAt: e.created_at
@@ -450,14 +473,35 @@ fetchStats();
       toast(label + ' copied');
     }
 
+    function sanitizeMobile(raw) {
+      // Remove ALL non-digit characters: spaces, dashes, +, brackets, etc.
+      let digits = String(raw).replace(/\D/g, '');
+      // Remove leading 0 (e.g. 0XXXXXXXXXX → XXXXXXXXXX)
+      if (digits.startsWith('0')) digits = digits.slice(1);
+      // Remove leading 91 country code if present (e.g. 91XXXXXXXXXX → XXXXXXXXXX)
+      if (digits.length === 12 && digits.startsWith('91')) digits = digits.slice(2);
+      // Final result should be 10 digits
+      return digits;
+    }
+function whatsappUrl(mobile) {
+    const mob = sanitizeMobile(mobile);
+    return `https://wa.me/91${mob}`;
+}
+
     function actionIcons(e, size) {
       const dim = size || 'w-12 h-12';
+      const mob = sanitizeMobile(e.mobile);
       return `
-    <a href="https://wa.me/91${e.mobile}" target="_blank" rel="noopener" title="WhatsApp"
-       class="${dim} rounded-full bg-green-900/30 text-green-400 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">${waSvg}</a>
-    <a href="https://t.me/+91${e.mobile}" target="_blank" rel="noopener" title="Telegram"
+   <a href="https://web.whatsapp.com/send?phone=91${sanitizeMobile(e.mobile)}"
+   target="_blank"
+   rel="noopener noreferrer"
+   title="WhatsApp"
+   class="${dim} rounded-full bg-green-900/30 text-green-400 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">
+   ${waSvg}
+</a>
+    <a href="https://t.me/${mob}" target="_blank" rel="noopener" title="Telegram"
        class="${dim} rounded-full bg-sky-900/30 text-sky-400 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors">${tgSvg}</a>
-    <a href="tel:+91${e.mobile}" title="Call"
+    <a href="tel:+91${mob}" title="Call"
        class="${dim} rounded-full bg-orange-900/30 text-accentLight flex items-center justify-center hover:bg-accent hover:text-white transition-colors">${callSvg}</a>
   `;
     }
@@ -509,6 +553,7 @@ async function fetchArchive(renderAfter = true) {
         name: e.name,
         mobile: e.mobile,
         email: e.email,
+        source: e.source || '',
         service: e.service_name || e.service,
         status: 'Not Interested',
         createdAt: e.archived_at || e.created_at
@@ -537,35 +582,35 @@ function renderStats(stats) {
         {
             key: 'total',
             label: "TOTAL ENQUIRIES",
-            value: currentStats.total,
+            value: currentStats.total || 0,
             icon: `<path d="M4 4h16v4H4zM4 12h16M4 16h16M4 20h10"/>`,
             gradient: 'from-blue-600 via-indigo-600 to-indigo-800'
         },
         {
             key: 'New',
             label: "NEW / PENDING",
-            value: currentStats.pending,
+            value: currentStats.pending || 0,
             icon: `<path d="M7 14l3-3 3 3 5-6"/>`,
             gradient: 'from-orange-500 via-amber-600 to-orange-700'
         },
         {
             key: 'Contacted',
             label: "CONTACTED",
-            value: currentStats.contacted,
+            value: currentStats.contacted || 0,
             icon: `<path d="M5 13l4 4L19 7"/>`,
             gradient: 'from-emerald-500 via-teal-600 to-teal-800'
         },
         {
             key: 'Not Interested',
             label: "NOT INTERESTED",
-            value: notInterestedCount,
+            value: notInterestedCount || 0,
             icon: `<path d="M18 6L6 18M6 6l12 12"/>`,
             gradient: 'from-rose-600 via-red-600 to-red-800'
         },
         {
             key: 'today',
             label: "TODAY'S ENQUIRIES",
-            value: currentStats.today,
+            value: currentStats.today || 0,
             icon: `<circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/>`,
             gradient: 'from-purple-600 via-fuchsia-600 to-purple-800'
         }
@@ -714,7 +759,7 @@ const clickHint = isActive
         data-id="${e.id}">
         <option value="New" ${e.status === "New" ? "selected" : ""} style="background:#1f2937;color:#f3f4f6;">New</option>
         <option value="Contacted" ${e.status === "Contacted" ? "selected" : ""} style="background:#1f2937;color:#f3f4f6;">Contacted</option>
-        <option value="Not Interested" ${e.status === "Not Interested" ? "selected" : ""} style="background:#1f2937;color:#f3f4f6;">Not Interested</option>
+       
     </select>
   `;
     }
@@ -731,8 +776,8 @@ const clickHint = isActive
           : statusSelectHTML(e);
 
         const actionCell = viewMode === 'archive'
-          ? `<div class="flex items-center justify-center gap-1.5">${actionIcons(e, 'w-8 h-8')}</div>`
-          : `<div class="flex items-center justify-center gap-1.5">
+          ? `<div class="flex items-center justify-center gap-1.5 action-icons-container">${actionIcons(e, 'w-8 h-8')}</div>`
+          : `<div class="flex items-center justify-center gap-1.5 action-icons-container">
               ${actionIcons(e, 'w-8 h-8')}
               ${notInterestedBtn(e.sl - 1, 'w-8 h-8')}
               <button data-connect="${e.sl - 1}" title="${e.status === 'Contacted' ? 'Mark as new' : 'Mark as contacted'}"
@@ -783,8 +828,8 @@ const clickHint = isActive
 
       list.innerHTML = rows.map(e => {
         const actionRow = viewMode === 'archive'
-          ? `<div class="flex items-center gap-2">${actionIcons(e, 'w-12 h-12')}</div>`
-          : `<div class="flex items-center gap-2">
+          ? `<div class="flex items-center gap-2 action-icons-container">${actionIcons(e, 'w-12 h-12')}</div>`
+          : `<div class="flex items-center gap-2 action-icons-container">
               ${actionIcons(e, 'w-12 h-12')}
               ${notInterestedBtn(e.sl - 1, 'w-10 h-10')}
               <button data-connect="${e.sl - 1}" title="${e.status === 'Contacted' ? 'Mark as new' : 'Mark as contacted'}"
@@ -1071,6 +1116,106 @@ document.addEventListener("change", async (e) => {
     } else {
       if (loginOverlay) loginOverlay.remove();
       fetchEnquiries();
+    }
+
+    /* ============ LOGOUT LOGIC ============ */
+    const userMenuBtn = document.getElementById('userMenuBtn');
+    const userDropdown = document.getElementById('userDropdown');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    if (userMenuBtn && userDropdown) {
+      userMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdown.classList.toggle('hidden');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+          userDropdown.classList.add('hidden');
+        }
+      });
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        sessionStorage.removeItem('adminLoggedIn');
+        sessionStorage.removeItem('adminToken');
+        window.location.href = 'admin-login.html';
+      });
+    }
+
+    /* ============ CHANGE PASSWORD LOGIC ============ */
+    const openChangePasswordBtn = document.getElementById('openChangePasswordBtn');
+    const changePasswordModal = document.getElementById('changePasswordModal');
+    const closeChangePasswordModal = document.getElementById('closeChangePasswordModal');
+    const changePasswordForm = document.getElementById('changePasswordForm');
+    const changePasswordError = document.getElementById('changePasswordError');
+    const submitChangePasswordBtn = document.getElementById('submitChangePasswordBtn');
+
+    if (openChangePasswordBtn && changePasswordModal) {
+      openChangePasswordBtn.addEventListener('click', () => {
+        userDropdown.classList.add('hidden');
+        changePasswordModal.classList.remove('hidden');
+      });
+    }
+
+    if (closeChangePasswordModal) {
+      closeChangePasswordModal.addEventListener('click', () => {
+        changePasswordModal.classList.add('hidden');
+        changePasswordForm.reset();
+        changePasswordError.classList.add('hidden');
+      });
+    }
+
+    if (changePasswordForm) {
+      changePasswordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        changePasswordError.classList.add('hidden');
+        
+        const oldPassword = document.getElementById('oldPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const token = sessionStorage.getItem('adminToken');
+
+        if (newPassword !== confirmPassword) {
+          changePasswordError.textContent = "New password and confirm password do not match";
+          changePasswordError.classList.remove('hidden');
+          return;
+        }
+
+        submitChangePasswordBtn.disabled = true;
+        submitChangePasswordBtn.textContent = 'Updating...';
+
+        try {
+          const res = await fetch(`${CONFIG.API_BASE_URL}/admin/change-password`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ oldPassword, newPassword, confirmPassword })
+          });
+          const data = await res.json();
+          
+          if (data.success) {
+            toast('Password changed successfully. Please login again.');
+            setTimeout(() => {
+              sessionStorage.removeItem('adminLoggedIn');
+              sessionStorage.removeItem('adminToken');
+              window.location.href = 'admin-login.html';
+            }, 1500);
+          } else {
+            changePasswordError.textContent = data.message || 'Failed to change password';
+            changePasswordError.classList.remove('hidden');
+          }
+        } catch (err) {
+          changePasswordError.textContent = 'An error occurred';
+          changePasswordError.classList.remove('hidden');
+        } finally {
+          submitChangePasswordBtn.disabled = false;
+          submitChangePasswordBtn.textContent = 'Change Password';
+        }
+      });
     }
   </script>
 </body>
